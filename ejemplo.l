@@ -54,9 +54,7 @@ operadorNegacion = no
 
 igual = \=
 coma  = \,
-punto = \.
 puntoYComa = ;
-dosPuntos = :
 parentesisApertura = \(
 parentesisCierre = \)
 corcheteApertura = \[

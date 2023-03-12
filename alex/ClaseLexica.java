@@ -48,4 +48,5 @@ public class ClaseLexica {
   public static final int VOID = 45;
   public static final int ENUM = 46;
   public static final int NEW = 47;
+  public static final int SWITCH = 48;
 }

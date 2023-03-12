@@ -3,8 +3,8 @@
 # Run jflex to generate the lexer
 java -cp jflex.jar jflex.Main ejemplo.l
 
-# Move analizadorLexicoTiny.java into the alex folder
-mv analizadorLexicoTiny.java alex/
+# Move analizadorLexicoTiny.java into the alex folder while forcing rewrite
+mv -f analizadorLexicoTiny.java alex/
 
 # Compile the generated Java files
 javac alex/*.java

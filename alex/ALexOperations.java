@@ -123,6 +123,9 @@ public class ALexOperations {
   public UnidadLexica unidadStruct() {
     return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.STRUCT);
   }
+  public UnidadLexica unidadSwitch() {
+    return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.SWITCH);
+  }
   public UnidadLexica unidadCase() {
     return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.CASE);
   }
