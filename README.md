@@ -1,4 +1,4 @@
-# PRACTICA_PL
+# PRACTICA de Procesadores del Lenguaje (PL)
 
 Creación de un compilador de Ñ++ (lenguaje basado en C++) creado por Alejandro Paz, Lucas Vukotic y Enrique Queipo de Llano para la asignatura de Procesadores del Lenguaje (UCM) 
 creado con Java, JLex, CUP y webassembly.
