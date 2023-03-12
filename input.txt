@@ -1,0 +1,3 @@
+entero x_1a = 5 + 1;
+buleano encontrado = verdad yy mentira oo mentira;
+mientras (encontrado == mentira) {¡para!;}
