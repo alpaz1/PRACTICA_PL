@@ -30,8 +30,10 @@ non terminal  Programa,Declaraciones,Funciones,Principal,Tipo, NombreEnumerado, 
 
 Programa ::= Principal | Declaraciones Principal| Funciones Principal| Declaraciones Funciones Principal;
 //Modulos ::=  MENOR IDEN MAYOR Programa;
-Declaraciones ::=  Tipo IDEN PUNTOYCOMA| Declaraciones ;
-Tipo ::= TIPOINT | TIPOFLOAT | TIPOBOOL | VOID | NombreEnumerado | NombreRegistro | TipoArray | TipoPuntero;
+//Declaraciones ::= Declaraciones NombreRegistro | Declaraciones NombreEnumerado |Declaraciones Tipo |;
+Declaraciones ::=  Tipo IDEN PUNTOYCOMA| Tipo IDEN PUNTOYCOMA Declaraciones ;
+Tipo ::= TIPOINT | TIPOFLOAT | TIPOBOOL | VOID  | TipoArray | TipoPuntero;
+/*
 NombreEnumerado ::= ENUM IDEN IGUALDAD LLAP ListaEnumerado LLCIERRE PUNTOYCOMA ;
 ListaEnumerado ::= IDEN | IDEN COMA ListaEnumerado;
 NombreRegistro ::= STRUCT IDEN LLAP ListaCampos LLCIERRE PUNTOYCOMA;
@@ -39,18 +41,20 @@ ListaCampos ::= Declaracion | Declaracion ListaCampos;
 TipoArray ::= Tipo CAP TamañoArray CCIERRE | TipoArray CAP TamañoArray CCIERRE;
 TamañoArray ::= ENT | IDEN;
 TipoPuntero ::= Tipo POR;
+
 Funciones ::= Funcion Funciones ;
 Funcion ::= Tipo IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones RETURN Tipo LLCIERRE PUNTOYCOMA;
 Parametros ::= Parametro | Parametro COMA Parametros | ;
 Parametro ::= Tipo IDEN;
 ListaInstrucciones ::= Instruccion | Instruccion ListaInstrucciones;
 Instruccion ::= Asignacion | Condicional | Iteracion | LlamadaFuncion | RETURN E0 ;
-Asignacion ::= IDEN = E0 PUNTOYCOMA;
+Asignacion ::= IDEN IGUALDAD E0 PUNTOYCOMA;
 Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE ELSE LLAP ListaInstrucciones LLCIERRE | IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE;
 Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE | FOR PAP Asignacion PUNTOYCOMA E0 PUNTOYCOMA Asignacion PCIERRE LLAP ListaInstrucciones LLCIERRE;
 LlamadaFuncion ::= IDEN PAP Argumentos PCIERRE PUNTOYCOMA;
 Argumentos ::= E0 | E0 COMA Argumentos;
 Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones LLCIERRE ;
+
 
 E0 ::= E0 OR E1 | E1;
 
@@ -85,3 +89,4 @@ E7 ::=  TRUE
       | NEW Tipo PAP PCIERRE
       | PAP E0 PCIERRE;
 
+*/
