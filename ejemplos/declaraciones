@@ -1,0 +1,11 @@
+entero a = 5;
+buleano b = verdad;
+vacio principal () {
+    b = verdad oo mentira;
+    si (3 + 2 == 5) {
+        b = mentira;
+    } sino {
+        fib();
+    }
+    devuelve 8;
+}

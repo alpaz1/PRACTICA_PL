@@ -24,39 +24,36 @@ terminal    MAYOR ,IDEN ,MENOR,PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOAT, VOID,ENT,
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL;
 
-non terminal  Programa,Declaraciones,Funciones,Principal,Tipo, NombreEnumerado, NombreRegistro, TipoArray,
+non terminal  Programa,Declariacion, Principal,Tipo, NombreEnumerado, NombreRegistro, TipoArray,
               TipoPuntero, ListaEnumerado, ListaCampos, Declaracion, TamañoArray, Funcion, Argumentos,
-              Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion,
+              Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque,
               E0, E1, E2, E3, E4, E5, E6,E7;
 
 
-Programa ::= Principal | Declaraciones Principal| Funciones Principal| Declaraciones Funciones Principal;
 //Modulos ::=  MENOR IDEN MAYOR Programa;
-//Declaraciones ::= Declaraciones NombreRegistro | Declaraciones NombreEnumerado |Declaraciones Tipo |;
-Declaraciones ::=  Tipo IDEN PUNTOYCOMA|Tipo IDEN IGUAL E0 PUNTOYCOMA| Tipo IDEN PUNTOYCOMA Declaraciones| Tipo IDEN IGUAL E0 PUNTOYCOMA Declaraciones ;
-Tipo ::= TIPOINT | TIPOFLOAT | TIPOBOOL  | TipoArray | TipoPuntero;
-/*
-NombreEnumerado ::= ENUM IDEN IGUAL LLAP ListaEnumerado LLCIERRE PUNTOYCOMA ;
-ListaEnumerado ::= IDEN | IDEN COMA ListaEnumerado;
-NombreRegistro ::= STRUCT IDEN LLAP ListaCampos LLCIERRE PUNTOYCOMA;
-ListaCampos ::= Declaracion | Declaracion ListaCampos;
-TipoArray ::= Tipo CAP TamañoArray CCIERRE | TipoArray CAP TamañoArray CCIERRE;
-TamañoArray ::= ENT | IDEN;
-TipoPuntero ::= Tipo POR;
+Programa ::= Declaracion PUNTOYCOMA Programa 
+                  {: System.out.println("Declaracion");:}
+            | Funcion Programa 
+                  {: System.out.println("Funcion");:}
+            | Principal
+                  {: System.out.println("Se acabo el programa");:};
+Tipo ::= TIPOINT | TIPOFLOAT | TIPOBOOL | TipoArray | TipoPuntero;
 
-Funciones ::= Funcion Funciones ;
-Funcion ::= Tipo IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones RETURN Tipo LLCIERRE PUNTOYCOMA;
-Parametros ::= Parametro | Parametro COMA Parametros | ;
-Parametro ::= Tipo IDEN;
-*/
-ListaInstrucciones ::= Instruccion | Instruccion ListaInstrucciones;
-Instruccion ::= Asignacion | Condicional | Iteracion | LlamadaFuncion | RETURN E0 ;
-Asignacion ::= IDEN IGUAL E0 PUNTOYCOMA;
-Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE ELSE LLAP ListaInstrucciones LLCIERRE | IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE;
-Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE | FOR PAP Asignacion PUNTOYCOMA E0 PUNTOYCOMA Asignacion PCIERRE LLAP ListaInstrucciones LLCIERRE;
-LlamadaFuncion ::= IDEN PAP Argumentos PCIERRE PUNTOYCOMA;
-Argumentos ::= E0 | E0 COMA Argumentos;
 Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones LLCIERRE ;
+ListaInstrucciones ::= Instruccion PUNTOYCOMA ListaInstrucciones | Bloque ListaInstrucciones | ;
+Instruccion ::=  Declaracion | Asignacion | RETURN E0 | LlamadaFuncion | ;
+
+// ------------------------ Instrucciones ------------------------
+Declaracion ::=  Tipo Asignacion| Tipo IDEN;
+Asignacion ::= IDEN IGUAL E0;
+LlamadaFuncion ::= IDEN PAP Argumentos PCIERRE;
+Argumentos ::= E0 COMA Argumentos | E0 | ;
+
+// ------------------------ Bloques ------------------------
+Bloque ::= Condicional; // Iteracion
+Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
+              | IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE ELSE LLAP ListaInstrucciones LLCIERRE;
+
 
 
 E0 ::= E0 OR E1 | E1;
@@ -92,6 +89,19 @@ E7 ::=  TRUE
       | NEW Tipo PAP PCIERRE
       | PAP E0 PCIERRE;
 
+/*
+NombreEnumerado ::= ENUM IDEN IGUAL LLAP ListaEnumerado LLCIERRE PUNTOYCOMA ;
+ListaEnumerado ::= IDEN | IDEN COMA ListaEnumerado;
+NombreRegistro ::= STRUCT IDEN LLAP ListaCampos LLCIERRE PUNTOYCOMA;
+ListaCampos ::= Declaracion | Declaracion ListaCampos;
+TipoArray ::= Tipo CAP TamañoArray CCIERRE | TipoArray CAP TamañoArray CCIERRE;
+TamañoArray ::= ENT | IDEN;
+TipoPuntero ::= Tipo POR;
 
+Funcion ::= Tipo IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones RETURN Tipo LLCIERRE PUNTOYCOMA;
+Parametros ::= Parametro | Parametro COMA Parametros | ;
+Parametro ::= Tipo IDEN;
+Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE | FOR PAP Asignacion PUNTOYCOMA E0 PUNTOYCOMA Asignacion PCIERRE LLAP ListaInstrucciones LLCIERRE;
+*/
 
 
