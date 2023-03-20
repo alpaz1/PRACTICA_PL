@@ -33,8 +33,8 @@ non terminal  Programa,Declaraciones,Funciones,Principal,Tipo, NombreEnumerado, 
 Programa ::= Principal | Declaraciones Principal| Funciones Principal| Declaraciones Funciones Principal;
 //Modulos ::=  MENOR IDEN MAYOR Programa;
 //Declaraciones ::= Declaraciones NombreRegistro | Declaraciones NombreEnumerado |Declaraciones Tipo |;
-Declaraciones ::=  Tipo IDEN PUNTOYCOMA| Tipo IDEN PUNTOYCOMA Declaraciones ;
-Tipo ::= TIPOINT | TIPOFLOAT | TIPOBOOL | VOID  | TipoArray | TipoPuntero;
+Declaraciones ::=  Tipo IDEN PUNTOYCOMA|Tipo IDEN IGUAL E0 PUNTOYCOMA| Tipo IDEN PUNTOYCOMA Declaraciones| Tipo IDEN IGUAL E0 PUNTOYCOMA Declaraciones ;
+Tipo ::= TIPOINT | TIPOFLOAT | TIPOBOOL  | TipoArray | TipoPuntero;
 /*
 NombreEnumerado ::= ENUM IDEN IGUAL LLAP ListaEnumerado LLCIERRE PUNTOYCOMA ;
 ListaEnumerado ::= IDEN | IDEN COMA ListaEnumerado;
@@ -48,6 +48,7 @@ Funciones ::= Funcion Funciones ;
 Funcion ::= Tipo IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones RETURN Tipo LLCIERRE PUNTOYCOMA;
 Parametros ::= Parametro | Parametro COMA Parametros | ;
 Parametro ::= Tipo IDEN;
+*/
 ListaInstrucciones ::= Instruccion | Instruccion ListaInstrucciones;
 Instruccion ::= Asignacion | Condicional | Iteracion | LlamadaFuncion | RETURN E0 ;
 Asignacion ::= IDEN IGUAL E0 PUNTOYCOMA;
@@ -64,7 +65,7 @@ E1 ::= E1 AND E2 | E2;
 
 E2 ::= E2 IGUALDAD E3 | E2 DISTINTO E3 | E3;
 
-E4 ::= E3 MAYOR E4
+E3 ::= E3 MAYOR E4
       | E3 MENOR E4
       | E3 MAYORIGUAL E4
       | E3 MENORIGUAL E4
@@ -91,6 +92,6 @@ E7 ::=  TRUE
       | NEW Tipo PAP PCIERRE
       | PAP E0 PCIERRE;
 
-*/
+
 
 
