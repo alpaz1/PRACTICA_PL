@@ -24,7 +24,7 @@ terminal    MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOAT, VOID, EN
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA;
 
-non terminal  Programa,Declariacion, Principal,Tipo, NombreEnumerado, NombreRegistro, TipoArray, ListaArgumentos, Argumento,
+non terminal  Programa,Declariacion, Principal,Tipo, NombreEnumerado, NombreRegistro, TipoArray, ListaArgumentos, Argumento, InsFor,
               TipoPuntero, ListaEnumerado, ListaCampos, Declaracion, TamañoArray, Funcion, Argumentos, ListaParametros, NombreFuncion, 
               Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque,
               E0, E1, E2, E3, E4, E5, E6,E7;
@@ -53,9 +53,14 @@ ListaArgumentos ::= Argumento COMA ListaArgumentos | Argumento;
 Argumento ::= E0;
 
 // ------------------------ Bloques ------------------------
-Bloque ::= Condicional; // Iteracion
+Bloque ::= Condicional| Iteracion;
 Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
               | IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE ELSE LLAP ListaInstrucciones LLCIERRE;
+Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
+              | FOR PAP InsFor E0 PUNTOYCOMA Asignacion  PCIERRE LLAP ListaInstrucciones LLCIERRE;
+InsFor ::= Tipo Asignacion PUNTOYCOMA | Asignacion PUNTOYCOMA | PUNTOYCOMA;
+
+
 
 Funcion ::= Tipo IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones LLCIERRE; //  RETURN Tipo LLCIERRE PUNTOYCOMA;
 Parametros ::= ListaParametros | ;
