@@ -19,13 +19,13 @@ init with {:
 :};
 
 //AÑADIR & (y en parametros), SWITCH, #, INCLUDE
-terminal    MAYOR ,IDEN ,MENOR,PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOAT, VOID,ENT,REAL, MAIN,
-            ENUM, LLAP,LLCIERRE, CAP, CCIERRE, STRUCT,POR, RETURN, IF, ELSE, PAP,PCIERRE, WHILE, DIV,
+terminal    MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOAT, VOID, ENT, REAL, MAIN,
+            ENUM, LLAP, LLCIERRE, CAP, CCIERRE, STRUCT,POR, RETURN, IF, ELSE, PAP, PCIERRE, WHILE, DIV,
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA;
 
-non terminal  Programa,Declariacion, Principal,Tipo, NombreEnumerado, NombreRegistro, TipoArray,
-              TipoPuntero, ListaEnumerado, ListaCampos, Declaracion, TamañoArray, Funcion, Argumentos,
+non terminal  Programa,Declariacion, Principal,Tipo, NombreEnumerado, NombreRegistro, TipoArray, ListaArgumentos, Argumento,
+              TipoPuntero, ListaEnumerado, ListaCampos, Declaracion, TamañoArray, Funcion, Argumentos, ListaParametros, NombreFuncion, 
               Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque,
               E0, E1, E2, E3, E4, E5, E6,E7;
 
@@ -46,13 +46,21 @@ Instruccion ::=  Declaracion | Asignacion | RETURN E0 | LlamadaFuncion | ;
 // ------------------------ Instrucciones ------------------------
 Declaracion ::=  Tipo Asignacion| Tipo IDEN;
 Asignacion ::= IDEN IGUAL E0;
-LlamadaFuncion ::= IDEN PAP Argumentos PCIERRE;
-Argumentos ::= E0 COMA Argumentos | E0 | ;
+NombreFuncion ::= IDEN | READ | PRINT;
+LlamadaFuncion ::= NombreFuncion PAP Argumentos PCIERRE;
+Argumentos ::= ListaArgumentos | ;
+ListaArgumentos ::= Argumento COMA ListaArgumentos | Argumento;
+Argumento ::= E0;
 
 // ------------------------ Bloques ------------------------
 Bloque ::= Condicional; // Iteracion
 Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
               | IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE ELSE LLAP ListaInstrucciones LLCIERRE;
+
+Funcion ::= Tipo IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones LLCIERRE; //  RETURN Tipo LLCIERRE PUNTOYCOMA;
+Parametros ::= ListaParametros | ;
+ListaParametros ::= Parametro COMA ListaParametros | Parametro;
+Parametro ::= Tipo IDEN;
 
 
 
@@ -85,6 +93,7 @@ E7 ::=  TRUE
       | FALSE
       | ENT
       | TIPOFLOAT
+      | IDEN
       | LlamadaFuncion
       | NEW Tipo PAP PCIERRE
       | PAP E0 PCIERRE;
@@ -98,9 +107,6 @@ TipoArray ::= Tipo CAP TamañoArray CCIERRE | TipoArray CAP TamañoArray CCIERRE
 TamañoArray ::= ENT | IDEN;
 TipoPuntero ::= Tipo POR;
 
-Funcion ::= Tipo IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones RETURN Tipo LLCIERRE PUNTOYCOMA;
-Parametros ::= Parametro | Parametro COMA Parametros | ;
-Parametro ::= Tipo IDEN;
 Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE | FOR PAP Asignacion PUNTOYCOMA E0 PUNTOYCOMA Asignacion PCIERRE LLAP ListaInstrucciones LLCIERRE;
 */
 

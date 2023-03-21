@@ -2,7 +2,8 @@ entero a = 5;
 buleano b = verdad;
 vacio principal () {
     b = verdad oo mentira;
-    si (3 + 2 == 5) {
+    entero c = lee();
+    si (n== 5) {
         b = mentira;
     } sino {
         fib();

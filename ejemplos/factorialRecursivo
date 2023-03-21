@@ -1,5 +1,5 @@
 entero factorialRec(entero n) {
-    si ( n == 0 ) {
+    si (n == 0) {
         devuelve 1;
     }
     sino {
@@ -7,7 +7,7 @@ entero factorialRec(entero n) {
     }
 }
 vacio principal () {
-    enteron = lee("Introduzca un numero positivo");
+    entero n = lee();
     imprime(factorialRec(n));
     devuelve;
 }
