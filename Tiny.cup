@@ -37,14 +37,14 @@ Programa ::= Declaracion PUNTOYCOMA Programa
                   {: System.out.println("Funcion");:}
             | Principal
                   {: System.out.println("Se acabo el programa");:};
-Tipo ::= VOID | TIPOINT | TIPOFLOAT | TIPOBOOL | TipoArray | TipoPuntero;
+Tipo ::= VOID | TIPOINT | TIPOFLOAT | TIPOBOOL | TipoArray | TipoPuntero | IDEN;
 
 Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones LLCIERRE ;
 ListaInstrucciones ::= Instruccion PUNTOYCOMA ListaInstrucciones | Bloque ListaInstrucciones | ;
 Instruccion ::=  Declaracion | Asignacion | RETURN E0 | LlamadaFuncion | ;
 
 // ------------------------ Instrucciones ------------------------
-Declaracion ::=  Tipo Asignacion| Tipo IDEN;
+Declaracion ::=  Tipo Asignacion| Tipo IDEN | DeclaracionEnumerado;
 Asignacion ::= IDEN IGUAL E0;
 NombreFuncion ::= IDEN | READ | PRINT;
 LlamadaFuncion ::= NombreFuncion PAP Argumentos PCIERRE;
@@ -67,6 +67,8 @@ Parametros ::= ListaParametros | ;
 ListaParametros ::= Parametro COMA ListaParametros | Parametro;
 Parametro ::= Tipo IDEN;
 
+DeclaracionEnumerado ::= ENUM IDEN LLAP ListaEnumerado LLCIERRE;
+ListaEnumerado ::= IDEN COMA ListaEnumerado | IDEN;
 
 
 E0 ::= E0 OR E1 | E1;
@@ -104,8 +106,6 @@ E7 ::=  TRUE
       | PAP E0 PCIERRE;
 
 /*
-NombreEnumerado ::= ENUM IDEN IGUAL LLAP ListaEnumerado LLCIERRE PUNTOYCOMA ;
-ListaEnumerado ::= IDEN | IDEN COMA ListaEnumerado;
 NombreRegistro ::= STRUCT IDEN LLAP ListaCampos LLCIERRE PUNTOYCOMA;
 ListaCampos ::= Declaracion | Declaracion ListaCampos;
 TipoArray ::= Tipo CAP TamañoArray CCIERRE | TipoArray CAP TamañoArray CCIERRE;

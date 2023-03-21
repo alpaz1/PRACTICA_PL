@@ -8,7 +8,7 @@ enum DiaSemana {
     Domingo,
     Error
 };
-DiaSemana AveriguaDia ( e n t e r o n ) {
+DiaSemana AveriguaDia ( entero n ) {
     selecciona (n) {
         caso 1 : devuelve Lunes;
         caso 2 : devuelve Martes;
