@@ -1,0 +1,13 @@
+entero factorialRec(entero n) {
+    si ( n == 0 ) {
+        devuelve 1;
+    }
+    sino {
+        devuelve n * factorial (n - 1 ) ;
+    }
+}
+vacio principal () {
+    enteron = lee("Introduzca un numero positivo");
+    imprime(factorialRec(n));
+    devuelve;
+}

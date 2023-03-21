@@ -1,0 +1,14 @@
+entero factorialIterativo(entero n) {
+    entero resultado = 1;
+    paraCada ( entero i = 1 ; i <= n ; i= i + 1 ) {
+        resultado = resultado * i ;
+    }
+    devuelve resultado;
+}
+
+
+vacio principal () {
+    entero n = lee(Introduzca un numero positivo);
+    imprime (factorialIterativo(n));
+    devuelve;
+}
