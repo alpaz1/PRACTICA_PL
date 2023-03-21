@@ -37,7 +37,7 @@ Programa ::= Declaracion PUNTOYCOMA Programa
                   {: System.out.println("Funcion");:}
             | Principal
                   {: System.out.println("Se acabo el programa");:};
-Tipo ::= TIPOINT | TIPOFLOAT | TIPOBOOL | TipoArray | TipoPuntero;
+Tipo ::= VOID | TIPOINT | TIPOFLOAT | TIPOBOOL | TipoArray | TipoPuntero;
 
 Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones LLCIERRE ;
 ListaInstrucciones ::= Instruccion PUNTOYCOMA ListaInstrucciones | Bloque ListaInstrucciones | ;
