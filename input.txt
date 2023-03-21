@@ -1,5 +1,47 @@
+#incluir "hola.txt"
+#incluir "pruebaaa.h"
+
+enum DiaSemana { a, b, c};
+
+estructura Tiempo{
+    entero hora;
+    entero minuto;
+    flotante segundo;
+};
+
 entero x_1a = 5 + 1;
 buleano encontrado = verdad yy mentira oo mentira;
+
+bool prueba(int a, int& b){
+    mientras (a == b){
+        paraCada(a = 0; a < b; a = a + 1){
+            b = b + 1;
+        }
+    }
+}
+
+bool pruebaConReturn(int a, int& b){
+    mientras (a == b){
+        paraCada(a = 0; a < b; a = a + 1){
+            b = b + 1;
+        }
+    }
+
+    selecciona (b){
+        caso 0: 
+            si(a > 1) {
+                c = verdad;
+            }
+        caso 1: 
+            c = mentira;
+            ¡para!;
+        caso 2:
+        porDefecto: a = 3;
+    }
+
+    return a;
+}
+
 vacio principal () {
     si (mentira == mentira){
         x_la = 1;

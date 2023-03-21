@@ -165,6 +165,18 @@ public class ALexOperations {
       return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.INCLUDE);
    }
 
+   public UnidadLexica unidadComillasDobles(){
+      return new UnidadLexica(alex.fila(),  alex.columna(), ClaseLexica.COMILLASDOBLES);
+   }
+
+   public UnidadLexica unidadPunto(){
+      return new UnidadLexica(alex.fila(),  alex.columna(), ClaseLexica.PUNTO);
+   }
+
+   public UnidadLexica unidadDosPuntos(){
+      return new UnidadLexica(alex.fila(),  alex.columna(), ClaseLexica.DOSPUNTOS);
+   }
+
    public void error() {
    System.err.println("***"+alex.fila()+", "+alex.columna()+" Caracter inesperado: "+alex.lexema());
    }

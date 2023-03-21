@@ -57,6 +57,7 @@ operadorAnd = yy
 operadorOr = oo
 operadorNegacion = no
 
+comillasDobles = \"
 almohadilla = \#
 unversand = \&
 igual = \=
@@ -68,6 +69,8 @@ corcheteApertura = \[
 corcheteCierre = \]
 llaveApertura = \{
 llaveCierre = \}
+punto = \.
+dosPuntos = \:
 
 
 int = entero
@@ -124,6 +127,10 @@ identificador = {letra}({letra}|{digito}|"_")*
 {operadorOr}              {return ops.unidadOr();}
 {operadorNegacion}        {return ops.unidadNegacion();}
 
+
+{comillasDobles}          {return ops.unidadComillasDobles();}
+{almohadilla}             {return ops.unidadAlmohadilla();}
+{unversand}               {return ops.unidadUnversand();}
 {igual}                   {return ops.unidadIgual();} 
 {coma}                    {return ops.unidadComa();}
 {puntoYComa}              {return ops.unidadPuntoYComa();}
@@ -132,7 +139,9 @@ identificador = {letra}({letra}|{digito}|"_")*
 {corcheteApertura}        {return ops.unidadCAp();}
 {corcheteCierre}          {return ops.unidadCCierre();} 
 {llaveApertura}           {return ops.unidadLLAp();}
-{llaveCierre}             {return ops.unidadLLCierre();}  
+{llaveCierre}             {return ops.unidadLLCierre();}
+{punto}                   {return ops.unidadPunto();}
+{dosPuntos}               {return ops.unidadDosPuntos();}
 
 {int}		                  {return ops.unidadTipoInt();}
 {bool}                    {return ops.unidadTipoBool();}
@@ -156,6 +165,7 @@ identificador = {letra}({letra}|{digito}|"_")*
 {print}                   {return ops.unidadPrint();}
 {read}                    {return ops.unidadRead();}
 {main}                    {return ops.unidadMain();}
+{include}                 {return ops.unidadInclude();}
 
 {identificador}           {return ops.unidadId();}
 [^]                       {ops.error();}  
