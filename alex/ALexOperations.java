@@ -152,6 +152,19 @@ public class ALexOperations {
    public UnidadLexica unidadEof() {
       return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.EOF); 
    }
+
+   public UnidadLexica unidadUnversand(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.UNVERSAND);
+   }
+
+   public UnidadLexica unidadAlmohadilla(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.ALMOHADILLA);
+   }
+
+   public UnidadLexica unidadInclude(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.INCLUDE);
+   }
+
    public void error() {
    System.err.println("***"+alex.fila()+", "+alex.columna()+" Caracter inesperado: "+alex.lexema());
    }

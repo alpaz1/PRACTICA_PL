@@ -32,7 +32,7 @@ import errors.GestionErroresTiny;
 letra  = ([A-Z]|[a-z])
 digitoPositivo = [1-9]
 digito = ({digitoPositivo}|0)
-parteEntera = {digitoPositivo}{digito}*
+parteEntera = {digitoPositivo}{digito}*|0
 parteDecimal = {digito}* {digitoPositivo}
 numeroEntero = [\+\-]?{parteEntera}
 numeroReal = [\+\-]?{parteEntera}\.{parteDecimal}
@@ -57,7 +57,8 @@ operadorAnd = yy
 operadorOr = oo
 operadorNegacion = no
 
-
+almohadilla = \#
+unversand = \&
 igual = \=
 coma  = \,
 puntoYComa = ;
@@ -92,6 +93,7 @@ return = devuelve
 print = imprime
 read = lee
 main = principal
+include = incluir
 
 
 identificador = {letra}({letra}|{digito}|"_")*

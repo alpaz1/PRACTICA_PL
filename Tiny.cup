@@ -22,7 +22,7 @@ init with {:
 terminal    MAYOR ,IDEN ,MENOR,PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOAT, VOID,ENT,REAL, MAIN,
             ENUM, LLAP,LLCIERRE, CAP, CCIERRE, STRUCT,POR, RETURN, IF, ELSE, PAP,PCIERRE, WHILE, DIV,
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION,
-            PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL;
+            PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA;
 
 non terminal  Programa,Declariacion, Principal,Tipo, NombreEnumerado, NombreRegistro, TipoArray,
               TipoPuntero, ListaEnumerado, ListaCampos, Declaracion, TamañoArray, Funcion, Argumentos,
