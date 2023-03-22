@@ -2,12 +2,16 @@
 #incluir "pruebaaa.h"
 
 enum DiaSemana { a, b, c};
+DiaSemana[2][3] miAray = {{1,2}};
+
 
 estructura Tiempo{
     entero hora;
     entero minuto;
     flotante segundo;
 };
+
+Tiempo[2] a;
 
 entero x_1a = 5 + 1;
 buleano encontrado = verdad yy mentira oo mentira;
@@ -43,6 +47,7 @@ bool pruebaConReturn(int a, int& b){
 }
 
 vacio principal () {
+    entero[2][3] miAray = {{1,2}};
     si (mentira == mentira){
         x_la = 1;
     }
