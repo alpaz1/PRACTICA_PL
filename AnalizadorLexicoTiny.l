@@ -71,6 +71,7 @@ llaveApertura = \{
 llaveCierre = \}
 punto = \.
 dosPuntos = \:
+arroba = \@
 
 
 int = entero
@@ -142,6 +143,7 @@ identificador = {letra}({letra}|{digito}|"_")*
 {llaveCierre}             {return ops.unidadLLCierre();}
 {punto}                   {return ops.unidadPunto();}
 {dosPuntos}               {return ops.unidadDosPuntos();}
+{arroba}                  {return ops.unidadArroba();}
 
 {int}		                  {return ops.unidadTipoInt();}
 {bool}                    {return ops.unidadTipoBool();}

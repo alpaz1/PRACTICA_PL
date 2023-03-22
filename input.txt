@@ -16,7 +16,7 @@ Tiempo[2] a;
 entero x_1a = 5 + 1;
 buleano encontrado = verdad yy mentira oo mentira;
 
-bool prueba(int a, int& b){
+buleano prueba(int a, int& b,  DiaSemana[][] &miArray){
     mientras (a == b){
         paraCada(a = 0; a < b; a = a + 1){
             b = b + 1;
@@ -24,13 +24,15 @@ bool prueba(int a, int& b){
     }
 }
 
-bool pruebaConReturn(int a, int& b){
+buleano pruebaConReturn(int a, int& b){
     mientras (a == b){
         paraCada(a = 0; a < b; a = a + 1){
             b = b + 1;
         }
     }
 
+
+    
     selecciona (b){
         caso 0: 
             si(a > 1) {
@@ -51,11 +53,22 @@ vacio principal () {
     si (mentira == mentira){
         x_la = 1;
     }
+
     sino{
         paraCada (; i < 1 ; i = i + 1){
             buleano a = true;
         }
     }
+
+    entero*[2][3] miAray = {{1,2}};
+    entero* n;
+    Tiempo* t1;
+    Tiempo t;
+    t.segundo = 60;
+    entero z = t.segundo;
+
+    @m = 1;
+    @m = @n;
 
     mientras (a > 1){
         x = x + 1;

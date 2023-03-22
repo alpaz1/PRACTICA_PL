@@ -177,6 +177,10 @@ public class ALexOperations {
       return new UnidadLexica(alex.fila(),  alex.columna(), ClaseLexica.DOSPUNTOS);
    }
 
+   public UnidadLexica unidadArroba(){
+      return new UnidadLexica(alex.fila(),  alex.columna(), ClaseLexica.ARROBA);
+   }
+
    public void error() {
    System.err.println("***"+alex.fila()+", "+alex.columna()+" Caracter inesperado: "+alex.lexema());
    }
