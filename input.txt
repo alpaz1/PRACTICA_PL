@@ -2,7 +2,7 @@
 #incluir "pruebaaa.h"
 
 enum DiaSemana { a, b, c};
-DiaSemana[2][3] miAray = {{1,2}};
+lista <lista <DiaSemana>[2]> [3] miAray = {{Lunes,Martes}};
 
 
 estructura Tiempo{
@@ -11,12 +11,12 @@ estructura Tiempo{
     flotante segundo;
 };
 
-Tiempo[2] a;
+lista <Tiempo> [2] a;
 
 entero x_1a = 5 + 1;
 buleano encontrado = verdad yy mentira oo mentira;
 
-buleano prueba(int a, int& b,  DiaSemana[][] &miArray){
+buleano prueba(int a, int& b, lista <lista <DiaSemana>[]>[] &miArray){
     mientras (a == b){
         paraCada(a = 0; a < b; a = a + 1){
             b = b + 1;
@@ -49,7 +49,7 @@ buleano pruebaConReturn(int a, int& b){
 }
 
 vacio principal () {
-    entero[2][3] miAray = {{1,2}};
+    lista <lista <entero>[2]>[3] miAray = {{1,2}};
     si (mentira == mentira){
         x_la = 1;
     }
@@ -60,12 +60,18 @@ vacio principal () {
         }
     }
 
-    entero*[2][3] miAray = {{1,2}};
+    lista <lista <entero*>[2]>[3] miAray = {{1,2}};
     entero* n;
     Tiempo* t1;
     Tiempo t;
     t.segundo = 60;
     entero z = t.segundo;
+    a[1] = true;
+    a[i] = c[2][1][2];
+    b = c[1][1];
+    t.segundo = t1.minuto;
+    c[1][2][2] = t.minuto;
+    t.minuto = c[1][2][3];
 
     @m = 1;
     @m = @n;

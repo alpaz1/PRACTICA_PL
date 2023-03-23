@@ -79,6 +79,7 @@ void = vacio
 float = flotante
 bool = buleano
 enum = enum
+array = lista
 
 true = verdad
 false = mentira
@@ -150,6 +151,7 @@ identificador = {letra}({letra}|{digito}|"_")*
 {float}                   {return ops.unidadTipoFloat();}
 {void}                    {return ops.unidadTipoVoid();} 
 {enum}                    {return ops.unidadTipoEnum();}
+{array}                   {return ops.unidadArray();}
 {true}                    {return ops.unidadTrue();}
 {false}                   {return ops.unidadFalse();}
 

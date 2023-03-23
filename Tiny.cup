@@ -22,13 +22,14 @@ init with {:
 terminal    MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOAT, VOID, ENT, MAIN, PUNTO, DOSPUNTOS,
             ENUM, LLAP, LLCIERRE, CAP, CCIERRE, STRUCT,POR, RETURN, IF, ELSE, PAP, PCIERRE, WHILE, DIV, ARROBA,
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION,
-            PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL;
+            PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  Programa, Principal,Tipo, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor,
+non terminal  Programa, Principal,Tipo, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim,
               ListaEnumerado, ListaCampos, Declaracion, Funcion, Argumentos, ListaParametros, NombreFuncion, 
               Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
-              E0, E1, E2, E3, E4, E5, E6,E7, Modulos, DeclaracionEnumerado, Selecciona, Casos, Valor, InsParada, PorDefecto, ListaValores,
-              AsignacionArray, AcesoStruct;
+              E0, E1, E2, E3, E4, E5, E6,E7, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
+              AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray;
+
 
 
 Programa ::= Declaracion PUNTOYCOMA Programa 
@@ -41,15 +42,16 @@ Programa ::= Declaracion PUNTOYCOMA Programa
                   {: System.out.println("Se acabo el programa");:};
 
 
-Tipo ::=  Tipo CAP E0 CCIERRE| Tipo CAP CCIERRE |VOID | TIPOINT | TIPOFLOAT | TIPOBOOL | IDEN| Tipo POR;
+Tipo ::=  ARRAY  MENOR  Tipo  MAYOR ArraysDim |VOID | TIPOINT | TIPOFLOAT | TIPOBOOL | IDEN| Tipo POR;
+ArraysDim ::=  CAP E0 CCIERRE| CAP CCIERRE;
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN PUNTO IDEN COMILLASDOBLES;
 Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones LLCIERRE ;
 ListaInstrucciones ::= Instruccion PUNTOYCOMA ListaInstrucciones | Bloque ListaInstrucciones | ;
-Instruccion ::=  Declaracion | Asignacion | RETURN E0 | LlamadaFuncion| AcesoStruct;
+Instruccion ::=  Declaracion | Asignacion | RETURN E0 | LlamadaFuncion| AcesoStruct | AcesoArray;
 
 // ------------------------ Instrucciones ------------------------
 
-ListaValores ::= COMA Valor ListaValores|;
+ListaValores ::= COMA E0 ListaValores|;
 NombreFuncion ::= IDEN | READ | PRINT;
 LlamadaFuncion ::= NombreFuncion PAP Argumentos PCIERRE;
 Argumentos ::= ListaArgumentos | ;
@@ -57,8 +59,8 @@ ListaArgumentos ::= Argumento COMA ListaArgumentos | Argumento;
 Argumento ::= E0;
 
 Declaracion ::=  Tipo Asignacion | Tipo IDEN | DeclaracionEnumerado | DeclaracionRegistro;
-Asignacion ::= IDEN IGUAL E0 | IDEN IGUAL AsignacionArray | ARROBA IDEN IGUAL E0;
-AsignacionArray ::= LLAP Valor ListaValores LLCIERRE | LLAP AsignacionArray LLCIERRE;
+Asignacion ::= IDEN IGUAL E0 | IDEN IGUAL AsignacionArray | ARROBA IDEN IGUAL E0| IDEN IGUAL AcesoArray;
+AsignacionArray ::= LLAP E0 ListaValores LLCIERRE | LLAP AsignacionArray LLCIERRE;
 
 
 // ------------------------ Bloques ------------------------
@@ -76,11 +78,12 @@ Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
 InsFor ::= TIPOINT Asignacion PUNTOYCOMA | Asignacion PUNTOYCOMA | PUNTOYCOMA;
 Selecciona ::= SWITCH PAP IDEN PCIERRE LLAP Casos  PorDefecto LLCIERRE;
 Casos ::= Caso Casos |;
-Caso ::= CASE Valor DOSPUNTOS ListaInstrucciones InsParada;
-Valor ::= TRUE|FALSE|ENT|REAL;
+Caso ::= CASE E0 DOSPUNTOS ListaInstrucciones InsParada;
 PorDefecto ::= DEFAULT DOSPUNTOS ListaInstrucciones |;
 InsParada ::= BREAK PUNTOYCOMA | ;
-//CON ESTA SINTAXIS EL ACCESO A LOS ARRAYS ES DIFICIL, CREO QUE MEJOR DECLARAR ARRAYS CON <>
+AcesoArray ::= IDEN CAP E4 CCIERRE ListaAcesoArray| IDEN CAP E4 CCIERRE ListaAcesoArray AsigPosArray;
+AsigPosArray ::= IGUAL E0|  IGUAL IDEN CAP E4 CCIERRE ListaAcesoArray;
+ListaAcesoArray ::=  CAP E4 CCIERRE ListaAcesoArray|;
 AcesoStruct ::= IDEN PUNTO IDEN | IDEN PUNTO Asignacion;
 
 // ----------------------Funciones--------------------------
