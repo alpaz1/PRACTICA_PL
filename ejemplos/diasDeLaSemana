@@ -17,12 +17,11 @@ DiaSemana AveriguaDia ( entero n ) {
         caso 5: devuelve Viernes;
         caso 6 : devuelve Sabado;
         caso 7 : devuelve Domingo;
-        por Defecto : devuelveError; // en caso de un numero invalido , se devuelve
+        porDefecto : devuelveError(); // en caso de un numero invalido , se devuelve
     }
 }
 vacio principal () {
-    entero n = Lee("Ingrese un numero del 1 al 7");
+    entero n = Lee(Ingrese un numero del 1 al 7);
     DiaSemana dia = AveriguaDia(n);
     imprime(dia);
-    devuelve;
 }

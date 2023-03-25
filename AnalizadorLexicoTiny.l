@@ -71,6 +71,7 @@ llaveApertura = \{
 llaveCierre = \}
 punto = \.
 dosPuntos = \:
+arroba = \@
 
 
 int = entero
@@ -78,6 +79,7 @@ void = vacio
 float = flotante
 bool = buleano
 enum = enum
+array = lista
 
 true = verdad
 false = mentira
@@ -97,6 +99,11 @@ print = imprime
 read = lee
 main = principal
 include = incluir
+class = clase
+public = publico
+private = privado
+protected = protegido
+typedef = alias
 
 
 identificador = {letra}({letra}|{digito}|"_")*
@@ -142,12 +149,14 @@ identificador = {letra}({letra}|{digito}|"_")*
 {llaveCierre}             {return ops.unidadLLCierre();}
 {punto}                   {return ops.unidadPunto();}
 {dosPuntos}               {return ops.unidadDosPuntos();}
+{arroba}                  {return ops.unidadArroba();}
 
 {int}		                  {return ops.unidadTipoInt();}
 {bool}                    {return ops.unidadTipoBool();}
 {float}                   {return ops.unidadTipoFloat();}
 {void}                    {return ops.unidadTipoVoid();} 
 {enum}                    {return ops.unidadTipoEnum();}
+{array}                   {return ops.unidadArray();}
 {true}                    {return ops.unidadTrue();}
 {false}                   {return ops.unidadFalse();}
 
@@ -166,6 +175,12 @@ identificador = {letra}({letra}|{digito}|"_")*
 {read}                    {return ops.unidadRead();}
 {main}                    {return ops.unidadMain();}
 {include}                 {return ops.unidadInclude();}
+{class}                   {return ops.unidadClass();}
+{private}                 {return ops.unidadPrivate();}
+{public}                  {return ops.unidadPublic();}
+{protected}               {return ops.unidadProtected();}
+{typedef}                 {return ops.unidadTypedef();}
+
 
 {identificador}           {return ops.unidadId();}
 [^]                       {ops.error();}  

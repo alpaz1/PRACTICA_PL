@@ -9,5 +9,4 @@ entero factorialRec(entero n) {
 vacio principal () {
     entero n = lee();
     imprime(factorialRec(n));
-    devuelve;
 }

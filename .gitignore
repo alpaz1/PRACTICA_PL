@@ -4,4 +4,4 @@ asint/ClaseLexica.java
 
 *.class
 
-.metadata
+.metadata*

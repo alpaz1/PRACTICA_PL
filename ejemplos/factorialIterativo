@@ -10,5 +10,4 @@ entero factorialIterativo(entero n) {
 vacio principal () {
     entero n = lee(Introduzca un numero positivo);
     imprime (factorialIterativo(n));
-    devuelve;
 }
