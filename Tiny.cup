@@ -28,6 +28,8 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
 
 non terminal  Programa, Principal,Tipo, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
               ListaEnumerado, ListaCampos, Declaracion, Funcion, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
+non terminal  Programa, Principal,Tipo, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
+              ListaEnumerado, ListaCampos, Declaracion, Funcion, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
               Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
               E0, E1, E2, E3, E6, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
               AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
@@ -43,11 +45,19 @@ Programa ::= Declaracion PUNTOYCOMA Programa
             |Modulos Programa
                   {: System.out.println("Módulo");:}
             |Funcion Programa 
+            |Funcion Programa 
                   {: System.out.println("Funcion");:}
+            |Clase Programa
+                  {: System.out.println("Clase");:}
             |Clase Programa
                   {: System.out.println("Clase");:}
             | Principal
                   {: System.out.println("Se acabo el programa");:};
+
+
+Tipo ::=  ARRAY  MENOR  Tipo  MAYOR ArraysDim |VOID | TIPOINT | TIPOFLOAT | TIPOBOOL | IDEN| Tipo POR;
+Alias ::= TYPEDEF IDEN IGUAL Tipo;
+ArraysDim ::=  CAP E0 CCIERRE| CAP CCIERRE;
 
 
 Tipo ::=  ARRAY  MENOR  Tipo  MAYOR ArraysDim |VOID | TIPOINT | TIPOFLOAT | TIPOBOOL | IDEN| Tipo POR;
@@ -69,9 +79,25 @@ CuerpoClase ::= Atributo CuerpoClase
 Atributo ::= ModAceso Declaracion PUNTOYCOMA;
 Constructor::= ModAceso IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones LLCIERRE;
 Metodo ::= ModAceso Funcion;
+Instruccion ::=  Declaracion | Asignacion | RETURN E0 | LlamadaFuncion| AcesoStruct | AcesoArray;
+
+//---------------------Clases-----------------------------------
+
+Clase::= ModAceso CLASS IDEN LLAP CuerpoClase;
+CuerpoClase ::= Atributo CuerpoClase
+               |Constructor CuerpoClase
+               |Metodo CuerpoClase
+               |LLCIERRE;
+
+Atributo ::= ModAceso Declaracion PUNTOYCOMA;
+Constructor::= ModAceso IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones LLCIERRE;
+Metodo ::= ModAceso Funcion;
 
 ModAceso::= PUBLIC | PRIVATE | PROTECTED;
+ModAceso::= PUBLIC | PRIVATE | PROTECTED;
 // ------------------------ Instrucciones ------------------------
+
+ListaValores ::= COMA E0 ListaValores| COMA AsignacionArray ListaValores|;
 
 ListaValores ::= COMA E0 ListaValores| COMA AsignacionArray ListaValores|;
 NombreFuncion ::= IDEN | READ | PRINT;
@@ -79,6 +105,11 @@ LlamadaFuncion ::= NombreFuncion PAP Argumentos PCIERRE;
 Argumentos ::= ListaArgumentos | ;
 ListaArgumentos ::= Argumento COMA ListaArgumentos | Argumento;
 Argumento ::= E0;
+
+Declaracion ::=  Tipo Asignacion | Tipo IDEN | DeclaracionEnumerado | DeclaracionRegistro| Alias;
+Asignacion ::= IDEN IGUAL E0 | IDEN IGUAL AsignacionArray | ARROBA IDEN IGUAL E0| IDEN IGUAL AcesoArray;
+AsignacionArray ::= LLAP E0 ListaValores LLCIERRE | LLAP AsignacionArray ListaValores LLCIERRE;
+
 
 Declaracion ::=  Tipo Asignacion | Tipo IDEN | DeclaracionEnumerado | DeclaracionRegistro| Alias;
 Asignacion ::= IDEN IGUAL E0 | IDEN IGUAL AsignacionArray | ARROBA IDEN IGUAL E0| IDEN IGUAL AcesoArray;
@@ -98,11 +129,17 @@ Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
 Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
               | FOR PAP InsFor E0 PUNTOYCOMA Asignacion  PCIERRE LLAP ListaInstrucciones LLCIERRE;
 InsFor ::= TIPOINT Asignacion PUNTOYCOMA | Asignacion PUNTOYCOMA | PUNTOYCOMA;
+InsFor ::= TIPOINT Asignacion PUNTOYCOMA | Asignacion PUNTOYCOMA | PUNTOYCOMA;
 Selecciona ::= SWITCH PAP IDEN PCIERRE LLAP Casos  PorDefecto LLCIERRE;
 Casos ::= Caso Casos |;
 Caso ::= CASE E0 DOSPUNTOS ListaInstrucciones InsParada;
+Caso ::= CASE E0 DOSPUNTOS ListaInstrucciones InsParada;
 PorDefecto ::= DEFAULT DOSPUNTOS ListaInstrucciones |;
 InsParada ::= BREAK PUNTOYCOMA | ;
+AcesoArray ::= IDEN CAP E4 CCIERRE ListaAcesoArray| IDEN CAP E4 CCIERRE ListaAcesoArray AsigPosArray;
+AsigPosArray ::= IGUAL E0|  IGUAL IDEN CAP E4 CCIERRE ListaAcesoArray;
+ListaAcesoArray ::=  CAP E4 CCIERRE ListaAcesoArray|;
+AcesoStruct ::= IDEN PUNTO IDEN | IDEN PUNTO Asignacion;
 AcesoArray ::= IDEN CAP E4 CCIERRE ListaAcesoArray| IDEN CAP E4 CCIERRE ListaAcesoArray AsigPosArray;
 AsigPosArray ::= IGUAL E0|  IGUAL IDEN CAP E4 CCIERRE ListaAcesoArray;
 ListaAcesoArray ::=  CAP E4 CCIERRE ListaAcesoArray|;
@@ -157,9 +194,13 @@ E7 ::=  TRUE
       | IDEN
       | IDEN PUNTO IDEN
       | ARROBA IDEN
+      | IDEN PUNTO IDEN
+      | ARROBA IDEN
       | LlamadaFuncion
       | NEW Tipo PAP Argumentos PCIERRE
+      | NEW Tipo PAP Argumentos PCIERRE
       | PAP E0 PCIERRE;
+
 
 
 

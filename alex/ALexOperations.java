@@ -204,6 +204,33 @@ public class ALexOperations {
       return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.TYPEDEF);
    }
 
+   public UnidadLexica unidadArroba(){
+      return new UnidadLexica(alex.fila(),  alex.columna(), ClaseLexica.ARROBA);
+   }
+
+   public UnidadLexica unidadArray(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.ARRAY);
+   }
+
+   public UnidadLexica unidadClass(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.CLASS);
+   }
+
+   public UnidadLexica unidadPrivate(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.PRIVATE);
+   }
+
+   public UnidadLexica unidadPublic(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.PUBLIC);
+   }
+
+   public UnidadLexica unidadProtected(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.PROTECTED);
+   }
+   public UnidadLexica unidadTypedef(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.TYPEDEF);
+   }
+
    public void error() {
    System.err.println("***"+alex.fila()+", "+alex.columna()+" Caracter inesperado: "+alex.lexema());
    }
