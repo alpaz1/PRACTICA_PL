@@ -50,7 +50,9 @@ Programa ::= Declaracion PUNTOYCOMA Programa
             |Clase Programa
                   {: System.out.println("Clase");:}
             | Principal
-                  {: System.out.println("Se acabo el programa");:};
+                  {: System.out.println("Se acabo el programa");:} //poner ;
+            |;//QUITAR, PUESTO PARA HACER PRUEBAS DEL AST
+
 
 Tipo ::=  ARRAY  MENOR  Tipo  MAYOR ArraysDim 
           |VOID 
