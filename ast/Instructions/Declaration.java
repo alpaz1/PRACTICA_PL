@@ -1,4 +1,7 @@
-package ast;
+package ast.Instructions;
+
+import ast.Types.KindTypes;
+
 
 public class Declaration extends Instruction {
 

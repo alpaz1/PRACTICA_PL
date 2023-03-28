@@ -1,4 +1,7 @@
-package ast;
+package ast.Expresions;
+
+import ast.ASTNode;
+import ast.NodeKind;
 
 public abstract class E extends ASTNode {
     public abstract KindE kind();

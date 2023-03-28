@@ -1,4 +1,4 @@
-package ast;
+package ast.Expresions;
 
 public class EBin extends E {
    private E opnd1;

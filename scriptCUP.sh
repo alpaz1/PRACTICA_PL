@@ -20,7 +20,12 @@ mv -f AnalizadorSintacticoTiny.java asint/AnalizadorSintacticoTiny.java
 mv -f ClaseLexica.java asint/ClaseLexica.java
 
 # Compilamos todo
-javac -cp lib/cup.jar */*.java
+
+#javac -cp lib/cup.jar */*.java 
+#find . -name "*.java" -exec javac -cp lib/cup.jar {} \;
+find . -name "*.java" -exec javac -cp lib/cup.jar {} +
+
+
 
 # A partir de aquí es output del analizador sintáctico
 echo -e "\n------------------ Analizador Sintactico ------------------\n"

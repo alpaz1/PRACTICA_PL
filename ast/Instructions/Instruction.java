@@ -1,4 +1,7 @@
-package ast;
+package ast.Instructions;
+
+import ast.ASTNode;
+import ast.NodeKind;
 
 public abstract class Instruction extends ASTNode {
     public abstract KindInstruction kind();

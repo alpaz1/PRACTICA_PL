@@ -1,2 +1,5 @@
-entero a = 2;
+entero a;
+vacio principal(){
+
+}
 

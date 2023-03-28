@@ -6,6 +6,10 @@ import alex.UnidadLexica;
 import errors.GestionErroresTiny;
 import alex.TokenValue;
 import ast.*;
+import ast.Expresions.*;
+import ast.Instructions.*;
+import ast.Types.*;
+import ast.Estructuras.*;
 
 scan with {: return getScanner().next_token(); :};
 parser code {: 
@@ -26,7 +30,7 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  Programa, Principal, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
+non terminal  Principal, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
               ListaEnumerado, ListaCampos, Funcion, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
               Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
               E0, E1, E2, E3, E6, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
@@ -34,34 +38,37 @@ non terminal  Programa, Principal, DeclaracionRegistro, ListaArgumentos, Argumen
 
 
 
+non terminal Programa P;
+non terminal DefinitionsList Declaraciones;
+non terminal BasicStructure Declaracion;
 non terminal Types Tipo;
-non terminal Instruction Declaracion;
 non terminal E E4;
 non terminal E E5;
 non terminal E E7;
 
 
-Programa ::= Declaracion PUNTOYCOMA Programa 
-                  {: RESULT = new Declaration(KindInstruction.DECLARACION);:}
-            |Modulos Programa
+P ::= Declaraciones:decs Principal
+                  {: RESULT = new Programa(decs);:};
+
+Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
+                  {: decs.addBasic(d);RESULT = decs; :}
+            |Modulos Declaraciones
                   {: System.out.println("Módulo");:}
-            |Funcion Programa 
+            |Funcion Declaraciones
                   {: System.out.println("Funcion");:}
-            |Clase Programa
+            |Clase Declaraciones
                   {: System.out.println("Clase");:}
-            | Principal
-                  {: System.out.println("Se acabo el programa");:} //poner ;
-            |;//QUITAR, PUESTO PARA HACER PRUEBAS DEL AST
+            |;
 
 
 Tipo ::=  ARRAY  MENOR  Tipo  MAYOR ArraysDim 
-          |VOID 
           |TIPOINT 
             {:RESULT= new BasicTypes(KindTypes.TIPOINT);:}
           |TIPOFLOAT 
           |TIPOBOOL 
           |IDEN
           |Tipo POR;
+
 Alias ::= TYPEDEF IDEN IGUAL Tipo;
 ArraysDim ::=  CAP E0 CCIERRE| CAP CCIERRE;
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN PUNTO IDEN COMILLASDOBLES;
@@ -91,7 +98,12 @@ Argumentos ::= ListaArgumentos | ;
 ListaArgumentos ::= Argumento COMA ListaArgumentos | Argumento;
 Argumento ::= E0;
 
-Declaracion ::=  Tipo Asignacion | Tipo IDEN | DeclaracionEnumerado | DeclaracionRegistro| Alias;
+Declaracion ::=  Tipo Asignacion 
+                 |Tipo:t IDEN:n
+                        {:RESULT= new BasicStructure(n.lexema, KindTypes.TIPOINT);:}
+                 |DeclaracionEnumerado 
+                 |DeclaracionRegistro
+                 |Alias;
 Asignacion ::= IDEN IGUAL E0 | IDEN IGUAL AsignacionArray | ARROBA IDEN IGUAL E0| IDEN IGUAL AcesoArray;
 AsignacionArray ::= LLAP E0 ListaValores LLCIERRE | LLAP AsignacionArray ListaValores LLCIERRE;
 

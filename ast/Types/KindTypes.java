@@ -1,4 +1,4 @@
-package ast;
+package ast.Types;
 
 public enum KindTypes {
     TIPOINT
