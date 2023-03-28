@@ -1,6 +1,6 @@
 package ast;
 
-public abstract class E implements ASTNode {
+public abstract class E extends ASTNode {
     public abstract KindE kind();
     public E opnd1() {throw new UnsupportedOperationException("opnd1");} 
     public E opnd2() {throw new UnsupportedOperationException("opnd2");} 

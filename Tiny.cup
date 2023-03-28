@@ -26,13 +26,15 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  Programa, Principal,Tipo, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
+non terminal  Programa, Principal, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
               ListaEnumerado, ListaCampos, Declaracion, Funcion, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
               Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
               E0, E1, E2, E3, E6, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
               AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
 
 
+
+non terminal Types Tipo;
 non terminal E E4;
 non terminal E E5;
 non terminal E E7;
@@ -47,10 +49,18 @@ Programa ::= Declaracion PUNTOYCOMA Programa
             |Clase Programa
                   {: System.out.println("Clase");:}
             | Principal
-                  {: System.out.println("Se acabo el programa");:};
+                  {: System.out.println("Se acabo el programa");:} //poner ;
+            |;//QUITAR, PUESTO PARA HACER PRUEBAS DEL AST
 
 
-Tipo ::=  ARRAY  MENOR  Tipo  MAYOR ArraysDim |VOID | TIPOINT | TIPOFLOAT | TIPOBOOL | IDEN| Tipo POR;
+Tipo ::=  ARRAY  MENOR  Tipo  MAYOR ArraysDim 
+          |VOID 
+          |TIPOINT 
+            {:RESULT= new BasicTypes(KindTypes.TIPOINT);:}
+          |TIPOFLOAT 
+          |TIPOBOOL 
+          |IDEN
+          |Tipo POR;
 Alias ::= TYPEDEF IDEN IGUAL Tipo;
 ArraysDim ::=  CAP E0 CCIERRE| CAP CCIERRE;
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN PUNTO IDEN COMILLASDOBLES;
