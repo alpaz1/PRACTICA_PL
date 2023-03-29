@@ -33,7 +33,7 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
 non terminal  Principal, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
               ListaEnumerado, ListaCampos, Funcion, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
               Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
-              E0, E1, E2, E3, E6, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
+              E0, E1, E2, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
               AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
 
 
@@ -42,9 +42,7 @@ non terminal Programa P;
 non terminal DefinitionsList Declaraciones;
 non terminal BasicStructure Declaracion;
 non terminal Types Tipo;
-non terminal E E4;
-non terminal E E5;
-non terminal E E7;
+non terminal E E3,E4,E5,E6,E7;
 
 
 P ::= Declaraciones:decs Principal
@@ -153,22 +151,34 @@ E0 ::= E0 OR E1 | E1;
 
 E1 ::= E1 AND E2 | E2;
 
-E2 ::= E2 IGUALDAD E3 | E2 DISTINTO E3 | E3;
+E2 ::=  E2:opIzq IGUALDAD E3:opDer
+      {:RESULT= new EBin(opIzq, opDer, KindE.IGUALDAD);:}
+      | E2:opIzq DISTINTO E3:opDer
+      {:RESULT= new EBin(opIzq, opDer, KindE.DISTINTO);:}
+      | E3;
 
-E3 ::= E3 MAYOR E4
-      | E3 MENOR E4
-      | E3 MAYORIGUAL E4
-      | E3 MENORIGUAL E4
+E3 ::= E3:opIzq MAYOR E4:opDer
+      {:RESULT = new EBin(opIzq, opDer, KindE.MAYOR);:}
+      | E3:opIzq MENOR E4:opDer
+      {:RESULT = new EBin(opIzq, opDer, KindE.MENOR);:}
+      | E3:opIzq MAYORIGUAL E4:opDer
+      {:RESULT = new EBin(opIzq, opDer, KindE.MAYORIGUAL);:}
+      | E3:opIzq MENORIGUAL E4:opDer
+      {:RESULT = new EBin(opIzq, opDer, KindE.MENORIGUAL);:}
       | E4;
 
 E4 ::= E4:opIzq MAS E5:opDer
       {:RESULT = new EBin(opIzq, opDer, KindE.SUMA);:}
-      | E4 MENOS E5
+      | E4:opIzq MENOS E5:opDer
+      {:RESULT = new EBin(opIzq, opDer, KindE.RESTA);:}
       | E5;
 
-E5 ::= E5 POR E6
-      | E5 DIV E6
-      | E5 MOD E6
+E5 ::= E5:opIzq POR E6:opDer
+      {:RESULT = new EBin(opIzq, opDer, KindE.MUL);:}
+      | E5:opIzq DIV E6:opDer
+      {:RESULT = new EBin(opIzq, opDer, KindE.DIV);:}
+      | E5:opIzq MOD E6:opDer
+      {:RESULT = new EBin(opIzq, opDer, KindE.MOD);:}
       | E6;
 
 E6 ::= MENOS E6
@@ -180,6 +190,7 @@ E7 ::=  TRUE
       | ENT:valor
       {:RESULT= new Const(valor.lexema, KindE.ENT);:}
       | REAL
+      {:RESULT= new Const(valor.lexema, KindE.FLOAT);:}
       | IDEN
       | IDEN PUNTO IDEN
       | ARROBA IDEN

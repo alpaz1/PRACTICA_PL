@@ -4,8 +4,8 @@ import ast.Types.KindTypes;
 
 public class BasicStructure {
     
-    String name;
-    KindTypes tipo;
+    private String name;
+    private KindTypes tipo;
 
     public BasicStructure(String name, KindTypes tipo){
         this.name = name;
