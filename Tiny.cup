@@ -33,7 +33,7 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
 non terminal  Principal, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
               ListaEnumerado, ListaCampos, Funcion, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
               Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
-              E0, E1, E2, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
+              E0, E1, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
               AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
 
 
@@ -42,14 +42,14 @@ non terminal Programa P;
 non terminal DefinitionsList Declaraciones;
 non terminal BasicStructure Declaracion;
 non terminal Types Tipo;
-non terminal E E3,E4,E5,E6,E7;
+non terminal E E2,E3,E4,E5,E6,E7;
 
 
 P ::= Declaraciones:decs Principal
                   {: RESULT = new Programa(decs);:};
 
 Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
-                  {: decs.addBasic(d);RESULT = decs; :}
+                  {: decs.addBasic(d);RESULT = decs; :} //Creemos que lo que es nulo es dec, la lista de declaracions basicas
             |Modulos Declaraciones
                   {: System.out.println("Módulo");:}
             |Funcion Declaraciones
@@ -189,7 +189,7 @@ E7 ::=  TRUE
       | FALSE
       | ENT:valor
       {:RESULT= new Const(valor.lexema, KindE.ENT);:}
-      | REAL
+      | REAL:valor
       {:RESULT= new Const(valor.lexema, KindE.FLOAT);:}
       | IDEN
       | IDEN PUNTO IDEN
