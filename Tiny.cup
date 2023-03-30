@@ -10,6 +10,8 @@ import ast.Expresions.*;
 import ast.Instructions.*;
 import ast.Types.*;
 import ast.Estructuras.*;
+import java.util.List;
+import java.util.ArrayList;
 
 scan with {: return getScanner().next_token(); :};
 parser code {: 
@@ -30,58 +32,75 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  Principal, DeclaracionRegistro, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
-              ListaEnumerado, ListaCampos, Funcion, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
-              Parametro,Parametros, ListaInstrucciones, Instruccion, Asignacion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
-              E0, E1, Modulos, DeclaracionEnumerado, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
+non terminal  Principal, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
+              ListaCampos, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
+              Parametro, Parametros, ListaInstrucciones, Instruccion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
+              Modulos, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
               AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
 
-
-
 non terminal Programa P;
+non terminal StructClass DeclaracionRegistro;
+non terminal Definition Declaracion; 
+non terminal Asignacion Asignacion; 
+non terminal Funcion Funcion; 
+non terminal EnumClass DeclaracionEnumerado;
+non terminal List<String> ListaEnumerado;
 non terminal DefinitionsList Declaraciones;
-non terminal Definition Declaracion;
 non terminal Types Tipo;
-non terminal E E2,E3,E4,E5,E6,E7;
+non terminal E E0,E1,E2,E3,E4,E5,E6,E7;
 
 
 P ::= Declaraciones:decs Principal
                   {: RESULT = new Programa(decs);:};
 
 Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
-                    {: decs.addBasic(d);RESULT = decs; :} //Creemos que lo que es nulo es dec, la lista de declaracions basicas
+                    {: decs.addBasic(d);RESULT = decs; :} 
+                | DeclaracionEnumerado:e PUNTOYCOMA Declaraciones:decs
+                    {:decs.addEnum(e); RESULT = decs;:}
                 | Modulos Declaraciones
-                    {: System.out.println("Módulo");:}
                 | Funcion Declaraciones
-                    {: System.out.println("Funcion");:}
                 | Clase Declaraciones
-                    {: System.out.println("Clase");:}
                 |
                     {: RESULT = new DefinitionsList(); :};
 
+Declaracion ::= Tipo:t Asignacion:a
+                  //   {:RESULT = new Definition(KindTypes.INT, a.getId(), a.getValor());:}
+                | Tipo:t IDEN:n
+                    {:RESULT = new Definition(t.kind(), n.lexema);:}
+                | DeclaracionRegistro
+                | Alias;
+
+Asignacion ::= IDEN:n IGUAL E0:valor
+            //     {:System.out.println("Valor: " + valor.toString()); RESULT = new Asignacion(n.lexema, valor);:}   
+            |  IDEN IGUAL AsignacionArray 
+            |  ARROBA IDEN IGUAL E0
+            |  IDEN IGUAL AcesoArray;
+AsignacionArray ::= LLAP E0 ListaValores LLCIERRE | LLAP AsignacionArray ListaValores LLCIERRE;
 
 Tipo ::= ARRAY MENOR Tipo MAYOR ArraysDim
-          |TIPOINT 
-            {:RESULT= new BasicTypes(KindTypes.TIPOINT);:}
-          |TIPOFLOAT 
-          |TIPOBOOL 
-          |IDEN
-          |Tipo POR;
+          | TIPOINT 
+            {:RESULT= new BasicTypes(KindTypes.INT);:}
+          | TIPOFLOAT 
+            {:RESULT= new BasicTypes(KindTypes.FLOAT);:}
+          | TIPOBOOL 
+            {:RESULT= new BasicTypes(KindTypes.BOOL);:}
+          | IDEN
+          | Tipo POR;
 
 Alias ::= TYPEDEF IDEN IGUAL Tipo;
 ArraysDim ::= CAP E0 CCIERRE| CAP CCIERRE;
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN PUNTO IDEN COMILLASDOBLES;
 Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones LLCIERRE ;
 ListaInstrucciones ::= Instruccion PUNTOYCOMA ListaInstrucciones | Bloque ListaInstrucciones | ;
-Instruccion ::= Declaracion | Asignacion | RETURN E0 | LlamadaFuncion| AcesoStruct | AcesoArray;
+Instruccion ::= Declaracion | Asignacion | RETURN E0 | LlamadaFuncion | AcesoStruct | AcesoArray;
 
 //---------------------Clases-----------------------------------
 
 Clase::= ModAceso CLASS IDEN LLAP CuerpoClase;
 CuerpoClase ::= Atributo CuerpoClase
-               |Constructor CuerpoClase
-               |Metodo CuerpoClase
-               |LLCIERRE;
+               | Constructor CuerpoClase
+               | Metodo CuerpoClase
+               | LLCIERRE;
 
 Atributo ::= ModAceso Declaracion PUNTOYCOMA;
 Constructor::= ModAceso IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones LLCIERRE;
@@ -97,24 +116,12 @@ Argumentos ::= ListaArgumentos | ;
 ListaArgumentos ::= Argumento COMA ListaArgumentos | Argumento;
 Argumento ::= E0;
 
-Declaracion ::= Tipo Asignacion 
-                | Tipo:t IDEN:n
-                    {:RESULT= new Definition(n.lexema, KindTypes.TIPOINT);:}
-                | DeclaracionEnumerado
-                    {:RESULT= new Definition(n.lexema, KindTypes.TIPOINT);:}
-                | DeclaracionRegistro
-                | Alias;
-Asignacion ::= IDEN IGUAL E0 | IDEN IGUAL AsignacionArray | ARROBA IDEN IGUAL E0| IDEN IGUAL AcesoArray;
-AsignacionArray ::= LLAP E0 ListaValores LLCIERRE | LLAP AsignacionArray ListaValores LLCIERRE;
 
 
 // ------------------------ Bloques ------------------------
 Bloque ::= Condicional
-                  {: System.out.println("      Condicional");:}
            | Iteracion 
-                  {: System.out.println("      Bucle");:}
-           | Selecciona
-                  {: System.out.println("      Switch");:};
+           | Selecciona;
 
 Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
               | IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE ELSE LLAP ListaInstrucciones LLCIERRE;
@@ -141,9 +148,12 @@ ListaParametros ::= Parametro COMA ListaParametros | Parametro;
 Parametro ::= Tipo IDEN | Tipo UNVERSAND IDEN;
 
 //---------------------Otros tipos ----------------------------
-DeclaracionEnumerado ::= ENUM IDEN LLAP ListaEnumerado LLCIERRE
-                            {:RESULT= new StructClass(n.lexema, KindTypes.TIPOINT);:};
-ListaEnumerado ::= IDEN COMA ListaEnumerado | IDEN;
+DeclaracionEnumerado ::= ENUM IDEN:n LLAP ListaEnumerado:campos LLCIERRE
+                            {:RESULT= new EnumClass(n.lexema, campos);:};
+ListaEnumerado ::= IDEN:campo COMA ListaEnumerado:campos
+                    {:campos.add(campo.lexema); RESULT = campos;:}
+                 | IDEN:campo
+                    {:List<String> campos = new ArrayList<String>(); campos.add(campo.lexema); RESULT = campos;:};
 DeclaracionRegistro ::= STRUCT IDEN LLAP ListaCampos LLCIERRE;
 ListaCampos ::= Tipo IDEN PUNTOYCOMA| Tipo IDEN PUNTOYCOMA ListaCampos;
 
@@ -188,12 +198,14 @@ E6 ::= MENOS E6
       | NEGACION E6
       | E7;
 
-E7 ::= TRUE
-      | FALSE
+E7 ::= TRUE:valor
+        {:RESULT = new Const(valor.lexema, KindE.BOOL);:}
+      | FALSE:valor
+        {:RESULT = new Const(valor.lexema, KindE.BOOL);:}
       | ENT:valor
-      {:RESULT= new Const(valor.lexema, KindE.ENT);:}
+        {:RESULT = new Const(valor.lexema, KindE.ENT);:}
       | REAL:valor
-      {:RESULT= new Const(valor.lexema, KindE.FLOAT);:}
+        {:RESULT = new Const(valor.lexema, KindE.FLOAT);:}
       | IDEN
       | IDEN PUNTO IDEN
       | ARROBA IDEN

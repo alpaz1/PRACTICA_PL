@@ -19,14 +19,14 @@ public class DefinitionsList {
         lista_struct = new ArrayList<StructClass>();
         lista_enum = new ArrayList<EnumClass>();
         lista_funcion = new ArrayList<Funcion>();
-    }
-
-    
+    }   
 
     // AST TOSTRING -----------------------------------------------------------------
     public String toString() {
-        //return "Enumerados: " + lista_enum.toString() + "\nStruct: " + lista_struct.toString() +"\nFunciones: "  + lista_funcion.toString();
-        return "Basicos: " + lista_basica.toString();
+        return  "Basicos: " + lista_basica.toString() + "\n" +
+                "Enumerados: " + lista_enum + "\n" +
+                "Struct: " + lista_struct.toString() + "\n" +
+                "Funciones: "  + lista_funcion.toString();
     }
 
     // AUXILIARES -----------------------------------------------------------------
@@ -35,8 +35,6 @@ public class DefinitionsList {
     public void addBasic(Definition s){
         lista_basica.add(s);
     }
-
-    /* 
 
     public void addStruct(StructClass s){
         lista_struct.add(s);
@@ -50,5 +48,4 @@ public class DefinitionsList {
     public void addFuncion(Funcion f){
         lista_funcion.add(f);
     }
-    */
 }

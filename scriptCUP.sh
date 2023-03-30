@@ -39,7 +39,7 @@ while getopts ":t" opt; do
         i=$((i+1))
         echo -e "\n------------------ Archivo $file ------------------\n"
         if [[ -r "$file" ]]; then
-          java -cp ".:lib/cup.jar" asint.Main $file # ejecutar CUP en el archivo
+          java -cp ".:lib/*" asint.Main $file # ejecutar CUP en el archivo 
         fi
       done
       exit 0
@@ -52,9 +52,9 @@ done
 # Si no se proporciona ninguna opción, se ejecuta el script con una opción predeterminada
 if [ $OPTIND -eq 1 ]; then
   if [ -n "$1" ]; then
-    java -cp ".:lib/cup.jar" asint.Main $1 
+    java -cp ".:lib/*" asint.Main $1 
   else
     echo "No se ha proporcionado un archivo de entrada."
-    java -cp ".:lib/cup.jar" asint.Main ejemplos/input.txt
+    java -cp ".:lib/*" asint.Main ejemplos/input.txt
   fi
 fi

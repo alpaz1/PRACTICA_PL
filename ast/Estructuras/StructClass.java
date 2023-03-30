@@ -1,15 +1,20 @@
 package ast.Estructuras;
+import java.util.List;
+
+import ast.Pair;
+import ast.Util;
+import ast.Types.KindTypes;
 
 public class StructClass {
     private String name;
-    private KindTypes tipo;
+    private List<Pair<KindTypes, String>> campos;
 
-    public Definition(String name, KindTypes tipo){
+    public StructClass(String name, List<Pair<KindTypes, String>> campos){
         this.name = name;
-        this.tipo = tipo;
+        this.campos = campos;
     }
 
-    public String toString(){
-        return "(" + tipo.toString() + " " + name + ")";
+    public String toString(){ // enum{a,b,c}
+        return name + '{' + Util.prettify(campos) + '}';
     }
 }

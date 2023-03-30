@@ -1,5 +1,6 @@
 enum DiaSemana {
-    a, b, c};
+    a, b, c
+};
 
 entero a = 5;
 buleano b = verdad;
