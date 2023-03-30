@@ -30,5 +30,31 @@ find . -name "*.java" -exec javac -cp lib/cup.jar {} +
 # A partir de aquí es output del analizador sintáctico
 echo -e "\n------------------ Analizador Sintactico ------------------\n"
 
-# Ejecutamos el analizador sintáctico con el archivo de entrada input.txt
-java -cp ".:lib/cup.jar" asint.Main $input
+
+while getopts ":t" opt; do
+  case ${opt} in
+    t ) # Si se especifica la opción "-t"
+      i=0  
+      for file in ejemplos/*; do
+        i=$((i+1))
+        echo -e "\n------------------ Archivo $file ------------------\n"
+        if [[ -r "$file" ]]; then
+          java -cp ".:lib/cup.jar" asint.Main $file # ejecutar CUP en el archivo
+        fi
+      done
+      exit 0
+      ;;
+    \? ) echo "Opción inválida: -$OPTARG" 1>&2; exit 1;;
+    : ) echo "La opción -$OPTARG requiere un argumento." 1>&2; exit 1;;
+  esac
+done
+
+# Si no se proporciona ninguna opción, se ejecuta el script con una opción predeterminada
+if [ $OPTIND -eq 1 ]; then
+  if [ -n "$1" ]; then
+    java -cp ".:lib/cup.jar" asint.Main $1 
+  else
+    echo "No se ha proporcionado un archivo de entrada."
+    java -cp ".:lib/cup.jar" asint.Main ejemplos/input.txt
+  fi
+fi

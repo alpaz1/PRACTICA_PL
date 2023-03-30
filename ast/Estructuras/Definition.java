@@ -2,18 +2,18 @@ package ast.Estructuras;
 
 import ast.Types.KindTypes;
 
-public class BasicStructure {
+public class Definition {
     
     private String name;
     private KindTypes tipo;
 
-    public BasicStructure(String name, KindTypes tipo){
+    public Definition(String name, KindTypes tipo){
         this.name = name;
         this.tipo = tipo;
     }
 
     public String toString(){
-        return "(" + name + tipo.toString() + ")";
+        return "(" + tipo.toString() + " " + name + ")";
     }
 
 }

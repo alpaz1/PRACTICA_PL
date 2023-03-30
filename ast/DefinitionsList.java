@@ -2,23 +2,23 @@ package ast;
 
 import java.util.*;
 
-import ast.Estructuras.BasicStructure;
+import ast.Estructuras.*;
 
 
 
 public class DefinitionsList {
 
 
-    private List<BasicStructure> lista_basica;
-    //private List<StructClass> lista_struct;
-    //private List<EnumClass> lista_enum;
-    //private List<Funcion> lista_funcion;
+    private List<Definition> lista_basica;
+    private List<StructClass> lista_struct;
+    private List<EnumClass> lista_enum;
+    private List<Funcion> lista_funcion;
     
     public DefinitionsList(){
-        lista_basica = new ArrayList<BasicStructure>();
-        //lista_struct = new ArrayList<StructClass>();
-        //lista_enum = new ArrayList<EnumClass>();
-        //lista_funcion = new ArrayList<Funcion>();
+        lista_basica = new ArrayList<Definition>();
+        lista_struct = new ArrayList<StructClass>();
+        lista_enum = new ArrayList<EnumClass>();
+        lista_funcion = new ArrayList<Funcion>();
     }
 
     
@@ -32,7 +32,7 @@ public class DefinitionsList {
     // AUXILIARES -----------------------------------------------------------------
 
 
-    public void addBasic(BasicStructure s){
+    public void addBasic(Definition s){
         lista_basica.add(s);
     }
 
