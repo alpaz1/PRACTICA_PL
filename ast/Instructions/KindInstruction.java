@@ -1,5 +1,5 @@
 package ast.Instructions;
 
 public enum KindInstruction {
-    DECLARACION, ASIGNACION
+    DECLARACION, ASIGNACION, BUCLEFOR, BUCLEWHILE
 }

@@ -33,9 +33,9 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
+non terminal  ListaArgumentos, Argumento, ArraysDim, Alias,
               ListaCampos, Argumentos, NombreFuncion, Clase, ModAceso,
-              Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
+              Condicional, LlamadaFuncion, Caso,
               Modulos, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
               AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
 
@@ -46,7 +46,9 @@ non terminal List<Instruccion> ListaInstrucciones;
 non terminal Instruccion Instruccion;
 non terminal StructClass DeclaracionRegistro;
 non terminal Declaracion Declaracion; 
-non terminal Asignacion Asignacion;   
+non terminal Asignacion Asignacion, InsFor;
+non terminal BucleFor Iteracion;
+non terminal Bloque Bloque;
 non terminal Funcion Funcion;
 non terminal Parametro Parametro;
 non terminal List<Parametro> ListaParametros;
@@ -105,7 +107,8 @@ Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones:instList LLCIERRE
                 {:RESULT= new Funcion(KindTypes.VOID, "principal", new ArrayList<Parametro>(),instList);:};
 ListaInstrucciones ::= Instruccion:ins PUNTOYCOMA ListaInstrucciones:insList 
                         {:insList.add(ins); RESULT = insList;:}
-                     | Bloque ListaInstrucciones 
+                     | Bloque:block ListaInstrucciones:insList
+                        {:insList.add(block); RESULT = insList;:}
                      | 
                         {:RESULT = new ArrayList<Instruccion>();:};
 
@@ -146,15 +149,22 @@ Argumento ::= E0;
 
 // ------------------------ Bloques ------------------------
 Bloque ::= Condicional
-           | Iteracion 
+           | Iteracion:block
+              {:RESULT = block;:}
            | Selecciona;
 
 Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
               | IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE ELSE LLAP ListaInstrucciones LLCIERRE;
-Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
-              | FOR PAP InsFor E0 PUNTOYCOMA Asignacion PCIERRE LLAP ListaInstrucciones LLCIERRE;
-InsFor ::= TIPOINT Asignacion PUNTOYCOMA | Asignacion PUNTOYCOMA | PUNTOYCOMA;
 
+Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
+              | FOR PAP InsFor:var E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
+               {:RESULT = new BucleFor(var, exp, asig, list );:};
+
+InsFor ::= TIPOINT Asignacion:var PUNTOYCOMA 
+              {:RESULT = var;:}
+          | Asignacion:var PUNTOYCOMA 
+               {:RESULT = var;:}
+          | PUNTOYCOMA;
 Selecciona ::= SWITCH PAP IDEN PCIERRE LLAP Casos PorDefecto LLCIERRE;
 Casos ::= Caso Casos |;
 Caso ::= CASE E0 DOSPUNTOS ListaInstrucciones InsParada;
@@ -196,11 +206,13 @@ ListaCampos ::= Tipo IDEN PUNTOYCOMA| Tipo IDEN PUNTOYCOMA ListaCampos;
 
 //------------------ Expresiones ----------------------------
 
-E0 ::= E0:opIzq OR E1:opDer 
+E0 ::= E0:opIzq OR E1:opDer
+        //{:RESULT= new EBin(opIzq, opDer, KindE.OR);:}
      | E1:e
         {:RESULT = e;:};
 
 E1 ::= E1:opIzq AND E2:opDer 
+        //{:RESULT= new EBin(opIzq, opDer, KindE.AND);:}
      | E2:e
         {:RESULT = e;:};
 
@@ -251,7 +263,8 @@ E7 ::= TRUE:valor
         {:RESULT = new Const(valor.lexema, KindE.ENT);:}
       | REAL:valor
         {:RESULT = new Const(valor.lexema, KindE.FLOAT);:}
-      | IDEN
+      | IDEN:valor
+        {:RESULT = new Const(valor.lexema, KindE.IDENTIFICADOR);:}
       | IDEN PUNTO IDEN
       | ARROBA IDEN
       | LlamadaFuncion

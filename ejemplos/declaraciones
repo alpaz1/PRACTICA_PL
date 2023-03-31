@@ -12,5 +12,12 @@ vacio principal() {
     // b = verdad oo mentira;
     // entero c = lee();
     b = 5;
+    paraCada(entero i = 0; i + 2 < 1; i = i + 1){
+        a = 34;
+        paraCada ( entero i = 1 ; i <= n ; i= i + 1 ) {
+        resultado = resultado * i ;
+        }
+    }
+
     // devuelve 8;
 }
