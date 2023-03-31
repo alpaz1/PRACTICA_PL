@@ -1,16 +1,16 @@
 enum DiaSemana {
     a, b, c
 };
-
 entero a = 5;
 buleano b = verdad;
-vacio principal () {
-    b = verdad oo mentira;
-    entero c = lee();
-    si (n== 5) {
-        b = mentira;
-    } sino {
-        fib();
-    }
-    devuelve 8;
+flotante c;
+entero a (entero x, buleano y){
+    a = 7;
+}
+
+vacio principal() {
+    // b = verdad oo mentira;
+    // entero c = lee();
+    b = 5;
+    // devuelve 8;
 }

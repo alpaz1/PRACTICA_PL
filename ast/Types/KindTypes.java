@@ -1,5 +1,5 @@
 package ast.Types;
 
 public enum KindTypes {
-    INT, FLOAT, BOOL
+    INT, FLOAT, BOOL, VOID
 }

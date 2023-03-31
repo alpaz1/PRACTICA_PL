@@ -10,6 +10,7 @@ import ast.Expresions.*;
 import ast.Instructions.*;
 import ast.Types.*;
 import ast.Estructuras.*;
+import ast.Auxiliares.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -32,17 +33,24 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  Principal, ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
-              ListaCampos, Argumentos, ListaParametros, NombreFuncion, Clase, ModAceso,
-              Parametro, Parametros, ListaInstrucciones, Instruccion, Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
+non terminal  ListaArgumentos, Argumento, InsFor, ArraysDim, Alias,
+              ListaCampos, Argumentos, NombreFuncion, Clase, ModAceso,
+              Condicional, Iteracion, LlamadaFuncion, Bloque, Caso,
               Modulos, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
               AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
 
+
 non terminal Programa P;
+non terminal Funcion Principal;
+non terminal List<Instruccion> ListaInstrucciones;
+non terminal Instruccion Instruccion;
 non terminal StructClass DeclaracionRegistro;
-non terminal Definition Declaracion; 
-non terminal Asignacion Asignacion; 
-non terminal Funcion Funcion; 
+non terminal Declaracion Declaracion; 
+non terminal Asignacion Asignacion;   
+non terminal Funcion Funcion;
+non terminal Parametro Parametro;
+non terminal List<Parametro> ListaParametros;
+non terminal List<Parametro> Parametros;
 non terminal EnumClass DeclaracionEnumerado;
 non terminal List<String> ListaEnumerado;
 non terminal DefinitionsList Declaraciones;
@@ -50,28 +58,29 @@ non terminal Types Tipo;
 non terminal E E0,E1,E2,E3,E4,E5,E6,E7;
 
 
-P ::= Declaraciones:decs Principal
-                  {: RESULT = new Programa(decs);:};
+P ::= Declaraciones:decs Principal:p
+                  {: RESULT = new Programa(decs, p);:};
 
 Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
                     {: decs.addBasic(d);RESULT = decs; :} 
-                | DeclaracionEnumerado:e PUNTOYCOMA Declaraciones:decs
-                    {:decs.addEnum(e); RESULT = decs;:}
-                | Modulos Declaraciones
-                | Funcion Declaraciones
-                | Clase Declaraciones
+                | DeclaracionEnumerado:d PUNTOYCOMA Declaraciones:decs
+                    {:decs.addEnum(d); RESULT = decs;:}
+                | Modulos Declaraciones:decs
+                | Funcion:f Declaraciones:decs
+                    {:decs.addFuncion(f); RESULT = decs;:}
+                | Clase Declaraciones:decs
                 |
                     {: RESULT = new DefinitionsList(); :};
 
 Declaracion ::= Tipo:t Asignacion:a
-                  //   {:RESULT = new Definition(KindTypes.INT, a.getId(), a.getValor());:}
+                    {:RESULT = new Declaracion(t.kind(), a.getId(), a.getValor());:}
                 | Tipo:t IDEN:n
-                    {:RESULT = new Definition(t.kind(), n.lexema);:}
+                    {:RESULT = new Declaracion(t.kind(), n.lexema);:}
                 | DeclaracionRegistro
                 | Alias;
 
 Asignacion ::= IDEN:n IGUAL E0:valor
-            //     {:System.out.println("Valor: " + valor.toString()); RESULT = new Asignacion(n.lexema, valor);:}   
+                 {:RESULT = new Asignacion(n.lexema, valor);:}
             |  IDEN IGUAL AsignacionArray 
             |  ARROBA IDEN IGUAL E0
             |  IDEN IGUAL AcesoArray;
@@ -84,15 +93,30 @@ Tipo ::= ARRAY MENOR Tipo MAYOR ArraysDim
             {:RESULT= new BasicTypes(KindTypes.FLOAT);:}
           | TIPOBOOL 
             {:RESULT= new BasicTypes(KindTypes.BOOL);:}
+          //| VOID                                                        ----------- Da problemas de shif reduce -----------
+          //  {:RESULT= new BasicTypes(KindTypes.VOID);:}
           | IDEN
           | Tipo POR;
 
 Alias ::= TYPEDEF IDEN IGUAL Tipo;
 ArraysDim ::= CAP E0 CCIERRE| CAP CCIERRE;
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN PUNTO IDEN COMILLASDOBLES;
-Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones LLCIERRE ;
-ListaInstrucciones ::= Instruccion PUNTOYCOMA ListaInstrucciones | Bloque ListaInstrucciones | ;
-Instruccion ::= Declaracion | Asignacion | RETURN E0 | LlamadaFuncion | AcesoStruct | AcesoArray;
+Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones:instList LLCIERRE 
+                {:RESULT= new Funcion(KindTypes.VOID, "principal", new ArrayList<Parametro>(),instList);:};
+ListaInstrucciones ::= Instruccion:ins PUNTOYCOMA ListaInstrucciones:insList 
+                        {:insList.add(ins); RESULT = insList;:}
+                     | Bloque ListaInstrucciones 
+                     | 
+                        {:RESULT = new ArrayList<Instruccion>();:};
+
+Instruccion ::= Declaracion:dec
+                  {:RESULT = dec;:}
+              | Asignacion:as
+                  {:RESULT = as;:}
+              | RETURN E0 
+              | LlamadaFuncion 
+              | AcesoStruct 
+              | AcesoArray;
 
 //---------------------Clases-----------------------------------
 
@@ -112,8 +136,10 @@ ModAceso::= PUBLIC | PRIVATE | PROTECTED;
 ListaValores ::= COMA E0 ListaValores| COMA AsignacionArray ListaValores|;
 NombreFuncion ::= IDEN | READ | PRINT;
 LlamadaFuncion ::= NombreFuncion PAP Argumentos PCIERRE;
-Argumentos ::= ListaArgumentos | ;
-ListaArgumentos ::= Argumento COMA ListaArgumentos | Argumento;
+Argumentos ::= ListaArgumentos 
+              | ;
+ListaArgumentos ::= Argumento COMA ListaArgumentos 
+              | Argumento;
 Argumento ::= E0;
 
 
@@ -142,10 +168,20 @@ ListaAcesoArray ::= CAP E4 CCIERRE ListaAcesoArray|;
 AcesoStruct ::= IDEN PUNTO IDEN | IDEN PUNTO Asignacion;
 
 // ----------------------Funciones--------------------------
-Funcion ::= Tipo IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones  LLCIERRE;
-Parametros ::= ListaParametros | ;
-ListaParametros ::= Parametro COMA ListaParametros | Parametro;
-Parametro ::= Tipo IDEN | Tipo UNVERSAND IDEN;
+Funcion ::= Tipo:t IDEN:id PAP Parametros:paramList PCIERRE LLAP ListaInstrucciones:instList LLCIERRE
+              {:RESULT= new Funcion(t.kind(), id.lexema, paramList, instList);:};
+Parametros ::= ListaParametros:paramList
+              {:RESULT = paramList;:}
+              | 
+              {:RESULT = new ArrayList<Parametro>();:};
+ListaParametros ::= Parametro:param COMA ListaParametros:paramList
+                    {:paramList.add(param); RESULT = paramList;:}
+                  | Parametro:param
+                    {:List<Parametro> paramList = new ArrayList<Parametro>(); paramList.add(param); RESULT = paramList;:};
+Parametro ::= Tipo:t IDEN:id
+              {:RESULT = new Parametro(t.kind(), id.lexema, false);:}
+            | Tipo:t UNVERSAND IDEN:id
+              {:RESULT = new Parametro(t.kind(), id.lexema, true);:};
 
 //---------------------Otros tipos ----------------------------
 DeclaracionEnumerado ::= ENUM IDEN:n LLAP ListaEnumerado:campos LLCIERRE
@@ -160,43 +196,52 @@ ListaCampos ::= Tipo IDEN PUNTOYCOMA| Tipo IDEN PUNTOYCOMA ListaCampos;
 
 //------------------ Expresiones ----------------------------
 
-E0 ::= E0 OR E1 | E1;
+E0 ::= E0:opIzq OR E1:opDer 
+     | E1:e
+        {:RESULT = e;:};
 
-E1 ::= E1 AND E2 | E2;
+E1 ::= E1:opIzq AND E2:opDer 
+     | E2:e
+        {:RESULT = e;:};
 
 E2 ::= E2:opIzq IGUALDAD E3:opDer
-      {:RESULT= new EBin(opIzq, opDer, KindE.IGUALDAD);:}
+          {:RESULT= new EBin(opIzq, opDer, KindE.IGUALDAD);:}
       | E2:opIzq DISTINTO E3:opDer
-      {:RESULT= new EBin(opIzq, opDer, KindE.DISTINTO);:}
-      | E3;
+          {:RESULT= new EBin(opIzq, opDer, KindE.DISTINTO);:}
+      | E3:e
+          {:RESULT = e;:};
 
 E3 ::= E3:opIzq MAYOR E4:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.MAYOR);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MAYOR);:}
       | E3:opIzq MENOR E4:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.MENOR);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MENOR);:}
       | E3:opIzq MAYORIGUAL E4:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.MAYORIGUAL);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MAYORIGUAL);:}
       | E3:opIzq MENORIGUAL E4:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.MENORIGUAL);:}
-      | E4;
+          {:RESULT = new EBin(opIzq, opDer, KindE.MENORIGUAL);:}
+      | E4:e
+          {:RESULT = e;:};
 
 E4 ::= E4:opIzq MAS E5:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.SUMA);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.SUMA);:}
       | E4:opIzq MENOS E5:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.RESTA);:}
-      | E5;
+          {:RESULT = new EBin(opIzq, opDer, KindE.RESTA);:}
+      | E5:e
+          {:RESULT = e;:};
 
 E5 ::= E5:opIzq POR E6:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.MUL);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MUL);:}
       | E5:opIzq DIV E6:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.DIV);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.DIV);:}
       | E5:opIzq MOD E6:opDer
-      {:RESULT = new EBin(opIzq, opDer, KindE.MOD);:}
-      | E6;
+          {:RESULT = new EBin(opIzq, opDer, KindE.MOD);:}
+      | E6:e
+          {:RESULT = e;:};
 
 E6 ::= MENOS E6
       | NEGACION E6
-      | E7;
+      | E7:e
+          {:RESULT = e;:};
 
 E7 ::= TRUE:valor
         {:RESULT = new Const(valor.lexema, KindE.BOOL);:}

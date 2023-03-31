@@ -2,35 +2,40 @@ package ast.Estructuras;
 
 import ast.Expresions.E;
 import ast.Instructions.Asignacion;
+import ast.Instructions.Instruccion;
+import ast.Instructions.KindInstruction;
 import ast.Types.KindTypes;
 
-public class Definition {
+public class Declaracion extends Instruccion {
     
     private String name;
     private KindTypes tipo;
     private Object valor = null;
 
-    public Definition(KindTypes tipo, String name){
+    public Declaracion(KindTypes tipo, String name){
         this.tipo = tipo;
         this.name = name;
     }
 
-    public Definition(KindTypes tipo, String name, Object valor){
+    public Declaracion(KindTypes tipo, String name, Object valor){
         this.tipo = tipo;
         this.name = name;
-        System.out.println("Valor: " + valor.toString());
         this.valor = valor;
     }
 
     public String toString(){
         String out;
-        // System.out.println("Valor: " + valor.toString());
         if (valor != null){
             out = tipo.toString() + " " + name + " = " + valor.toString();
         } else {
-            out = "(" + tipo.toString() + " " + name + ")";
+            out = tipo.toString() + " " + name;
         }
         return out;
+    }
+
+    @Override
+    public KindInstruction kind() {
+        return KindInstruction.DECLARACION;
     }
 
 }

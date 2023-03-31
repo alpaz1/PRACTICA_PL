@@ -2,7 +2,7 @@ package ast.Instructions;
 
 import ast.Expresions.E;
 
-public class Asignacion {
+public class Asignacion extends Instruccion{
     private KindInstruction tipoIns = KindInstruction.ASIGNACION; // esto sirve de algo?
     private String iden;
     private Object valor;

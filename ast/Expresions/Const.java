@@ -5,7 +5,7 @@ public class Const extends E {
   private KindE tipo;
   public Const(String valor, KindE tipo) {
     this.tipo = tipo;
-   this.valor = valor;
+    this.valor = valor;
   }
   public KindE kind() {return tipo;}   
   public String toString() {return valor;}  

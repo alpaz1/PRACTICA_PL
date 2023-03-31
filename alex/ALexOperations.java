@@ -27,16 +27,16 @@ public class ALexOperations {
    return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.ENUM); 
    } 
    public UnidadLexica unidadEnt() {
-      return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.ENT,alex.lexema()); 
+      return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.ENT, alex.lexema()); 
    } 
    public UnidadLexica unidadReal() {
-      return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.REAL,alex.lexema()); 
+      return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.REAL, alex.lexema()); 
    } 
    public UnidadLexica unidadTrue() {
-      return new UnidadLexica(alex.fila(),alex.columna(), ClaseLexica.TRUE);
+      return new UnidadLexica(alex.fila(),alex.columna(), ClaseLexica.TRUE, alex.lexema());
    }
    public UnidadLexica unidadFalse() {
-      return new UnidadLexica(alex.fila(),alex.columna(), ClaseLexica.FALSE);
+      return new UnidadLexica(alex.fila(),alex.columna(), ClaseLexica.FALSE, alex.lexema());
    }
    public UnidadLexica unidadSuma() {
       return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.MAS); 
