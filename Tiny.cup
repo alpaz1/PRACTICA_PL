@@ -148,13 +148,16 @@ Argumento ::= E0;
 
 
 // ------------------------ Bloques ------------------------
-Bloque ::= Condicional
+Bloque ::= Condicional:block
+              {:RESULT= block;:}
            | Iteracion:block
               {:RESULT = block;:}
            | Selecciona;
 
-Condicional ::= IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
-              | IF PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE ELSE LLAP ListaInstrucciones LLCIERRE;
+Condicional ::= IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE
+              {: RESULT = new IfElse(exp,ins); :}
+              | IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE ELSE LLAP ListaInstrucciones:inselse LLCIERRE;
+              {: RESULT = new IfElse(exp,ins,inselse); :}
 
 Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
               | FOR PAP InsFor:var E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
