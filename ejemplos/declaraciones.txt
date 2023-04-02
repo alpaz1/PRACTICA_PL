@@ -8,6 +8,8 @@ entero a (entero x, buleano y){
     a = 7;
 }
 
+lista <entero> [3] l;
+
 vacio principal() {
     b = verdad oo mentira;
     buleano aaa = no verdad;
@@ -18,6 +20,9 @@ vacio principal() {
         resultado = resultado * i ;
         }
     }
+
+    lista <entero> [3] l;
+
 
     devuelve 8;
 }

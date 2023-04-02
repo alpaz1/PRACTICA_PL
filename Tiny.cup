@@ -33,10 +33,10 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  ArraysDim, Alias,
+non terminal  ArraysDim, Alias, AsignacionArray,
               ListaCampos, Argumentos, Clase, ModAceso,
               Modulos, InsParada, ListaValores,
-              AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
+              AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
 
 
 non terminal Programa P;
@@ -92,12 +92,24 @@ Declaracion ::= Tipo:t Asignacion:a
 
 Asignacion ::= IDEN:n IGUAL E0:valor
                  {:RESULT = new Asignacion(n.lexema, valor);:}
-            |  IDEN IGUAL AsignacionArray 
+            |  IDEN:n IGUAL AsignacionArray:valor
+                 {:RESULT = new Asignacion(n.lexema, valor);:}
             |  ARROBA IDEN IGUAL E0
             |  IDEN IGUAL AcesoArray;
-AsignacionArray ::= LLAP E0 ListaValores LLCIERRE | LLAP AsignacionArray ListaValores LLCIERRE;
+AsignacionArray ::= LLAP E0:e ListaValores:l LLCIERRE
+                    //  {:  l.add(e); RESULT = l;:}
+                   | LLAP AsignacionArray:a ListaValores:l LLCIERRE
+                     ;// {: l.add(a);RESULT = l;:};
 
-Tipo ::= ARRAY MENOR Tipo MAYOR ArraysDim
+ListaValores ::= COMA E0:e ListaValores:l
+                   //   {:l.add(e); RESULT = l;:}
+                | COMA AsignacionArray:a ListaValores:l
+                    //   {:l.add(a); RESULT = l;:}
+                |; //{:RESULT =  new ArrayList<Object>(); :};
+
+
+Tipo ::= ARRAY MENOR Tipo:t MAYOR ArraysDim
+            {:RESULT = new BasicTypes(KindTypes.ARRAY);:}
           | TIPOINT 
             {:RESULT= new BasicTypes(KindTypes.INT);:}
           | TIPOFLOAT 
@@ -151,7 +163,6 @@ Metodo ::= ModAceso Funcion;
 ModAceso::= PUBLIC | PRIVATE | PROTECTED;
 // ------------------------ Instrucciones ------------------------
 
-ListaValores ::= COMA E0 ListaValores| COMA AsignacionArray ListaValores|;
 // Llamada a función como expresión
 LlamadaFuncion ::= IDEN:nombre PAP ListaArgumentos:args PCIERRE
                   {:RESULT = new LlamadaFunExp(nombre.lexema,args);:};

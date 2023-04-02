@@ -10,7 +10,7 @@ public class Asignacion extends Instruccion{
     private KindTypes tipo;
 
 
-    public Asignacion(String iden, E valor){
+    public Asignacion(String iden, Object valor){
         this.iden = iden;
         this.valor = valor;
     }

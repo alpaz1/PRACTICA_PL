@@ -8,8 +8,8 @@ import ast.Types.KindTypes;
 
 public class Declaracion extends Instruccion {
     
-    private String name;
-    private KindTypes tipo;
+    protected String name;
+    protected KindTypes tipo;
     private Object valor = null;
 
     public Declaracion(KindTypes tipo, String name){
