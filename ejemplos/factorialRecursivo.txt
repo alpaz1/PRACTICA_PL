@@ -3,10 +3,10 @@ entero factorialRec(entero n) {
         devuelve 1;
     }
     sino {
-        devuelve n * factorial (n - 1 ) ;
+        devuelve n * factorialRec (n - 1 ) ;
     }
 }
 vacio principal () {
-    entero n = lee();
+    lee();
     imprime(factorialRec(n));
 }

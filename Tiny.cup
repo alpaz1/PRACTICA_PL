@@ -33,9 +33,9 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  ListaArgumentos, Argumento, ArraysDim, Alias,
-              ListaCampos, Argumentos, NombreFuncion, Clase, ModAceso,
-              Condicional, LlamadaFuncion, Caso,
+non terminal  ArraysDim, Alias,
+              ListaCampos, Argumentos, Clase, ModAceso,
+              Caso,
               Modulos, Selecciona, Casos, InsParada, PorDefecto, ListaValores,
               AsignacionArray, AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
 
@@ -47,12 +47,18 @@ non terminal Instruccion Instruccion;
 non terminal StructClass DeclaracionRegistro;
 non terminal Declaracion Declaracion; 
 non terminal Asignacion Asignacion, InsFor;
+non terminal Condicional Condicional;
+non terminal Devuelve Return;
+non terminal Imprime Print;
+non terminal Lee Read;
 non terminal BucleFor Iteracion;
 non terminal Bloque Bloque;
 non terminal Funcion Funcion;
 non terminal Parametro Parametro;
+non terminal LlamadaFunExp LlamadaFuncion;
 non terminal List<Parametro> ListaParametros;
 non terminal List<Parametro> Parametros;
+non terminal List<E> ListaArgumentos;
 non terminal EnumClass DeclaracionEnumerado;
 non terminal List<String> ListaEnumerado;
 non terminal DefinitionsList Declaraciones;
@@ -116,8 +122,14 @@ Instruccion ::= Declaracion:dec
                   {:RESULT = dec;:}
               | Asignacion:as
                   {:RESULT = as;:}
-              | RETURN E0 
-              | LlamadaFuncion 
+              | Return:ret
+                  {:RESULT =ret;:}
+              | Print:pr
+                  {:RESULT = pr;:}
+              | Read:re
+                  {:RESULT=re;:}
+              | LlamadaFuncion:fun
+                  {:RESULT = new LlamadaFunInst(fun);:}
               | AcesoStruct 
               | AcesoArray;
 
@@ -137,15 +149,27 @@ ModAceso::= PUBLIC | PRIVATE | PROTECTED;
 // ------------------------ Instrucciones ------------------------
 
 ListaValores ::= COMA E0 ListaValores| COMA AsignacionArray ListaValores|;
-NombreFuncion ::= IDEN | READ | PRINT;
-LlamadaFuncion ::= NombreFuncion PAP Argumentos PCIERRE;
-Argumentos ::= ListaArgumentos 
-              | ;
-ListaArgumentos ::= Argumento COMA ListaArgumentos 
-              | Argumento;
-Argumento ::= E0;
+// Llamada a función como expresión
+LlamadaFuncion ::= IDEN:nombre PAP ListaArgumentos:args PCIERRE
+                  {:RESULT = new LlamadaFunExp(nombre.lexema,args);:};
+      
+ListaArgumentos ::= E0:arg COMA ListaArgumentos:arglist 
+                {:arglist.add(arg); RESULT = arglist;:}
+              | E0:exp
+                {: RESULT =  new ArrayList<E>(); RESULT.add(exp);  :}
+              |
+                {: RESULT = new ArrayList<E>(); :};
 
+Print ::= PRINT PAP E0:exp PCIERRE 
+         {: RESULT = new Imprime(exp); :};
 
+Read ::= READ PAP PCIERRE 
+         {:RESULT = new Lee();:};
+
+Return ::= RETURN E0:exp 
+            {:RESULT = new Devuelve(exp);:}
+          | RETURN 
+            {:RESULT = new Devuelve();:};
 
 // ------------------------ Bloques ------------------------
 Bloque ::= Condicional:block
@@ -155,9 +179,9 @@ Bloque ::= Condicional:block
            | Selecciona;
 
 Condicional ::= IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE
-              {: RESULT = new IfElse(exp,ins); :}
-              | IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE ELSE LLAP ListaInstrucciones:inselse LLCIERRE;
-              {: RESULT = new IfElse(exp,ins,inselse); :}
+              {: RESULT = new Condicional(exp,ins); :}
+              | IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE ELSE LLAP ListaInstrucciones:inselse LLCIERRE
+              {: RESULT = new Condicional(exp,ins,inselse); :};
 
 Iteracion ::= WHILE PAP E0 PCIERRE LLAP ListaInstrucciones LLCIERRE
               | FOR PAP InsFor:var E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
@@ -210,12 +234,12 @@ ListaCampos ::= Tipo IDEN PUNTOYCOMA| Tipo IDEN PUNTOYCOMA ListaCampos;
 //------------------ Expresiones ----------------------------
 
 E0 ::= E0:opIzq OR E1:opDer
-        //{:RESULT= new EBin(opIzq, opDer, KindE.OR);:}
+        {:RESULT= new EBin(opIzq, opDer, KindE.OR);:}
      | E1:e
         {:RESULT = e;:};
 
 E1 ::= E1:opIzq AND E2:opDer 
-        //{:RESULT= new EBin(opIzq, opDer, KindE.AND);:}
+        {:RESULT= new EBin(opIzq, opDer, KindE.AND);:}
      | E2:e
         {:RESULT = e;:};
 
@@ -253,8 +277,10 @@ E5 ::= E5:opIzq POR E6:opDer
       | E6:e
           {:RESULT = e;:};
 
-E6 ::= MENOS E6
-      | NEGACION E6
+E6 ::= MENOS E6:exp
+        {:RESULT = new EUnaria(exp,KindE.MENOS);:}
+      | NEGACION E6:exp
+       {:RESULT = new EUnaria(exp, KindE.NEG);:} 
       | E7:e
           {:RESULT = e;:};
 
@@ -270,7 +296,8 @@ E7 ::= TRUE:valor
         {:RESULT = new Const(valor.lexema, KindE.IDENTIFICADOR);:}
       | IDEN PUNTO IDEN
       | ARROBA IDEN
-      | LlamadaFuncion
+      | LlamadaFuncion:llamada
+        {:RESULT=llamada;:}
       | NEW Tipo PAP Argumentos PCIERRE
       | PAP E0 PCIERRE;
 

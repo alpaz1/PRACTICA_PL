@@ -3,18 +3,18 @@ package ast.Instructions;
 import ast.Expresions.E;
 import java.util.*;
 
-public class IfElse extends Bloque {
+public class Condicional extends Bloque {
 
     protected E condicion;
     protected List<Instruccion> instrucciones_then;
     protected List<Instruccion> instrucciones_else;
 
-    public IfElse(E exp, List<Instruccion> instrucciones_then) {
+    public Condicional(E exp, List<Instruccion> instrucciones_then) {
         this.condicion = exp;
         this.instrucciones_then = instrucciones_then;
     }
 
-    public IfElse(E exp, List<Instruccion> instrucciones_then, List<Instruccion> instrucciones_else) {
+    public Condicional(E exp, List<Instruccion> instrucciones_then, List<Instruccion> instrucciones_else) {
         this.condicion = exp;
         this.instrucciones_then = instrucciones_then;
         this.instrucciones_else = instrucciones_else;
