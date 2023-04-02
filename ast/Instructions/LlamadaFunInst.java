@@ -14,6 +14,6 @@ public class LlamadaFunInst extends Instruccion {
     }
 
     public String toString(){
-        return "Llamada (" + funcion.toString() + ")";
+        return funcion.toString();
     }
 }

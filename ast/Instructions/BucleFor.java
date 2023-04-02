@@ -12,12 +12,11 @@ public class BucleFor extends Bloque{
     private Asignacion a;
 
 
-
     public BucleFor(Asignacion variable, E exp , Asignacion a ,  List<Instruccion> instList ){
+        super(instList);
         this.var = variable;
         this.valor = exp;
         this.a = a;
-        this.instList = instList;
     }
 
     public KindInstruction kind() {return tipoIns;}

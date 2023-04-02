@@ -6,33 +6,26 @@ import java.util.*;
 public class Condicional extends Bloque {
 
     protected E condicion;
-    protected List<Instruccion> instrucciones_then;
     protected List<Instruccion> instrucciones_else;
 
     public Condicional(E exp, List<Instruccion> instrucciones_then) {
+        super(instrucciones_then);
         this.condicion = exp;
-        this.instrucciones_then = instrucciones_then;
+        instrucciones_else = null;
     }
 
     public Condicional(E exp, List<Instruccion> instrucciones_then, List<Instruccion> instrucciones_else) {
+        super(instrucciones_then);
         this.condicion = exp;
-        this.instrucciones_then = instrucciones_then;
         this.instrucciones_else = instrucciones_else;
     }
 
     public String toString() {
-        String inst = "";
-        for (Instruccion i : instrucciones_then) {
-            inst = inst + i + "\n";
-        }
-        String el = "";
-        if (instrucciones_else != null) {
-            for (Instruccion i : instrucciones_else) {
-                el = el + i + "\n";
-            }
-        }
-
-        return "If (Condición:" + condicion.toString() + ", Instrucciones:\n" + inst + "Else:\n" + el + ")";
+        if (this.instrucciones_else == null)
+            return "If (Condición:" + this.condicion.toString() + ", Instrucciones:\n" + this.instList.toString() + ")";
+        else
+            return "If (Condición:" + this.condicion.toString() + ", Instrucciones:\n" + this.instList.toString()
+            + "Else:\n" + this.instrucciones_else.toString() + ")";
     }
 
     public KindInstruction kind() {

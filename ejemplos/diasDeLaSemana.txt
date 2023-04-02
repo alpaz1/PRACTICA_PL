@@ -8,20 +8,22 @@ enum DiaSemana {
     Domingo,
     Error
 };
-DiaSemana AveriguaDia ( entero n ) {
+entero AveriguaDia ( entero n ) {
     selecciona (n) {
-        caso 1 : devuelve Lunes;
-        caso 2 : devuelve Martes;
-        caso 3: devuelve Miercoles;
-        caso 4 : devuelve Jueves;
-        caso 5: devuelve Viernes;
-        caso 6 : devuelve Sabado;
-        caso 7 : devuelve Domingo;
+        caso 1 : devuelve Lunes; ¡para!;
+        caso 2 : devuelve Martes; ¡para!;
+        caso 3: devuelve Miercoles; ¡para!;
+        caso 4 : devuelve Jueves; ¡para!;
+        caso 5: devuelve Viernes; ¡para!;
+        caso 6 : devuelve Sabado; ¡para!;
+        caso 7 : devuelve Domingo; ¡para!;
         porDefecto : devuelveError(); // en caso de un numero invalido , se devuelve
     }
 }
 vacio principal () {
-    entero n = Lee(Ingrese un numero del 1 al 7);
-    DiaSemana dia = AveriguaDia(n);
+    {
+        entero n = 3;
+    }
+    AveriguaDia(n);
     imprime(dia);
 }

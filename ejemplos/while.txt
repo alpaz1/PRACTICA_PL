@@ -1,0 +1,8 @@
+vacio principal() {
+    entero n = 0;
+    mientras (n < 10) {
+        imprime(n);
+        n = n + 1;
+    }
+    devuelve 0;
+}

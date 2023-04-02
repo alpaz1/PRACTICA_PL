@@ -1,3 +1,0 @@
-vacio principal() {
-    devuelve 1;
-}
