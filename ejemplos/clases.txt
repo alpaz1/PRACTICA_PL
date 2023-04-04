@@ -1,0 +1,25 @@
+publico clase Hora {
+    privado entero segundos;
+    privado entero minutos;
+    privado entero horas;
+
+    publico Hora(){
+        segundos = 0;
+        minutos = 0;
+        horas = 0;
+    }
+    publico Hora(entero s, entero m, entero h){
+        segundos = s;
+        minutos = m;
+        horas = h;
+    }
+
+    publico entero aSegundos() {
+        devuelve horas*3600 + minutos*60 + segundos;
+    }
+
+}
+
+vacio principal() {
+    entero a;
+}

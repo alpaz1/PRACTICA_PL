@@ -10,6 +10,7 @@ import ast.Expresions.*;
 import ast.Instructions.*;
 import ast.Types.*;
 import ast.Estructuras.*;
+import ast.Estructuras.clases.*;
 import ast.Auxiliares.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -34,9 +35,9 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
 non terminal  ArraysDim, Alias, AsignacionArray,
-              ListaCampos, Argumentos, Clase, ModAceso,
+              ListaCampos, Argumentos,
               Modulos, InsParada, ListaValores,
-              AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray, CuerpoClase, Atributo, Constructor, Metodo;
+              AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray;
 
 
 non terminal Programa P;
@@ -44,7 +45,12 @@ non terminal Funcion Principal;
 non terminal List<Instruccion> ListaInstrucciones;
 non terminal Instruccion Instruccion;
 non terminal StructClass DeclaracionRegistro;
-non terminal Declaracion Declaracion; 
+non terminal Declaracion Declaracion;
+non terminal PrivacyMode ModAcceso; 
+non terminal Clase Clase,CuerpoClase;
+non terminal Atributo Atributo;
+non terminal Constructor Constructor;
+non terminal Metodo Metodo;
 non terminal Asignacion Asignacion, InsFor;
 non terminal Condicional Condicional;
 non terminal Devuelve Return;
@@ -79,7 +85,8 @@ Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
                 | Modulos Declaraciones:decs
                 | Funcion:f Declaraciones:decs
                     {:decs.addFuncion(f); RESULT = decs;:}
-                | Clase Declaraciones:decs
+                | Clase:clase Declaraciones:decs
+                    {:decs.addClase(clase);RESULT=decs;:}
                 |
                     {: RESULT = new DefinitionsList(); :};
 
@@ -150,17 +157,30 @@ Instruccion ::= Declaracion:dec
 
 //---------------------Clases-----------------------------------
 
-Clase::= ModAceso CLASS IDEN LLAP CuerpoClase;
-CuerpoClase ::= Atributo CuerpoClase
-               | Constructor CuerpoClase
-               | Metodo CuerpoClase
-               | LLCIERRE;
+Clase::= ModAcceso:modo CLASS IDEN:nombre LLAP CuerpoClase:clase LLCIERRE
+              {:clase.setName(nombre.lexema);clase.setModo(modo);RESULT= clase;:};
+CuerpoClase ::= Atributo:a CuerpoClase:clase
+               {:clase.addAtrib(a);RESULT=clase;:}
+               | Constructor:c CuerpoClase:clase
+               {:clase.addConstr(c);RESULT=clase;:}
+               | Metodo:m CuerpoClase:clase
+               {:clase.addMetodo(m);RESULT=clase;:}
+               |
+               {:RESULT = new Clase();:};
 
-Atributo ::= ModAceso Declaracion PUNTOYCOMA;
-Constructor::= ModAceso IDEN PAP Parametros PCIERRE LLAP ListaInstrucciones LLCIERRE;
-Metodo ::= ModAceso Funcion;
+Atributo ::= ModAcceso:modo Declaracion:dec PUNTOYCOMA
+              {:RESULT = new Atributo(modo,dec);:};
+Constructor::= ModAcceso:modo IDEN PAP Parametros:param PCIERRE LLAP ListaInstrucciones:inst LLCIERRE
+                {:RESULT = new Constructor(modo,param,inst);:};
+Metodo ::= ModAcceso:modo Funcion:fun
+            {:RESULT = new Metodo(modo,fun);:};
 
-ModAceso::= PUBLIC | PRIVATE | PROTECTED;
+ModAcceso::= PUBLIC
+            {:RESULT = PrivacyMode.PUBLIC;:}
+            | PRIVATE
+            {:RESULT = PrivacyMode.PRIVATE;:} 
+            | PROTECTED
+            {:RESULT = PrivacyMode.PROTECTED;:};
 // ------------------------ Instrucciones ------------------------
 
 // Llamada a función como expresión

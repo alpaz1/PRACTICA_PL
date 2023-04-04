@@ -16,6 +16,12 @@ public class Declaracion extends Instruccion {
         this.tipo = tipo;
         this.name = name;
     }
+    public KindTypes getTipo() {
+        return this.tipo;
+    }
+    public String getName() {
+        return this.name;
+    }
 
     public Declaracion(KindTypes tipo, String name, Object valor){
         this.tipo = tipo;

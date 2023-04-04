@@ -3,8 +3,7 @@ package ast.Estructuras;
 import java.util.*;
 
 import ast.Estructuras.*;
-
-
+import ast.Estructuras.clases.*;
 
 public class DefinitionsList {
 
@@ -13,12 +12,14 @@ public class DefinitionsList {
     private List<StructClass> lista_struct;
     private List<EnumClass> lista_enum;
     private List<Funcion> lista_funcion;
+    private List<Clase> lista_clases;
     
     public DefinitionsList(){
         lista_basica = new ArrayList<Declaracion>();
         lista_struct = new ArrayList<StructClass>();
         lista_enum = new ArrayList<EnumClass>();
         lista_funcion = new ArrayList<Funcion>();
+        lista_clases = new ArrayList<Clase>();
     }   
 
     // AST TOSTRING -----------------------------------------------------------------
@@ -26,7 +27,8 @@ public class DefinitionsList {
         return  "Basicos: " + lista_basica.toString() + "\n" +
                 "Enumerados: " + lista_enum + "\n" +
                 "Struct: " + lista_struct.toString() + "\n" +
-                "Funciones: "  + lista_funcion;
+                "Funciones: "  + lista_funcion + "\n" +
+                "Clases: " + lista_clases.toString();
     }
 
     // AUXILIARES -----------------------------------------------------------------
@@ -46,5 +48,8 @@ public class DefinitionsList {
     
     public void addFuncion(Funcion f){
         lista_funcion.add(f);
+    }
+    public void addClase(Clase c){
+        lista_clases.add(c);
     }
 }
