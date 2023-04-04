@@ -1,7 +1,6 @@
 package ast.Estructuras;
 
 import ast.Expresions.E;
-import ast.Instructions.Asignacion;
 import ast.Instructions.Instruccion;
 import ast.Instructions.KindInstruction;
 import ast.Types.KindTypes;
@@ -10,7 +9,7 @@ public class Declaracion extends Instruccion {
     
     protected String name;
     protected KindTypes tipo;
-    private Object valor = null;
+    private E valor = null;
 
     public Declaracion(KindTypes tipo, String name){
         this.tipo = tipo;
@@ -23,7 +22,7 @@ public class Declaracion extends Instruccion {
         return this.name;
     }
 
-    public Declaracion(KindTypes tipo, String name, Object valor){
+    public Declaracion(KindTypes tipo, String name, E valor){
         this.tipo = tipo;
         this.name = name;
         this.valor = valor;

@@ -2,21 +2,22 @@ package ast.Instructions;
 
 import ast.Expresions.E;
 import ast.Types.KindTypes;
+import ast.Accesos.*;
 
 public class Asignacion extends Instruccion{
     private KindInstruction tipoIns = KindInstruction.ASIGNACION; // esto sirve de algo?
-    private String iden;
-    private Object valor;
+    private Acceso iden;
+    private E valor;
     private KindTypes tipo;
 
 
-    public Asignacion(String iden, Object valor){
+    public Asignacion(Acceso iden, E valor){
         this.iden = iden;
         this.valor = valor;
     }
 
 
-    public Asignacion(String iden, E valor, KindTypes tipo){
+    public Asignacion(Acceso iden, E valor, KindTypes tipo){
         this.iden = iden;
         this.tipo = tipo;
         this.valor = valor;
@@ -29,11 +30,11 @@ public class Asignacion extends Instruccion{
         else return tipoIns.toString() + ": " + iden + " = " + valor.toString();
     }
 
-    public String getId(){
+    public Acceso getId(){
         return this.iden;
     }
 
-    public Object getValor(){
+    public E getValor(){
         return this.valor;
     }
 }

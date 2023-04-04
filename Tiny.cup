@@ -12,6 +12,7 @@ import ast.Types.*;
 import ast.Estructuras.*;
 import ast.Estructuras.clases.*;
 import ast.Auxiliares.*;
+import ast.Accesos.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -35,15 +36,18 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
 non terminal  ArraysDim, Alias, AsignacionArray,
-              ListaCampos, Argumentos,
-              Modulos, InsParada, ListaValores,
-              AcesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray;
+              Argumentos,
+              InsParada, ListaValores,
+              AccesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray;
 
 
 non terminal Programa P;
 non terminal Funcion Principal;
+non terminal Modulo Modulos;
 non terminal List<Instruccion> ListaInstrucciones;
+non terminal List<Declaracion> ListaCampos;
 non terminal Instruccion Instruccion;
+non terminal Acceso Acceso0,Acceso1;
 non terminal StructClass DeclaracionRegistro;
 non terminal Declaracion Declaracion;
 non terminal PrivacyMode ModAcceso; 
@@ -64,7 +68,7 @@ non terminal CasoSwitch Caso;
 non terminal CasoSwitch PorDefecto;
 non terminal Funcion Funcion;
 non terminal Parametro Parametro;
-non terminal LlamadaFunExp LlamadaFuncion;
+non terminal LlamadaFunExp LlamadaFuncion,LlamadaConstructor;
 non terminal List<Parametro> ListaParametros;
 non terminal List<Parametro> Parametros;
 non terminal List<E> ListaArgumentos;
@@ -82,7 +86,10 @@ Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
                     {: decs.addBasic(d);RESULT = decs; :} 
                 | DeclaracionEnumerado:d PUNTOYCOMA Declaraciones:decs
                     {:decs.addEnum(d); RESULT = decs;:}
-                | Modulos Declaraciones:decs
+                | DeclaracionRegistro:s PUNTOYCOMA Declaraciones:decs
+                    {:decs.addStruct(s);RESULT = decs;:}
+                | Modulos:m Declaraciones:decs
+                    {:decs.addModulo(m);RESULT = decs;:}
                 | Funcion:f Declaraciones:decs
                     {:decs.addFuncion(f); RESULT = decs;:}
                 | Clase:clase Declaraciones:decs
@@ -90,23 +97,31 @@ Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
                 |
                     {: RESULT = new DefinitionsList(); :};
 
-Declaracion ::= Tipo:t Asignacion:a
-                    {:RESULT = new Declaracion(t.kind(), a.getId(), a.getValor());:}
+Acceso0 ::= Acceso0:ref CAP E0:exp CCIERRE 
+            {: RESULT = new AccesoArray(ref,exp); :}
+            | Acceso0:ref PUNTO IDEN:campo 
+            {: RESULT = new AccesoStruct(ref,campo.lexema); :}
+            | Acceso0:ref PUNTO IDEN:metodo PAP ListaArgumentos:arglist PCIERRE
+            {: RESULT = new AccesoMetodo(ref,new LlamadaFunExp(metodo.lexema,arglist));:}
+            | Acceso1:ref
+            {: RESULT = ref; :};
+Acceso1 ::= IDEN:nombre
+            {: RESULT = new AccesoVar(nombre.lexema); :}
+            | ARROBA Acceso1:ref
+            {: RESULT = new AccesoPuntero(ref); :}
+            | ARROBA PAP Acceso0:ref PCIERRE
+            {: RESULT = new AccesoPuntero(ref); :};
+
+
+Declaracion ::= Tipo:t IDEN:n IGUAL E0:exp
+                    {:RESULT = new Declaracion(t.kind(), n.lexema, exp);:}
                 | Tipo:t IDEN:n
                     {:RESULT = new Declaracion(t.kind(), n.lexema);:}
-                | DeclaracionRegistro
                 | Alias;
 
-Asignacion ::= IDEN:n IGUAL E0:valor
-                 {:RESULT = new Asignacion(n.lexema, valor);:}
-            |  IDEN:n IGUAL AsignacionArray:valor
-                 {:RESULT = new Asignacion(n.lexema, valor);:}
-            |  ARROBA IDEN IGUAL E0
-            |  IDEN IGUAL AcesoArray;
-AsignacionArray ::= LLAP E0:e ListaValores:l LLCIERRE
-                    //  {:  l.add(e); RESULT = l;:}
-                   | LLAP AsignacionArray:a ListaValores:l LLCIERRE
-                     ;// {: l.add(a);RESULT = l;:};
+Asignacion ::= Acceso0:ref IGUAL E0:exp
+               {:RESULT = new Asignacion(ref,exp);:};
+
 
 ListaValores ::= COMA E0:e ListaValores:l
                    //   {:l.add(e); RESULT = l;:}
@@ -125,12 +140,14 @@ Tipo ::= ARRAY MENOR Tipo:t MAYOR ArraysDim
             {:RESULT= new BasicTypes(KindTypes.BOOL);:}
           //| VOID                                                        ----------- Da problemas de shif reduce -----------
           //  {:RESULT= new BasicTypes(KindTypes.VOID);:}
-          | IDEN
+          | IDEN:nombre
+            {:RESULT = new StructType(nombre.lexema);:}
           | Tipo POR;
 
 Alias ::= TYPEDEF IDEN IGUAL Tipo;
 ArraysDim ::= CAP E0 CCIERRE| CAP CCIERRE;
-Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN PUNTO IDEN COMILLASDOBLES;
+Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN:nombre PUNTO IDEN:ext COMILLASDOBLES
+            {:RESULT = new Modulo(nombre.lexema,ext.lexema);:};
 Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones:instList LLCIERRE 
                 {:RESULT= new Funcion(KindTypes.VOID, "principal", new ArrayList<Parametro>(),instList);:};
 ListaInstrucciones ::= Instruccion:ins PUNTOYCOMA ListaInstrucciones:insList 
@@ -151,9 +168,7 @@ Instruccion ::= Declaracion:dec
               | Read:re
                   {:RESULT=re;:}
               | LlamadaFuncion:fun
-                  {:RESULT = new LlamadaFunInst(fun);:}
-              | AcesoStruct 
-              | AcesoArray;
+                  {:RESULT = new LlamadaFunInst(fun);:};
 
 //---------------------Clases-----------------------------------
 
@@ -181,6 +196,9 @@ ModAcceso::= PUBLIC
             {:RESULT = PrivacyMode.PRIVATE;:} 
             | PROTECTED
             {:RESULT = PrivacyMode.PROTECTED;:};
+
+LlamadaConstructor ::= NEW IDEN:nombreClase PAP ListaArgumentos:argList PCIERRE
+                      {:RESULT = new LlamadaFunExp(nombreClase.lexema,argList);:};
 // ------------------------ Instrucciones ------------------------
 
 // Llamada a función como expresión
@@ -244,11 +262,7 @@ PorDefecto ::= DEFAULT DOSPUNTOS ListaInstrucciones:inst
               {:RESULT= new CasoSwitch(inst);:};
 InsParada ::= BREAK PUNTOYCOMA | ;
 
-AcesoArray ::= IDEN CAP E4 CCIERRE ListaAcesoArray| IDEN CAP E4 CCIERRE ListaAcesoArray AsigPosArray;
-AsigPosArray ::= IGUAL E0| IGUAL IDEN CAP E4 CCIERRE ListaAcesoArray;
-ListaAcesoArray ::= CAP E4 CCIERRE ListaAcesoArray|;
 
-AcesoStruct ::= IDEN PUNTO IDEN | IDEN PUNTO Asignacion;
 
 // ----------------------Funciones--------------------------
 Funcion ::= Tipo:t IDEN:id PAP Parametros:paramList PCIERRE LLAP ListaInstrucciones:instList LLCIERRE
@@ -273,8 +287,12 @@ ListaEnumerado ::= IDEN:campo COMA ListaEnumerado:campos
                     {:campos.add(campo.lexema); RESULT = campos;:}
                  | IDEN:campo
                     {:List<String> campos = new ArrayList<String>(); campos.add(campo.lexema); RESULT = campos;:};
-DeclaracionRegistro ::= STRUCT IDEN LLAP ListaCampos LLCIERRE;
-ListaCampos ::= Tipo IDEN PUNTOYCOMA| Tipo IDEN PUNTOYCOMA ListaCampos;
+DeclaracionRegistro ::= STRUCT IDEN:nombre LLAP ListaCampos:valores LLCIERRE
+                    {:RESULT = new StructClass(nombre.lexema,valores);:};
+ListaCampos ::= Declaracion:dec ListaCampos:valores
+                {:valores.add(dec); RESULT = valores;:} 
+                | Declaracion:dec
+                {:List<Declaracion> decs = new ArrayList<Declaracion>();decs.add(dec);RESULT = decs;:};
 
 
 //------------------ Expresiones ----------------------------
@@ -338,14 +356,14 @@ E7 ::= TRUE:valor
         {:RESULT = new Const(valor.lexema, KindE.ENT);:}
       | REAL:valor
         {:RESULT = new Const(valor.lexema, KindE.FLOAT);:}
-      | IDEN:valor
-        {:RESULT = new Const(valor.lexema, KindE.IDENTIFICADOR);:}
-      | IDEN PUNTO IDEN
-      | ARROBA IDEN
+      | Acceso0:ref
+        {:RESULT=ref;:}
       | LlamadaFuncion:llamada
         {:RESULT=llamada;:}
-      | NEW Tipo PAP Argumentos PCIERRE
-      | PAP E0 PCIERRE;
+      | LlamadaConstructor:llamada
+        {:RESULT=llamada;:}
+      | PAP E0:exp PCIERRE
+      {:RESULT = exp;:};
 
 
 

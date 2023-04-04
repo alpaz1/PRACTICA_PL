@@ -4,6 +4,7 @@ import java.util.*;
 
 import ast.Estructuras.*;
 import ast.Estructuras.clases.*;
+import ast.Auxiliares.Modulo;
 
 public class DefinitionsList {
 
@@ -13,6 +14,7 @@ public class DefinitionsList {
     private List<EnumClass> lista_enum;
     private List<Funcion> lista_funcion;
     private List<Clase> lista_clases;
+    private List<Modulo> lista_modulos;
     
     public DefinitionsList(){
         lista_basica = new ArrayList<Declaracion>();
@@ -20,6 +22,7 @@ public class DefinitionsList {
         lista_enum = new ArrayList<EnumClass>();
         lista_funcion = new ArrayList<Funcion>();
         lista_clases = new ArrayList<Clase>();
+        lista_modulos = new ArrayList<Modulo>();
     }   
 
     // AST TOSTRING -----------------------------------------------------------------
@@ -51,5 +54,8 @@ public class DefinitionsList {
     }
     public void addClase(Clase c){
         lista_clases.add(c);
+    }
+    public void addModulo(Modulo m){
+        lista_modulos.add(m);
     }
 }

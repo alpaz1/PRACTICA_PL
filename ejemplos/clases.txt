@@ -21,5 +21,6 @@ publico clase Hora {
 }
 
 vacio principal() {
-    entero a;
+    Hora reloj = nuevo Hora(30,30,1);
+    imprime(reloj.aSegundos());
 }
