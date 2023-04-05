@@ -35,10 +35,7 @@ terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOA
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  ArraysDim, Alias, AsignacionArray,
-              Argumentos,
-              InsParada, ListaValores,
-              AccesoStruct, AcesoArray, ListaAcesoArray, AsigPosArray;
+non terminal  Alias;
 
 
 non terminal Programa P;
@@ -123,15 +120,10 @@ Asignacion ::= Acceso0:ref IGUAL E0:exp
                {:RESULT = new Asignacion(ref,exp);:};
 
 
-ListaValores ::= COMA E0:e ListaValores:l
-                   //   {:l.add(e); RESULT = l;:}
-                | COMA AsignacionArray:a ListaValores:l
-                    //   {:l.add(a); RESULT = l;:}
-                |; //{:RESULT =  new ArrayList<Object>(); :};
-
-
-Tipo ::= ARRAY MENOR Tipo:t MAYOR ArraysDim
-            {:RESULT = new BasicTypes(KindTypes.ARRAY);:}
+Tipo ::=  ARRAY MENOR Tipo:t MAYOR CAP E0:tam CCIERRE
+            {:RESULT = new ArrayType(t,tam);:}
+          | ARRAY MENOR Tipo:t MAYOR CAP CCIERRE
+            {:RESULT = new ArrayType(t,null);:}
           | TIPOINT 
             {:RESULT= new BasicTypes(KindTypes.INT);:}
           | TIPOFLOAT 
@@ -146,7 +138,7 @@ Tipo ::= ARRAY MENOR Tipo:t MAYOR ArraysDim
             {:RESULT = new PointerType(t);:};
 
 Alias ::= TYPEDEF IDEN IGUAL Tipo;
-ArraysDim ::= CAP E0 CCIERRE| CAP CCIERRE;
+
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN:nombre PUNTO IDEN:ext COMILLASDOBLES
             {:RESULT = new Modulo(nombre.lexema,ext.lexema);:};
 Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones:instList LLCIERRE 
@@ -291,9 +283,9 @@ ListaEnumerado ::= IDEN:campo COMA ListaEnumerado:campos
                     {:List<String> campos = new ArrayList<String>(); campos.add(campo.lexema); RESULT = campos;:};
 DeclaracionRegistro ::= STRUCT IDEN:nombre LLAP ListaCampos:valores LLCIERRE
                     {:RESULT = new StructClass(nombre.lexema,valores);:};
-ListaCampos ::= Declaracion:dec ListaCampos:valores
+ListaCampos ::= Declaracion:dec PUNTOYCOMA ListaCampos:valores
                 {:valores.add(dec); RESULT = valores;:} 
-                | Declaracion:dec
+                | Declaracion:dec PUNTOYCOMA
                 {:List<Declaracion> decs = new ArrayList<Declaracion>();decs.add(dec);RESULT = decs;:};
 
 

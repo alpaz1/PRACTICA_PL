@@ -11,7 +11,7 @@ public class AccesoArray extends Acceso{
         this.acceso = acceso;
     }
     public String toString() {
-        return "ExpAccArr(" + acceso + "[" + exp + "])";
+        return "AccArr(" + acceso + "[" + exp + "])";
     }
 
 }

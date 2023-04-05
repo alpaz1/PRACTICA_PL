@@ -1,6 +1,15 @@
 entero a;
+
+estructura Cliente {
+    entero dni;
+    entero edad;
+};
 vacio principal(){
     buleano* puntero;
     @puntero = mentira;
+    lista <entero>[10] miLista;
+    miLista[2] = 0;
+    Cliente cliente;
+    cliente.DNI = 12345678;
 }
 
