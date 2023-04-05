@@ -35,8 +35,6 @@ terminal    TokenValue MAYOR, IDEN, MENOR, PUNTOYCOMA, TIPOINT, TIPOBOOL, TIPOFL
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
-non terminal  Alias;
-
 
 non terminal Programa P;
 non terminal Funcion Principal;
@@ -44,6 +42,7 @@ non terminal Modulo Modulos;
 non terminal List<Instruccion> ListaInstrucciones;
 non terminal List<Declaracion> ListaCampos;
 non terminal Instruccion Instruccion;
+non terminal Alias Alias;
 non terminal Acceso Acceso0,Acceso1;
 non terminal StructClass DeclaracionRegistro;
 non terminal Declaracion Declaracion;
@@ -81,6 +80,8 @@ P ::= Declaraciones:decs Principal:p
 
 Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
                     {: decs.addBasic(d);RESULT = decs; :} 
+                | Alias:a PUNTOYCOMA Declaraciones:decs
+                    {:decs.addAlias(a); RESULT = decs;:}
                 | DeclaracionEnumerado:d PUNTOYCOMA Declaraciones:decs
                     {:decs.addEnum(d); RESULT = decs;:}
                 | DeclaracionRegistro:s PUNTOYCOMA Declaraciones:decs
@@ -113,8 +114,7 @@ Acceso1 ::= IDEN:nombre
 Declaracion ::= Tipo:t IDEN:n IGUAL E0:exp
                     {:RESULT = new Declaracion(t.kind(), n.lexema, exp);:}
                 | Tipo:t IDEN:n
-                    {:RESULT = new Declaracion(t.kind(), n.lexema);:}
-                | Alias;
+                    {:RESULT = new Declaracion(t.kind(), n.lexema);:};
 
 Asignacion ::= Acceso0:ref IGUAL E0:exp
                {:RESULT = new Asignacion(ref,exp);:};
@@ -137,7 +137,8 @@ Tipo ::=  ARRAY MENOR Tipo:t MAYOR CAP E0:tam CCIERRE
           | Tipo:t POR
             {:RESULT = new PointerType(t);:};
 
-Alias ::= TYPEDEF IDEN IGUAL Tipo;
+Alias ::= TYPEDEF IDEN:nombre IGUAL Tipo:tipo
+          {:RESULT = new Alias(nombre.lexema,tipo);:};
 
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN:nombre PUNTO IDEN:ext COMILLASDOBLES
             {:RESULT = new Modulo(nombre.lexema,ext.lexema);:};
@@ -234,13 +235,14 @@ Condicional ::= IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE
 Iteracion ::= WHILE PAP E0:exp PCIERRE LLAP ListaInstrucciones:list LLCIERRE
               {:RESULT = new BucleWhile(exp,list);:}
               | FOR PAP InsFor:var E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
-               {:RESULT = new BucleFor(var, exp, asig, list );:};
+               {:RESULT = new BucleFor(var, exp, asig, list );:}
+              | FOR PAP PUNTOYCOMA E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
+               {:RESULT = new BucleFor(exp,asig,list);:};
 
 InsFor ::= TIPOINT Asignacion:var PUNTOYCOMA 
               {:RESULT = var;:}
           | Asignacion:var PUNTOYCOMA 
-               {:RESULT = var;:}
-          | PUNTOYCOMA;
+               {:RESULT = var;:};
 Selecciona ::= SWITCH PAP IDEN:nombre PCIERRE LLAP Casos:casos PorDefecto:def LLCIERRE
             {:RESULT= new Switch(nombre.lexema,casos,def);:}
             | SWITCH PAP IDEN:nombre PCIERRE LLAP Casos:casos LLCIERRE
@@ -255,8 +257,6 @@ Caso ::= CASE E0:exp DOSPUNTOS ListaInstrucciones:inst BREAK PUNTOYCOMA
           {:RESULT= new CasoSwitch(exp,inst,false);:};
 PorDefecto ::= DEFAULT DOSPUNTOS ListaInstrucciones:inst
               {:RESULT= new CasoSwitch(inst);:};
-
-
 
 // ----------------------Funciones--------------------------
 Funcion ::= Tipo:t IDEN:id PAP Parametros:paramList PCIERRE LLAP ListaInstrucciones:instList LLCIERRE
@@ -291,8 +291,8 @@ ListaCampos ::= Declaracion:dec PUNTOYCOMA ListaCampos:valores
 
 //------------------ Expresiones ----------------------------
 
-// ExpresionArray ::= LLAP ListaArgumentos:lst LLCIERRE
-//                     | {:RESULT = new ArrayType(t,tam);:};
+ ExpresionArray ::= LLAP ListaArgumentos:lst LLCIERRE
+                     | {:RESULT = new ArrayType(t,tam);:};
 
 E0 ::= E0:opIzq OR E1:opDer
         {:RESULT= new EBin(opIzq, opDer, KindE.OR);:}
@@ -363,10 +363,3 @@ E7 ::= TRUE:valor
         {:RESULT = exp;:}
       | LLAP ListaArgumentos:lst LLCIERRE
         {:RESULT = new Const(lst.toString(), KindE.ARRAY);:};
-
-
-
-
-
-
-

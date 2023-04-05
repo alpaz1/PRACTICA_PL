@@ -2,7 +2,6 @@ package ast.Estructuras;
 import java.util.List;
 
 import ast.Util;
-import ast.Types.KindTypes;
 
 public class EnumClass {
     private String name;

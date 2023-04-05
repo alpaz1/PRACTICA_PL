@@ -6,8 +6,8 @@ entero factorialIterativo(entero n) {
     devuelve resultado;
 }
 
-
 vacio principal () {
-    entero n = lee(Introduzca un numero positivo);
+    entero n;
+    lee();
     imprime (factorialIterativo(n));
 }

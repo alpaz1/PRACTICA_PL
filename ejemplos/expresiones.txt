@@ -4,6 +4,9 @@ estructura Cliente {
     entero dni;
     entero edad;
 };
+
+alias matriz = lista <lista<entero>[10]>[10];
+
 vacio principal(){
     buleano* puntero;
     @puntero = mentira;
@@ -11,5 +14,8 @@ vacio principal(){
     miLista[2] = 0;
     Cliente cliente;
     cliente.DNI = 12345678;
+    paraCada(; a <= 20; a = a + 2){
+        a = a - 1;
+    }
 }
 

@@ -2,8 +2,8 @@ package ast.Estructuras;
 
 import java.util.*;
 
-import ast.Estructuras.*;
 import ast.Estructuras.clases.*;
+import ast.Instructions.Alias;
 import ast.Auxiliares.Modulo;
 
 public class DefinitionsList {
@@ -15,6 +15,7 @@ public class DefinitionsList {
     private List<Funcion> lista_funcion;
     private List<Clase> lista_clases;
     private List<Modulo> lista_modulos;
+    private List<Alias> lista_alias;
     
     public DefinitionsList(){
         lista_basica = new ArrayList<Declaracion>();
@@ -23,11 +24,13 @@ public class DefinitionsList {
         lista_funcion = new ArrayList<Funcion>();
         lista_clases = new ArrayList<Clase>();
         lista_modulos = new ArrayList<Modulo>();
+        lista_alias = new ArrayList<Alias>();
     }   
 
     // AST TOSTRING -----------------------------------------------------------------
     public String toString() {
         return  "Basicos: " + lista_basica.toString() + "\n" +
+                "Alias: " + lista_alias.toString() + "\n" +
                 "Enumerados: " + lista_enum + "\n" +
                 "Struct: " + lista_struct.toString() + "\n" +
                 "Funciones: "  + lista_funcion + "\n" +
@@ -36,9 +39,12 @@ public class DefinitionsList {
 
     // AUXILIARES -----------------------------------------------------------------
 
-
     public void addBasic(Declaracion s){
         lista_basica.add(s);
+    }
+
+    public void addAlias(Alias a){
+        lista_alias.add(a);
     }
 
     public void addStruct(StructClass s){

@@ -6,11 +6,18 @@ import ast.Expresions.E;
 
 
 public class BucleFor extends Bloque{
-    private KindInstruction tipoIns = KindInstruction.BUCLEFOR; // esto sirve de algo?
+
     private Asignacion var;
-    private Object valor;
+    private E valor;
     private Asignacion a;
 
+
+    public BucleFor(E exp , Asignacion a ,  List<Instruccion> instList ){
+        super(instList);
+        this.valor = exp;
+        this.a = a;
+        this.var = null;
+    }
 
     public BucleFor(Asignacion variable, E exp , Asignacion a ,  List<Instruccion> instList ){
         super(instList);
@@ -19,10 +26,17 @@ public class BucleFor extends Bloque{
         this.a = a;
     }
 
-    public KindInstruction kind() {return tipoIns;}
+    public KindInstruction kind() {
+        return KindInstruction.BUCLEFOR;
+    }
+
     public String toString() {
-        return tipoIns.toString() + " Variable: " + var.toString() + " Condicion:  " + valor.toString() + "Asignacion: " + a.toString()
+        if (this.var != null)
+            return "FOR: (" + "Variable: " + var.toString() + " Condicion:  " + valor.toString() + "Asignacion: " + a.toString() + ")"
                 + "Cuerpo: {" +instList.toString() + "}"; 
+        else 
+        return "FOR: (" + " Variable: " + ";" + " Condicion:  " + valor.toString() + "Asignacion: " + a.toString() + ")"
+        + "Cuerpo: {" +instList.toString() + "}"; 
     }
 
     public Asignacion getId(){
@@ -33,7 +47,7 @@ public class BucleFor extends Bloque{
         return this.a;
     }
 
-    public Object getValor(){
+    public E getValor(){
         return this.valor;
     }
 }
