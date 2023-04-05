@@ -138,11 +138,12 @@ Tipo ::= ARRAY MENOR Tipo:t MAYOR ArraysDim
             {:RESULT= new BasicTypes(KindTypes.FLOAT);:}
           | TIPOBOOL 
             {:RESULT= new BasicTypes(KindTypes.BOOL);:}
-          //| VOID                                                        ----------- Da problemas de shif reduce -----------
+          //| VOID                    
           //  {:RESULT= new BasicTypes(KindTypes.VOID);:}
           | IDEN:nombre
             {:RESULT = new StructType(nombre.lexema);:}
-          | Tipo POR;
+          | Tipo:t POR
+            {:RESULT = new PointerType(t);:};
 
 Alias ::= TYPEDEF IDEN IGUAL Tipo;
 ArraysDim ::= CAP E0 CCIERRE| CAP CCIERRE;
@@ -256,11 +257,12 @@ Casos ::= Caso:caso Casos:casos
            {: casos.add(caso); RESULT = casos; :}
           |
           {: RESULT = new ArrayList<CasoSwitch>();:};
-Caso ::= CASE E0:exp DOSPUNTOS ListaInstrucciones:inst InsParada
-          {:RESULT= new CasoSwitch(exp,inst);:};
+Caso ::= CASE E0:exp DOSPUNTOS ListaInstrucciones:inst BREAK PUNTOYCOMA
+          {:RESULT= new CasoSwitch(exp,inst,true);:}
+          | CASE E0:exp DOSPUNTOS ListaInstrucciones:inst
+          {:RESULT= new CasoSwitch(exp,inst,false);:};
 PorDefecto ::= DEFAULT DOSPUNTOS ListaInstrucciones:inst
               {:RESULT= new CasoSwitch(inst);:};
-InsParada ::= BREAK PUNTOYCOMA | ;
 
 
 

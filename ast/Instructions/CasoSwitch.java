@@ -6,10 +6,12 @@ import java.util.List;
 public class CasoSwitch extends Bloque {
 
     private E caso;
+    private boolean parada;
 
-    public CasoSwitch(E condicion, List<Instruccion> instrucciones) {
+    public CasoSwitch(E condicion, List<Instruccion> instrucciones, boolean parada) {
         super(instrucciones);
         this.caso = condicion;
+        this.parada = parada;
     }
 
     public CasoSwitch(List<Instruccion> instrucciones) {
@@ -25,6 +27,9 @@ public class CasoSwitch extends Bloque {
         if (caso == null)
             return "default: " + this.instList.toString();
         else
-            return "case " + caso.toString() + ": " + this.instList.toString();
+            if (this.parada)
+                return "case " + caso.toString() + ": " + this.instList.toString() + " BREAK";
+            else
+                return "case " + caso.toString() + ": " + this.instList.toString();
     }
 }
