@@ -30,8 +30,8 @@ init with {:
 :};
 
 
-terminal    TokenValue MAYOR ,IDEN, MENOR, PUNTOYCOMA, TIPOINT,TIPOBOOL,TIPOFLOAT, VOID, ENT, MAIN, PUNTO, DOSPUNTOS, CLASS, PRIVATE,
-            ENUM, LLAP, LLCIERRE, CAP, CCIERRE, STRUCT,POR, RETURN, IF, ELSE, PAP, PCIERRE, WHILE, DIV, ARROBA, PUBLIC, PROTECTED,
+terminal    TokenValue MAYOR, IDEN, MENOR, PUNTOYCOMA, TIPOINT, TIPOBOOL, TIPOFLOAT, VOID, ENT, MAIN, PUNTO, DOSPUNTOS, CLASS, PRIVATE,
+            ENUM, LLAP, LLCIERRE, CAP, CCIERRE, STRUCT, POR, RETURN, IF, ELSE, PAP, PCIERRE, WHILE, DIV, ARROBA, PUBLIC, PROTECTED,
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
             PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
@@ -291,6 +291,9 @@ ListaCampos ::= Declaracion:dec PUNTOYCOMA ListaCampos:valores
 
 //------------------ Expresiones ----------------------------
 
+// ExpresionArray ::= LLAP ListaArgumentos:lst LLCIERRE
+//                     | {:RESULT = new ArrayType(t,tam);:};
+
 E0 ::= E0:opIzq OR E1:opDer
         {:RESULT= new EBin(opIzq, opDer, KindE.OR);:}
      | E1:e
@@ -357,7 +360,9 @@ E7 ::= TRUE:valor
       | LlamadaConstructor:llamada
         {:RESULT=llamada;:}
       | PAP E0:exp PCIERRE
-      {:RESULT = exp;:};
+        {:RESULT = exp;:}
+      | LLAP ListaArgumentos:lst LLCIERRE
+        {:RESULT = new Const(lst.toString(), KindE.ARRAY);:};
 
 
 

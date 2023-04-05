@@ -1,0 +1,103 @@
+#incluir "hola.txt"
+#incluir "pruebaaa.h"
+
+enum DiaSemana { a, b, c};
+alias matriz = lista <lista <DiaSemana>[2]> [3];
+
+
+estructura Tiempo{
+    entero hora;
+    entero minuto;
+    flotante segundo;
+};
+
+
+publico clase miClase{
+    privado entero a = 1;
+    protegido lista <lista <DiaSemana>[2]> [3] miAray; //  = {{Lunes,Martes}}
+    publico Tiempo tiempo;
+    
+    publico miClase(Tiempo& t, entero a){
+        tiempo = t;
+        miAray[1] = Jueves;
+    }
+
+    privado void fun(buleano b){
+        b = mentira;
+    }
+}
+
+lista <Tiempo> [2] a;
+
+entero x_1a = 5 + 1;
+buleano encontrado = verdad yy mentira oo mentira;
+
+buleano prueba(int a, int& b, lista <lista <DiaSemana>[]>[] &miArray){
+    mientras (a == b){
+        paraCada(a = 0; a < b; a = a + 1){
+            b = b + 1;
+        }
+    }
+}
+
+buleano pruebaConReturn(int a, int& b){
+    mientras (a == b){
+        paraCada(a = 0; a < b; a = a + 1){
+            b = b + 1;
+        }
+    }
+
+
+    
+    selecciona (b){
+        caso 0: 
+            si(a > 1) {
+                c = verdad;
+            }
+        caso 1: 
+            c = mentira;
+            ¡para!;
+        caso 2:
+        porDefecto: a = 3;
+    }
+
+    devuelve a;
+}
+
+vacio principal () {
+
+    miClase mc = nuevo miClase(t,a);
+
+    matriz m; //  = {{Viernes, Sabado}, {Sabado,Domingo}, {Domingo, Viernes}}
+
+    lista <lista <entero>[2]>[3] miAray; //  = {{1,2}}
+    si (mentira == mentira){
+        x_la = 1;
+    }
+
+    sino{
+        paraCada (; i < 1 ; i = i + 1){
+            buleano a = true;
+        }
+    }
+
+    lista <lista <entero*>[2]>[3] miAray; //  = {{1,2}}
+    entero* n;
+    Tiempo* t1;
+    Tiempo t;
+    t.segundo = 60;
+    entero z = t.segundo;
+    a[1] = true;
+    a[i] = c[2][1][2];
+    b = c[1][1];
+    t.segundo = t1.minuto;
+    c[1][2][2] = t.minuto;
+    t.minuto = c[1][2][3];
+
+    @m = 1;
+    @m = @n;
+
+    mientras (a > 1){
+        x = x + 1;
+    }
+}
