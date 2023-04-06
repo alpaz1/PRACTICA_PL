@@ -37,7 +37,7 @@ terminal    TokenValue MAYOR, IDEN, MENOR, PUNTOYCOMA, TIPOINT, TIPOBOOL, TIPOFL
 
 
 non terminal Programa P;
-non terminal Funcion Principal;
+non terminal FMain Principal;
 non terminal Modulo Modulos;
 non terminal List<Instruccion> ListaInstrucciones;
 non terminal List<Declaracion> ListaCampos;
@@ -142,8 +142,8 @@ Alias ::= TYPEDEF IDEN:nombre IGUAL Tipo:tipo
 
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN:nombre PUNTO IDEN:ext COMILLASDOBLES
             {:RESULT = new Modulo(nombre.lexema,ext.lexema);:};
-Principal ::= VOID MAIN PAP PCIERRE LLAP ListaInstrucciones:instList LLCIERRE 
-                {:RESULT= new Funcion(KindTypes.VOID, "principal", new ArrayList<Parametro>(),instList);:};
+Principal ::= MAIN PAP PCIERRE LLAP ListaInstrucciones:instList LLCIERRE 
+            {:RESULT= new FMain(instList);:};
 ListaInstrucciones ::= Instruccion:ins PUNTOYCOMA ListaInstrucciones:insList 
                         {:insList.add(ins); RESULT = insList;:}
                      | Bloque:block ListaInstrucciones:insList

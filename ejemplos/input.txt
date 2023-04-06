@@ -62,7 +62,7 @@ buleano pruebaConReturn(entero a, entero& b){
     devuelve a;
 }
 
-vacio principal () {
+principal(){
 
     miClase mc = nuevo miClase(t,a);
 

@@ -7,7 +7,7 @@ estructura Cliente {
 
 alias matriz = lista <lista<entero>[10]>[10];
 
-vacio principal(){
+principal(){
     buleano* puntero;
     @puntero = mentira;
     lista <entero>[10] miLista;

@@ -10,7 +10,7 @@ entero a (entero x, buleano y){
 
 lista <entero> [3] l;
 
-vacio principal() {
+principal() {
     b = verdad oo mentira;
     buleano aaa = no verdad;
     b = 5;

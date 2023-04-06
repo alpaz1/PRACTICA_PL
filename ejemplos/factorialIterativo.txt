@@ -6,7 +6,7 @@ entero factorialIterativo(entero n) {
     devuelve resultado;
 }
 
-vacio principal () {
+principal () {
     entero n;
     lee();
     imprime (factorialIterativo(n));

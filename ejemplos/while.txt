@@ -1,4 +1,4 @@
-vacio principal() {
+principal() {
     entero n = 0;
     mientras (n < 10) {
         imprime(n);

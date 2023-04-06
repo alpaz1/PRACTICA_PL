@@ -6,7 +6,7 @@ entero factorialRec(entero n) {
         devuelve n * factorialRec (n - 1 ) ;
     }
 }
-vacio principal () {
+principal () {
     lee();
     imprime(factorialRec(n));
 }

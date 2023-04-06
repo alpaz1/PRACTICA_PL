@@ -20,7 +20,7 @@ publico clase Hora {
 
 }
 
-vacio principal() {
+principal() {
     Hora reloj = nuevo Hora(30,30,1);
     imprime(reloj.aSegundos());
 }

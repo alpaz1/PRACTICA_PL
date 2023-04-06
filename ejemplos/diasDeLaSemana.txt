@@ -20,7 +20,7 @@ entero AveriguaDia ( entero n ) {
         porDefecto : devuelveError(); // en caso de un numero invalido , se devuelve
     }
 }
-vacio principal () {
+principal () {
     {
         entero n = 3;
     }
