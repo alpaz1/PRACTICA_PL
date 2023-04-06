@@ -4,17 +4,17 @@
 enum DiaSemana { a, b, c};
 alias matriz = lista <lista <DiaSemana>[2]> [3];
 
-
+// Estructura para representar el tiempo
 estructura Tiempo{
     entero hora;
     entero minuto;
     flotante segundo;
 };
 
-
+// Clase personalizada
 publico clase miClase{
     privado entero a = 1;
-    protegido lista <lista <DiaSemana>[2]> [3] miAray; //  = {{Lunes,Martes}}
+    protegido lista <lista <DiaSemana>[2]> [3] miAray = {{Lunes,Martes}};
     publico Tiempo tiempo;
     
     publico miClase(Tiempo& t, entero a){
@@ -32,7 +32,7 @@ lista <Tiempo> [2] a;
 entero x_1a = 5 + 1;
 buleano encontrado = verdad yy mentira oo mentira;
 
-buleano prueba(int a, int& b, lista <lista <DiaSemana>[]>[] &miArray){
+buleano prueba(entero a, entero& b, lista <lista <DiaSemana>[]>[] &miArray){
     mientras (a == b){
         paraCada(a = 0; a < b; a = a + 1){
             b = b + 1;
@@ -40,14 +40,12 @@ buleano prueba(int a, int& b, lista <lista <DiaSemana>[]>[] &miArray){
     }
 }
 
-buleano pruebaConReturn(int a, int& b){
+buleano pruebaConReturn(entero a, entero& b){
     mientras (a == b){
         paraCada(a = 0; a < b; a = a + 1){
             b = b + 1;
         }
     }
-
-
     
     selecciona (b){
         caso 0: 
@@ -68,9 +66,9 @@ vacio principal () {
 
     miClase mc = nuevo miClase(t,a);
 
-    matriz m; //  = {{Viernes, Sabado}, {Sabado,Domingo}, {Domingo, Viernes}}
+    matriz m = {{Viernes, Sabado}, {Sabado,Domingo}, {Domingo, Viernes}};
 
-    lista <lista <entero>[2]>[3] miAray; //  = {{1,2}}
+    lista <lista <entero>[2]>[3] miAray = {{1,2}};
     si (mentira == mentira){
         x_la = 1;
     }

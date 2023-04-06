@@ -29,7 +29,8 @@ public class DefinitionsList {
 
     // AST TOSTRING -----------------------------------------------------------------
     public String toString() {
-        return  "Basicos: " + lista_basica.toString() + "\n" +
+        return  "Modulos: " + lista_modulos.toString() + "\n" +
+                "Basicos: " + lista_basica.toString() + "\n" +
                 "Alias: " + lista_alias.toString() + "\n" +
                 "Enumerados: " + lista_enum + "\n" +
                 "Struct: " + lista_struct.toString() + "\n" +
