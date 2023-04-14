@@ -7,7 +7,7 @@ public abstract class ASTNode {
     
     public ASTNode(){}
 
-
+    public void vincular() {}
     //public abstract NodeKind nodeKind();
     //public abstract String toString();
 }

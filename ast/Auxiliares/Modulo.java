@@ -1,6 +1,8 @@
 package ast.Auxiliares;
 
-public class Modulo {
+import ast.ASTNode;
+
+public class Modulo extends ASTNode{
     private String nombre;
     private String extension;
 

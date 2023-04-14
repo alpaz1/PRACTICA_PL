@@ -2,12 +2,13 @@ package ast.Estructuras;
 
 import java.util.List;
 
+import ast.ASTNode;
 import ast.Util;
 import ast.Auxiliares.Parametro;
 import ast.Instructions.Instruccion;
 import ast.Types.KindTypes;
 
-public class Funcion {
+public class Funcion extends ASTNode{
     private String nombre;
     private KindTypes tipo;
     private List<Instruccion> instList;

@@ -3,7 +3,9 @@ package ast.Estructuras.clases;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Clase {
+import ast.ASTNode;
+
+public class Clase extends ASTNode{
     private String nombre;
     private PrivacyMode modo;
     private List<Atributo> atributos;

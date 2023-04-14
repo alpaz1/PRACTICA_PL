@@ -1,9 +1,10 @@
 package ast.Estructuras;
 import java.util.List;
 
+import ast.ASTNode;
 import ast.Util;
 
-public class StructClass {
+public class StructClass extends ASTNode{
     private String name;
     private List<Declaracion> campos;
 

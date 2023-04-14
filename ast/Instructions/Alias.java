@@ -1,8 +1,9 @@
 package ast.Instructions;
 
+import ast.ASTNode;
 import ast.Types.Types;
 
-public class Alias extends Instruccion{
+public class Alias extends ASTNode{
 
     private Types tipo;
     private String nombre;

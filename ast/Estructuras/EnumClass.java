@@ -1,9 +1,10 @@
 package ast.Estructuras;
 import java.util.List;
 
+import ast.ASTNode;
 import ast.Util;
 
-public class EnumClass {
+public class EnumClass extends ASTNode{
     private String name;
     private List<String> campos;
 
