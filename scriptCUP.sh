@@ -54,7 +54,7 @@ if [ $OPTIND -eq 1 ]; then
   if [ -n "$1" ]; then
     java -cp ".:lib/*" asint.Main $1 
   else
-    echo "No se ha proporcionado un archivo de entrada."
+    echo "No se ha proporcionado un archivo de entrada, compilando input.txt..."
     java -cp ".:lib/*" asint.Main ejemplos/input.txt
   fi
 fi

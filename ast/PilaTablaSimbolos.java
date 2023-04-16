@@ -2,6 +2,7 @@ package ast;
 
 import java.util.Stack;
 import java.util.HashMap;
+import java.util.Map;
 
 public class PilaTablaSimbolos {
     
@@ -67,6 +68,36 @@ public class PilaTablaSimbolos {
         return puntero;
     }
 
+    private void printAmbito(HashMap<String,ASTNode> ambito){
+        for (Map.Entry<String, ASTNode> entry : ambito.entrySet()) {
+            String key = entry.getKey();
+            ASTNode value = entry.getValue();
+            System.out.println(key + " -> " + value);
+        }
+    }
 
+    public void print(){
+        System.out.println("Vinculacion:");
+        Stack<HashMap<String, ASTNode>> pilaTabla_aux = new Stack<HashMap<String, ASTNode>>();
+        if(!pilaTabla.empty()){
+            HashMap<String,ASTNode> cima = pilaTabla.pop();
+            System.out.println("Ambito Global: ");
+            printAmbito(cima);
+            pilaTabla_aux.push(cima);
+            while (!pilaTabla.empty()){
+                // Print cima
+                cima = pilaTabla.pop();
+                System.out.println("Ambito: ");
+                printAmbito(cima);
+                pilaTabla_aux.push(cima);
+            }
+            //volver a guardar todo en la pila
+            while(!pilaTabla_aux.empty()){
+                pilaTabla.push(pilaTabla_aux.pop());
+            }
+        } else {
+            System.out.println("Pila vacia");
+        }
+    }
 
 }

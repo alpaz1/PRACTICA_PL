@@ -4,7 +4,7 @@ enum DiaSemana {
 entero a = 5;
 buleano b = verdad;
 flotante c;
-entero a (entero x, buleano y){
+entero d (entero x, buleano y){
     a = 7;
 }
 
@@ -22,7 +22,5 @@ principal() {
     }
 
     lista <entero> [3] l;
-
-
     devuelve 8;
 }

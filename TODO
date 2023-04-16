@@ -1,2 +1,5 @@
 Alejandro:
     -Construccion del AST de una declaracion fuera del main
+
+
+n = lee()

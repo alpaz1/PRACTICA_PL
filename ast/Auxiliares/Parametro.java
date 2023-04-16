@@ -1,8 +1,9 @@
 package ast.Auxiliares;
 
+import ast.ASTNode;
 import ast.Types.KindTypes;
 
-public class Parametro {
+public class Parametro extends ASTNode{
     private KindTypes tipo;
     private String nombre;
     private boolean andpersand;

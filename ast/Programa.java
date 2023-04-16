@@ -8,17 +8,17 @@ import ast.Estructuras.FMain;
 public class Programa extends ASTNode {
 
     // ATRIBUTOS CONSTRUCTOR -----------------------------------------------------------------
-    private DefinitionsList definiciones; // Structs, enums y funciones
-    private FMain fmain; // Funcion main del programa
+    private static DefinitionsList definiciones; // Structs, enums y funciones
+    private static FMain fmain; // Funcion main del programa
     public static PilaTablaSimbolos pila;
     
     public static boolean okTipos;
     public static boolean okVinculacion;
 
     public Programa(DefinitionsList l, FMain fmain) {
-        this.definiciones = l;
-        this.fmain = fmain;
-        this.pila = new PilaTablaSimbolos();
+        Programa.definiciones = l;
+        Programa.fmain = fmain;
+        Programa.pila = new PilaTablaSimbolos();
     }
     
 
@@ -26,7 +26,9 @@ public class Programa extends ASTNode {
         pila.abreBloque();
         definiciones.vincular();
         fmain.vincular();
+        pila.print();
         pila.cierraBloque();
+        // Quitar
     }
 
     // AST ToString -----------------------------------------------------------------
