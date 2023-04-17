@@ -145,9 +145,9 @@ Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN:nombre PUNTO IDEN:ext COMILL
 Principal ::= MAIN PAP PCIERRE LLAP ListaInstrucciones:instList LLCIERRE 
             {:RESULT= new FMain(instList);:};
 ListaInstrucciones ::= Instruccion:ins PUNTOYCOMA ListaInstrucciones:insList 
-                        {:insList.add(ins); RESULT = insList;:}
+                        {:RESULT = insList; insList.add(ins);:}
                      | Bloque:block ListaInstrucciones:insList
-                        {:insList.add(block); RESULT = insList;:}
+                        {:RESULT = insList; insList.add(block);:}
                      | 
                         {:RESULT = new ArrayList<Instruccion>();:};
 
@@ -159,8 +159,8 @@ Instruccion ::= Declaracion:dec
                   {:RESULT =ret;:}
               | Print:pr
                   {:RESULT = pr;:}
-              | Read:re
-                  {:RESULT=re;:}
+              // | Read:re
+              //     {:RESULT=re;:}
               | LlamadaFuncion:fun
                   {:RESULT = new LlamadaFunInst(fun);:};
 
@@ -353,6 +353,8 @@ E7 ::= TRUE:valor
       | Acceso0:ref
         {:RESULT=ref;:}
       | LlamadaFuncion:llamada
+        {:RESULT=llamada;:}
+      | Read:llamada
         {:RESULT=llamada;:}
       | LlamadaConstructor:llamada
         {:RESULT=llamada;:}

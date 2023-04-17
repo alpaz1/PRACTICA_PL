@@ -1,13 +1,13 @@
 entero factorialIterativo(entero n) {
     entero resultado = 1;
-    paraCada ( entero i = 1 ; i <= n ; i= i + 1 ) {
-        resultado = resultado * i ;
-    }
+    //paraCada ( entero i = 1 ; i <= n ; i= i + 1 ) {
+    //    resultado = resultado * i ;
+    //}
     devuelve resultado;
 }
 
 principal () {
     entero n;
-    lee();
+    n = lee();
     imprime (factorialIterativo(n));
 }

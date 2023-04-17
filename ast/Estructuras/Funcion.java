@@ -33,7 +33,9 @@ public class Funcion extends ASTNode{
             }
 
             // si es void no hace falta
-            for (Instruccion instruccion : instList) {
+            // for (Instruccion instruccion : instList) {
+            for (int i = instList.size() - 1; i >= 0; i--) {
+                Instruccion instruccion = instList.get(i);
                 instruccion.vincular();
                 // Vincular el return
                 // if (! (instruccion instanceof AsigClass || instruccion instanceof DecClass || 

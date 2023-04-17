@@ -38,6 +38,7 @@ public class Declaracion extends Instruccion {
         // mismo name en ese bloque
         ASTNode nodo = Programa.pila.buscaIdCima(name);
         if (nodo == null) { // devuelve null cuando no esta
+            // System.out.println("Vinculando " + name);
             Programa.pila.insertaId(name, this);
             if (exp != null)
                 exp.vincular();
