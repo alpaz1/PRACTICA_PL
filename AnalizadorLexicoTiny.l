@@ -59,7 +59,7 @@ operadorNegacion = no
 
 comillasDobles = \"
 almohadilla = \#
-unversand = \&
+ampersand = \&
 igual = \=
 coma  = \,
 puntoYComa = ;
@@ -144,7 +144,7 @@ identificador = {letra}({letra}|{digito}|"_")*
 
 {comillasDobles}          {return ops.unidadComillasDobles();}
 {almohadilla}             {return ops.unidadAlmohadilla();}
-{unversand}               {return ops.unidadUnversand();}
+{ampersand}               {return ops.unidadAmpersand();}
 {igual}                   {return ops.unidadIgual();} 
 {coma}                    {return ops.unidadComa();}
 {puntoYComa}              {return ops.unidadPuntoYComa();}

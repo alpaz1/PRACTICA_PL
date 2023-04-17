@@ -10,4 +10,9 @@ public class AccesoPuntero extends Acceso{
     public String toString(){
         return "AccPtr(@" + direccion +")";
     }
+
+    public void vincular() {
+        direccion.vincular();
+        this.nodoVinculo = direccion.nodoVinculo;
+    }
 }

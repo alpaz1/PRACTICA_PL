@@ -18,5 +18,6 @@ public class Bloque extends Instruccion{
     public KindInstruction kind() {
         return KindInstruction.BLOCK;
     }
+    public void vincular() {}
 
 }

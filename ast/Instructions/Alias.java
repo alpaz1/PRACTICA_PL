@@ -20,5 +20,11 @@ public class Alias extends ASTNode{
     public String toString() {
         return "ALIAS: " + nombre + " - " + tipo.toString();
     }
+
+    @Override
+    public void vincular() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'vincular'");
+    }
     
 }

@@ -17,6 +17,12 @@ public class Clase extends ASTNode{
         metodos = new ArrayList<Metodo>();
         constructores = new ArrayList<Constructor>();
     }
+
+    public void vincular() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'vincular'");
+    }
+
     public void setName(String name){
         this.nombre = name;
     }
@@ -37,4 +43,5 @@ public class Clase extends ASTNode{
         return "Clase: " + this.nombre +"(" +this.modo.toString() +")" +"{Atributos: " + atributos.toString() + 
         ", Constructores: "+ constructores.toString() + ", Metodos: " + metodos.toString()+"}";
     }
+    
 }

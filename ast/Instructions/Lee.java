@@ -10,4 +10,6 @@ public class Lee extends Instruccion {
     public String toString() {
         return "Leer";
     }
+
+    public void vincular() {}
 }

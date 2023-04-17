@@ -1,21 +1,18 @@
 package ast.Auxiliares;
 
-import ast.ASTNode;
+import ast.Estructuras.Declaracion;
 import ast.Types.KindTypes;
 
-public class Parametro extends ASTNode{
-    private KindTypes tipo;
-    private String nombre;
-    private boolean andpersand;
+public class Parametro extends Declaracion{
+    private boolean ampersand;
 
-    public Parametro(KindTypes tipo, String nombre, boolean andpersand){
-        this.tipo = tipo;
-        this.nombre = nombre;
-        this.andpersand = andpersand;
+    public Parametro(KindTypes tipo, String nombre, boolean ampersand){
+        super(tipo,nombre);
+        this.ampersand = ampersand;
     }
 
     @Override
     public String toString() {
-        return tipo.toString() + " " + (andpersand ? "&":"") + nombre;
+        return tipo.toString() + " " + (ampersand ? "&":"") + this.name;
     }
 }

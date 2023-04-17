@@ -33,7 +33,7 @@ init with {:
 terminal    TokenValue MAYOR, IDEN, MENOR, PUNTOYCOMA, TIPOINT, TIPOBOOL, TIPOFLOAT, VOID, ENT, MAIN, PUNTO, DOSPUNTOS, CLASS, PRIVATE,
             ENUM, LLAP, LLCIERRE, CAP, CCIERRE, STRUCT, POR, RETURN, IF, ELSE, PAP, PCIERRE, WHILE, DIV, ARROBA, PUBLIC, PROTECTED,
             FOR, AND, OR, IGUALDAD , DISTINTO, MAYORIGUAL, MENORIGUAL, MAS, MENOS, MOD, TRUE, FALSE, NEW, COMA, NEGACION, TYPEDEF,
-            PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, UNVERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
+            PRINT, READ, SWITCH, BREAK, DEFAULT, CASE, IGUAL, AMPERSAND, INCLUDE, ALMOHADILLA, COMILLASDOBLES, REAL, ARRAY;
 
 
 non terminal Programa P;
@@ -271,7 +271,7 @@ ListaParametros ::= Parametro:param COMA ListaParametros:paramList
                     {:List<Parametro> paramList = new ArrayList<Parametro>(); paramList.add(param); RESULT = paramList;:};
 Parametro ::= Tipo:t IDEN:id
               {:RESULT = new Parametro(t.kind(), id.lexema, false);:}
-            | Tipo:t UNVERSAND IDEN:id
+            | Tipo:t AMPERSAND IDEN:id
               {:RESULT = new Parametro(t.kind(), id.lexema, true);:};
 
 //---------------------Otros tipos ----------------------------

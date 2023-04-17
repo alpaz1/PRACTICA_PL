@@ -13,6 +13,10 @@ public class LlamadaFunInst extends Instruccion {
         return KindInstruction.FUNCALL;
     }
 
+    public void vincular() {
+        funcion.vincular();
+    }
+
     public String toString(){
         return funcion.toString();
     }

@@ -10,6 +10,13 @@ public class AccesoArray extends Acceso{
         this.exp = exp;
         this.acceso = acceso;
     }
+
+    public void vincular() {
+        acceso.vincular();
+        this.nodoVinculo = acceso.nodoVinculo;
+        exp.vincular();
+    }
+
     public String toString() {
         return "AccArr(" + acceso + "[" + exp + "])";
     }

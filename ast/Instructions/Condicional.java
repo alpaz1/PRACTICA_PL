@@ -1,5 +1,6 @@
 package ast.Instructions;
 
+import ast.Programa;
 import ast.Expresions.E;
 import java.util.*;
 
@@ -18,6 +19,22 @@ public class Condicional extends Bloque {
         super(instrucciones_then);
         this.condicion = exp;
         this.instrucciones_else = instrucciones_else;
+    }
+
+    public void vincular() {
+        condicion.vincular();
+        Programa.pila.abreBloque();
+        for (Instruccion instruccion : this.instList) {
+            instruccion.vincular();
+        }
+        Programa.pila.cierraBloque();
+        if (instrucciones_else != null) {
+            Programa.pila.abreBloque();
+            for (Instruccion instruccion : instrucciones_else) {
+                instruccion.vincular();
+            }
+            Programa.pila.cierraBloque();
+        }
     }
 
     public String toString() {

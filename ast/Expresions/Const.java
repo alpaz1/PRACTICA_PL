@@ -8,5 +8,10 @@ public class Const extends E {
     this.valor = valor;
   }
   public KindE kind() {return tipo;}   
-  public String toString() {return valor;}  
+  public String toString() {return valor;}
+  public void vincular() {}  
+
+  public String getValor(){
+    return valor;
+  }
 }

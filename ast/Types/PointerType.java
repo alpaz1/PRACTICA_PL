@@ -14,6 +14,7 @@ public class PointerType extends Types{
 
     public String toString(){
         return tipo.toString() + "*";
-    }    
+    }
+
     
 }

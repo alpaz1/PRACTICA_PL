@@ -16,4 +16,9 @@ public class EUnaria extends E {
     public String toString() {
         return this.tipo.toString() + "("+ this.exp.toString() + ")";
     }
+
+  
+    public void vincular() {
+        this.exp.vincular();
+    }
 }

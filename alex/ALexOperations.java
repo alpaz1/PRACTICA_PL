@@ -153,8 +153,8 @@ public class ALexOperations {
       return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.EOF); 
    }
 
-   public UnidadLexica unidadUnversand(){
-      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.UNVERSAND);
+   public UnidadLexica unidadAmpersand(){
+      return new UnidadLexica(alex.fila(), alex.columna(), ClaseLexica.AMPERSAND);
    }
 
    public UnidadLexica unidadAlmohadilla(){

@@ -1,6 +1,7 @@
 package ast.Instructions;
 import java.util.List;
 
+import ast.Programa;
 import ast.Expresions.E;
 
 
@@ -8,13 +9,13 @@ import ast.Expresions.E;
 public class BucleFor extends Bloque{
 
     private Asignacion var;
-    private E valor;
+    private E exp;
     private Asignacion a;
 
 
     public BucleFor(E exp , Asignacion a ,  List<Instruccion> instList ){
         super(instList);
-        this.valor = exp;
+        this.exp = exp;
         this.a = a;
         this.var = null;
     }
@@ -22,8 +23,21 @@ public class BucleFor extends Bloque{
     public BucleFor(Asignacion variable, E exp , Asignacion a ,  List<Instruccion> instList ){
         super(instList);
         this.var = variable;
-        this.valor = exp;
+        this.exp = exp;
         this.a = a;
+    }
+
+    public void vincular() {
+        Programa.pila.abreBloque();
+        var.vincular();
+        exp.vincular();
+        
+        for(Instruccion instruccion : instList){
+            instruccion.vincular();
+        }
+        
+        a.vincular();
+        Programa.pila.cierraBloque();
     }
 
     public KindInstruction kind() {
@@ -32,10 +46,10 @@ public class BucleFor extends Bloque{
 
     public String toString() {
         if (this.var != null)
-            return "FOR: (" + "Variable: " + var.toString() + " Condicion:  " + valor.toString() + "Asignacion: " + a.toString() + ")"
+            return "FOR: (" + "Variable: " + var.toString() + " Condicion:  " + exp.toString() + "Asignacion: " + a.toString() + ")"
                 + "Cuerpo: {" +instList.toString() + "}"; 
         else 
-        return "FOR: (" + " Variable: " + ";" + " Condicion:  " + valor.toString() + "Asignacion: " + a.toString() + ")"
+        return "FOR: (" + " Variable: " + ";" + " Condicion:  " + exp.toString() + "Asignacion: " + a.toString() + ")"
         + "Cuerpo: {" +instList.toString() + "}"; 
     }
 
@@ -48,6 +62,6 @@ public class BucleFor extends Bloque{
     }
 
     public E getValor(){
-        return this.valor;
+        return this.exp;
     }
 }

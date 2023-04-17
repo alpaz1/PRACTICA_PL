@@ -1,6 +1,6 @@
 package ast.Types;
 
-public class BasicTypes  extends Types{
+public class BasicTypes extends Types{
 
     private KindTypes tipo;
 
@@ -8,7 +8,6 @@ public class BasicTypes  extends Types{
         this.tipo = tipo;
     }
 
-    @Override
     public KindTypes kind() {
         return this.tipo;
     }
@@ -17,4 +16,5 @@ public class BasicTypes  extends Types{
         return tipo.toString();
 
     }
+
 }

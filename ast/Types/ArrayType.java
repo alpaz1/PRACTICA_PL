@@ -12,6 +12,7 @@ public class ArrayType extends Types{
         this.tam = tam;
     }
 
+
     public KindTypes kind() {
         return KindTypes.ARRAY;
     }
@@ -22,5 +23,6 @@ public class ArrayType extends Types{
         else 
             return "Array "+ "<" + tipo.toString() + ">" + "[]";
     }
+
     
 }

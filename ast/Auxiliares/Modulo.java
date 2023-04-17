@@ -14,4 +14,10 @@ public class Modulo extends ASTNode{
     public String toString() {
         return "Incluir: " + this.nombre + "." + this.extension;
     }
+
+    @Override
+    public void vincular() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'vincular'");
+    }
 }

@@ -20,4 +20,10 @@ public class Devuelve extends Instruccion {
     public String toString() {
         return "Devuelve " + valorRetorno.toString();
     }
+
+    @Override
+    public void vincular() {
+        if (valorRetorno != null)
+            valorRetorno.vincular();
+    }
 }

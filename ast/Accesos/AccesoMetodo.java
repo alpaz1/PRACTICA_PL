@@ -18,4 +18,10 @@ public class AccesoMetodo extends Acceso {
     public String toString() {
         return "Clase: " + ref + " " + llamada.toString();
     }
+
+    @Override
+    public void vincular() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'vincular'");
+    }
 }

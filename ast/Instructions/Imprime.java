@@ -9,6 +9,10 @@ public class Imprime extends Instruccion {
         this.exp = exp;
     }
 
+    public void vincular() {
+        this.exp.vincular();
+    }
+
     public KindInstruction kind() {
         return KindInstruction.PRINT;
     }

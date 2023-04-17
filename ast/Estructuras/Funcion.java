@@ -53,4 +53,18 @@ public class Funcion extends ASTNode{
     public String toString(){
         return tipo.toString() + " " + nombre + "(" + Util.prettify(paramList) + ")" + "{" + Util.prettify(instList) + "}";
     }
+
+    public KindTypes getTipo(){
+        return this.tipo;
+    }
+    public String getName(){
+        return this.nombre;
+    }
+    public List<Instruccion> getInst(){
+        return this.instList;
+    }
+    public List<Parametro> getParams(){
+        return this.paramList;
+    }
+
 }

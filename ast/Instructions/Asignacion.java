@@ -7,27 +7,27 @@ import ast.Accesos.*;
 public class Asignacion extends Instruccion{
     private KindInstruction tipoIns = KindInstruction.ASIGNACION; // esto sirve de algo?
     private Acceso iden;
-    private E valor;
+    private E exp;
     private KindTypes tipo;
 
 
-    public Asignacion(Acceso iden, E valor){
+    public Asignacion(Acceso iden, E exp){
         this.iden = iden;
-        this.valor = valor;
+        this.exp = exp;
     }
 
 
-    public Asignacion(Acceso iden, E valor, KindTypes tipo){
+    public Asignacion(Acceso iden, E exp, KindTypes tipo){
         this.iden = iden;
         this.tipo = tipo;
-        this.valor = valor;
+        this.exp = exp;
     }
 
     public KindInstruction kind() {return tipoIns;}
     public String toString() {
-        if(tipo != null)    return tipoIns.toString() + ": " + iden  + "(" + this.tipo + ") = " + valor.toString();
+        if(tipo != null)    return tipoIns.toString() + ": " + iden  + "(" + this.tipo + ") = " + exp.toString();
 
-        else return tipoIns.toString() + ": " + iden + " = " + valor.toString();
+        else return tipoIns.toString() + ": " + iden + " = " + exp.toString();
     }
 
     public Acceso getId(){
@@ -35,6 +35,12 @@ public class Asignacion extends Instruccion{
     }
 
     public E getValor(){
-        return this.valor;
+        return this.exp;
+    }
+
+
+    public void vincular() {
+        iden.vincular();
+        exp.vincular();
     }
 }

@@ -1,5 +1,6 @@
 package ast.Instructions;
 
+import ast.Programa;
 import ast.Expresions.E;
 import java.util.List;
 
@@ -17,6 +18,17 @@ public class CasoSwitch extends Bloque {
     public CasoSwitch(List<Instruccion> instrucciones) {
         super(instrucciones);
         this.caso = null;
+    }
+
+    public void vincular(){
+        if (caso != null)
+            caso.vincular();
+
+        Programa.pila.abreBloque();
+        for (Instruccion instruccion : instList) {
+            instruccion.vincular();
+        }
+        Programa.pila.cierraBloque();
     }
 
     public KindInstruction kind() {
