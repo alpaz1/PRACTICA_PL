@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ast.ASTNode;
+import ast.Programa;
 
 public class Clase extends ASTNode{
     private String nombre;
@@ -19,8 +20,14 @@ public class Clase extends ASTNode{
     }
 
     public void vincular() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'vincular'");
+        Programa.pila.abreBloque();
+        for (Atributo a: atributos)
+            a.vincular();
+        for (Metodo m: metodos)
+            m.vincular();
+        for (Constructor c: constructores)
+            c.vincular();
+        Programa.pila.cierraBloque();
     }
 
     public void setName(String name){
@@ -30,13 +37,13 @@ public class Clase extends ASTNode{
         this.modo = modo;
     }
     public void addAtrib(Atributo a) {
-        atributos.add(a);
+        atributos.add(0,a);
     }
     public void addMetodo(Metodo m) {
-        metodos.add(m);
+        metodos.add(0,m);
     }
     public void addConstr(Constructor c) {
-        constructores.add(c);
+        constructores.add(0,c);
     }
 
     public String toString() {

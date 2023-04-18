@@ -14,4 +14,8 @@ public class Metodo {
     public String toString() {
         return "("+ this.modo.toString()+")"+this.fun.toString();
     }
+
+    public void vincular() {
+        fun.vincular();
+    }
 }

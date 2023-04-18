@@ -19,9 +19,8 @@ public class AccesoMetodo extends Acceso {
         return "Clase: " + ref + " " + llamada.toString();
     }
 
-    @Override
     public void vincular() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'vincular'");
+        ref.vincular();
+        llamada.vincular();
     }
 }

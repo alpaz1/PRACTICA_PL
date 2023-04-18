@@ -5,6 +5,11 @@ estructura Cliente {
     entero edad;
 };
 
+estructura Cabra {
+    entero edad;
+    flotante queso;
+};
+
 alias matriz = lista <lista<entero>[10]>[10];
 
 principal(){

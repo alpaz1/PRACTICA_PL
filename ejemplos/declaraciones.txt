@@ -7,6 +7,9 @@ flotante c;
 entero d (entero x, buleano y){
     a = 7;
 }
+buleano and(buleano x, buleano y){
+    devuelve x yy y;
+}
 
 lista <entero> [3] l;
 

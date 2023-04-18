@@ -2,7 +2,9 @@
 #incluir "pruebaaa.h"
 
 enum DiaSemana { a, b, c};
+enum Resultado {accepted, timelimit, wrongAnswer};
 alias matriz = lista <lista <DiaSemana>[2]> [3];
+alias alejandro = flotante;
 
 // Estructura para representar el tiempo
 estructura Tiempo{

@@ -12,7 +12,7 @@ public class Main {
 		AnalizadorLexicoTiny alex = new AnalizadorLexicoTiny(input);
 		AnalizadorSintacticoTiny asint = new AnalizadorSintacticoTiny(alex);
 		Programa p = (Programa) asint.parse().value;
-		p.vincular(); // vinculacion
-		// System.out.println(p);
+		// p.vincular(); // vinculacion
+		System.out.println(p);
 	}
 }

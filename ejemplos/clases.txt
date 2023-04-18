@@ -17,7 +17,9 @@ publico clase Hora {
     publico entero aSegundos() {
         devuelve horas*3600 + minutos*60 + segundos;
     }
-
+}
+publico clase miClase {
+    protegido entero miAtributo;
 }
 
 principal() {

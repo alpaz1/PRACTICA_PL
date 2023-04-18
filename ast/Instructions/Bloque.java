@@ -1,5 +1,6 @@
 package ast.Instructions;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Bloque extends Instruccion{
@@ -8,6 +9,7 @@ public class Bloque extends Instruccion{
     public Bloque(){}
     public Bloque(List<Instruccion> inst){
         this.instList = inst;
+        Collections.reverse(this.instList);
     }
     
     public String toString() {

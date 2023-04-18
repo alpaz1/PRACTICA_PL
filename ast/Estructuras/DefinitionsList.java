@@ -58,29 +58,29 @@ public class DefinitionsList {
     // AUXILIARES -----------------------------------------------------------------
 
     public void addBasic(Declaracion s){
-        lista_basica.add(s);
+        lista_basica.add(0,s);
     }
 
     public void addAlias(Alias a){
-        lista_alias.add(a);
+        lista_alias.add(0,a);
     }
 
     public void addStruct(StructClass s){
-        lista_struct.add(s);
+        lista_struct.add(0,s);
     }
     
     public void addEnum(EnumClass e){
-        lista_enum.add(e);
+        lista_enum.add(0,e);
     }
     
     public void addFuncion(Funcion f){
-        lista_funcion.add(f);
+        lista_funcion.add(0,f);
     }
     public void addClase(Clase c){
-        lista_clases.add(c);
+        lista_clases.add(0,c);
     }
     public void addModulo(Modulo m){
-        lista_modulos.add(m);
+        lista_modulos.add(0,m);
     }
 
 }

@@ -1,7 +1,9 @@
 package ast.Estructuras.clases;
 
+import java.util.Collections;
 import java.util.List;
 import ast.Instructions.Instruccion;
+import ast.Programa;
 import ast.Util;
 import ast.Auxiliares.*;
 
@@ -15,9 +17,20 @@ public class Constructor {
         this.modo = modo;
         this.instList = list;
         this.paramList = param;
+        Collections.reverse(this.instList);
+        Collections.reverse(this.paramList);
     }
 
     public String toString() {
         return this.modo.toString() + " Constructor: " + "(" + Util.prettify(paramList) + ")" + "{" + Util.prettify(instList) + "}";
+    }
+
+    public void vincular() {
+        Programa.pila.abreBloque();
+        for (Parametro param: paramList)
+            param.vincular();
+        for (Instruccion inst: instList)
+            inst.vincular();
+        Programa.pila.cierraBloque();
     }
 }

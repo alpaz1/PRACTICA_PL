@@ -1,11 +1,10 @@
 package ast.Estructuras;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ast.ASTNode;
 import ast.Programa;
 import ast.Util;
-import ast.Expresions.Const;
 
 public class EnumClass extends ASTNode{
     private String name;
@@ -14,6 +13,7 @@ public class EnumClass extends ASTNode{
     public EnumClass(String name, List<String> campos){
         this.name = name;
         this.campos = campos;
+        Collections.reverse(this.campos);
         //Programa.tipos_enum.add(this);
     }
 

@@ -1,4 +1,5 @@
 package ast.Estructuras;
+import java.util.Collections;
 import java.util.List;
 
 import ast.ASTNode;
@@ -12,6 +13,7 @@ public class StructClass extends ASTNode{
     public StructClass(String name, List<Declaracion> campos){
         this.name = name;
         this.campos = campos;
+        Collections.reverse(this.campos);
     }
 
     public String toString(){ // enum{a,b,c}

@@ -14,4 +14,8 @@ public class Atributo {
     public String toString() {
         return "("+ modo.toString() +")"+ dec.toString();
     }
+
+    public void vincular() {
+        dec.vincular();
+    }
 }

@@ -1,5 +1,6 @@
 package ast.Estructuras;
 
+import java.util.Collections;
 import java.util.List;
 
 import ast.ASTNode;
@@ -20,6 +21,8 @@ public class Funcion extends ASTNode{
         this.tipo = tipo;
         this.instList = instList;
         this.paramList = paramList;
+        Collections.reverse(this.instList);
+        Collections.reverse(this.paramList);
     }
 
     public void vincular() {

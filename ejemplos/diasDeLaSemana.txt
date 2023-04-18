@@ -23,6 +23,7 @@ entero AveriguaDia ( entero n ) {
 principal () {
     {
         entero n = 3;
+        n = n + 5;
     }
     AveriguaDia(n);
     imprime(dia);
