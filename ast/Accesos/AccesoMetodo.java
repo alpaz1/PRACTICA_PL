@@ -1,8 +1,5 @@
 package ast.Accesos;
 
-import java.util.List;
-
-import ast.Expresions.E;
 import ast.Expresions.LlamadaFunExp;
 
 public class AccesoMetodo extends Acceso {

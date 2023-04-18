@@ -51,7 +51,7 @@ non terminal Clase Clase,CuerpoClase;
 non terminal Atributo Atributo;
 non terminal Constructor Constructor;
 non terminal Metodo Metodo;
-non terminal Asignacion Asignacion, InsFor;
+non terminal Asignacion Asignacion;
 non terminal Condicional Condicional;
 non terminal Devuelve Return;
 non terminal Imprime Print;
@@ -234,15 +234,12 @@ Condicional ::= IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE
 
 Iteracion ::= WHILE PAP E0:exp PCIERRE LLAP ListaInstrucciones:list LLCIERRE
               {:RESULT = new BucleWhile(exp,list);:}
-              | FOR PAP InsFor:var E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
-               {:RESULT = new BucleFor(var, exp, asig, list );:}
+              | FOR PAP Declaracion:dec PUNTOYCOMA E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
+               {:RESULT = new BucleFor(dec, exp, asig, list );:}
               | FOR PAP PUNTOYCOMA E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
                {:RESULT = new BucleFor(exp,asig,list);:};
 
-InsFor ::= TIPOINT Asignacion:var PUNTOYCOMA 
-              {:RESULT = var;:}
-          | Asignacion:var PUNTOYCOMA 
-               {:RESULT = var;:};
+
 Selecciona ::= SWITCH PAP IDEN:nombre PCIERRE LLAP Casos:casos PorDefecto:def LLCIERRE
             {:RESULT= new Switch(nombre.lexema,casos,def);:}
             | SWITCH PAP IDEN:nombre PCIERRE LLAP Casos:casos LLCIERRE

@@ -1,6 +1,7 @@
 package ast.Instructions;
 
 import ast.ASTNode;
+import ast.Programa;
 import ast.Types.Types;
 
 public class Alias extends ASTNode{
@@ -21,10 +22,16 @@ public class Alias extends ASTNode{
         return "ALIAS: " + nombre + " - " + tipo.toString();
     }
 
-    @Override
     public void vincular() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'vincular'");
+        ASTNode nodo = Programa.pila.buscaIdCima(nombre);
+        if (nodo == null) { // devuelve null cuando no esta
+            // System.out.println("Vinculando " + name);
+            Programa.pila.insertaId(nombre, this);
+            // Algo relacionado con expresiones de tipos???
+        } else {
+            System.out.println("Error vinculacion: Este identificador ya esta usado: " + nombre);
+            Programa.okVinculacion = false;
+        }
     }
     
 }

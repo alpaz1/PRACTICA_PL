@@ -1,7 +1,7 @@
 #incluir "hola.txt"
 #incluir "pruebaaa.h"
 
-enum DiaSemana { a, b, c};
+enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
 enum Resultado {accepted, timelimit, wrongAnswer};
 alias matriz = lista <lista <DiaSemana>[2]> [3];
 alias alejandro = flotante;
@@ -21,7 +21,7 @@ publico clase miClase{
     
     publico miClase(Tiempo& t, entero a){
         tiempo = t;
-        miAray[1] = Jueves;
+        miAray[1][2] = Jueves;
     }
 
     privado void fun(buleano b){
@@ -36,7 +36,7 @@ buleano encontrado = verdad yy mentira oo mentira;
 
 buleano prueba(entero a, entero& b, lista <lista <DiaSemana>[]>[] &miArray){
     mientras (a == b){
-        paraCada(a = 0; a < b; a = a + 1){
+        paraCada(entero i = 0; i < b; i = i + 1){
             b = b + 1;
         }
     }
@@ -44,7 +44,7 @@ buleano prueba(entero a, entero& b, lista <lista <DiaSemana>[]>[] &miArray){
 
 buleano pruebaConReturn(entero a, entero& b){
     mientras (a == b){
-        paraCada(a = 0; a < b; a = a + 1){
+        paraCada(entero i = 0; i < b; i = i + 1){
             b = b + 1;
         }
     }

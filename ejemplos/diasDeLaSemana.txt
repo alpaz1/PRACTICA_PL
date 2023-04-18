@@ -8,7 +8,7 @@ enum DiaSemana {
     Domingo,
     Error
 };
-entero AveriguaDia ( entero n ) {
+DiaSemana AveriguaDia ( entero n ) {
     selecciona (n) {
         caso 1 : devuelve Lunes; ¡para!;
         caso 2 : devuelve Martes; ¡para!;
@@ -21,10 +21,7 @@ entero AveriguaDia ( entero n ) {
     }
 }
 principal () {
-    {
-        entero n = 3;
-        n = n + 5;
-    }
-    AveriguaDia(n);
+    entero n = 3;
+    DiaSemana dia = AveriguaDia(n);
     imprime(dia);
 }

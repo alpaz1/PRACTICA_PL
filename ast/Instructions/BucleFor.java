@@ -2,13 +2,14 @@ package ast.Instructions;
 import java.util.List;
 
 import ast.Programa;
+import ast.Estructuras.Declaracion;
 import ast.Expresions.E;
 
 
 
 public class BucleFor extends Bloque{
 
-    private Asignacion var;
+    private Declaracion dec;
     private E exp;
     private Asignacion a;
 
@@ -17,19 +18,20 @@ public class BucleFor extends Bloque{
         super(instList);
         this.exp = exp;
         this.a = a;
-        this.var = null;
+        this.dec = null;
     }
 
-    public BucleFor(Asignacion variable, E exp , Asignacion a ,  List<Instruccion> instList ){
+    public BucleFor(Declaracion dec, E exp , Asignacion a ,  List<Instruccion> instList ){
         super(instList);
-        this.var = variable;
+        this.dec = dec;
         this.exp = exp;
         this.a = a;
     }
 
     public void vincular() {
         Programa.pila.abreBloque();
-        var.vincular();
+        if (dec != null)
+            dec.vincular();
         exp.vincular();
         
         for(Instruccion instruccion : instList){
@@ -45,16 +47,16 @@ public class BucleFor extends Bloque{
     }
 
     public String toString() {
-        if (this.var != null)
-            return "FOR: (" + "Variable: " + var.toString() + " Condicion:  " + exp.toString() + "Asignacion: " + a.toString() + ")"
+        if (this.dec != null)
+            return "FOR: (" + "Variable: " + dec.toString() + " Condicion:  " + exp.toString() + "Asignacion: " + a.toString() + ")"
                 + "Cuerpo: {" +instList.toString() + "}"; 
         else 
-        return "FOR: (" + " Variable: " + ";" + " Condicion:  " + exp.toString() + "Asignacion: " + a.toString() + ")"
+            return "FOR: (" + " Variable: " + ";" + " Condicion:  " + exp.toString() + "Asignacion: " + a.toString() + ")"
         + "Cuerpo: {" +instList.toString() + "}"; 
     }
 
-    public Asignacion getId(){
-        return this.var;
+    public Declaracion getId(){
+        return this.dec;
     }
 
     public Asignacion getAsignacion(){

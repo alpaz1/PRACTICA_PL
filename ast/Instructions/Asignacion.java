@@ -10,7 +10,6 @@ public class Asignacion extends Instruccion{
     private E exp;
     private KindTypes tipo;
 
-
     public Asignacion(Acceso iden, E exp){
         this.iden = iden;
         this.exp = exp;
@@ -25,9 +24,11 @@ public class Asignacion extends Instruccion{
 
     public KindInstruction kind() {return tipoIns;}
     public String toString() {
-        if(tipo != null)    return tipoIns.toString() + ": " + iden  + "(" + this.tipo + ") = " + exp.toString();
+        if(tipo != null)    
+            return tipoIns.toString() + ": " + iden  + "(" + this.tipo + ") = " + exp.toString();
 
-        else return tipoIns.toString() + ": " + iden + " = " + exp.toString();
+        else 
+            return tipoIns.toString() + ": " + iden + " = " + exp.toString();
     }
 
     public Acceso getId(){
@@ -37,7 +38,6 @@ public class Asignacion extends Instruccion{
     public E getValor(){
         return this.exp;
     }
-
 
     public void vincular() {
         iden.vincular();
