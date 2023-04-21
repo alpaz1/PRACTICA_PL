@@ -1,7 +1,11 @@
 package ast;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ast.Estructuras.DefinitionsList;
+import ast.Estructuras.EnumClass;
 import ast.Estructuras.FMain;
 
 
@@ -14,6 +18,9 @@ public class Programa extends ASTNode {
     
     public static boolean okTipos;
     public static boolean okVinculacion;
+
+    public static List<EnumClass> enumList = new ArrayList<EnumClass>();
+
 
     public Programa(DefinitionsList l, FMain fmain) {
         Programa.definiciones = l;

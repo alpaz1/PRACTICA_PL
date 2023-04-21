@@ -18,6 +18,6 @@ public class Modulo extends ASTNode{
     @Override
     public void vincular() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'vincular'");
+        //throw new UnsupportedOperationException("Unimplemented method 'vincular'");
     }
 }

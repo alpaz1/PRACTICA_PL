@@ -20,13 +20,47 @@ public class Clase extends ASTNode{
     }
 
     public void vincular() {
+
+
+        for (Constructor c: constructores){
+            c.setName(nombre);
+          
+        }
+
+        for (Atributo a: atributos){
+            if (a.getPrivacyMode().equals(PrivacyMode.PUBLIC))
+                a.vincular();
+            else{
+                for (Constructor c: constructores){
+                    c.addAtr(a);
+                   // System.out.println("AÑADIDO");
+                   // System.out.println(a.toString());
+                }
+            }
+        }
+        for (Metodo m: metodos) {
+            if (m.getPrivacyMode().equals(PrivacyMode.PUBLIC))
+                m.vincular();
+        }
+        for (Constructor c: constructores){
+            if (c.getPrivacyMode().equals(PrivacyMode.PUBLIC))
+                c.vincular();
+        }
+            
+
         Programa.pila.abreBloque();
-        for (Atributo a: atributos)
-            a.vincular();
-        for (Metodo m: metodos)
-            m.vincular();
-        for (Constructor c: constructores)
-            c.vincular();
+        for (Atributo a: atributos){
+            if (a.getPrivacyMode().equals(PrivacyMode.PRIVATE))
+                a.vincular();
+        }
+        for (Metodo m: metodos) {
+            if (m.getPrivacyMode().equals(PrivacyMode.PRIVATE))
+                m.vincular();
+        }
+        for (Constructor c: constructores){
+            if (c.getPrivacyMode().equals(PrivacyMode.PRIVATE))
+                c.vincular();
+        }
         Programa.pila.cierraBloque();
     }
 

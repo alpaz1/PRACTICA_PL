@@ -17,6 +17,10 @@ public class DefinitionsList {
     private List<Modulo> lista_modulos;
     private List<Alias> lista_alias;
     
+    List<EnumClass> getEnumList(){
+        return this.lista_enum;
+    }
+
     public DefinitionsList(){
         lista_basica = new ArrayList<Declaracion>();
         lista_struct = new ArrayList<StructClass>();

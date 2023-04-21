@@ -18,4 +18,8 @@ public class Metodo {
     public void vincular() {
         fun.vincular();
     }
+
+    public PrivacyMode getPrivacyMode() {
+        return this.modo;
+    }
 }

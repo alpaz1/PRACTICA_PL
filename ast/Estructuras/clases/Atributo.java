@@ -18,4 +18,8 @@ public class Atributo {
     public void vincular() {
         dec.vincular();
     }
+
+    public PrivacyMode getPrivacyMode() {
+        return this.modo;
+    }
 }
