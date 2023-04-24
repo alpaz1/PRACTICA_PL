@@ -13,6 +13,7 @@ public class Main {
 		AnalizadorSintacticoTiny asint = new AnalizadorSintacticoTiny(alex);
 		Programa p = (Programa) asint.parse().value;
 		p.vincular(); // vinculacion
+		p.checkType();//tipado
 		// System.out.println(p);
 	}
 }

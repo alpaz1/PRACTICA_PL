@@ -58,6 +58,22 @@ public class Declaracion extends Instruccion {
         return out;
     }
 
+
+    public void checkType() {
+        // El tipo de la parte izquierda es this.tipo
+        //tipo.chequea();
+        if (exp != null) {
+            exp.checkType();
+
+            if (!this.tipo.equals(exp.tipo)) {
+                System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
+                Programa.okTipos = false;
+            }
+            else System.out.println("tipo OK");
+
+        }
+    }
+
     @Override
     public KindInstruction kind() {
         return KindInstruction.DECLARACION;

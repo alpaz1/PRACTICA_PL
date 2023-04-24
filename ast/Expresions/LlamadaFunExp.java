@@ -27,11 +27,32 @@ public class LlamadaFunExp extends E {
     }
 
 
-    public KindE kind() {
+    public KindE kindExp() {
         return KindE.LLAMADAFUN;
     }
 
     public String toString(){
         return "Llamada " + nombre + " (" + parametros.toString() + ")";
+    }
+
+    @Override
+    public void checkType() {
+        /* 
+        this.tipo = nodoVinculo.tipo;
+        // Chequeamos que hay el mismo nº parametros
+        Funcion f = (Funcion) this.nodoVinculo;
+        if (f.getListaArgs().size() != this.parametros.size()){ // Error, != nº parametros
+            System.out.println("Error vinculación: Distinto nº de parametros");
+            Programa.okTipos = false;
+        }
+        for (int i = 0; i < parametros.size(); ++i){ // el nº parametros esta ok por vinculacion
+            parametros.get(i).chequea();
+
+            if(!parametros.get(i).tipo.comparar(f.getListaArgs().get(i).tipo)){
+                System.out.println("Error Tipos: Funcion " + f.getNombre() + " espera otros parametros");
+                Programa.okTipos = false;
+            }
+        }  
+        */
     }
 }

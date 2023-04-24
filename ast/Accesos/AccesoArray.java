@@ -21,4 +21,10 @@ public class AccesoArray extends Acceso{
         return "AccArr(" + acceso + "[" + exp + "])";
     }
 
+    @Override
+    public void checkType() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'checkType'");
+    }
+
 }

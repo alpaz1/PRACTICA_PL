@@ -7,7 +7,7 @@ import ast.ASTNode;
 import ast.Programa;
 import ast.Util;
 import ast.Expresions.Const;
-import ast.Expresions.KindE;
+import ast.Types.KindTypes;
 
 public class EnumClass extends ASTNode{
     private String name;
@@ -17,7 +17,7 @@ public class EnumClass extends ASTNode{
         this.name = name;
         this.campos = new ArrayList<Const>();
         for (String s : valores) {
-            this.campos.add(new Const(s, KindE.ENUM));
+            this.campos.add(new Const(s, KindTypes.ENUM));
         }
         Programa.enumList.add(this);
         Collections.reverse(this.campos);

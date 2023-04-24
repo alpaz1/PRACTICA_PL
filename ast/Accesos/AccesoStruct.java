@@ -17,4 +17,10 @@ public class AccesoStruct extends Acceso{
     public String toString(){
         return "AccStr(" + acceso+ "." + this.campo + ")";
     }
+
+    @Override
+    public void checkType() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'checkType'");
+    }
 }

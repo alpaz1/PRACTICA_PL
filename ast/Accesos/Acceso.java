@@ -7,7 +7,7 @@ public abstract class Acceso extends E{
 
     public Acceso() {}
 
-    public KindE kind() {
+    public KindE kindExp() {
        return KindE.ACCESS;
     }
 

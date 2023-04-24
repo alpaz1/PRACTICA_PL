@@ -2,6 +2,9 @@ package ast.Accesos;
 
 import ast.ASTNode;
 import ast.Programa;
+import ast.Estructuras.Declaracion;
+import ast.Expresions.Const;
+
 
 public class AccesoVar extends Acceso{
     private String direccionInicial;
@@ -22,5 +25,16 @@ public class AccesoVar extends Acceso{
 
     public String toString(){
         return direccionInicial;
+    }
+
+    @Override
+    public void checkType() {
+        if((this.nodoVinculo instanceof Const)||(this.nodoVinculo instanceof Declaracion)){
+            this.tipo = ((Declaracion) nodoVinculo).getTipo();
+        }
+        else{
+            System.out.println("Error tipos: acceso a variable  " + direccionInicial);
+            Programa.okTipos = false;
+        } 
     }
 }

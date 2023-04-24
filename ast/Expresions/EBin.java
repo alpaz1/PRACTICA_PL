@@ -1,13 +1,17 @@
 package ast.Expresions;
 
+import ast.Programa;
+import ast.Types.KindTypes;
+
 public class EBin extends E {
   private E opnd1;
   private E opnd2;
-  private KindE tipo;
+  private KindE tipoExp;
 
-  public EBin(E opnd1, E opnd2, KindE tipo) {
+  public EBin(E opnd1, E opnd2, KindE tipoExp, KindTypes tipo) {
     this.opnd1 = opnd1;
     this.opnd2 = opnd2;
+    this.tipoExp = tipoExp;
     this.tipo = tipo;
   }
 
@@ -24,11 +28,29 @@ public class EBin extends E {
     return opnd2;
   }
 
-  public KindE kind() {
-    return tipo;
+  public KindE kindExp() {
+    return tipoExp;
   }
 
   public String toString() {
-    return tipo.toString() + "(" + opnd1().toString() + "," + opnd2().toString() + ")";
+    return tipoExp.toString() + "(" + opnd1().toString() + "," + opnd2().toString() + ")";
   }
+
+  @Override
+  public void checkType() {
+    opnd1.checkType();
+    opnd2.checkType();
+
+    
+
+  
+    if(this.tipo == null) 
+      this.tipo = opnd1.tipo; //caso de la expresion == o !=){
+    if(!opnd1.tipo.equals(opnd2.tipo) || !opnd1.tipo.equals(this.tipo)){
+      Programa.okTipos = false;
+      System.out.println("Error tipo: expresion binaria con operadores de distinto tipo o operador no apto para los argumentos introducidos");
+    }
+  }
+
+  
 }

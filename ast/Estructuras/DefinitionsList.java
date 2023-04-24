@@ -47,6 +47,24 @@ public class DefinitionsList {
         for (Modulo m: lista_modulos)
             m.vincular();
     }
+    public void checkType() {
+        for (Declaracion d: lista_basica)
+            d.checkType();
+        /* 
+        for (StructClass s: lista_struct)
+            s.vincular();
+        for (EnumClass e: lista_enum)
+            e.vincular();
+        for (Funcion f: lista_funcion)
+            f.vincular();
+        for (Clase c: lista_clases)
+            c.vincular();
+        for (Alias a: lista_alias)
+            a.vincular();
+        for (Modulo m: lista_modulos)
+            m.vincular();
+            */
+    }
 
     // AST TOSTRING -----------------------------------------------------------------
     public String toString() {

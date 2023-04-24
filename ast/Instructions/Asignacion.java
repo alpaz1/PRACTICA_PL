@@ -2,13 +2,13 @@ package ast.Instructions;
 
 import ast.Expresions.E;
 import ast.Types.KindTypes;
+import ast.Programa;
 import ast.Accesos.*;
 
 public class Asignacion extends Instruccion{
     private KindInstruction tipoIns = KindInstruction.ASIGNACION; // esto sirve de algo?
     private Acceso iden;
     private E exp;
-    private KindTypes tipo;
 
     public Asignacion(Acceso iden, E exp){
         this.iden = iden;
@@ -42,5 +42,15 @@ public class Asignacion extends Instruccion{
     public void vincular() {
         iden.vincular();
         exp.vincular();
+    }
+
+    public void checkType(){
+    //nombre.chequea();
+       // exp.chequea();
+
+        if(tipo.equals(exp.tipo)){
+            System.out.println("Error tipo: Asignacion " + iden + "=" + exp + "(" + iden.tipo + "," + exp.tipo + ")");
+            Programa.okTipos = false;
+        }
     }
 }

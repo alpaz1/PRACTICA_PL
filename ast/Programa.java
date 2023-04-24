@@ -35,7 +35,10 @@ public class Programa extends ASTNode {
         fmain.vincular();
         pila.print();
         pila.cierraBloque();
-        // Quitar
+    }
+
+    public void checkType(){
+        definiciones.checkType();
     }
 
     // AST ToString -----------------------------------------------------------------

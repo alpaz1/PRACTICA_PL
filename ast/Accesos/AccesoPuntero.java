@@ -15,4 +15,10 @@ public class AccesoPuntero extends Acceso{
         direccion.vincular();
         this.nodoVinculo = direccion.nodoVinculo;
     }
+
+    @Override
+    public void checkType() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'checkType'");
+    }
 }

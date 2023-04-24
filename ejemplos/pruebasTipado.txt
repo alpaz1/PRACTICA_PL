@@ -1,0 +1,12 @@
+buleano g = mentira;
+entero h = -1;
+buleano f = (verdad == g);
+buleano a = verdad oo mentira;
+entero b = 3 - 1 + 5 * 6;
+entero c = -b;
+buleano d = no a - verdad;
+entero e = c + b;
+
+principal() {
+   
+}

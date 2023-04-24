@@ -20,4 +20,10 @@ public class AccesoMetodo extends Acceso  {
         ref.vincular();
         llamada.vincular();
     }
+
+    @Override
+    public void checkType() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'checkType'");
+    }
 }
