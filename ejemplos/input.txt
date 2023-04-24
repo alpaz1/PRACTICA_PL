@@ -41,6 +41,8 @@ buleano prueba(entero a, entero& b, lista <lista <DiaSemana>[]>[] &miArray){
             b = b + 1;
         }
     }
+    devuelve a;
+    devuelve b;
 }
 
 buleano pruebaConReturn(entero a, entero& b){

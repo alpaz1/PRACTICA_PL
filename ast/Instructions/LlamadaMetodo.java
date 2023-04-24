@@ -1,13 +1,13 @@
-package ast.Accesos;
+package ast.Instructions;
 
+import ast.Accesos.Acceso;
 import ast.Expresions.LlamadaFunExp;
 
-public class AccesoMetodo extends Acceso  {
-    
+public class LlamadaMetodo extends Instruccion {
     private Acceso ref;
     private LlamadaFunExp llamada;
 
-    public AccesoMetodo(Acceso ref, LlamadaFunExp llamada){
+    public LlamadaMetodo(Acceso ref, LlamadaFunExp llamada){
         this.ref = ref;
         this.llamada = llamada;
     }
@@ -19,5 +19,10 @@ public class AccesoMetodo extends Acceso  {
     public void vincular() {
         ref.vincular();
         llamada.vincular();
+    }
+
+    @Override
+    public KindInstruction kind() {
+        return KindInstruction.LLAMADAMETODO;
     }
 }

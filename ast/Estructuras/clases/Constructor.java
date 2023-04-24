@@ -51,6 +51,7 @@ public class Constructor extends Funcion{
             param.vincular();
         for (Instruccion inst: instList)
             inst.vincular();
+            
         Programa.pila.cierraBloque();
     }
 

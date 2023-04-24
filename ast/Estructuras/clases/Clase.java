@@ -33,8 +33,12 @@ public class Clase extends ASTNode{
             else{
                 for (Constructor c: constructores){
                     c.addAtr(a);
-                   // System.out.println("AÑADIDO");
-                   // System.out.println(a.toString());
+                    //System.out.println("AÑADIDO");
+                    //System.out.println(a.toString());
+                }
+                for (Metodo m: metodos) {
+                    if (m.getPrivacyMode().equals(PrivacyMode.PUBLIC))
+                        m.addAtr(a);
                 }
             }
         }

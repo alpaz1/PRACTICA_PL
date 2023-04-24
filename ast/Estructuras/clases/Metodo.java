@@ -1,10 +1,19 @@
 package ast.Estructuras.clases;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ast.Estructuras.Funcion;
 
 public class Metodo {
     private PrivacyMode modo;
     private Funcion fun;
+
+    private List<Atributo> atributos = new ArrayList<Atributo>();
+
+    public void addAtr(Atributo a){
+        this.atributos.add(a);
+    }
 
     public Metodo(PrivacyMode modo, Funcion fun){
         this.modo = modo;
@@ -16,7 +25,9 @@ public class Metodo {
     }
 
     public void vincular() {
-        fun.vincular();
+      
+        fun.vincular(atributos);
+
     }
 
     public PrivacyMode getPrivacyMode() {

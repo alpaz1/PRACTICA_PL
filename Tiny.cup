@@ -162,7 +162,9 @@ Instruccion ::= Declaracion:dec
               // | Read:re
               //     {:RESULT=re;:}
               | LlamadaFuncion:fun
-                  {:RESULT = new LlamadaFunInst(fun);:};
+                  {:RESULT = new LlamadaFunInst(fun);:}
+              | Acceso0:ref PUNTO IDEN:metodo PAP ListaArgumentos:arglist PCIERRE
+                  {: RESULT = new LlamadaMetodo(ref,new LlamadaFunExp(metodo.lexema,arglist));:};
 
 //---------------------Clases-----------------------------------
 
@@ -198,6 +200,7 @@ LlamadaConstructor ::= NEW IDEN:nombreClase PAP ListaArgumentos:argList PCIERRE
 // Llamada a función como expresión
 LlamadaFuncion ::= IDEN:nombre PAP ListaArgumentos:args PCIERRE
                   {:RESULT = new LlamadaFunExp(nombre.lexema,args);:};
+                  
       
 ListaArgumentos ::= E0:arg COMA ListaArgumentos:arglist 
                 {:arglist.add(arg); RESULT = arglist;:}

@@ -18,11 +18,12 @@ publico clase Hora {
         devuelve horas*3600 + minutos*60 + segundos;
     }
 }
-publico clase miClase {
-    protegido entero miAtributo;
-}
+
+
 
 principal() {
     Hora reloj = nuevo Hora(30,30,1);
     imprime(reloj.aSegundos());
+    reloj.aSegundos();
+    entero a = reloj.aSegundos();
 }

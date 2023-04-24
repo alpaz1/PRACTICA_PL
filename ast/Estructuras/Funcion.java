@@ -7,6 +7,7 @@ import ast.ASTNode;
 import ast.Programa;
 import ast.Util;
 import ast.Auxiliares.Parametro;
+import ast.Estructuras.clases.Atributo;
 import ast.Instructions.Instruccion;
 import ast.Types.KindTypes;
 
@@ -33,6 +34,38 @@ public class Funcion extends ASTNode{
 
             for (Parametro param : paramList) {
                 param.vincular();
+            }
+
+            // si es void no hace falta
+            for (Instruccion instruccion : instList) {
+                instruccion.vincular();
+                // Vincular el return
+                // if (! (instruccion instanceof AsigClass || instruccion instanceof DecClass || 
+                //     instruccion instanceof FuncallClass)){
+                //         instruccion.setReturn(this);
+                //     }
+            }
+
+            Programa.pila.cierraBloque();
+        } else {
+            System.err.println("Error vinculacion: Este identificador ya esta usado: " + nombre);
+            Programa.okVinculacion = false;
+        }
+
+    }
+
+    public void vincular(List<Atributo> atributos ) {
+        ASTNode nodo = Programa.pila.buscaId(nombre);
+        if (nodo == null) {
+            Programa.pila.insertaId(nombre, this);
+            Programa.pila.abreBloque();
+
+            for (Parametro param : paramList) {
+                param.vincular();
+            }
+
+            for(Atributo a: atributos){
+                a.vincular();
             }
 
             // si es void no hace falta
