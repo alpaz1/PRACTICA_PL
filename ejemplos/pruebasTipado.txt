@@ -30,6 +30,7 @@ entero prueba(entero a, entero b, lista <lista <entero>[]>[] miArray){
 entero funCall = prueba (b,b,z);
 buleano funCall1 = prueba (b,b,z);
 
+
 estructura Tiempo{
     entero hora;
     entero minuto;
@@ -38,6 +39,9 @@ estructura Tiempo{
 
 };
 
+enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
+DiaSemana dia = 2;
+DiaSemana dia1 = Lunes;
 
 
 principal() {

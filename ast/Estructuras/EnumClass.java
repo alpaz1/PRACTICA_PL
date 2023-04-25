@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+
 import ast.ASTNode;
 import ast.Programa;
 import ast.Util;
@@ -13,6 +15,7 @@ import ast.Types.KindTypes;
 public class EnumClass extends ASTNode{
     private String name;
     private List<Const> campos;
+    
 
     public EnumClass(String name, List<String> valores){
         this.name = name;
@@ -24,8 +27,14 @@ public class EnumClass extends ASTNode{
         Collections.reverse(this.campos);
     }
 
-
+    public String getName(){
+        return this.name;
+    }
    
+
+    public List<Const> getCampos(){
+        return this.campos;
+    }
  
     public void vincular() {
         ASTNode nodo = Programa.pila.buscaId(name);

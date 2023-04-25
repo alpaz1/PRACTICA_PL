@@ -1,5 +1,6 @@
 package ast.Estructuras;
 
+import ast.Expresions.Const;
 import ast.Expresions.E;
 import ast.Instructions.Instruccion;
 import ast.Instructions.KindInstruction;
@@ -71,6 +72,34 @@ public class Declaracion extends Instruccion {
         // El tipo de la parte izquierda es this.tipo
         //tipo.chequea();
 
+        //ESTO ES SOLO PARA TRATAR LOS ENUMERADOS
+        if(this.tipo.kind().toString().equals("STRUCT")){
+            for(ASTNode nodo: Programa.definiciones.getEnumList() ){
+                if(((EnumClass)nodo).getName().equals(this.tipo.toString())){
+                    boolean ok = false;
+                    //System.out.println("Hola");
+                    for(Const c: ((EnumClass)nodo).getCampos()){
+
+                        if (c.getValor().equals(exp.toString())){
+                            ok = true;
+                            //System.out.println("tipo OK");
+                            return;
+                        }
+                        
+                    }
+                   
+                    if(!ok){
+                        System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
+                        Programa.okTipos = false;
+                        return;
+                    }
+
+                    
+                }    
+                break;        
+            }
+        }
+
         if (exp != null) {
             exp.checkType();
 
@@ -78,7 +107,7 @@ public class Declaracion extends Instruccion {
                 System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
                 Programa.okTipos = false;
             }
-            else System.out.println("tipo OK");
+           // else System.out.println("tipo OK");
 
         }
        

@@ -1,6 +1,5 @@
 package ast.Types;
 
-import java.sql.Struct;
 import java.util.List;
 
 import ast.ASTNode;

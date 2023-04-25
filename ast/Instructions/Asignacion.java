@@ -54,7 +54,7 @@ public class Asignacion extends Instruccion{
             System.out.println("Error tipo: Asignacion " + iden + "=" + exp + "(" + iden.tipo + "," + exp.tipo + ")");
             Programa.okTipos = false;
         }
-        else  System.out.println("tipo OK");
+       // else  System.out.println("tipo OK");
 
     }
 }
