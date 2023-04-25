@@ -73,6 +73,7 @@ non terminal List<String> ListaEnumerado;
 non terminal DefinitionsList Declaraciones;
 non terminal Types Tipo;
 non terminal E E0,E1,E2,E3,E4,E5,E6,E7;
+non terminal ArrayList<E> ExpArray;
 
 
 P ::= Declaraciones:decs Principal:p
@@ -112,9 +113,9 @@ Acceso1 ::= IDEN:nombre
 
 
 Declaracion ::= Tipo:t IDEN:n IGUAL E0:exp
-                    {:RESULT = new Declaracion(t.kind(), n.lexema, exp);:}
+                    {:RESULT = new Declaracion(t, n.lexema, exp);:}
                 | Tipo:t IDEN:n
-                    {:RESULT = new Declaracion(t.kind(), n.lexema);:};
+                    {:RESULT = new Declaracion(t, n.lexema);:};
 
 Asignacion ::= Acceso0:ref IGUAL E0:exp
                {:RESULT = new Asignacion(ref,exp);:};
@@ -131,9 +132,9 @@ Tipo ::=  TIPOINT
           | IDEN:nombre
             {:RESULT = new StructType(nombre.lexema);:}
           | ARRAY MENOR Tipo:t MAYOR CAP E0:tam CCIERRE
-            {:RESULT = new ArrayType(t,tam);:}
+            {:RESULT = new ArrayType(t.kind(),tam);:}
           | ARRAY MENOR Tipo:t MAYOR CAP CCIERRE
-            {:RESULT = new ArrayType(t,null);:}
+            {:RESULT = new ArrayType(t.kind(),null);:}
           | Tipo:t POR
             {:RESULT = new PointerType(t);:};
 
@@ -270,9 +271,9 @@ ListaParametros ::= Parametro:param COMA ListaParametros:paramList
                   | Parametro:param
                     {:List<Parametro> paramList = new ArrayList<Parametro>(); paramList.add(param); RESULT = paramList;:};
 Parametro ::= Tipo:t IDEN:id
-              {:RESULT = new Parametro(t.kind(), id.lexema, false);:}
+              {:RESULT = new Parametro(t, id.lexema, false);:}
             | Tipo:t AMPERSAND IDEN:id
-              {:RESULT = new Parametro(t.kind(), id.lexema, true);:};
+              {:RESULT = new Parametro(t, id.lexema, true);:};
 
 //---------------------Otros tipos ----------------------------
 DeclaracionEnumerado ::= ENUM IDEN:n LLAP ListaEnumerado:campos LLCIERRE
@@ -360,5 +361,12 @@ E7 ::= TRUE:valor
         {:RESULT=llamada;:}
       | PAP E0:exp PCIERRE
         {:RESULT = exp;:}
-      | LLAP ListaArgumentos:lst LLCIERRE
-        {:RESULT = new Const(lst.toString(), KindTypes.ARRAY);:};
+      | LLAP ExpArray:lst LLCIERRE
+        {:RESULT = new ExpArray(lst);:};
+
+ExpArray ::= E0:arg COMA ExpArray:arglist 
+            {:arglist.add(arg); RESULT = arglist;:}
+          | E0:exp
+            {: RESULT =  new ArrayList<E>(); RESULT.add(exp);:}
+          |
+            {: RESULT = new ArrayList<E>(); :};

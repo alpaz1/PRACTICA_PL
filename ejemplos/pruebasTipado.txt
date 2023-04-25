@@ -1,3 +1,6 @@
+lista <entero> [2] m = {1,1};
+lista <entero> [2] n = {verdad,1};
+
 buleano g = mentira;
 entero h = -1;
 buleano f = (verdad == g);

@@ -3,31 +3,42 @@ package ast.Estructuras;
 import ast.Expresions.E;
 import ast.Instructions.Instruccion;
 import ast.Instructions.KindInstruction;
+import ast.Types.ArrayType;
 import ast.Types.KindTypes;
+import ast.Types.Types;
 import ast.ASTNode;
 import ast.Programa;
 
 public class Declaracion extends Instruccion {
     
     protected String name;
-    protected KindTypes tipo;
+    protected KindTypes tipo = null;
     private E exp = null;
+    protected Types tipoCompuesto = null;
 
-    public Declaracion(KindTypes tipo, String name){
-        this.tipo = tipo;
+   
+
+
+    public Declaracion(Types tipo, String name){
+        this.tipoCompuesto = tipo;
         this.name = name;
+        this.tipo = tipo.kind();
     }
+   
+
+    public Declaracion(Types tipo, String name, E valor){
+        this.tipoCompuesto = tipo;
+        this.name = name;
+        this.exp = valor;
+        this.tipo = tipo.kind();
+
+    }
+
     public KindTypes getTipo() {
         return this.tipo;
     }
     public String getName() {
         return this.name;
-    }
-
-    public Declaracion(KindTypes tipo, String name, E valor){
-        this.tipo = tipo;
-        this.name = name;
-        this.exp = valor;
     }
 
 
@@ -42,7 +53,8 @@ public class Declaracion extends Instruccion {
             Programa.pila.insertaId(name, this);
             if (exp != null)
                 exp.vincular();
-        } else {
+        } 
+        else {
             System.out.println("Error vinculacion: Este identificador ya esta usado: " + name);
             Programa.okVinculacion = false;
         }
@@ -62,16 +74,26 @@ public class Declaracion extends Instruccion {
     public void checkType() {
         // El tipo de la parte izquierda es this.tipo
         //tipo.chequea();
+
         if (exp != null) {
             exp.checkType();
+            
 
-            if (!this.tipo.equals(exp.tipo)) {
+            if(tipo.toString().equals("ARRAY")){ //tipo ARRAY
+                if (!((ArrayType)tipoCompuesto).tipo.equals(exp.tipo)){
+                    System.out.println("Tipo del Array: " + ((ArrayType)tipoCompuesto).tipo.toString());
+                    System.out.println("Tipo de la expresion: " + exp.tipo);
+                }
+                else System.out.println("tipo OK");
+            }
+            else if (!this.tipo.equals(exp.tipo)) { //tipos básicos
                 System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
                 Programa.okTipos = false;
             }
             else System.out.println("tipo OK");
 
         }
+       
     }
 
     @Override
