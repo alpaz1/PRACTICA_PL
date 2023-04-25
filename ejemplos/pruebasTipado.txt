@@ -40,9 +40,12 @@ estructura Tiempo{
 };
 
 enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
+enum Frutas { Manzana, Pera};
+
 DiaSemana dia = 2;
 DiaSemana dia1 = Lunes;
-
+Frutas fruta1 = Pera;
+DiaSemana fruta = Pera;
 
 principal() {
 

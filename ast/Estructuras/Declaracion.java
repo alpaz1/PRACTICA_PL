@@ -75,9 +75,10 @@ public class Declaracion extends Instruccion {
         //ESTO ES SOLO PARA TRATAR LOS ENUMERADOS
         if(this.tipo.kind().toString().equals("STRUCT")){
             for(ASTNode nodo: Programa.definiciones.getEnumList() ){
+                //System.out.println(((EnumClass)nodo).getName());
+               // System.out.println(this.tipo.toString());
                 if(((EnumClass)nodo).getName().equals(this.tipo.toString())){
                     boolean ok = false;
-                    //System.out.println("Hola");
                     for(Const c: ((EnumClass)nodo).getCampos()){
 
                         if (c.getValor().equals(exp.toString())){
@@ -96,7 +97,6 @@ public class Declaracion extends Instruccion {
 
                     
                 }    
-                break;        
             }
         }
 
