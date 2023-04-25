@@ -3,8 +3,7 @@ package ast.Estructuras;
 import ast.Expresions.E;
 import ast.Instructions.Instruccion;
 import ast.Instructions.KindInstruction;
-import ast.Types.ArrayType;
-import ast.Types.KindTypes;
+
 import ast.Types.Types;
 import ast.ASTNode;
 import ast.Programa;
@@ -12,29 +11,26 @@ import ast.Programa;
 public class Declaracion extends Instruccion {
     
     protected String name;
-    protected KindTypes tipo = null;
     private E exp = null;
-    protected Types tipoCompuesto = null;
+   
 
    
 
 
     public Declaracion(Types tipo, String name){
-        this.tipoCompuesto = tipo;
         this.name = name;
-        this.tipo = tipo.kind();
+        this.tipo = tipo;
     }
    
 
     public Declaracion(Types tipo, String name, E valor){
-        this.tipoCompuesto = tipo;
         this.name = name;
         this.exp = valor;
-        this.tipo = tipo.kind();
+        this.tipo = tipo;
 
     }
 
-    public KindTypes getTipo() {
+    public Types getTipo() {
         return this.tipo;
     }
     public String getName() {
@@ -79,14 +75,7 @@ public class Declaracion extends Instruccion {
             exp.checkType();
             
 
-            if(tipo.toString().equals("ARRAY")){ //tipo ARRAY
-                if (!((ArrayType)tipoCompuesto).tipo.equals(exp.tipo)){
-                    System.out.println("Tipo del Array: " + ((ArrayType)tipoCompuesto).tipo.toString());
-                    System.out.println("Tipo de la expresion: " + exp.tipo);
-                }
-                else System.out.println("tipo OK");
-            }
-            else if (!this.tipo.equals(exp.tipo)) { //tipos básicos
+            if (!this.tipo.toString().equals(exp.tipo.toString())) { //tipos básicos
                 System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
                 Programa.okTipos = false;
             }

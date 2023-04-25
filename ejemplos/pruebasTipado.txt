@@ -1,4 +1,9 @@
 lista <entero> [2] m = {1,1};
+
+lista <entero> [2] p = {1,{1}};
+
+lista <lista <entero>[2]> [3] z = {{1}, {2}};
+
 lista <entero> [2] n = {verdad,1};
 
 buleano g = mentira;
@@ -12,4 +17,5 @@ entero e = c + b;
 
 principal() {
    
+
 }

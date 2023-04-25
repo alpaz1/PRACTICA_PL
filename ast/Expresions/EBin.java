@@ -2,13 +2,14 @@ package ast.Expresions;
 
 import ast.Programa;
 import ast.Types.KindTypes;
+import ast.Types.Types;
 
 public class EBin extends E {
   private E opnd1;
   private E opnd2;
   private KindE tipoExp;
 
-  public EBin(E opnd1, E opnd2, KindE tipoExp, KindTypes tipo) {
+  public EBin(E opnd1, E opnd2, KindE tipoExp, Types tipo) {
     this.opnd1 = opnd1;
     this.opnd2 = opnd2;
     this.tipoExp = tipoExp;
@@ -40,13 +41,11 @@ public class EBin extends E {
   public void checkType() {
     opnd1.checkType();
     opnd2.checkType();
-
-    
-
   
-    if(this.tipo == null) 
-      this.tipo = opnd1.tipo; //caso de la expresion == o !=){
-    if(!opnd1.tipo.equals(opnd2.tipo) || !opnd1.tipo.equals(this.tipo)){
+    if(this.tipo.toString().equals("NULL")){
+      this.tipo = opnd1.tipo; //caso de la expresion == o !=){ 
+    }
+    if(!opnd1.tipo.toString().equals(opnd2.tipo.toString()) || !opnd1.tipo.toString().equals(this.tipo.toString())){
       Programa.okTipos = false;
       System.out.println("Error tipo: expresion binaria con operadores de distinto tipo o operador no apto para los argumentos introducidos");
     }

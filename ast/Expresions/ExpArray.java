@@ -2,6 +2,8 @@ package ast.Expresions;
 
 import java.util.ArrayList;
 
+import ast.Types.ArrayType;
+import ast.Types.BasicTypes;
 import ast.Types.KindTypes;
 
 public class ExpArray  extends E{
@@ -10,8 +12,7 @@ public class ExpArray  extends E{
 
     public ExpArray( ArrayList<E> valor){
         this.valor = valor;
-        this.tipo = valor.get(0).tipo;
-        
+        this.tipo = new ArrayType(valor.get(0).tipo, null);
     }
 
     @Override
@@ -19,17 +20,17 @@ public class ExpArray  extends E{
         return KindE.ARRAY;
     }
 
-    public KindTypes kind(){
-        return this.valor.get(0).kind();
-    }
 
     @Override
     public void checkType() {
 
         for(E e: valor){
-            if(!e.kind().equals(tipo)){
-                this.tipo = KindTypes.ERROR;
+            if(!e.getTipo().toString().equals(tipo.getTipo().toString())){
+            
                 System.out.println("La expresion con la que se inicializa un array debe ser homogénea");
+               // System.out.println(e.getTipo().toString());
+                //System.out.println(tipo.toString());
+                this.tipo = new BasicTypes(KindTypes.ERROR);
                 break;
             }
         }

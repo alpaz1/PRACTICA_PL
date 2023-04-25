@@ -1,12 +1,13 @@
 package ast.Expresions;
 
 import ast.Types.KindTypes;
+import ast.Types.Types;
 
 public class EUnaria extends E {
     protected E exp;
     private KindE tipoExp;
 
-    public EUnaria(E exp, KindE tipoExp, KindTypes tipo) {
+    public EUnaria(E exp, KindE tipoExp, Types tipo) {
       this.exp = exp;
       this.tipoExp = tipoExp;
       this.tipo = tipo;

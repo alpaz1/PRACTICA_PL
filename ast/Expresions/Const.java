@@ -1,15 +1,17 @@
 package ast.Expresions;
 
-import ast.Types.KindTypes;
+
+
+import ast.Types.Types;
 
 public class Const extends E {
 
   private String valor;
-  public Const(String valor, KindTypes tipo) {
+  public Const(String valor, Types tipo) {
     this.tipo = tipo;
     this.valor = valor;
   }
-  public KindTypes kind() {return tipo;}   
+
   public String toString() {return valor;}
   public void vincular() {}  
 

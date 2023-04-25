@@ -126,15 +126,15 @@ Tipo ::=  TIPOINT
           | TIPOFLOAT 
             {:RESULT= new BasicTypes(KindTypes.FLOAT);:}
           | TIPOBOOL 
-            {:RESULT= new BasicTypes(KindTypes.BOOL);:}
+            {:RESULT=new BasicTypes(KindTypes.BOOL);:}
           | VOID                    
             {:RESULT= new BasicTypes(KindTypes.VOID);:}
           | IDEN:nombre
             {:RESULT = new StructType(nombre.lexema);:}
           | ARRAY MENOR Tipo:t MAYOR CAP E0:tam CCIERRE
-            {:RESULT = new ArrayType(t.kind(),tam);:}
+            {:RESULT = new ArrayType(t,tam);:}
           | ARRAY MENOR Tipo:t MAYOR CAP CCIERRE
-            {:RESULT = new ArrayType(t.kind(),null);:}
+            {:RESULT = new ArrayType(t,null);:}
           | Tipo:t POR
             {:RESULT = new PointerType(t);:};
 
@@ -293,64 +293,64 @@ ListaCampos ::= Declaracion:dec PUNTOYCOMA ListaCampos:valores
 //------------------ Expresiones ----------------------------
 
 E0 ::= E0:opIzq OR E1:opDer
-        {:RESULT= new EBin(opIzq, opDer, KindE.OR,KindTypes.BOOL);:}
+        {:RESULT= new EBin(opIzq, opDer, KindE.OR, new BasicTypes(KindTypes.BOOL));:}
      | E1:e
         {:RESULT = e;:};
 
 E1 ::= E1:opIzq AND E2:opDer 
-        {:RESULT= new EBin(opIzq, opDer, KindE.AND, KindTypes.BOOL);:}
+        {:RESULT= new EBin(opIzq, opDer, KindE.AND, new BasicTypes(KindTypes.BOOL));:}
      | E2:e
         {:RESULT = e;:};
 
 E2 ::= E2:opIzq IGUALDAD E3:opDer
-          {:RESULT= new EBin(opIzq, opDer, KindE.IGUALDAD, null);:}
+          {:RESULT= new EBin(opIzq, opDer, KindE.IGUALDAD, new BasicTypes(KindTypes.NULL));:}
       | E2:opIzq DISTINTO E3:opDer
-          {:RESULT= new EBin(opIzq, opDer, KindE.DISTINTO, null);:}
+          {:RESULT= new EBin(opIzq, opDer, KindE.DISTINTO, new BasicTypes(KindTypes.NULL));:}
       | E3:e
           {:RESULT = e;:};
 
 E3 ::= E3:opIzq MAYOR E4:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.MAYOR, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MAYOR, new BasicTypes(KindTypes.INT));:}
       | E3:opIzq MENOR E4:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.MENOR, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MENOR, new BasicTypes(KindTypes.INT));:}
       | E3:opIzq MAYORIGUAL E4:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.MAYORIGUAL, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MAYORIGUAL, new BasicTypes(KindTypes.INT));:}
       | E3:opIzq MENORIGUAL E4:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.MENORIGUAL, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MENORIGUAL, new BasicTypes(KindTypes.INT));:}
       | E4:e
           {:RESULT = e;:};
 
 E4 ::= E4:opIzq MAS E5:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.SUMA, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.SUMA, new BasicTypes(KindTypes.INT));:}
       | E4:opIzq MENOS E5:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.RESTA, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.RESTA, new BasicTypes(KindTypes.INT));:}
       | E5:e
           {:RESULT = e;:};
 
 E5 ::= E5:opIzq POR E6:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.MUL, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MUL, new BasicTypes(KindTypes.INT));:}
       | E5:opIzq DIV E6:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.DIV, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.DIV, new BasicTypes(KindTypes.INT));:}
       | E5:opIzq MOD E6:opDer
-          {:RESULT = new EBin(opIzq, opDer, KindE.MOD, KindTypes.INT);:}
+          {:RESULT = new EBin(opIzq, opDer, KindE.MOD, new BasicTypes(KindTypes.INT));:}
       | E6:e
           {:RESULT = e;:};
 
 E6 ::= MENOS E6:exp
-        {:RESULT = new EUnaria(exp,KindE.MENOS, KindTypes.INT);:}
+        {:RESULT = new EUnaria(exp,KindE.MENOS, new BasicTypes(KindTypes.INT));:}
       | NEGACION E6:exp
-       {:RESULT = new EUnaria(exp, KindE.NEG, KindTypes.BOOL);:} 
+       {:RESULT = new EUnaria(exp, KindE.NEG,new BasicTypes(KindTypes.BOOL));:} 
       | E7:e
           {:RESULT = e;:};
 
 E7 ::= TRUE:valor
-        {:RESULT = new Const(valor.lexema, KindTypes.BOOL);:}
+        {:RESULT = new Const(valor.lexema, new BasicTypes(KindTypes.BOOL));:}
       | FALSE:valor
-        {:RESULT = new Const(valor.lexema, KindTypes.BOOL);:}
+        {:RESULT = new Const(valor.lexema, new  BasicTypes(KindTypes.BOOL));:}
       | ENT:valor
-        {:RESULT = new Const(valor.lexema, KindTypes.INT);:}
+        {:RESULT = new Const(valor.lexema, new BasicTypes(KindTypes.INT));:}
       | REAL:valor
-        {:RESULT = new Const(valor.lexema,KindTypes.FLOAT);:}
+        {:RESULT = new Const(valor.lexema,new BasicTypes(KindTypes.FLOAT));:}
       | Acceso0:ref
         {:RESULT=ref;:}
       | LlamadaFuncion:llamada
