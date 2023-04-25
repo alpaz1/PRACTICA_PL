@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import ast.Instructions.Instruccion;
+import ast.Types.BasicTypes;
 import ast.Types.KindTypes;
 import ast.Programa;
 import ast.Util;
@@ -28,7 +29,7 @@ public class Constructor extends Funcion{
     }
 
     public Constructor(PrivacyMode modo,List<Parametro> param,List<Instruccion> list){
-        super( KindTypes.CONSTRUCTOR, name, param, list);
+        super(new BasicTypes( KindTypes.CONSTRUCTOR), name, param, list);
         this.modo = modo;
         this.instList = list;
         this.paramList = param;

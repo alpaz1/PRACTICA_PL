@@ -16,6 +16,10 @@ public class StructClass extends ASTNode{
         Collections.reverse(this.campos);
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public String toString(){ // enum{a,b,c}
         return name + '{' + Util.prettify(campos) + '}';
     }
@@ -30,4 +34,15 @@ public class StructClass extends ASTNode{
             Programa.okVinculacion = false;
         }
     }
+
+    public void checkType(){
+        for(Declaracion dec:campos){
+            dec.checkType();
+        }
+    }
+
+    public List<Declaracion> getCampos(){
+        return this.campos;
+    }
+
 }

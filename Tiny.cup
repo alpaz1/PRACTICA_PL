@@ -261,7 +261,7 @@ PorDefecto ::= DEFAULT DOSPUNTOS ListaInstrucciones:inst
 
 // ----------------------Funciones--------------------------
 Funcion ::= Tipo:t IDEN:id PAP Parametros:paramList PCIERRE LLAP ListaInstrucciones:instList LLCIERRE
-              {:RESULT= new Funcion(t.kind(), id.lexema, paramList, instList);:};
+              {:RESULT= new Funcion(t, id.lexema, paramList, instList);:};
 Parametros ::= ListaParametros:paramList
               {:RESULT = paramList;:}
               | 

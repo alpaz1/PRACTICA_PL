@@ -4,6 +4,8 @@ lista <entero> [2] p = {1,{1}};
 
 lista <lista <entero>[2]> [3] z = {{1}, {2}};
 
+lista <lista <lista <entero>[2]>[2]> [3] w = {{{11}}, {{2}}};
+
 lista <entero> [2] n = {verdad,1};
 
 buleano g = mentira;
@@ -15,7 +17,38 @@ entero c = -b;
 buleano d = no a - verdad;
 entero e = c + b;
 
+
+entero prueba(entero a, entero b, lista <lista <entero>[]>[] miArray){
+    mientras (a == b){
+        paraCada(entero i = 0; i < b; i = i + 1){
+            b = b + 1;
+        }
+    }
+    devuelve a;
+}
+
+entero funCall = prueba (b,b,z);
+buleano funCall1 = prueba (b,b,z);
+
+estructura Tiempo{
+    entero hora;
+    entero minuto;
+    entero segundo;
+    lista <entero> [2] n;
+
+};
+
+
+
 principal() {
-   
+
+Tiempo t;
+t.segundo = 60;
+t.noExiste = 100;
+t.hora = verdad;
+t.segundo = h;
+t.segundo = h + 2;
+t.n = {1,1};
+
 
 }

@@ -46,12 +46,15 @@ public class Asignacion extends Instruccion{
     }
 
     public void checkType(){
-    //nombre.chequea();
-       // exp.chequea();
+        iden.checkType();
+        exp.checkType();
 
-        if(tipo.equals(exp.tipo)){
+      
+        if( iden.tipo != null && !iden.tipo.toString().equals(exp.tipo.toString())){
             System.out.println("Error tipo: Asignacion " + iden + "=" + exp + "(" + iden.tipo + "," + exp.tipo + ")");
             Programa.okTipos = false;
         }
+        else  System.out.println("tipo OK");
+
     }
 }

@@ -45,6 +45,7 @@ buleano prueba(entero a, entero& b, lista <lista <DiaSemana>[]>[] &miArray){
     devuelve b;
 }
 
+
 buleano pruebaConReturn(entero a, entero& b){
     mientras (a == b){
         paraCada(entero i = 0; i < b; i = i + 1){

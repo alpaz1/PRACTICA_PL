@@ -77,7 +77,6 @@ public class PilaTablaSimbolos {
     }
 
     public void print(){
-        System.out.println("Vinculacion:");
         Stack<HashMap<String, ASTNode>> pilaTabla_aux = new Stack<HashMap<String, ASTNode>>();
         if(!pilaTabla.empty()){
             HashMap<String,ASTNode> cima = pilaTabla.pop();

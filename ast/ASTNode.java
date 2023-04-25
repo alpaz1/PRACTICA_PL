@@ -1,6 +1,5 @@
 package ast;
 
-import ast.Types.KindTypes;
 import ast.Types.Types;
 
 public abstract class ASTNode {
@@ -9,6 +8,7 @@ public abstract class ASTNode {
     public ASTNode nodoVinculo; // nodo con el que se vinculan
     public Types tipo; //tipo del nodo
     public ASTNode(){}
+
     public abstract void vincular();
     //public abstract NodeKind nodeKind();
     //public abstract String toString();

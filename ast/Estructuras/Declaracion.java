@@ -73,7 +73,6 @@ public class Declaracion extends Instruccion {
 
         if (exp != null) {
             exp.checkType();
-            
 
             if (!this.tipo.toString().equals(exp.tipo.toString())) { //tipos básicos
                 System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");

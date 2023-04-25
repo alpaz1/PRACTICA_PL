@@ -9,15 +9,14 @@ import ast.Util;
 import ast.Auxiliares.Parametro;
 import ast.Estructuras.clases.Atributo;
 import ast.Instructions.Instruccion;
-import ast.Types.KindTypes;
+import ast.Types.Types;
 
 public class Funcion extends ASTNode{
     private String nombre;
-    private KindTypes tipo;
     private List<Instruccion> instList;
     private List<Parametro> paramList;
 
-    public Funcion(KindTypes tipo, String name, List<Parametro> paramList, List<Instruccion> instList){
+    public Funcion(Types tipo, String name, List<Parametro> paramList, List<Instruccion> instList){
         this.nombre = name;
         this.tipo = tipo;
         this.instList = instList;
@@ -39,11 +38,6 @@ public class Funcion extends ASTNode{
             // si es void no hace falta
             for (Instruccion instruccion : instList) {
                 instruccion.vincular();
-                // Vincular el return
-                // if (! (instruccion instanceof AsigClass || instruccion instanceof DecClass || 
-                //     instruccion instanceof FuncallClass)){
-                //         instruccion.setReturn(this);
-                //     }
             }
 
             Programa.pila.cierraBloque();
@@ -68,14 +62,9 @@ public class Funcion extends ASTNode{
                 a.vincular();
             }
 
-            // si es void no hace falta
             for (Instruccion instruccion : instList) {
                 instruccion.vincular();
-                // Vincular el return
-                // if (! (instruccion instanceof AsigClass || instruccion instanceof DecClass || 
-                //     instruccion instanceof FuncallClass)){
-                //         instruccion.setReturn(this);
-                //     }
+                
             }
 
             Programa.pila.cierraBloque();
@@ -86,11 +75,23 @@ public class Funcion extends ASTNode{
 
     }
 
+    public void checkType() {
+        //this.tipo.chequea();
+
+        for (Parametro p : paramList) {
+            p.checkType();
+        }
+
+        for (Instruccion ins : instList) {
+            ins.checkType();
+        }
+    }
+
     public String toString(){
         return tipo.toString() + " " + nombre + "(" + Util.prettify(paramList) + ")" + "{" + Util.prettify(instList) + "}";
     }
 
-    public KindTypes getTipo(){
+    public Types getTipo(){
         return this.tipo;
     }
     public String getName(){

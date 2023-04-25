@@ -12,7 +12,7 @@ import ast.Estructuras.FMain;
 public class Programa extends ASTNode {
 
     // ATRIBUTOS CONSTRUCTOR -----------------------------------------------------------------
-    private static DefinitionsList definiciones; // Structs, enums y funciones
+    public static DefinitionsList definiciones; // Structs, enums y funciones
     private static FMain fmain; // Funcion main del programa
     public static PilaTablaSimbolos pila;
     
@@ -39,6 +39,7 @@ public class Programa extends ASTNode {
 
     public void checkType(){
         definiciones.checkType();
+        fmain.checkType();
     }
 
     // AST ToString -----------------------------------------------------------------

@@ -10,7 +10,7 @@ public class DefinitionsList {
 
 
     private List<Declaracion> lista_basica;
-    private List<StructClass> lista_struct;
+    public List<StructClass> lista_struct;
     private List<EnumClass> lista_enum;
     private List<Funcion> lista_funcion;
     private List<Clase> lista_clases;
@@ -32,14 +32,14 @@ public class DefinitionsList {
     }   
 
     public void vincular() {
+        for (Funcion f: lista_funcion)
+            f.vincular();
         for (Declaracion d: lista_basica)
             d.vincular();
         for (StructClass s: lista_struct)
             s.vincular();
         for (EnumClass e: lista_enum)
             e.vincular();
-        for (Funcion f: lista_funcion)
-            f.vincular();
         for (Clase c: lista_clases)
             c.vincular();
         for (Alias a: lista_alias)
@@ -50,9 +50,10 @@ public class DefinitionsList {
     public void checkType() {
         for (Declaracion d: lista_basica)
             d.checkType();
-        /* 
+         
         for (StructClass s: lista_struct)
-            s.vincular();
+            s.checkType();
+        /* 
         for (EnumClass e: lista_enum)
             e.vincular();
         for (Funcion f: lista_funcion)
@@ -61,9 +62,7 @@ public class DefinitionsList {
             c.vincular();
         for (Alias a: lista_alias)
             a.vincular();
-        for (Modulo m: lista_modulos)
-            m.vincular();
-            */
+        */
     }
 
     // AST TOSTRING -----------------------------------------------------------------
