@@ -22,6 +22,17 @@ public class BucleWhile extends Bloque {
         Programa.pila.cierraBloque();
     }
 
+    public void checkType(){
+        cond.checkType();
+        if(cond.tipo == null || !cond.tipo.toString().equals("BOOL")){ // La condicion tiene que ser bool
+            System.out.println("Error tipo: condicion while " + cond + "("+ cond.tipo +")"); 
+            Programa.okTipos = false;
+        } 
+        for(Instruccion instruccion : instList){
+            instruccion.checkType();
+        }
+    }
+
     public KindInstruction kind() {
         return KindInstruction.BUCLEWHILE;
     }

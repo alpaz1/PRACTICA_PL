@@ -45,7 +45,15 @@ public class EBin extends E {
     if(this.tipo.toString().equals("NULL")){
       this.tipo = opnd1.tipo; //caso de la expresion == o !=){ 
     }
-    if(!opnd1.tipo.toString().equals(opnd2.tipo.toString()) || !opnd1.tipo.toString().equals(this.tipo.toString())){
+
+    if(((this.tipoExp.toString().equals("MENOR"))|| (this.tipoExp.toString().equals("MAYOR"))) || ((this.tipoExp.toString().equals("MENORIGUAL")) || (this.tipoExp.toString().equals("MAYORIGUAL")))){
+      if(!opnd1.tipo.toString().equals("INT") || !opnd2.tipo.toString().equals("INT")){
+        Programa.okTipos = false;
+        System.out.println("Error tipo: expresion binaria con operadores de distinto tipo o operador no apto para los argumentos introducidos");
+      }
+    }
+
+    else if(!opnd1.tipo.toString().equals(opnd2.tipo.toString()) || !opnd1.tipo.toString().equals(this.tipo.toString())){
       Programa.okTipos = false;
       System.out.println("Error tipo: expresion binaria con operadores de distinto tipo o operador no apto para los argumentos introducidos");
     }

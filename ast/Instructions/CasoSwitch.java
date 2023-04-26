@@ -2,6 +2,8 @@ package ast.Instructions;
 
 import ast.Programa;
 import ast.Expresions.E;
+import ast.Types.Types;
+
 import java.util.List;
 
 public class CasoSwitch extends Bloque {
@@ -31,6 +33,14 @@ public class CasoSwitch extends Bloque {
         Programa.pila.cierraBloque();
     }
 
+    public void chequea() {
+        if (caso != null)
+            caso.checkType();
+        for (Instruccion instruccion : instList) {
+            instruccion.checkType();
+        }
+    }
+
     public KindInstruction kind() {
         return KindInstruction.CASE;
     }
@@ -43,5 +53,9 @@ public class CasoSwitch extends Bloque {
                 return "case " + caso.toString() + ": " + this.instList.toString() + " BREAK";
             else
                 return "case " + caso.toString() + ": " + this.instList.toString();
+    }
+
+    public Types getTipo() {
+        return caso.tipo;
     }
 }

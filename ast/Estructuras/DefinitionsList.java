@@ -58,8 +58,6 @@ public class DefinitionsList {
         for (StructClass s: lista_struct)
             s.checkType();
         /* 
-        for (EnumClass e: lista_enum)
-            e.vincular();
         for (Funcion f: lista_funcion)
             f.vincular();
         for (Clase c: lista_clases)

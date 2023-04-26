@@ -42,6 +42,30 @@ public class BucleFor extends Bloque{
         Programa.pila.cierraBloque();
     }
 
+    public void checkType(){
+        if(dec != null){
+            dec.checkType();
+            if(dec.tipo == null)
+                return;
+            if(!dec.tipo.toString().equals("INT")){ // La declaracion tiene que ser int
+                System.out.println("Error tipo: declaracion for " + dec + "("+ dec.tipo +")");    
+                Programa.okTipos = false;        
+            }
+        }
+        exp.checkType();
+        if(exp.tipo == null)
+            return;
+        if(!exp.tipo.toString().equals("BOOL")){ // La condicion tiene que ser bool
+            System.out.println("Error tipo: condicion for " + exp + "("+ exp.tipo +")"); 
+            Programa.okTipos = false;
+        }
+        a.checkType();
+
+        for(Instruccion instruccion : instList){
+            instruccion.checkType();
+        }
+    }
+
     public KindInstruction kind() {
         return KindInstruction.BUCLEFOR;
     }

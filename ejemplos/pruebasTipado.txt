@@ -64,9 +64,40 @@ principal() {
     DiaSemana dia1 = Lunes;
     Frutas fruta1 = Pera;
     DiaSemana fruta = Pera;
-    lista <lista <Frutas> [2]> [2] arrayFrutas = {{fruta1}};
+    lista <lista <Frutas> [2]> [2] arrayFrutas = {{Pera}};
 
     lista <Frutas> [2] arrayFrutas1 = {Pera};   
 
+
+    paraCada (entero b = 0; b < 2; b = b + 1){
+        si(a == verdad){
+            si(Pera){
+                entero entIf = 1;
+            }
+            sino{
+                entero elsif = 1;
+            }
+        }
+        sino{
+            DiaSemana dia2 = Martes;
+            mientras(3 <= 2 yy a oo 3 > 4 yy h < 1){
+                entero entWhile = 2;
+            }
+        }
+    }
+
+    paraCada (buleano b = verdad; b  oo 3 < 2; b = b + 1){
+     selecciona (b){
+        caso 0: 
+            si(a > 1) {
+                c = verdad;
+            }
+        caso 1: 
+            c = mentira;
+            ¡para!;
+        caso 2:
+        porDefecto: a = 3;
+    }
+    }
 
 }

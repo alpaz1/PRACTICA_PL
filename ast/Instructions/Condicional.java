@@ -37,6 +37,22 @@ public class Condicional extends Bloque {
         }
     }
 
+    public void checkType() {
+        condicion.checkType();
+        if (condicion.tipo == null || !condicion.tipo.toString().equals("BOOL")) { // La condicion tiene que ser bool
+            System.out.println("Error tipo: condicion if " + condicion + "(" + condicion.tipo + ")");
+            Programa.okTipos = false;
+        }
+        for (Instruccion instruccion : instList) {
+            instruccion.checkType();
+        }
+        if (instrucciones_else != null) {
+            for (Instruccion instruccion : instrucciones_else) {
+                instruccion.checkType();
+            }
+        }
+    }
+
     public String toString() {
         if (this.instrucciones_else == null)
             return "If (Condición:" + this.condicion.toString() + ", Instrucciones:\n" + this.instList.toString() + ")";
