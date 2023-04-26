@@ -1,6 +1,8 @@
 package ast.Accesos;
 
+import ast.Programa;
 import ast.Expresions.E;
+import ast.Types.ArrayType;
 
 public class AccesoArray extends Acceso{
     protected Acceso acceso;
@@ -23,8 +25,27 @@ public class AccesoArray extends Acceso{
 
     @Override
     public void checkType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkType'");
+            acceso.checkType();
+            exp.checkType();
+    
+            if (acceso.tipo == null || exp.tipo == null) {
+                this.tipo = null;
+            } else if (acceso.tipo instanceof ArrayType  && acceso.tipo.getTipo().toString().equals(((ArrayType) acceso.tipo).getTipo().toString())) {
+                //System.out.println(acceso.tipo.getTipo().toString());
+                //System.out.println(((ArrayType) acceso.tipo).getTipo().toString());
+
+                if (exp.tipo.toString().equals("INT")) {
+                    this.tipo = ((ArrayType) acceso.tipo).getTipo();
+                } else {
+                    System.out.println("Error tipos: Array ");
+                    Programa.okTipos = false;
+                }
+            } 
+            else {
+                System.out.println("Error tipos: Array ");
+                Programa.okTipos = false;
+            }
+        
     }
 
 }

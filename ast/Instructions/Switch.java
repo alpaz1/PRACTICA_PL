@@ -9,25 +9,36 @@ public class Switch extends Bloque{
     private E exp;
     private List<CasoSwitch> casos;
     private CasoSwitch porDefecto;
+    private boolean hayPorDefecto = false;
 
     public Switch(E var, List<CasoSwitch> casos){
         super();
         this.exp = var;
         this.casos = casos;
-        this.porDefecto = null;
     }
     public Switch(E var, List<CasoSwitch> casos, CasoSwitch def){
         super();
+        this.hayPorDefecto = true;
         this.exp = var;
         this.casos = casos;
         this.porDefecto = def;
-        this.casos.add(def);
+    }
+
+    public void vincular(){
+        exp.vincular();
+        Programa.pila.abreBloque();
+        
+        for(CasoSwitch caso : casos){
+            caso.vincular();
+        }
+        
+        if(hayPorDefecto) porDefecto.vincular();
+        Programa.pila.cierraBloque();
     }
 
     public void checkType(){
         exp.checkType();
-        // los casos tienen que ser del mismo tipo que la condicion
-
+       // System.out.println(exp + exp.kindExp().toString());
         for(CasoSwitch caso:casos){
             caso.checkType();  
             if(caso.getTipo()!=null && !caso.getTipo().toString().equals(exp.tipo.toString())){
@@ -35,6 +46,7 @@ public class Switch extends Bloque{
                 Programa.okTipos = false;
             }         
         }
+        if(hayPorDefecto) porDefecto.checkType();
     }
 
     public KindInstruction kind() {

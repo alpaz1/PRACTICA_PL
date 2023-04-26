@@ -245,9 +245,9 @@ Iteracion ::= WHILE PAP E0:exp PCIERRE LLAP ListaInstrucciones:list LLCIERRE
 
 
 Selecciona ::= SWITCH PAP IDEN:nombre PCIERRE LLAP Casos:casos PorDefecto:def LLCIERRE
-            {:RESULT= new Switch(nombre,casos,def);:}
+            {:RESULT= new Switch(new AccesoVar(nombre.lexema),casos,def);:}
             | SWITCH PAP IDEN:nombre PCIERRE LLAP Casos:casos LLCIERRE
-            {:RESULT= new Switch(nombre,casos);:};
+            {:RESULT= new Switch(new AccesoVar(nombre.lexema),casos);:};
 Casos ::= Caso:caso Casos:casos 
            {: casos.add(caso); RESULT = casos; :}
           |

@@ -1,6 +1,6 @@
 lista <entero> [2] m = {1,1};
 
-lista <entero> [2] p = {1,{1}};
+
 
 lista <lista <entero>[2]> [3] z = {{1}, {2}};
 
@@ -86,18 +86,34 @@ principal() {
         }
     }
 
-    paraCada (buleano b = verdad; b  oo 3 < 2; b = b + 1){
+
+    lista <entero> [2] p = {h};
+
+    b = 3;
+
+    paraCada (entero b = 1; b < 2; b = b + 1){
      selecciona (b){
         caso 0: 
-            si(a > 1) {
-                c = verdad;
+            si(3 > 1) {
+                b = 2;
             }
         caso 1: 
-            c = mentira;
+            b = 1;
             ¡para!;
         caso 2:
-        porDefecto: a = 3;
+            b = 6;
+        porDefecto: b = 7;
+     }
     }
-    }
+
+    p[0] = 1;
+    p[0] = h;
+    p[0] = verdad;
+    p[0] = a;
+
+    arrayFrutas[0][0] = fruta1;
+    arrayFrutas[0] = arrayFrutas1;
+
+
 
 }

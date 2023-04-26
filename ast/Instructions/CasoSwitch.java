@@ -33,7 +33,7 @@ public class CasoSwitch extends Bloque {
         Programa.pila.cierraBloque();
     }
 
-    public void chequea() {
+    public void checkType() {
         if (caso != null)
             caso.checkType();
         for (Instruccion instruccion : instList) {

@@ -38,11 +38,14 @@ public class AccesoVar extends Acceso{
 
     @Override
     public void checkType() {
+
         if(this.nodoVinculo instanceof Declaracion){
             this.tipo = ((Declaracion) nodoVinculo).getTipo();
+            //System.out.println(this + this.tipo.toString()+ "0");
         }
         else if(this.nodoVinculo instanceof Const){
             this.tipo = ((Const) nodoVinculo).getTipo();
+            //System.out.println(this + this.tipo.toString()+"1");
 
         }
         else {
