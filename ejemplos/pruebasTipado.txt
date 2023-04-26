@@ -43,19 +43,30 @@ enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
 enum Frutas { Manzana, Pera};
 
 DiaSemana dia = 2;
-DiaSemana dia1 = Lunes;
-Frutas fruta1 = Pera;
-DiaSemana fruta = Pera;
+
+lista <entero> [2] arrayTiempo = {h};
+
+
+
 
 principal() {
 
-Tiempo t;
-t.segundo = 60;
-t.noExiste = 100;
-t.hora = verdad;
-t.segundo = h;
-t.segundo = h + 2;
-t.n = {1,1};
+    Tiempo t;
+    t.segundo = 60;
+    t.noExiste = 100;
+    t.hora = verdad;
+    t.segundo = h;
+    t.segundo = h + 2;
+    t.n = {1,1};
+
+    lista <Tiempo> [2] arrayTiempo = {t};
+
+    DiaSemana dia1 = Lunes;
+    Frutas fruta1 = Pera;
+    DiaSemana fruta = Pera;
+    lista <lista <Frutas> [2]> [2] arrayFrutas = {{fruta1}};
+
+    lista <Frutas> [2] arrayFrutas1 = {Pera};   
 
 
 }

@@ -4,13 +4,22 @@ import ast.ASTNode;
 import ast.Programa;
 import ast.Estructuras.Declaracion;
 import ast.Expresions.Const;
+import ast.Types.BasicTypes;
+import ast.Types.KindTypes;
+import ast.Estructuras.EnumClass;
 
 
 public class AccesoVar extends Acceso{
     private String direccionInicial;
+    private String nombreEnum;
+
     
     public AccesoVar(String nombreVar){
         this.direccionInicial = nombreVar;
+    }
+
+    public String getNombreEnum(){
+        return this.nombreEnum;
     }
 
     public void vincular() {
@@ -29,12 +38,39 @@ public class AccesoVar extends Acceso{
 
     @Override
     public void checkType() {
-        if((this.nodoVinculo instanceof Const)||(this.nodoVinculo instanceof Declaracion)){
+        if(this.nodoVinculo instanceof Declaracion){
             this.tipo = ((Declaracion) nodoVinculo).getTipo();
         }
-        else{
-            System.out.println("Error tipos: acceso a variable  " + direccionInicial);
-            Programa.okTipos = false;
-        } 
+        else if(this.nodoVinculo instanceof Const){
+            this.tipo = ((Const) nodoVinculo).getTipo();
+
+        }
+        else {
+            boolean ok = false;
+            for(ASTNode nodo: Programa.definiciones.getEnumList() ){
+              
+                    for(Const c: ((EnumClass)nodo).getCampos()){
+
+                        if (c.getValor().equals(direccionInicial)){
+                            ok = true;
+                            nombreEnum = ((EnumClass)nodo).getName();
+                            this.tipo = new BasicTypes(KindTypes.ENUM);
+                            break;
+                            
+                        }
+                        
+                    }
+                   
+                    if(ok) break;
+
+                    
+                    
+            }
+            if(!ok){
+                System.out.println("Error tipos: acceso a variable  " + direccionInicial);
+                Programa.okTipos = false;
+            }
+        }
+    
     }
 }

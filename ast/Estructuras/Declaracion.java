@@ -4,10 +4,12 @@ import ast.Expresions.Const;
 import ast.Expresions.E;
 import ast.Instructions.Instruccion;
 import ast.Instructions.KindInstruction;
-
+import ast.Types.BasicTypes;
+import ast.Types.KindTypes;
 import ast.Types.Types;
 import ast.ASTNode;
 import ast.Programa;
+import ast.Accesos.AccesoVar;
 
 public class Declaracion extends Instruccion {
     
@@ -74,6 +76,7 @@ public class Declaracion extends Instruccion {
 
         //ESTO ES SOLO PARA TRATAR LOS ENUMERADOS
         if(this.tipo.kind().toString().equals("STRUCT")){
+            
             for(ASTNode nodo: Programa.definiciones.getEnumList() ){
                 //System.out.println(((EnumClass)nodo).getName());
                // System.out.println(this.tipo.toString());
@@ -83,6 +86,7 @@ public class Declaracion extends Instruccion {
 
                         if (c.getValor().equals(exp.toString())){
                             ok = true;
+                            exp.setTipo(new BasicTypes(KindTypes.ENUM));
                             //System.out.println("tipo OK");
                             return;
                         }
@@ -102,7 +106,7 @@ public class Declaracion extends Instruccion {
 
         if (exp != null) {
             exp.checkType();
-
+           
             if (!this.tipo.toString().equals(exp.tipo.toString())) { //tipos básicos
                 System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
                 Programa.okTipos = false;

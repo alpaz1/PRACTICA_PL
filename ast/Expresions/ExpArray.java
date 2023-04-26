@@ -11,8 +11,7 @@ public class ExpArray  extends E{
     ArrayList<E> valor;
 
     public ExpArray( ArrayList<E> valor){
-        this.valor = valor;
-        this.tipo = new ArrayType(valor.get(0).tipo, null);
+        this.valor = valor;    
     }
 
     @Override
@@ -23,9 +22,12 @@ public class ExpArray  extends E{
 
     @Override
     public void checkType() {
-
-        for(E e: valor){
-            if(!e.getTipo().toString().equals(tipo.getTipo().toString())){
+        valor.get(0).checkType();
+        this.tipo = new ArrayType(valor.get(0).getTipo(), null);    
+        for(int i = 1; i < valor.size(); ++i){    
+            valor.get(i).checkType();
+    
+            if(!valor.get(i).getTipo().toString().equals(tipo.getTipo().toString())){
             
                 System.out.println("La expresion con la que se inicializa un array debe ser homogénea");
                // System.out.println(e.getTipo().toString());
@@ -37,7 +39,7 @@ public class ExpArray  extends E{
     }
 
     public String toString(){
-        return this.valor.toString();
+        return this.valor.toString() + this.kindExp().toString();
     }
 
     @Override

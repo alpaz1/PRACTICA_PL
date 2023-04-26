@@ -9,7 +9,7 @@ import ast.Auxiliares.Modulo;
 public class DefinitionsList {
 
 
-    private List<Declaracion> lista_basica;
+    public List<Declaracion> lista_basica;
     public List<StructClass> lista_struct;
     private List<EnumClass> lista_enum;
     private List<Funcion> lista_funcion;
@@ -17,8 +17,12 @@ public class DefinitionsList {
     private List<Modulo> lista_modulos;
     private List<Alias> lista_alias;
     
-    List<EnumClass> getEnumList(){
+    public List<EnumClass> getEnumList(){
         return this.lista_enum;
+    }
+
+    public List<Declaracion> getBasicList(){
+        return this.lista_basica;
     }
 
     public DefinitionsList(){
