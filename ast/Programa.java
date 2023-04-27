@@ -1,6 +1,10 @@
 package ast;
 
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +19,7 @@ public class Programa extends ASTNode {
     public static DefinitionsList definiciones; // Structs, enums y funciones
     private static FMain fmain; // Funcion main del programa
     public static PilaTablaSimbolos pila;
+    public static PrintWriter codigo;
     
     public static boolean okTipos;
     public static boolean okVinculacion;
@@ -45,6 +50,27 @@ public class Programa extends ASTNode {
     public int maxMemoria(){
         int tam = 0;
         return tam;
+    }
+
+    public void generaCodigo() {
+        try {
+            System.out.println(System.getProperty("user.dir"));
+            codigo = new PrintWriter(new FileWriter("codigo/codigo.wat"));
+            FileReader preludio = new FileReader("codigo/preludio.wat");
+            preludio.transferTo(codigo);
+            preludio.close();
+
+            codigo.println("Holaaa");
+
+            FileReader epilogo = new FileReader("codigo/epilogo.wat");
+            epilogo.transferTo(codigo);
+            epilogo.close();
+
+            codigo.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // AST ToString -----------------------------------------------------------------

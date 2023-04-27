@@ -149,8 +149,7 @@ ListaInstrucciones ::= Instruccion:ins PUNTOYCOMA ListaInstrucciones:insList
                         {:RESULT = insList; insList.add(ins);:}
                      | Bloque:block ListaInstrucciones:insList
                         {:RESULT = insList; insList.add(block);:}
-                     | 
-                        {:RESULT = new ArrayList<Instruccion>();:};
+                     | {:RESULT = new ArrayList<Instruccion>();:};
 
 Instruccion ::= Declaracion:dec
                   {:RESULT = dec;:}

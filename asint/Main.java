@@ -17,6 +17,7 @@ public class Main {
 		p.vincular(); // vinculacion
 		System.out.println("------------------------ TIPADO ------------------------");
 		p.checkType();//tipado
+		p.generaCodigo();
 		// System.out.println(p);
 	}
 }
