@@ -31,16 +31,19 @@ entero funCall = prueba (b,b,z);
 buleano funCall1 = prueba (b,b,z);
 
 
+
+
+enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
+enum Frutas { Manzana, Pera};
+
 estructura Tiempo{
     entero hora;
     entero minuto;
     entero segundo;
+    Frutas frutaTiempo;
     lista <entero> [2] n;
-
+    lista <Frutas> [2] arrayFrutasTiempo;
 };
-
-enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
-enum Frutas { Manzana, Pera};
 
 DiaSemana dia = 2;
 
@@ -66,7 +69,7 @@ principal() {
     DiaSemana fruta = Pera;
     lista <lista <Frutas> [2]> [2] arrayFrutas = {{Pera}};
 
-    lista <Frutas> [2] arrayFrutas1 = {Pera};   
+    lista <Frutas> [2] arrayFrutas1 = {Pera, Manzana};   
 
 
     paraCada (entero b = 0; b < 2; b = b + 1){
@@ -113,6 +116,12 @@ principal() {
 
     arrayFrutas[0][0] = fruta1;
     arrayFrutas[0] = arrayFrutas1;
+
+    t.frutaTiempo = Manzana;
+    t.arrayFrutasTiempo = {1};
+    t.arrayFrutasTiempo[b] = Pera;
+    t.arrayFrutasTiempo = arrayFrutas1;
+    t.arrayFrutasTiempo = arrayFrutas;
 
 
 

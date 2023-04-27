@@ -16,6 +16,8 @@ public class ArrayType extends Types{
         return KindTypes.ARRAY;
     }
 
+    
+
     public String toString(){
         if(tam != null)
             return "Array " + "<" + tipo.toString() + ">" ;

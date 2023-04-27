@@ -4,7 +4,9 @@ import ast.ASTNode;
 import ast.Programa;
 import ast.Estructuras.Declaracion;
 import ast.Expresions.Const;
+import ast.Expresions.E;
 import ast.Types.BasicTypes;
+import ast.Types.EnumTypes;
 import ast.Types.KindTypes;
 import ast.Estructuras.EnumClass;
 
@@ -38,12 +40,29 @@ public class AccesoVar extends Acceso{
 
     @Override
     public void checkType() {
+        
 
         if(this.nodoVinculo instanceof Declaracion){
             this.tipo = ((Declaracion) nodoVinculo).getTipo();
             //System.out.println(this + this.tipo.toString()+ "0");
         }
         else if(this.nodoVinculo instanceof Const){
+            //System.out.println("HOLA");
+            //System.out.println(((Const) nodoVinculo).getTipo());
+                
+            for(ASTNode nodo: Programa.definiciones.getEnumList() ){
+
+                for(Const c: ((EnumClass)nodo).getCampos()){
+
+                    if (c.getValor().equals(nodoVinculo.toString())){
+                        // ((Const) nodoVinculo).setTipo(new EnumTypes("HOLA"));
+                        //System.out.println("tipo " + ((EnumClass)nodo).getName());
+                        c.setTipo(new EnumTypes(((EnumClass)nodo).getName()));
+                        //System.out.println("tipo OK");
+                    }   
+                }
+            }
+                      
             this.tipo = ((Const) nodoVinculo).getTipo();
             //System.out.println(this + this.tipo.toString()+"1");
 

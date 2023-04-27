@@ -1,7 +1,10 @@
+
+
 package ast.Estructuras;
 
 import ast.Expresions.Const;
 import ast.Expresions.E;
+import ast.Expresions.ExpArray;
 import ast.Instructions.Instruccion;
 import ast.Instructions.KindInstruction;
 import ast.Types.BasicTypes;
@@ -75,33 +78,60 @@ public class Declaracion extends Instruccion {
         //tipo.chequea();
 
         //ESTO ES SOLO PARA TRATAR LOS ENUMERADOS
-        if(this.tipo.kind().toString().equals("STRUCT")){
-            
-            for(ASTNode nodo: Programa.definiciones.getEnumList() ){
-                //System.out.println(((EnumClass)nodo).getName());
-               // System.out.println(this.tipo.toString());
-                if(((EnumClass)nodo).getName().equals(this.tipo.toString())){
-                    boolean ok = false;
-                    for(Const c: ((EnumClass)nodo).getCampos()){
+        Types t= this.tipo;
+      
 
-                        if (c.getValor().equals(exp.toString())){
-                            ok = true;
-                            exp.setTipo(new BasicTypes(KindTypes.ENUM));
-                            //System.out.println("tipo OK");
-                            return;
+        while(exp != null && t != null){
+
+            if(t.kind().toString().equals("STRUCT") ){
+                boolean ok = false;
+                boolean isEnum = false;
+                for(ASTNode nodo: Programa.definiciones.getEnumList() ){
+                    //System.out.println(((EnumClass)nodo).getName());
+                    // System.out.println(this.tipo.toString());
+                    if(((EnumClass)nodo).getName().equals(t.toString())){
+                       // System.out.println("AQUI");
+
+                        isEnum = true;
+        
+                        for(Const c: ((EnumClass)nodo).getCampos()){
+
+                            if (c.getValor().equals(exp.toString())){
+                                ok = true;
+                                exp.setTipo(new BasicTypes(KindTypes.ENUM));
+                                //System.out.println("tipo OK");
+                                return;
+                            }
+                            
                         }
+                    
                         
+                    }    
+                }
+
+                if(isEnum && !ok){
+                    //System.out.println(t.kind().toString());
+
+                    if(t.kind().toString().equals("STRUCT") ){
+                        //System.out.println(t);
+                        exp.checkType();
+                        if(!this.tipo.toString().equals(exp.tipo.toString())){
+                            System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
+                            Programa.okTipos = false;
+                        }
+                        //System.out.println(exp);
                     }
-                   
-                    if(!ok){
+                    else{
+
                         System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
                         Programa.okTipos = false;
-                        return;
                     }
-
-                    
-                }    
+                    return;
+                }
             }
+
+            t = t.getTipo();
+
         }
 
         if (exp != null) {

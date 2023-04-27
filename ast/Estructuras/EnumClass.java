@@ -3,14 +3,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 import ast.ASTNode;
 import ast.Programa;
 import ast.Util;
 import ast.Expresions.Const;
-import ast.Types.BasicTypes;
-import ast.Types.KindTypes;
+import ast.Types.EnumTypes;
 
 public class EnumClass extends ASTNode{
     private String name;
@@ -21,7 +19,7 @@ public class EnumClass extends ASTNode{
         this.name = name;
         this.campos = new ArrayList<Const>();
         for (String s : valores) {
-            this.campos.add(new Const(s, new BasicTypes(KindTypes.ENUM)));
+            this.campos.add(new Const(s, new EnumTypes(name)));
         }
         Programa.enumList.add(this);
         Collections.reverse(this.campos);

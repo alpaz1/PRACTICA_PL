@@ -1,6 +1,7 @@
 package ast.Expresions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ast.Types.ArrayType;
 import ast.Types.BasicTypes;
@@ -8,7 +9,7 @@ import ast.Types.KindTypes;
 
 public class ExpArray  extends E{
 
-    ArrayList<E> valor;
+    public ArrayList<E> valor;
 
     public ExpArray( ArrayList<E> valor){
         this.valor = valor;    
@@ -19,12 +20,16 @@ public class ExpArray  extends E{
         return KindE.ARRAY;
     }
 
+ 
+
 
     @Override
     public void checkType() {
         valor.get(0).checkType();
+        //System.out.println("HOLA" + valor.get(0).kindExp());
         this.tipo = new ArrayType(valor.get(0).getTipo(), null);    
-        for(int i = 1; i < valor.size(); ++i){    
+        for(int i = 1; i < valor.size(); ++i){  
+           // System.out.println("HOLA" + valor.get(i).kindExp());
             valor.get(i).checkType();
     
             if(!valor.get(i).getTipo().toString().equals(tipo.getTipo().toString())){

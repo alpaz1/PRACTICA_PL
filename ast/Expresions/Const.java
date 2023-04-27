@@ -7,6 +7,7 @@ import ast.Types.Types;
 public class Const extends E {
 
   private String valor;
+  
   public Const(String valor, Types tipo) {
     this.tipo = tipo;
     this.valor = valor;

@@ -25,6 +25,8 @@ public class AccesoArray extends Acceso{
 
     @Override
     public void checkType() {
+
+            
             acceso.checkType();
             exp.checkType();
     
