@@ -1,5 +1,4 @@
 
-
 package ast.Estructuras;
 
 import ast.Expresions.Const;
@@ -15,34 +14,28 @@ import ast.Programa;
 import ast.Accesos.AccesoVar;
 
 public class Declaracion extends Instruccion {
-    
+
     protected String name;
     private E exp = null;
-   
 
-   
-
-
-    public Declaracion(Types tipo, String name){
+    public Declaracion(Types tipo, String name) {
         this.name = name;
         this.tipo = tipo;
     }
-   
 
-    public Declaracion(Types tipo, String name, E valor){
+    public Declaracion(Types tipo, String name, E valor) {
         this.name = name;
         this.exp = valor;
         this.tipo = tipo;
-
     }
 
     public Types getTipo() {
         return this.tipo;
     }
+
     public String getName() {
         return this.name;
     }
-
 
     public void vincular() {
         // Tenemos un buscaId particular para este caso
@@ -55,16 +48,15 @@ public class Declaracion extends Instruccion {
             Programa.pila.insertaId(name, this);
             if (exp != null)
                 exp.vincular();
-        } 
-        else {
+        } else {
             System.out.println("Error vinculacion: Este identificador ya esta usado: " + name);
             Programa.okVinculacion = false;
         }
     }
 
-    public String toString(){
+    public String toString() {
         String out;
-        if (exp != null){
+        if (exp != null) {
             out = tipo.toString() + " " + name + " = " + exp.toString();
         } else {
             out = tipo.toString() + " " + name;
@@ -72,58 +64,56 @@ public class Declaracion extends Instruccion {
         return out;
     }
 
-
     public void checkType() {
         // El tipo de la parte izquierda es this.tipo
-        //tipo.chequea();
+        // tipo.chequea();
 
-        //ESTO ES SOLO PARA TRATAR LOS ENUMERADOS
-        Types t= this.tipo;
-      
+        // ESTO ES SOLO PARA TRATAR LOS ENUMERADOS
+        Types t = this.tipo;
 
-        while(exp != null && t != null){
+        while (exp != null && t != null) {
 
-            if(t.kind().toString().equals("STRUCT") ){
+            if (t.kind().toString().equals("STRUCT")) {
                 boolean ok = false;
                 boolean isEnum = false;
-                for(ASTNode nodo: Programa.definiciones.getEnumList() ){
-                    //System.out.println(((EnumClass)nodo).getName());
+                for (ASTNode nodo : Programa.definiciones.getEnumList()) {
+                    // System.out.println(((EnumClass)nodo).getName());
                     // System.out.println(this.tipo.toString());
-                    if(((EnumClass)nodo).getName().equals(t.toString())){
-                       // System.out.println("AQUI");
+                    if (((EnumClass) nodo).getName().equals(t.toString())) {
+                        // System.out.println("AQUI");
 
                         isEnum = true;
-        
-                        for(Const c: ((EnumClass)nodo).getCampos()){
 
-                            if (c.getValor().equals(exp.toString())){
+                        for (Const c : ((EnumClass) nodo).getCampos()) {
+
+                            if (c.getValor().equals(exp.toString())) {
                                 ok = true;
                                 exp.setTipo(new BasicTypes(KindTypes.ENUM));
-                                //System.out.println("tipo OK");
+                                // System.out.println("tipo OK");
                                 return;
                             }
-                            
+
                         }
-                    
-                        
-                    }    
+
+                    }
                 }
 
-                if(isEnum && !ok){
-                    //System.out.println(t.kind().toString());
+                if (isEnum && !ok) {
+                    // System.out.println(t.kind().toString());
 
-                    if(t.kind().toString().equals("STRUCT") ){
-                        //System.out.println(t);
+                    if (t.kind().toString().equals("STRUCT")) {
+                        // System.out.println(t);
                         exp.checkType();
-                        if(!this.tipo.toString().equals(exp.tipo.toString())){
-                            System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
+                        if (!this.tipo.toString().equals(exp.tipo.toString())) {
+                            System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "("
+                                    + this.tipo + "," + exp.tipo + ")");
                             Programa.okTipos = false;
                         }
-                        //System.out.println(exp);
-                    }
-                    else{
+                        // System.out.println(exp);
+                    } else {
 
-                        System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
+                        System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo
+                                + "," + exp.tipo + ")");
                         Programa.okTipos = false;
                     }
                     return;
@@ -136,15 +126,16 @@ public class Declaracion extends Instruccion {
 
         if (exp != null) {
             exp.checkType();
-           
-            if (!this.tipo.toString().equals(exp.tipo.toString())) { //tipos básicos
-                System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","+ exp.tipo + ")");
+
+            if (!this.tipo.toString().equals(exp.tipo.toString())) { // tipos básicos
+                System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","
+                        + exp.tipo + ")");
                 Programa.okTipos = false;
             }
-           // else System.out.println("tipo OK");
+            // else System.out.println("tipo OK");
 
         }
-       
+
     }
 
     @Override

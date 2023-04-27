@@ -1,8 +1,9 @@
 
-entero a = 7;
+entero c = 7;
+buleano b = verdad;
 
-entero sumar(){
-    devuelve verdad;
+entero sumar(entero a){
+    devuelve a;
 }
 
 

@@ -6,14 +6,6 @@ import ast.Types.Types;
 
 public abstract class E extends ASTNode {
     public abstract KindE kindExp();
-    public  Types getTipo(){
-        return this.tipo;
-    }
-
-    public void setTipo(Types tipo){
-        this.tipo = tipo;
-    }
-
     public abstract void checkType();
     // public E opnd1() {throw new UnsupportedOperationException("opnd1");} 
     // public E opnd2() {throw new UnsupportedOperationException("opnd2");} 

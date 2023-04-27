@@ -11,6 +11,7 @@ public abstract class ASTNode {
 
     public abstract void vincular();
     public Types getTipo(){return tipo;}
+    public void setTipo(Types tipo){this.tipo = tipo;}
     public void checkType() {}
     //public abstract NodeKind nodeKind();
     //public abstract String toString();

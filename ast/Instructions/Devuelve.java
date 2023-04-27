@@ -1,11 +1,9 @@
 package ast.Instructions;
 
 import ast.Programa;
-import ast.Estructuras.Funcion;
 import ast.Expresions.E;
 import ast.Types.BasicTypes;
 import ast.Types.KindTypes;
-import ast.Types.Types;
 
 public class Devuelve extends Instruccion {
     protected E valorRetorno;
@@ -13,7 +11,6 @@ public class Devuelve extends Instruccion {
 
     public Devuelve(E exp) {
         this.valorRetorno = exp;
-        this.tipo = exp.getTipo();
     }
 
     public Devuelve() {
@@ -38,7 +35,11 @@ public class Devuelve extends Instruccion {
 
     @Override
     public void checkType() {
-        if (nodoVinculo.getTipo() != this.tipo){
+        if (valorRetorno != null){
+            valorRetorno.checkType();
+            tipo = valorRetorno.getTipo();
+        }
+        if (!nodoVinculo.getTipo().toString().equals(this.tipo.toString())){
             System.err.println("Error de tipo: el valor devuelto no se corresponde con el de la función");
             Programa.okVinculacion = false;
         }
