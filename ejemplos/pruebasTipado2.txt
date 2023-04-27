@@ -1,0 +1,11 @@
+
+entero a = 7;
+
+entero sumar(){
+    devuelve verdad;
+}
+
+
+principal() {
+
+}

@@ -54,12 +54,11 @@ public class DefinitionsList {
     public void checkType() {
         for (Declaracion d: lista_basica)
             d.checkType();
-         
         for (StructClass s: lista_struct)
             s.checkType();
-        /* 
         for (Funcion f: lista_funcion)
-            f.vincular();
+            f.checkType();
+        /* 
         for (Clase c: lista_clases)
             c.vincular();
         for (Alias a: lista_alias)

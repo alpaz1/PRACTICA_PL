@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ast.ASTNode;
+import ast.NodeKind;
 import ast.Programa;
 import ast.Util;
 import ast.Auxiliares.Parametro;
@@ -12,6 +13,7 @@ import ast.Instructions.Instruccion;
 import ast.Types.Types;
 
 public class Funcion extends ASTNode{
+    private static final NodeKind TIPO_NODO = NodeKind.FUNCION;
     private String nombre;
     private List<Instruccion> instList;
     private List<Parametro> paramList;
@@ -21,6 +23,7 @@ public class Funcion extends ASTNode{
         this.tipo = tipo;
         this.instList = instList;
         this.paramList = paramList;
+        this.tipoNodo = TIPO_NODO;
         Collections.reverse(this.instList);
         Collections.reverse(this.paramList);
     }
@@ -48,7 +51,7 @@ public class Funcion extends ASTNode{
 
     }
 
-    public void vincular(List<Atributo> atributos ) {
+    public void vincular(List<Atributo> atributos) {
         ASTNode nodo = Programa.pila.buscaId(nombre);
         if (nodo == null) {
             Programa.pila.insertaId(nombre, this);

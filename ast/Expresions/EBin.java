@@ -55,9 +55,9 @@ public class EBin extends E {
 
     else if(!opnd1.tipo.toString().equals(opnd2.tipo.toString()) || !opnd1.tipo.toString().equals(this.tipo.toString())){
       Programa.okTipos = false;
-      System.out.println("Error tipo: expresion binaria con operadores de distinto tipo o operador no apto para los argumentos introducidos");
+      System.out.println("Error tipo: expresion binaria " + "(" + tipoExp + ")"
+          + " con operadores de distinto tipo o operador no apto para los argumentos introducidos");
     }
   }
 
-  
 }

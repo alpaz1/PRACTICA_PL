@@ -10,6 +10,8 @@ public abstract class ASTNode {
     public ASTNode(){}
 
     public abstract void vincular();
+    public Types getTipo(){return tipo;}
+    public void checkType() {}
     //public abstract NodeKind nodeKind();
     //public abstract String toString();
 }

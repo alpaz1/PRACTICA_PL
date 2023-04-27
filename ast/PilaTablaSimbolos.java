@@ -1,6 +1,7 @@
 package ast;
 
 import java.util.Stack;
+import java.util.Map.Entry;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,6 +67,34 @@ public class PilaTablaSimbolos {
             puntero = cima.get(id);
         }
         return puntero;
+    }
+
+    public ASTNode buscaIdFuncionActual (){
+        // Usado por returns para saber a quien corresponden
+        ASTNode node = null;
+        Stack<HashMap<String, ASTNode>> pilaTabla_aux = new Stack<HashMap<String, ASTNode>>();
+        if(!pilaTabla.empty()){
+            HashMap<String,ASTNode> cima = pilaTabla.pop();
+            pilaTabla_aux.push(cima);
+            // vaciamos la tabla
+            while (!pilaTabla.empty()){
+                cima = pilaTabla.pop();
+                pilaTabla_aux.push(cima);
+            }
+            // al final del todo esta la funcion
+            for (ASTNode globalNode: cima.values()){
+                if (globalNode.tipoNodo == NodeKind.FUNCION){
+                    node = globalNode;
+                    break;
+                }
+            }
+
+            //volver a guardar todo en la pila
+            while(!pilaTabla_aux.empty()){
+                pilaTabla.push(pilaTabla_aux.pop());
+            }
+        }
+        return node;
     }
 
     private void printAmbito(HashMap<String,ASTNode> ambito){

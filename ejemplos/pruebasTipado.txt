@@ -1,6 +1,5 @@
+
 lista <entero> [2] m = {1,1};
-
-
 
 lista <lista <entero>[2]> [3] z = {{1}, {2}};
 
@@ -8,14 +7,19 @@ lista <lista <lista <entero>[2]>[2]> [3] w = {{{11}}, {{2}}};
 
 lista <entero> [2] n = {verdad,1};
 
+
 buleano g = mentira;
 entero h = -1;
 buleano f = (verdad == g);
 buleano a = verdad oo mentira;
 entero b = 3 - 1 + 5 * 6;
-entero c = -b;
-buleano d = no a - verdad;
-entero e = c + b;
+// entero c = -b;
+// buleano d = no a - verdad;
+// entero e = c + b;
+
+entero sumar(buleano a, entero b){
+    return a;
+}
 
 
 entero prueba(entero a, entero b, lista <lista <entero>[]>[] miArray){
