@@ -16,5 +16,8 @@ public class PointerType extends Types{
         return tipo.toString() + "*";
     }
 
-    
+    @Override
+    public int getTam() {
+        return 4;
+    }    
 }

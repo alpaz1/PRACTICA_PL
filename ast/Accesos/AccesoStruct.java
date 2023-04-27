@@ -29,7 +29,7 @@ public class AccesoStruct extends Acceso{
         acceso.checkType();
         if(acceso.tipo != null){
             if(acceso.tipo instanceof StructType){
-                List<Declaracion> declaraciones = ((StructType)acceso.tipo).getSusCampos();
+                List<Declaracion> declaraciones = ((StructType)acceso.tipo).getCampos();
                 Declaracion m = null;
                 for (Declaracion d : declaraciones) {
                     if (d.getName().compareTo(campo) == 0){

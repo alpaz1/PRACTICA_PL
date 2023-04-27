@@ -9,4 +9,6 @@ public abstract class Instruccion extends ASTNode {
     public NodeKind nodeKind() {return NodeKind.INSTRUCTION;}
     public String toString() {return "";}
 
+    public int maxMemoria() {return 0;}
+
 }

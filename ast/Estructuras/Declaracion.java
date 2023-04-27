@@ -11,7 +11,6 @@ import ast.Types.KindTypes;
 import ast.Types.Types;
 import ast.ASTNode;
 import ast.Programa;
-import ast.Accesos.AccesoVar;
 
 public class Declaracion extends Instruccion {
 
@@ -105,37 +104,38 @@ public class Declaracion extends Instruccion {
                         // System.out.println(t);
                         exp.checkType();
                         if (!this.tipo.toString().equals(exp.tipo.toString())) {
-                            System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "("
+                            System.out.println("Error tipo: Declaracion " + tipo + " " + name + " = " + exp + "("
                                     + this.tipo + "," + exp.tipo + ")");
                             Programa.okTipos = false;
                         }
                         // System.out.println(exp);
                     } else {
 
-                        System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo
+                        System.out.println("Error tipo: Declaracion " + tipo + " " + name + " = " + exp + "(" + this.tipo
                                 + "," + exp.tipo + ")");
                         Programa.okTipos = false;
                     }
                     return;
                 }
             }
-
             t = t.getTipo();
-
         }
 
         if (exp != null) {
             exp.checkType();
 
             if (!this.tipo.toString().equals(exp.tipo.toString())) { // tipos básicos
-                System.out.println("Error tipo: Declaracion " + tipo + " " + name + "=" + exp + "(" + this.tipo + ","
+                System.out.println("Error tipo: Declaracion " + tipo + " " + name + " = " + exp + "(" + this.tipo + ","
                         + exp.tipo + ")");
                 Programa.okTipos = false;
             }
             // else System.out.println("tipo OK");
-
         }
+    }
 
+    @Override
+    public int maxMemoria() {
+        return tipo.getTam()*4; // (sizeof int = 4) arrays de enteros y enteros
     }
 
     @Override

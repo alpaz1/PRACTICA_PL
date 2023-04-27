@@ -131,8 +131,8 @@ Tipo ::=  TIPOINT
             {:RESULT= new BasicTypes(KindTypes.VOID);:}
           | IDEN:nombre
             {:RESULT = new StructType(nombre.lexema);:}
-          | ARRAY MENOR Tipo:t MAYOR CAP E0:tam CCIERRE
-            {:RESULT = new ArrayType(t,tam);:}
+          | ARRAY MENOR Tipo:t MAYOR CAP ENT:valor CCIERRE
+            {:Const tam = new Const(valor.lexema, new BasicTypes(KindTypes.INT)); RESULT = new ArrayType(t,tam);:}
           | ARRAY MENOR Tipo:t MAYOR CAP CCIERRE
             {:RESULT = new ArrayType(t,null);:}
           | Tipo:t POR
@@ -342,6 +342,7 @@ E6 ::= MENOS E6:exp
        {:RESULT = new EUnaria(exp, KindE.NEG,new BasicTypes(KindTypes.BOOL));:} 
       | E7:e
           {:RESULT = e;:};
+          
 
 E7 ::= TRUE:valor
         {:RESULT = new Const(valor.lexema, new BasicTypes(KindTypes.BOOL));:}

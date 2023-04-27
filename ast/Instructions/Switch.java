@@ -15,12 +15,14 @@ public class Switch extends Bloque{
         super();
         this.exp = var;
         this.casos = casos;
+        this.instList = casos;
     }
     public Switch(E var, List<CasoSwitch> casos, CasoSwitch def){
         super();
         this.hayPorDefecto = true;
         this.exp = var;
         this.casos = casos;
+        this.instList = casos;
         this.porDefecto = def;
     }
 

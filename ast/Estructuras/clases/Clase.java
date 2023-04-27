@@ -68,6 +68,21 @@ public class Clase extends ASTNode{
         Programa.pila.cierraBloque();
     }
 
+    @Override
+    public void checkType() {
+        for (Atributo atributo : atributos) {
+            atributo.checkType();
+        }
+
+        for (Metodo metodo : metodos) {
+            metodo.checkType();
+        }
+
+        for (Constructor constructor: constructores){
+            constructor.checkType();
+        }
+    }
+
     public void setName(String name){
         this.nombre = name;
     }

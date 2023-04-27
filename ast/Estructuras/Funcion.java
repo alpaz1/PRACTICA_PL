@@ -61,13 +61,12 @@ public class Funcion extends ASTNode{
                 param.vincular();
             }
 
-            for(Atributo a: atributos){
+            for(Atributo a: atributos){  // TODO: no debería hacer falta?
                 a.vincular();
             }
 
             for (Instruccion instruccion : instList) {
                 instruccion.vincular();
-                
             }
 
             Programa.pila.cierraBloque();

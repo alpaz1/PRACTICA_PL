@@ -27,13 +27,21 @@ public class StructType extends Types{
         return this.nombre_tipo;
     }
 
-    public List<Declaracion> getSusCampos() {
+    public List<Declaracion> getCampos() {
         for (StructClass nodo : Programa.definiciones.lista_struct) {
             if (nombre_tipo.compareTo(nodo.getName()) == 0) {
                 campos = nodo;
             }
         }
         return ( (StructClass) campos).getCampos();
+    }
+    @Override
+    public int getTam() {
+        int tam = 0;
+        for (Declaracion declaracion: getCampos()){
+            tam += declaracion.maxMemoria();
+        }
+        return tam;
     }
     
 }

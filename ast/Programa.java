@@ -42,6 +42,11 @@ public class Programa extends ASTNode {
         fmain.checkType();
     }
 
+    public int maxMemoria(){
+        int tam = 0;
+        return tam;
+    }
+
     // AST ToString -----------------------------------------------------------------
     public String toString() {
         return definiciones.toString() + "\nFuncion Main: " + fmain.toString();

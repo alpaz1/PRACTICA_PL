@@ -3,9 +3,10 @@ package ast.Estructuras.clases;
 import java.util.ArrayList;
 import java.util.List;
 
+import ast.ASTNode;
 import ast.Estructuras.Funcion;
 
-public class Metodo {
+public class Metodo extends ASTNode {
     private PrivacyMode modo;
     private Funcion fun;
 
@@ -20,14 +21,19 @@ public class Metodo {
         this.fun = fun;
     }
 
+    @Override
     public String toString() {
         return "("+ this.modo.toString()+")"+this.fun.toString();
     }
 
+    @Override
     public void vincular() {
-      
         fun.vincular(atributos);
+    }
 
+    @Override
+    public void checkType() {
+        fun.checkType();
     }
 
     public PrivacyMode getPrivacyMode() {

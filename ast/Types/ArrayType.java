@@ -1,12 +1,13 @@
 package ast.Types;
 
+import ast.Expresions.Const;
 import ast.Expresions.E;
 
 public class ArrayType extends Types{
 
-    protected E tam;
+    protected Const tam;
 
-    public  ArrayType(Types tipo, E tam) {
+    public ArrayType(Types tipo, Const tam) {
         this.tipo = tipo;
         this.tam = tam;
     }
@@ -16,13 +17,17 @@ public class ArrayType extends Types{
         return KindTypes.ARRAY;
     }
 
-    
-
     public String toString(){
         if(tam != null)
             return "Array " + "<" + tipo.toString() + ">" ;
         else 
             return "Array "+ "<" + tipo.toString() + ">" ;
+    }
+
+
+    @Override
+    public int getTam() {
+        return tipo.getTam() * Integer.parseInt(tam.getValor());
     }
 
     
