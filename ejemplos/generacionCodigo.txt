@@ -1,0 +1,3 @@
+principal() {
+    imprime(7);
+}

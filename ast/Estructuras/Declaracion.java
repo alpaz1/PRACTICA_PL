@@ -134,6 +134,11 @@ public class Declaracion extends Instruccion {
     }
 
     @Override
+    public void generaCodigo() {
+        // Programa.codigo.println(name);
+    }
+
+    @Override
     public int maxMemoria() {
         return tipo.getTam()*4; // (sizeof int = 4) arrays de enteros y enteros
     }

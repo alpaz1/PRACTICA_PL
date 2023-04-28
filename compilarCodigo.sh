@@ -58,3 +58,8 @@ if [ $OPTIND -eq 1 ]; then
     java -cp ".:lib/*" asint.Main ejemplos/input.txt
   fi
 fi
+
+# cd codigo
+# ./wat2wasm codigo.wat
+# node main.js
+# cd ..

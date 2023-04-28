@@ -13,6 +13,7 @@ public abstract class ASTNode {
     public Types getTipo(){return tipo;}
     public void setTipo(Types tipo){this.tipo = tipo;}
     public void checkType() {}
+    public void generaCodigo() {}
     //public abstract NodeKind nodeKind();
     //public abstract String toString();
 }

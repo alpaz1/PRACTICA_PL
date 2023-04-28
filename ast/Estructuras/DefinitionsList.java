@@ -4,6 +4,7 @@ import java.util.*;
 
 import ast.Estructuras.clases.*;
 import ast.Instructions.Alias;
+import ast.Programa;
 import ast.Auxiliares.Modulo;
 
 public class DefinitionsList {
@@ -58,12 +59,29 @@ public class DefinitionsList {
             s.checkType();
         for (Funcion f: lista_funcion)
             f.checkType();
-        /* 
-        for (Clase c: lista_clases)
+            /* 
+            for (Clase c: lista_clases)
             c.vincular();
         for (Alias a: lista_alias)
             a.vincular();
         */
+    }
+
+    public void generaCodigo(){
+        for (Funcion f: lista_funcion)
+            f.generaCodigo();
+        for (Declaracion d: lista_basica)
+            d.generaCodigo();
+        for (StructClass s: lista_struct)
+            s.generaCodigo();
+        for (EnumClass e: lista_enum)
+            e.generaCodigo();
+        for (Clase c: lista_clases)
+            c.generaCodigo();
+        for (Alias a: lista_alias)
+            a.generaCodigo();
+        for (Modulo m: lista_modulos)
+            m.generaCodigo();
     }
 
     // AST TOSTRING -----------------------------------------------------------------

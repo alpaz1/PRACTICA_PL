@@ -15,7 +15,7 @@ import ast.Types.Types;
 public class Funcion extends ASTNode{
     private static final NodeKind TIPO_NODO = NodeKind.FUNCION;
     private String nombre;
-    private List<Instruccion> instList;
+    List<Instruccion> instList;
     private List<Parametro> paramList;
 
     public Funcion(Types tipo, String name, List<Parametro> paramList, List<Instruccion> instList){

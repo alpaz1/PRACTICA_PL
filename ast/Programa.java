@@ -54,14 +54,14 @@ public class Programa extends ASTNode {
 
     public void generaCodigo() {
         try {
-            System.out.println(System.getProperty("user.dir"));
             codigo = new PrintWriter(new FileWriter("codigo/codigo.wat"));
             FileReader preludio = new FileReader("codigo/preludio.wat");
             preludio.transferTo(codigo);
             preludio.close();
 
-            codigo.println("Holaaa");
-
+            definiciones.generaCodigo();
+            fmain.generaCodigo();
+            
             FileReader epilogo = new FileReader("codigo/epilogo.wat");
             epilogo.transferTo(codigo);
             epilogo.close();

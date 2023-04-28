@@ -7,10 +7,31 @@
 (import "runtime" "exceptionHandler" (func $exception (type $_sig_i32)))
 (import "runtime" "print" (func $print (type $_sig_i32)))
 (import "runtime" "read" (func $read (type $_sig_ri32)))
-(memory 2000)
+(memory 2000)   ;; TODO: Esto se cambia imagino
 (global $SP (mut i32) (i32.const 0)) ;; start of stack
 (global $MP (mut i32) (i32.const 0)) ;; mark pointer
-(global $NP (mut i32) (i32.const 131071996)) ;; heap 2000*64*1024-4Holaaa
+(global $NP (mut i32) (i32.const 131071996)) ;; heap 2000*64*1024-4
+(start $main)
+(func $main  (type $_sig_void)
+ (local $localsStart i32)
+ (local $temp i32)
+ i32.const 200
+ call $reserveStack
+ set_local $temp
+ get_global $MP
+ get_local $temp
+ i32.store
+ get_global $MP
+ get_global $SP
+ i32.store offset=4
+ get_global $MP
+ i32.const 8
+ i32.add
+ set_local $localsStart
+i32.const 7
+call $print
+ call $freeStack
+)
 (func $reserveStack (param $size i32)
    (result i32)
    get_global $MP

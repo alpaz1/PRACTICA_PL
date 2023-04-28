@@ -8,5 +8,3 @@ Por el momento solo contamos con la generación completa del AST. En la carpeta 
 Tambien se incluye un script `scriptCUP.sh` para poder probar el analizador pasando los ficheros de ejemplo.
 
 Para ello, desde la carpeta del proyecto ejecutamos ./scriptCUP.sh ./ejemplos/input.txt
-
-La generacion de codigo depende de nodejs. Para instalarlo en linux usa el siguente comando ` $ sudo apt install nodejs `

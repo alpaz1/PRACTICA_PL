@@ -1,5 +1,6 @@
 package ast.Instructions;
 
+import ast.Programa;
 import ast.Expresions.E;
 
 public class Imprime extends Instruccion {
@@ -11,6 +12,12 @@ public class Imprime extends Instruccion {
 
     public void vincular() {
         this.exp.vincular();
+    }
+
+    @Override
+    public void generaCodigo() {
+        exp.generaCodigo();
+        Programa.codigo.println("call $print");
     }
 
     public KindInstruction kind() {
