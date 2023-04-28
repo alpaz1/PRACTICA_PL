@@ -7,6 +7,7 @@ public abstract class ASTNode {
     public NodeKind tipoNodo;  // tipo de su nodo
     public ASTNode nodoVinculo; // nodo con el que se vinculan
     public Types tipo; //tipo del nodo
+    public int delta;//posición dentro de su ámbtio de dicho nodo
     public ASTNode(){}
 
     public abstract void vincular();

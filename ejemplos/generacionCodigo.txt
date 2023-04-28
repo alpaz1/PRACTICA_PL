@@ -1,3 +1,3 @@
 principal() {
-    imprime(7);
+    imprime(2 + 3 - 1 * 5 / 1 % 2 == 4);
 }

@@ -28,7 +28,19 @@
  i32.const 8
  i32.add
  set_local $localsStart
-i32.const 7
+i32.const 2
+i32.const 3
+i32.add
+i32.const 1
+i32.const 5
+i32.mul
+i32.const 1
+i32.div_s
+i32.const 2
+i32.rem_s
+i32.sub
+i32.const 5
+i32.eq
 call $print
  call $freeStack
 )

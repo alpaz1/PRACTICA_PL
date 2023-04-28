@@ -2,6 +2,7 @@ package ast.Instructions;
 
 import ast.Programa;
 import ast.Expresions.E;
+import ast.Types.KindTypes;
 
 public class Imprime extends Instruccion {
     protected E exp;
@@ -17,6 +18,9 @@ public class Imprime extends Instruccion {
     @Override
     public void generaCodigo() {
         exp.generaCodigo();
+        if (exp.getTipo().toString().equals(KindTypes.BOOL.toString())){
+            // Programa.codigo.println("call ");
+        }
         Programa.codigo.println("call $print");
     }
 

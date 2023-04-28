@@ -81,6 +81,7 @@ principal(){
 
     si (mentira == mentira){
         x_a = 1;
+        t.segundo = 10;
     }
 
     sino{

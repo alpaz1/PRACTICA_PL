@@ -11,6 +11,7 @@ import ast.Types.KindTypes;
 import ast.Types.Types;
 import ast.ASTNode;
 import ast.Programa;
+import ast.Accesos.Acceso;
 
 public class Declaracion extends Instruccion {
 
@@ -135,6 +136,21 @@ public class Declaracion extends Instruccion {
 
     @Override
     public void generaCodigo() {
+
+        if (exp != null) {
+            Programa.codigo.println("i32.const " + etiqueta);
+            Programa.codigo.println("i32.const 4");
+            Programa.codigo.println("i32.mul");
+            Programa.codigo.println("get_local $localsStart");
+            Programa.codigo.println("i32.add");
+
+            exp.generaCodigo();
+            if (exp instanceof Acceso) {
+                Programa.codigo.println("i32.load"); // devuelve direccion
+            }
+            Programa.codigo.println("i32.store"); // 1º arg, 2º arg, store
+        }
+
         // Programa.codigo.println(name);
     }
 
