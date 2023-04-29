@@ -1,22 +1,26 @@
 package ast;
 
 import java.util.Stack;
-import java.util.Map.Entry;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PilaTablaSimbolos {
     
     private Stack<HashMap<String,ASTNode>> pilaTabla;
+    private Stack<Integer> deltaBloques;
+    private int totalDelta;
 
     public PilaTablaSimbolos() {
         this.pilaTabla = new Stack<HashMap<String,ASTNode>>();
+        this.deltaBloques = new Stack<Integer>();
+        this.totalDelta = 0;
     }
 
      // Cada vez que entro en un nuevo ambito 
      public void abreBloque(){
         // que empieza un nuevo bloque apilando una nueva tabla vacía
         pilaTabla.push(new HashMap<String,ASTNode>());
+        deltaBloques.push(0); // la posicion dentro del bloque empiceza en 0
     }
 
     // Cada vez que salgo de un ambito 
@@ -25,6 +29,17 @@ public class PilaTablaSimbolos {
         if (!pilaTabla.empty()){ 
             pilaTabla.pop(); 
         }
+        totalDelta -= deltaBloques.pop();
+    }
+
+    public int getDelta() {
+        return totalDelta;
+    }
+
+    public void updateDelta(int size) {
+        totalDelta += size;
+        int deltaBloque = deltaBloques.pop();
+        deltaBloques.push(deltaBloque + size);
     }
 
     // Insertamos en la tabla de la cima de la pila un nuevo identificador

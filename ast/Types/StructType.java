@@ -28,13 +28,15 @@ public class StructType extends Types{
     }
 
     public List<Declaracion> getCampos() {
+        // TODO: WTF
         for (StructClass nodo : Programa.definiciones.lista_struct) {
-            if (nombre_tipo.compareTo(nodo.getName()) == 0) {
+            if (nombre_tipo.equals(nodo.getName())) {
                 campos = nodo;
             }
         }
         return ( (StructClass) campos).getCampos();
     }
+
     @Override
     public int getTam() {
         int tam = 0;

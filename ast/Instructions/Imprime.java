@@ -18,9 +18,9 @@ public class Imprime extends Instruccion {
     @Override
     public void generaCodigo() {
         exp.generaCodigo();
-        if (exp.getTipo().toString().equals(KindTypes.BOOL.toString())){
-            // Programa.codigo.println("call ");
-        }
+        // if (exp.getTipo().toString().equals(KindTypes.BOOL.toString())){
+        //     // Programa.codigo.println("call ");
+        // }
         Programa.codigo.println("call $print");
     }
 

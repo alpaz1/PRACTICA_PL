@@ -26,8 +26,9 @@ public class AccesoVar extends Acceso {
         if (nodo == null) {
             System.out.println("Error vinculacion: Intento de acceso sin declaracion: " + direccionInicial);
             Programa.okVinculacion = false;
-        } else
+        } else{
             this.nodoVinculo = nodo;
+        }
     }
 
     public String toString() {
@@ -35,37 +36,35 @@ public class AccesoVar extends Acceso {
     }
 
     @Override
+    public void generaCodigo() {
+        // Accedemos a la posicion
+        Programa.codigo.println("get_local $localsStart");
+        Programa.codigo.println("i32.const " + nodoVinculo.delta);
+        Programa.codigo.println("i32.add");
+        Programa.codigo.println("i32.load");
+    }
+
+    @Override
     public void checkType() {
         if (this.nodoVinculo instanceof Declaracion) {
-            this.tipo = ((Declaracion) nodoVinculo).getTipo();
-            // System.out.println(this + this.tipo.toString()+ "0");
-        } else if (this.nodoVinculo instanceof Const) {
-            // System.out.println("HOLA");
-            // System.out.println(((Const) nodoVinculo).getTipo());
-
-            for (ASTNode nodo : Programa.definiciones.getEnumList()) {
-
-                for (Const c : ((EnumClass) nodo).getCampos()) {
-
+            this.tipo = nodoVinculo.getTipo();
+        } else if (this.nodoVinculo instanceof Const) { // Si esta vinculado a un campo de un enum (Lunes), en vez de a una variable
+            for (EnumClass enum_ : Programa.definiciones.getEnumList()) {
+                for (Const c : enum_.getCampos()) {
                     if (c.getValor().equals(nodoVinculo.toString())) {
-                        // ((Const) nodoVinculo).setTipo(new EnumTypes("HOLA"));
-                        // System.out.println("tipo " + ((EnumClass)nodo).getName());
-                        c.setTipo(new EnumTypes(((EnumClass) nodo).getName()));
-                        // System.out.println("tipo OK");
+                        // c.setTipo(new EnumTypes(enum_.getName()));
+                        nodoVinculo = c;
                     }
                 }
             }
-
-            this.tipo = ((Const) nodoVinculo).getTipo();
-            // System.out.println(this + this.tipo.toString()+"1");
-
+            this.tipo = nodoVinculo.getTipo();
         } else {
             boolean ok = false;
-            for (ASTNode nodo : Programa.definiciones.getEnumList()) {
-                for (Const c : ((EnumClass) nodo).getCampos()) {
+            for (EnumClass enum_ : Programa.definiciones.getEnumList()) {
+                for (Const c : enum_.getCampos()) {
                     if (c.getValor().equals(direccionInicial)) {
                         ok = true;
-                        nombreEnum = ((EnumClass) nodo).getName();
+                        nombreEnum = enum_.getName();
                         this.tipo = new BasicTypes(KindTypes.ENUM);
                         break;
                     }

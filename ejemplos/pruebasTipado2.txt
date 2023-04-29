@@ -1,25 +1,7 @@
-
-entero c = 7;
-buleano b = verdad;
-
-entero sumar(entero a){
-    devuelve a;
-}
-
-publico clase miClase{
-    privado entero a = 1;
-    publico buleano b = verdad;
-    protegido entero c;
-    
-    publico miClase(entero d){
-        c = d;
-    }
-
-    privado void fun(buleano b){
-        b = mentira;
-    }
-}
+enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
 
 principal() {
-    miClase mc = nuevo miClase(7);
+    DiaSemana dia = Lunes;
+    imprime(dia);
+    imprime(Lunes);
 }

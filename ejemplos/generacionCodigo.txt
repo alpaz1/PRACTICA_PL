@@ -1,3 +1,5 @@
 principal() {
-    imprime(2 + 3 - 1 * 5 / 1 % 2 == 4);
+    entero a = 5;
+    entero b = 7;
+    imprime(a + b);
 }

@@ -44,8 +44,8 @@ public class Declaracion extends Instruccion {
         // mismo name en ese bloque
         ASTNode nodo = Programa.pila.buscaIdCima(name);
         if (nodo == null) { // devuelve null cuando no esta
-            // System.out.println("Vinculando " + name);
             Programa.pila.insertaId(name, this);
+            setDelta(); // posicion relativa al bloque
             if (exp != null)
                 exp.vincular();
         } else {
@@ -138,20 +138,16 @@ public class Declaracion extends Instruccion {
     public void generaCodigo() {
 
         if (exp != null) {
-            Programa.codigo.println("i32.const " + etiqueta);
-            Programa.codigo.println("i32.const 4");
-            Programa.codigo.println("i32.mul");
+            Programa.codigo.println("i32.const " + delta);
             Programa.codigo.println("get_local $localsStart");
             Programa.codigo.println("i32.add");
 
             exp.generaCodigo();
-            if (exp instanceof Acceso) {
-                Programa.codigo.println("i32.load"); // devuelve direccion
-            }
-            Programa.codigo.println("i32.store"); // 1º arg, 2º arg, store
+            // if (exp instanceof Acceso) {
+            //     Programa.codigo.println("i32.load"); // devuelve direccion
+            // }
+            Programa.codigo.println("i32.store"); // Guarda exp en la posicion localsStart + delta
         }
-
-        // Programa.codigo.println(name);
     }
 
     @Override

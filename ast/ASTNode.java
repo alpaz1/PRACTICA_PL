@@ -15,6 +15,10 @@ public abstract class ASTNode {
     public void setTipo(Types tipo){this.tipo = tipo;}
     public void checkType() {}
     public void generaCodigo() {}
+    public void setDelta(){
+        delta = Programa.pila.getDelta();
+        Programa.pila.updateDelta(tipo.getTam());
+    }
     //public abstract NodeKind nodeKind();
     //public abstract String toString();
 }

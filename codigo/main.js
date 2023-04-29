@@ -51,10 +51,11 @@ async function start() {
     wasmModule = await WebAssembly.compile(code);
     instance = await WebAssembly.instantiate(wasmModule, importObjects);
 //    await instance.exports.init();
+    process.exit(0);
 }
 
-async function run() {
-    await readInput(2);
+function run() {
+    // await readInput(2);
     start();
 }
 

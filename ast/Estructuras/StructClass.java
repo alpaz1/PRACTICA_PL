@@ -29,6 +29,13 @@ public class StructClass extends ASTNode{
         ASTNode nodo = Programa.pila.buscaId(name);
         if (nodo == null) { //devuelve null cuando no esta
             Programa.pila.insertaId(name, this);
+            setDelta();
+            // Para los campos de un struct, iniciamos la cuenta de 0 (pero no es un bloque)
+            int structDelta = 0;
+            for (Declaracion campo: campos){
+                campo.delta = structDelta;
+                structDelta += campo.getTipo().getTam();
+            }
         } else {
             System.out.println("Error vinculacion: Este identificador ya esta usado: " + name);
             Programa.okVinculacion = false;
