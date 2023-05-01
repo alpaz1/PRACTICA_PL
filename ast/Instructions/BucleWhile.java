@@ -13,6 +13,27 @@ public class BucleWhile extends Bloque {
         this.cond = exp;
     }
 
+
+    public void generaCodigo(){
+       
+        Programa.codigo.println("block");
+        Programa.codigo.println("loop");
+
+        this.cond.generaCodigo();
+        
+        Programa.codigo.println("i32.eqz");
+        Programa.codigo.println("br_if 1");
+        
+        for (Instruccion ins : this.instList){
+            ins.generaCodigo();
+        }
+
+        Programa.codigo.println("br 0");
+        Programa.codigo.println("end");
+        Programa.codigo.println("end");
+    }
+
+
     public void vincular() {
         Programa.pila.abreBloque();
         cond.vincular();

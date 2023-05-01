@@ -4,5 +4,4 @@ principal() {
         imprime(n);
         n = n + 1;
     }
-    devuelve 0;
 }
