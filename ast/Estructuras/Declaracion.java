@@ -152,7 +152,7 @@ public class Declaracion extends Instruccion {
 
     @Override
     public int maxMemoria() {
-        return tipo.getTam()*4; // (sizeof int = 4) arrays de enteros y enteros
+        return tipo.getTam(); // (sizeof int = 4) arrays de enteros y enteros
     }
 
     @Override

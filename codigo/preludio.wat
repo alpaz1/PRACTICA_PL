@@ -11,4 +11,4 @@
 (global $SP (mut i32) (i32.const 0)) ;; start of stack
 (global $MP (mut i32) (i32.const 0)) ;; mark pointer
 (global $NP (mut i32) (i32.const 131071996)) ;; heap 2000*64*1024-4
-(start $main)
+(start $principal)

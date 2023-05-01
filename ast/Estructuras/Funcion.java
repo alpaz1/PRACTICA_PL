@@ -9,6 +9,7 @@ import ast.Programa;
 import ast.Util;
 import ast.Auxiliares.Parametro;
 import ast.Estructuras.clases.Atributo;
+import ast.Instructions.Bloque;
 import ast.Instructions.Instruccion;
 import ast.Types.Types;
 
@@ -89,15 +90,24 @@ public class Funcion extends ASTNode{
         }
     }
 
+    public int maxMemoria() {
+        int max = Bloque.maxMemoria(instList);
+        for (Parametro param: paramList){
+            max += param.maxMemoria();
+        }
+        return max;
+    }
+
     @Override
     public void generaCodigo() {
-        int tam = 200; // TODO: cambiar esto a lo que ocupa la funcion
+        // int tam = 200; // TODO: cambiar esto a lo que ocupa la funcion
+        int tam = maxMemoria();
         Programa.codigo.print("(func $" + nombre);
         for (Parametro param: paramList){
             param.respresentacionWasm();
         }
         // RETURN TIPE
-        if (! tipo.toString().equals("NULL")){
+        if (! tipo.toString().equals("VOID")){
             Programa.codigo.print(" (result " + tipo.respresentacionWasm() +")");
         }
         Programa.codigo.println("");
@@ -124,6 +134,11 @@ public class Funcion extends ASTNode{
             instruccion.generaCodigo(); 
         }
         Programa.codigo.println(" call $freeStack");
+        // meto algo en la pila por si no hay un return
+        if (! tipo.toString().equals("VOID")){
+            Programa.codigo.println("i32.const 0");
+            Programa.codigo.println(tipo.respresentacionWasm() + ".load");
+        }
         Programa.codigo.println(")");
     }
 

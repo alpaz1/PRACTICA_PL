@@ -1,6 +1,8 @@
 entero c = 9;
 
 entero func(entero a){
+    entero c;
+    entero d;
     devuelve 10;
 }
 

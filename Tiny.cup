@@ -302,9 +302,9 @@ E1 ::= E1:opIzq AND E2:opDer
         {:RESULT = e;:};
 
 E2 ::= E2:opIzq IGUALDAD E3:opDer
-          {:RESULT= new EBin(opIzq, opDer, KindE.IGUALDAD, new BasicTypes(KindTypes.NULL));:}
+          {:RESULT= new EBin(opIzq, opDer, KindE.IGUALDAD, new BasicTypes(KindTypes.BOOL));:}
       | E2:opIzq DISTINTO E3:opDer
-          {:RESULT= new EBin(opIzq, opDer, KindE.DISTINTO, new BasicTypes(KindTypes.NULL));:}
+          {:RESULT= new EBin(opIzq, opDer, KindE.DISTINTO, new BasicTypes(KindTypes.BOOL));:}
       | E3:e
           {:RESULT = e;:};
 

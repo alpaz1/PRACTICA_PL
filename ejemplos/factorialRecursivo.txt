@@ -8,6 +8,6 @@ entero factorialRec(entero n) {
 }
 
 principal () {
-    entero n = 4;
+    entero n = 5;
     imprime(factorialRec(n));
 }
