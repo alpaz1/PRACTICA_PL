@@ -15,16 +15,16 @@ import ast.Accesos.Acceso;
 
 public class Declaracion extends Instruccion {
 
-    protected String name;
+    protected String nombre;
     private E exp = null;
 
-    public Declaracion(Types tipo, String name) {
-        this.name = name;
+    public Declaracion(Types tipo, String nombre) {
+        this.nombre = nombre;
         this.tipo = tipo;
     }
 
-    public Declaracion(Types tipo, String name, E valor) {
-        this.name = name;
+    public Declaracion(Types tipo, String nombre, E valor) {
+        this.nombre = nombre;
         this.exp = valor;
         this.tipo = tipo;
     }
@@ -34,7 +34,7 @@ public class Declaracion extends Instruccion {
     }
 
     public String getName() {
-        return this.name;
+        return this.nombre;
     }
 
     public void vincular() {
@@ -42,14 +42,14 @@ public class Declaracion extends Instruccion {
         // Va a permitir de declarar con un mismo identificador siempre y cuado no se
         // haya declarado uno con el
         // mismo name en ese bloque
-        ASTNode nodo = Programa.pila.buscaIdCima(name);
+        ASTNode nodo = Programa.pila.buscaIdCima(nombre);
         if (nodo == null) { // devuelve null cuando no esta
-            Programa.pila.insertaId(name, this);
+            Programa.pila.insertaId(nombre, this);
             setDelta(); // posicion relativa al bloque
             if (exp != null)
                 exp.vincular();
         } else {
-            System.out.println("Error vinculacion: Este identificador ya esta usado: " + name);
+            System.out.println("Error vinculacion: Este identificador ya esta usado: " + nombre);
             Programa.okVinculacion = false;
         }
     }
@@ -57,9 +57,9 @@ public class Declaracion extends Instruccion {
     public String toString() {
         String out;
         if (exp != null) {
-            out = tipo.toString() + " " + name + " = " + exp.toString();
+            out = tipo.toString() + " " + nombre + " = " + exp.toString();
         } else {
-            out = tipo.toString() + " " + name;
+            out = tipo.toString() + " " + nombre;
         }
         return out;
     }
@@ -105,14 +105,14 @@ public class Declaracion extends Instruccion {
                         // System.out.println(t);
                         exp.checkType();
                         if (!this.tipo.toString().equals(exp.tipo.toString())) {
-                            System.out.println("Error tipo: Declaracion " + tipo + " " + name + " = " + exp + "("
+                            System.out.println("Error tipo: Declaracion " + tipo + " " + nombre + " = " + exp + "("
                                     + this.tipo + "," + exp.tipo + ")");
                             Programa.okTipos = false;
                         }
                         // System.out.println(exp);
                     } else {
 
-                        System.out.println("Error tipo: Declaracion " + tipo + " " + name + " = " + exp + "(" + this.tipo
+                        System.out.println("Error tipo: Declaracion " + tipo + " " + nombre + " = " + exp + "(" + this.tipo
                                 + "," + exp.tipo + ")");
                         Programa.okTipos = false;
                     }
@@ -126,7 +126,7 @@ public class Declaracion extends Instruccion {
             exp.checkType();
 
             if (!this.tipo.toString().equals(exp.tipo.toString())) { // tipos básicos
-                System.out.println("Error tipo: Declaracion " + tipo + " " + name + " = " + exp + "(" + this.tipo + ","
+                System.out.println("Error tipo: Declaracion " + tipo + " " + nombre + " = " + exp + "(" + this.tipo + ","
                         + exp.tipo + ")");
                 Programa.okTipos = false;
             }

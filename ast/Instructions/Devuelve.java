@@ -35,7 +35,8 @@ public class Devuelve extends Instruccion {
 
     @Override
     public void generaCodigo() {
-        
+        Programa.codigo.println(tipo.respresentacionWasm() + ".const " + valorRetorno);
+        Programa.codigo.println("return");
     }
 
     @Override

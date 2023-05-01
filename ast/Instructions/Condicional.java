@@ -54,6 +54,13 @@ public class Condicional extends Bloque {
     }
 
     @Override
+    public int maxMemoria(List<? extends Instruccion> instList) {
+        int si = super.maxMemoria(instList);
+        int sino = super.maxMemoria(instrucciones_else);
+        return Integer.max(si, sino);
+    }
+
+    @Override
     public void generaCodigo() {
         condicion.generaCodigo();
         Programa.codigo.println("if");

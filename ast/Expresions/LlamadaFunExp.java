@@ -60,18 +60,20 @@ public class LlamadaFunExp extends E {
 
     @Override
     public void generaCodigo() {
-        Programa.codigo.println("block");
 
         // Copia los argumentos aqui a memoria
-        int delta = Programa.pila.getDelta();
+        // int delta = Programa.pila.getDelta();
+        // for (E argumento: argumentos){
+        //     Programa.codigo.println("i32.const " + delta);
+        //     Programa.codigo.println("get_local $localsStart");
+        //     Programa.codigo.println("i32.add");
+        //     argumento.generaCodigo();
+        //     Programa.codigo.println("i32.store");
+        //     delta += argumento.getTipo().getTam();
+        // }
         for (E argumento: argumentos){
-            Programa.codigo.println("i32.const " + delta);
-            Programa.codigo.println("get_local $localsStart");
-            Programa.codigo.println("i32.add");
             argumento.generaCodigo();
-            Programa.codigo.println("i32.store");
-            delta += argumento.getTipo().getTam();
         }
-        nodoVinculo.generaCodigo();
+        Programa.codigo.println("call $" + nombre);
     }
 }

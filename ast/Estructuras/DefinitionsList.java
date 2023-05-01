@@ -67,6 +67,11 @@ public class DefinitionsList {
         */
     }
 
+    public void generaFunc(){
+        for (Funcion f: lista_funcion)
+            f.generaCodigo();
+    }
+
     public void generaCodigo(){
         for (Declaracion d: lista_basica)
             d.generaCodigo();

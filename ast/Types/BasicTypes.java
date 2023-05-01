@@ -1,5 +1,7 @@
 package ast.Types;
 
+import ast.Programa;
+
 public class BasicTypes extends Types {
 
     private KindTypes tipo;
@@ -20,6 +22,26 @@ public class BasicTypes extends Types {
     }
 
     @Override
+    public String respresentacionWasm() {
+        String wasmTipe;
+        switch (tipo) {
+            case INT:
+                wasmTipe = "i32";
+                break;
+            case FLOAT:
+                wasmTipe = "f32";
+                break;
+            case BOOL:
+                wasmTipe = "i32";
+                break;
+            default:
+                wasmTipe = "";
+                break;
+        }
+        return wasmTipe;
+    }
+
+    @Override
     public int getTam() {
         int tam = 0;
         switch (tipo) {
@@ -32,35 +54,10 @@ public class BasicTypes extends Types {
             case BOOL:
                 tam =4;
                 break;
-            // case VOID:
-
-            //     break;
-            // case ARRAY:
-
-            //     break;
             default:
                 tam = 0;
                 break;
-            // case STRUCT:
-
-            //     break;
-            // case POINTER:
-
-            //     break;
-            // case CONSTRUCTOR:
-
-            //     break;
-            // case ENUM:
-
-            //     break;
-            // case ERROR:
-
-            //     break;
-            // case NULL:
-
-            //     break;
         }
-
         return tam;
     }
 
