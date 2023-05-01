@@ -1,13 +1,17 @@
-entero c = 9;
 
-entero func(entero a){
-    entero c;
-    entero d;
-    devuelve 10;
-}
 
 principal() {
-    entero a = 5;
-    entero b = 8;
-    imprime(func(a));
+
+    lista <entero> [12] l;
+    l[4] = 12;
+    imprime(l[4]);
+     l[11] = 1;
+    imprime(l[11]);
+
+    entero n = 0;
+    mientras(n < 12){
+        l[n] = n;
+        imprime(l[n]);
+        n = n + 1;
+    }
 }

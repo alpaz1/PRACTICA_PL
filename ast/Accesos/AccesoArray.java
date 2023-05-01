@@ -50,4 +50,59 @@ public class AccesoArray extends Acceso{
         
     }
 
+
+    public void generaCodigoAux(){
+        Programa.codigo.println(";;AQUI ACCESO ARRAY");//deja el valor de localsStart en la cima de la pila
+
+        Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
+
+        Programa.codigo.println("i32.const " + acceso.nodoVinculo.delta); //cte de valor el delta asociado al nodo
+        Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
+        Programa.codigo.println("i32.load"); //deja el valor en la pila
+        //hasta aqui acceso a la primera posición del array
+
+        //int tam_elem = tipo.getTam();
+        Programa.codigo.println(";;AQUI COMIENZO EXP");//deja el valor de localsStart en la cima de la pila
+
+        exp.generaCodigo(); // indice
+
+        Programa.codigo.println(";;AQUI FIN EXP");//deja el valor de localsStart en la cima de la pila
+        
+        Programa.codigo.println("i32.const " + 4); // tam un elemento
+        Programa.codigo.println("i32.mul");
+        Programa.codigo.println("i32.load");
+        Programa.codigo.println("i32.add");
+        
+    }
+
+    public void generaCodigo() {
+
+        Programa.codigo.println(";;AQUI ACCESO ARRAY");//deja el valor de localsStart en la cima de la pila
+
+        Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
+
+        Programa.codigo.println("i32.const " + acceso.nodoVinculo.delta); //cte de valor el delta asociado al nodo
+        Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
+        Programa.codigo.println("i32.load"); //deja el valor en la pila
+        //hasta aqui acceso a la primera posición del array
+
+        //int tam_elem = tipo.getTam();
+        Programa.codigo.println(";;AQUI COMIENZO EXP");//deja el valor de localsStart en la cima de la pila
+
+        exp.generaCodigo(); // indice
+
+        Programa.codigo.println(";;AQUI FIN EXP");//deja el valor de localsStart en la cima de la pila
+        
+        Programa.codigo.println("i32.const " + 4); // tam un elemento
+        Programa.codigo.println("i32.mul");
+        Programa.codigo.println("i32.load");
+        Programa.codigo.println("i32.add");
+        
+        Programa.codigo.println("i32.load");
+
+
+       
+        
+    }
+
 }

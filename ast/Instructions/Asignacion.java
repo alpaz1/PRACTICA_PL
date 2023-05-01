@@ -17,6 +17,7 @@ public class Asignacion extends Instruccion{
     }
 
 
+
     public Asignacion(Acceso iden, E exp, Types tipo){
         this.iden = iden;
         this.tipo = tipo;
@@ -56,5 +57,18 @@ public class Asignacion extends Instruccion{
         }
        // else  System.out.println("tipo OK");
 
+    }
+
+    public void generaCodigo(){
+        if(iden instanceof AccesoVar){
+            Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
+            Programa.codigo.println("i32.const " + iden.nodoVinculo.delta); //cte de valor el delta asociado al nodo del identificados de la variable cuyo valor vamos a modificar
+            Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
+        }
+        else if(iden instanceof AccesoArray){
+            ((AccesoArray)iden).generaCodigoAux();
+        }
+        exp.generaCodigo();
+        Programa.codigo.println("i32.store");
     }
 }

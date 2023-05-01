@@ -38,11 +38,14 @@ public class AccesoVar extends Acceso {
     @Override
     public void generaCodigo() {
         // Accedemos a la posicion
-        Programa.codigo.println("get_local $localsStart");
-        Programa.codigo.println("i32.const " + nodoVinculo.delta);
-        Programa.codigo.println("i32.add");
-        Programa.codigo.println("i32.load");
+        Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
+        Programa.codigo.println("i32.const " + nodoVinculo.delta); //cte de valor el delta asociado al nodo
+        Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
+        Programa.codigo.println("i32.load"); //deja el valor en la pila
+        
     }
+
+   
 
     @Override
     public void checkType() {

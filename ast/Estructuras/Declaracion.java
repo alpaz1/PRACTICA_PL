@@ -3,7 +3,6 @@ package ast.Estructuras;
 
 import ast.Expresions.Const;
 import ast.Expresions.E;
-import ast.Expresions.ExpArray;
 import ast.Instructions.Instruccion;
 import ast.Instructions.KindInstruction;
 import ast.Types.BasicTypes;
@@ -11,7 +10,6 @@ import ast.Types.KindTypes;
 import ast.Types.Types;
 import ast.ASTNode;
 import ast.Programa;
-import ast.Accesos.Acceso;
 
 public class Declaracion extends Instruccion {
 

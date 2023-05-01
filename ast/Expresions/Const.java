@@ -21,7 +21,7 @@ public class Const extends E {
   public void vincular() {}
 
   public String getValor() {
-    // se debería de cambiar a int o float segun corresponda
+    // se debería cambiar a int o float segun corresponda
     if (valor.equals("verdad")) {
       return "1";
     } else if (valor.equals("mentira")) {

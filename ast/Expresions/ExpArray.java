@@ -53,5 +53,7 @@ public class ExpArray  extends E{
             e.vincular();
         }
     }
+
+    
     
 }
