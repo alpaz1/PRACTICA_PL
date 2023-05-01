@@ -23,8 +23,8 @@ public class Bloque extends Instruccion{
         return KindInstruction.BLOCK;
     }
 
-    @Override
-    public int maxMemoria() {
+
+    public int maxMemoria(List<? extends Instruccion> instList) {
         int tamDeclaraciones = 0;
         int maximoBloque = 0;
         for (Instruccion instruccion : instList) {
@@ -38,6 +38,11 @@ public class Bloque extends Instruccion{
             }
         }
         return maximoBloque + tamDeclaraciones;
+    }
+
+    @Override
+    public int maxMemoria() {
+        return maxMemoria(instList);
     }
 
     @Override

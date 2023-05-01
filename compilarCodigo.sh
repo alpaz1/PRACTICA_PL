@@ -7,22 +7,12 @@ fi
 
 
 # Creamos el analizador lexico
-java -cp lib/jflex.jar jflex.Main AnalizadorLexicoTiny.l
-
-# Movemos el analizador lexico a alex
-mv -f AnalizadorLexicoTiny.java alex/AnalizadorLexicoTiny.java
+java -cp lib/jflex.jar jflex.Main AnalizadorLexicoTiny.l -d alex -nobak
 
 # Generamos el analizador sintáctico con CUP
-java -cp lib/cup.jar java_cup.Main -parser AnalizadorSintacticoTiny -symbols ClaseLexica -nopositions Tiny.cup #2> /dev/null
-
-# Movemos el analizador sintáctico a asint
-mv -f AnalizadorSintacticoTiny.java asint/AnalizadorSintacticoTiny.java
-mv -f ClaseLexica.java asint/ClaseLexica.java
+java -cp lib/cup.jar java_cup.Main -parser AnalizadorSintacticoTiny -symbols ClaseLexica -destdir asint -nopositions Tiny.cup #2> /dev/null
 
 # Compilamos todo
-
-#javac -cp lib/cup.jar */*.java 
-#find . -name "*.java" -exec javac -cp lib/cup.jar {} \;
 find . -name "*.java" -exec javac -cp lib/cup.jar -d bin/ {} +
 
 

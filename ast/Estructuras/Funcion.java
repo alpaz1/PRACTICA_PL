@@ -92,27 +92,13 @@ public class Funcion extends ASTNode{
     @Override
     public void generaCodigo() {
         int tam = 200; // TODO: cambiar esto a lo que ocupa la funcion
-        Programa.codigo.println("(func $" + nombre + "  (type $_sig_void)"); // TODO: cambiar esto por los parametros
-        Programa.codigo.println(" (local $localsStart i32)");
-        Programa.codigo.println(" (local $temp i32)");
         Programa.codigo.println(" i32.const " + tam); //  ;; let this be the stack size needed (params+locals+2)*4");
         Programa.codigo.println(" call $reserveStack"); // ;; returns old MP (dynamic link)");
-        Programa.codigo.println(" set_local $temp");
-        Programa.codigo.println(" get_global $MP");
-        Programa.codigo.println(" get_local $temp");
-        Programa.codigo.println(" i32.store"); // Guardo el MP antiguo en mp
-        Programa.codigo.println(" get_global $MP");
-        Programa.codigo.println(" get_global $SP");
-        Programa.codigo.println(" i32.store offset=4"); // Guardo el SP en mp + 4
-        Programa.codigo.println(" get_global $MP");
-        Programa.codigo.println(" i32.const 8"); // salto el mp antiguo y el sp
-        Programa.codigo.println(" i32.add");
-        Programa.codigo.println(" set_local $localsStart"); // La funcion empieza aqui
         for (Instruccion instruccion: instList){
             instruccion.generaCodigo(); 
         }
+        Programa.codigo.println(" end");
         Programa.codigo.println(" call $freeStack");
-        Programa.codigo.println(")");
     }
 
     public String toString(){

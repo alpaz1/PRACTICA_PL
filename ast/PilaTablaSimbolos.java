@@ -20,7 +20,7 @@ public class PilaTablaSimbolos {
      public void abreBloque(){
         // que empieza un nuevo bloque apilando una nueva tabla vacía
         pilaTabla.push(new HashMap<String,ASTNode>());
-        deltaBloques.push(0); // la posicion dentro del bloque empiceza en 0
+        deltaBloques.push(totalDelta); // El delta antes del bloque
     }
 
     // Cada vez que salgo de un ambito 
@@ -29,7 +29,7 @@ public class PilaTablaSimbolos {
         if (!pilaTabla.empty()){ 
             pilaTabla.pop(); 
         }
-        totalDelta -= deltaBloques.pop();
+        totalDelta = deltaBloques.pop();
     }
 
     public int getDelta() {
@@ -38,8 +38,6 @@ public class PilaTablaSimbolos {
 
     public void updateDelta(int size) {
         totalDelta += size;
-        int deltaBloque = deltaBloques.pop();
-        deltaBloques.push(deltaBloque + size);
     }
 
     // Insertamos en la tabla de la cima de la pila un nuevo identificador

@@ -16,6 +16,11 @@ public class Imprime extends Instruccion {
     }
 
     @Override
+    public void checkType() {
+        exp.checkType();
+    }
+
+    @Override
     public void generaCodigo() {
         exp.generaCodigo();
         // if (exp.getTipo().toString().equals(KindTypes.BOOL.toString())){

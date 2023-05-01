@@ -34,6 +34,11 @@ public class Devuelve extends Instruccion {
     }
 
     @Override
+    public void generaCodigo() {
+        
+    }
+
+    @Override
     public void checkType() {
         if (valorRetorno != null){
             valorRetorno.checkType();

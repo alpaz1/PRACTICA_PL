@@ -1,6 +1,8 @@
 package ast.Expresions;
 
 import ast.Programa;
+import ast.Types.BasicTypes;
+import ast.Types.KindTypes;
 import ast.Types.Types;
 
 public class Const extends E {
@@ -20,7 +22,13 @@ public class Const extends E {
 
   public String getValor() {
     // se debería de cambiar a int o float segun corresponda
-    return valor;
+    if (valor.equals("verdad")) {
+      return "1";
+    } else if (valor.equals("mentira")) {
+      return "0";
+    } else{
+      return valor;
+    }
   }
 
   @Override
@@ -34,6 +42,6 @@ public class Const extends E {
 
   @Override
   public void generaCodigo() {
-      Programa.codigo.println("i32.const " + valor);
+      Programa.codigo.println("i32.const " + getValor());
   }
 }

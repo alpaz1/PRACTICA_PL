@@ -68,8 +68,6 @@ public class DefinitionsList {
     }
 
     public void generaCodigo(){
-        for (Funcion f: lista_funcion)
-            f.generaCodigo();
         for (Declaracion d: lista_basica)
             d.generaCodigo();
         for (StructClass s: lista_struct)

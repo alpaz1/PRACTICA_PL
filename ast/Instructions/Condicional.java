@@ -53,6 +53,22 @@ public class Condicional extends Bloque {
         }
     }
 
+    @Override
+    public void generaCodigo() {
+        condicion.generaCodigo();
+        Programa.codigo.println("if");
+        for (Instruccion instruccion: instList){
+            instruccion.generaCodigo();
+        }
+        if (instrucciones_else != null){
+            Programa.codigo.println("else");
+            for (Instruccion instruccion: instrucciones_else){
+                instruccion.generaCodigo();
+            }
+        }
+        Programa.codigo.println("end");
+    }
+
     public String toString() {
         if (this.instrucciones_else == null)
             return "If (Condición:" + this.condicion.toString() + ", Instrucciones:\n" + this.instList.toString() + ")";
