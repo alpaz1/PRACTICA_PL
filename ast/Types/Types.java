@@ -22,5 +22,9 @@ public abstract class Types {
     public NodeKind nodeKind() {return NodeKind.TYPE;}
     public String toString() {return "";}
 
+    public String respresentacionWasm(){
+        return "";
+    }
+
     public abstract int getTam();
 }

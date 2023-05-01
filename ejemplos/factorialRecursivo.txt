@@ -1,18 +1,13 @@
-entero a = 0;
-
-
 entero factorialRec(entero n) {
     si (n == 0) {
         devuelve 1;
     }
     sino {
-        devuelve n * factorialRec (n - 1 ) ;
+        devuelve n * factorialRec(n - 1);
     }
 }
 
-entero y = factorialRec(0);
-
 principal () {
-    entero n = lee();
+    entero n = 5;
     imprime(factorialRec(n));
 }

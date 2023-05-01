@@ -35,7 +35,8 @@ public class Devuelve extends Instruccion {
 
     @Override
     public void generaCodigo() {
-        
+        valorRetorno.generaCodigo();
+        Programa.codigo.println("return");
     }
 
     @Override

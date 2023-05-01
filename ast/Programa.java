@@ -59,7 +59,7 @@ public class Programa extends ASTNode {
             preludio.transferTo(codigo);
             preludio.close();
 
-            // definiciones.generaCodigo();
+            definiciones.generaFunc();
             fmain.generaCodigo();
             
             FileReader epilogo = new FileReader("codigo/epilogo.wat");

@@ -1,13 +1,13 @@
 entero c = 9;
 
 entero func(entero a){
-    imprime(a);
+    entero c;
+    entero d;
     devuelve 10;
 }
 
 principal() {
     entero a = 5;
     entero b = 8;
-
-    imprime(func(b));
+    imprime(func(a));
 }

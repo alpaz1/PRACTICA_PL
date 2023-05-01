@@ -24,7 +24,7 @@ public class Bloque extends Instruccion{
     }
 
 
-    public int maxMemoria(List<? extends Instruccion> instList) {
+    public static int maxMemoria(List<? extends Instruccion> instList) {
         int tamDeclaraciones = 0;
         int maximoBloque = 0;
         for (Instruccion instruccion : instList) {
