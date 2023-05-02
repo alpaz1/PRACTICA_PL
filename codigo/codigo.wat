@@ -15,7 +15,7 @@
 (func $principal
  (local $localsStart i32)
  (local $temp i32)
- i32.const 636
+ i32.const 8
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -28,18 +28,11 @@
  i32.const 8
  i32.add
  set_local $localsStart
-;;INICIO DECLARACIONi
-i32.const 0
-get_local $localsStart
-i32.add
-i32.const 0
-i32.store
-;;FIN DECLARACIONi
 ;;INICIO DECLARACIONn
-i32.const 4
+i32.const 0
 get_local $localsStart
 i32.add
-i32.const 0
+i32.const 1
 i32.store
 ;;FIN DECLARACIONn
 block
@@ -48,101 +41,21 @@ get_local $localsStart
 i32.const 0
 i32.add
 i32.load
-i32.const 12
+i32.const 10
 i32.lt_s
 i32.eqz
 br_if 1
-;;INICIO DECLARACIONj
-i32.const 584
-get_local $localsStart
-i32.add
-i32.const 0
-i32.store
-;;FIN DECLARACIONj
-block
-loop
-get_local $localsStart
-i32.const 584
-i32.add
-i32.load
-i32.const 12
-i32.lt_s
-i32.eqz
-br_if 1
-;;INICIO ASIGNACIONj
-get_local $localsStart
-i32.const 584
-i32.add
-get_local $localsStart
-i32.const 584
-i32.add
-i32.load
-i32.const 1
-i32.add
-i32.store
-;;FIN ASIGNACIONj
-;;INICIO ASIGNACIONAccArr(AccArr(l[i])[j])
-get_local $localsStart
-;;AQUI ACCESO ARRAY AccArr(l[i])
-;;AQUI COMIENZO EXP i
 get_local $localsStart
 i32.const 0
 i32.add
-i32.load
-;;AQUI FIN EXP i
-i32.const 48
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(l[i])
-;;AQUI ACCESO ARRAY AccArr(AccArr(l[i])[j])
-;;AQUI COMIENZO EXP j
-get_local $localsStart
-i32.const 584
-i32.add
-i32.load
-;;AQUI FIN EXP j
-i32.const 4
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(AccArr(l[i])[j])
-get_local $localsStart
-i32.const 4
-i32.add
-i32.load
-i32.store
-;;FIN ASIGNACIONAccArr(AccArr(l[i])[j])
-get_local $localsStart
-;;AQUI ACCESO ARRAY
-;;AQUI ACCESO ARRAY AccArr(l[i])
-;;AQUI COMIENZO EXP i
-get_local $localsStart
-i32.const 0
-i32.add
-i32.load
-;;AQUI FIN EXP i
-i32.const 48
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(l[i])
-;;AQUI ACCESO ARRAY AccArr(AccArr(l[i])[j])
-;;AQUI COMIENZO EXP j
-get_local $localsStart
-i32.const 584
-i32.add
-i32.load
-;;AQUI FIN EXP j
-i32.const 4
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(AccArr(l[i])[j])
 i32.load
 call $print
 ;;INICIO ASIGNACIONn
 get_local $localsStart
-i32.const 4
+i32.const 0
 i32.add
 get_local $localsStart
-i32.const 4
+i32.const 0
 i32.add
 i32.load
 i32.const 1
@@ -152,128 +65,103 @@ i32.store
 br 0
 end
 end
-;;INICIO ASIGNACIONi
+;;INICIO DECLARACIONi
+i32.const 4
 get_local $localsStart
-i32.const 0
 i32.add
+i32.const 9
+i32.store
+;;FIN DECLARACIONi
+block
+loop
 get_local $localsStart
-i32.const 0
+i32.const 4
 i32.add
 i32.load
 i32.const 1
+i32.ge_s
+i32.eqz
+br_if 1
+get_local $localsStart
+i32.const 4
 i32.add
+i32.load
+i32.load
+set_local $temp
+block $break
+block ;; un caso
+block ;; un caso
+block ;; caso default
+end
+get_local $temp
+i32.const 1
+get_local $temp
+i32.eq
+i32.eqz
+br_if 0
+i32.const 1
+call $print
+br $break
+set_local $temp
+end
+get_local $temp
+i32.const 5
+get_local $temp
+i32.eq
+i32.eqz
+br_if 0
+i32.const 10
+call $print
+br $break
+set_local $temp
+end
+get_local $temp
+i32.const 0
+call $print
+br $break
+set_local $temp
+end ;; para salir del switch con break
+;;INICIO ASIGNACIONi
+get_local $localsStart
+i32.const 4
+i32.add
+get_local $localsStart
+i32.const 4
+i32.add
+i32.load
+i32.const 1
+i32.sub
 i32.store
 ;;FIN ASIGNACIONi
 br 0
 end
 end
-;;INICIO ASIGNACIONAccArr(l1[4])
-get_local $localsStart
-;;AQUI ACCESO ARRAY AccArr(l1[4])
-;;AQUI COMIENZO EXP 4
-i32.const 4
-;;AQUI FIN EXP 4
-i32.const 4
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(l1[4])
-i32.const 12
-i32.store
-;;FIN ASIGNACIONAccArr(l1[4])
-get_local $localsStart
-;;AQUI ACCESO ARRAY AccArr(l1[4])
-;;AQUI COMIENZO EXP 4
-i32.const 4
-;;AQUI FIN EXP 4
-i32.const 4
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(l1[4])
-i32.load
-call $print
-;;INICIO ASIGNACIONAccArr(l1[11])
-get_local $localsStart
-;;AQUI ACCESO ARRAY AccArr(l1[11])
-;;AQUI COMIENZO EXP 11
-i32.const 11
-;;AQUI FIN EXP 11
-i32.const 4
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(l1[11])
-i32.const 1
-i32.store
-;;FIN ASIGNACIONAccArr(l1[11])
-get_local $localsStart
-;;AQUI ACCESO ARRAY AccArr(l1[11])
-;;AQUI COMIENZO EXP 11
-i32.const 11
-;;AQUI FIN EXP 11
-i32.const 4
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(l1[11])
-i32.load
-call $print
-;;INICIO ASIGNACIONn
-get_local $localsStart
-i32.const 4
-i32.add
-i32.const 0
-i32.store
-;;FIN ASIGNACIONn
 block
 loop
 get_local $localsStart
-i32.const 4
+i32.const 0
 i32.add
 i32.load
-i32.const 12
+i32.const 20
 i32.lt_s
 i32.eqz
 br_if 1
-;;INICIO ASIGNACIONAccArr(l1[n])
+i32.const 2
 get_local $localsStart
-;;AQUI ACCESO ARRAY AccArr(l1[n])
-;;AQUI COMIENZO EXP n
-get_local $localsStart
-i32.const 4
+i32.const 0
 i32.add
 i32.load
-;;AQUI FIN EXP n
-i32.const 4
 i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(l1[n])
-get_local $localsStart
-i32.const 4
-i32.add
-i32.load
-i32.store
-;;FIN ASIGNACIONAccArr(l1[n])
-get_local $localsStart
-;;AQUI ACCESO ARRAY AccArr(l1[n])
-;;AQUI COMIENZO EXP n
-get_local $localsStart
-i32.const 4
-i32.add
-i32.load
-;;AQUI FIN EXP n
-i32.const 4
-i32.mul
-i32.add
-;;AQUI FIN ARRAY AccArr(l1[n])
-i32.load
 call $print
 ;;INICIO ASIGNACIONn
 get_local $localsStart
-i32.const 4
+i32.const 0
 i32.add
 get_local $localsStart
-i32.const 4
+i32.const 0
 i32.add
 i32.load
-i32.const 1
+i32.const 2
 i32.add
 i32.store
 ;;FIN ASIGNACIONn

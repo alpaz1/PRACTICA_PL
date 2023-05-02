@@ -3,6 +3,7 @@ package ast.Instructions;
 import java.util.List;
 
 import ast.Programa;
+import ast.Accesos.Acceso;
 import ast.Expresions.E;
 
 public class Switch extends Bloque{
@@ -24,6 +25,32 @@ public class Switch extends Bloque{
         this.casos = casos;
         this.instList = casos;
         this.porDefecto = def;
+    }
+
+    public void generaCodigo(){
+        exp.generaCodigo(); // evaluo la condicion 
+        if(exp instanceof Acceso){
+            Programa.codigo.println("i32.load"); // si es acceso, obtengo su valor
+        }
+        Programa.codigo.println("set_local $temp"); // guardo la condicion en temp
+
+        Programa.codigo.println("block $break"); // block etiqueta en end para saltar cuando entre en un caso con break
+        for (CasoSwitch caso : casos){
+            Programa.codigo.println("block ;; un caso");
+        }
+        if (hayPorDefecto)
+            Programa.codigo.println("block ;; caso default");
+        for (CasoSwitch caso : casos){
+            caso.generaCodigo(); // lo primero que haré despues de end es dejar en la cima de la pila el valor de la exp
+            Programa.codigo.println("set_local $temp"); // guardo la condicion en temp que dejé en la cima para recuperar
+        }
+        if (hayPorDefecto){
+            porDefecto.generaCodigo();
+            Programa.codigo.println("set_local $temp");
+        }
+
+        Programa.codigo.println("end ;; para salir del switch con break");
+        //Programa.escribir.println("drop"); // para quitar de la cima el valor
     }
 
     public void vincular(){

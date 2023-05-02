@@ -26,6 +26,29 @@ public class BucleFor extends Bloque {
         this.a = a;
     }
 
+    public void generaCodigo(){
+        if (dec != null)
+            dec.generaCodigo();
+
+        Programa.codigo.println("block");
+        Programa.codigo.println("loop");
+
+        exp.generaCodigo();
+        
+        Programa.codigo.println("i32.eqz");
+        Programa.codigo.println("br_if 1");
+        
+        for (Instruccion ins : instList){
+            ins.generaCodigo();
+        }
+
+        a.generaCodigo();
+
+        Programa.codigo.println("br 0");
+        Programa.codigo.println("end");
+        Programa.codigo.println("end");
+    }
+
     @Override
     public void vincular() {
         Programa.pila.abreBloque();
