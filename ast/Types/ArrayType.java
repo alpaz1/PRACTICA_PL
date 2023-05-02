@@ -27,7 +27,9 @@ public class ArrayType extends Types{
 
     @Override
     public int getTam() {
+        
         return tipo.getTam() * Integer.parseInt(tam.getValor());
+       
     }
 
     

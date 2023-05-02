@@ -5,7 +5,7 @@ import ast.Expresions.E;
 import ast.Types.ArrayType;
 
 public class AccesoArray extends Acceso{
-    protected Acceso acceso;
+    public Acceso acceso;
     protected E exp;
 
     public AccesoArray(Acceso acceso, E exp) {
@@ -50,59 +50,73 @@ public class AccesoArray extends Acceso{
         
     }
 
+    public void calcularDirRelativa(AccesoArray a){
 
-    public void generaCodigoAux(){
-        Programa.codigo.println(";;AQUI ACCESO ARRAY");//deja el valor de localsStart en la cima de la pila
+        Programa.codigo.println(";;AQUI ACCESO ARRAY " + a);//deja el valor de localsStart en la cima de la pila
 
-        Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
 
-        Programa.codigo.println("i32.const " + acceso.nodoVinculo.delta); //cte de valor el delta asociado al nodo
-        Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
-        Programa.codigo.println("i32.load"); //deja el valor en la pila
-        //hasta aqui acceso a la primera posición del array
-
+      
         //int tam_elem = tipo.getTam();
-        Programa.codigo.println(";;AQUI COMIENZO EXP");//deja el valor de localsStart en la cima de la pila
+        Programa.codigo.println(";;AQUI COMIENZO EXP " + a.exp);//deja el valor de localsStart en la cima de la pila
 
-        exp.generaCodigo(); // indice
+        a.exp.generaCodigo(); // indice
 
-        Programa.codigo.println(";;AQUI FIN EXP");//deja el valor de localsStart en la cima de la pila
-        
-        Programa.codigo.println("i32.const " + 4); // tam un elemento
+        Programa.codigo.println(";;AQUI FIN EXP " + a.exp) ;//deja el valor de localsStart en la cima de la pila
+        int tam_elem = a.tipo.getTam();
+
+        Programa.codigo.println("i32.const " + tam_elem ); // tam un elemento
         Programa.codigo.println("i32.mul");
-        Programa.codigo.println("i32.load");
         Programa.codigo.println("i32.add");
-        
+        Programa.codigo.println(";;AQUI FIN ARRAY " + a);//deja el valor de localsStart en la cima de la pila
+
     }
+
+
+
+
 
     public void generaCodigo() {
 
-        Programa.codigo.println(";;AQUI ACCESO ARRAY");//deja el valor de localsStart en la cima de la pila
-
+        Acceso aux = this.acceso;
         Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
 
-        Programa.codigo.println("i32.const " + acceso.nodoVinculo.delta); //cte de valor el delta asociado al nodo
-        Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
-        Programa.codigo.println("i32.load"); //deja el valor en la pila
-        //hasta aqui acceso a la primera posición del array
+            while( aux instanceof AccesoArray){
+                Programa.codigo.println(";;AQUI ACCESO ARRAY");//deja el valor de localsStart en la cima de la pila
 
-        //int tam_elem = tipo.getTam();
-        Programa.codigo.println(";;AQUI COMIENZO EXP");//deja el valor de localsStart en la cima de la pila
+                
+                calcularDirRelativa(((AccesoArray)aux));
+                
+                aux = ((AccesoArray)aux).acceso;                
 
-        exp.generaCodigo(); // indice
+            }
+            calcularDirRelativa(this);
+            Programa.codigo.println("i32.load");
 
-        Programa.codigo.println(";;AQUI FIN EXP");//deja el valor de localsStart en la cima de la pila
-        
-        Programa.codigo.println("i32.const " + 4); // tam un elemento
-        Programa.codigo.println("i32.mul");
-        Programa.codigo.println("i32.load");
-        Programa.codigo.println("i32.add");
-        
-        Programa.codigo.println("i32.load");
-
-
-       
         
     }
 
+    /*get_local $localsStart
+i32.const 0
+i32.add
+i32.load
+;;AQUI COMIENZO EXP 9
+i32.const 9
+;;AQUI FIN EXP 9
+i32.const 48
+i32.mul
+i32.load
+i32.add
+;;AQUI FIN ARRAY l
+;;AQUI ACCESO ARRAY AccArr(l[9])
+i32.const 0
+i32.add
+i32.load
+;;AQUI COMIENZO EXP 10
+i32.const 10
+;;AQUI FIN EXP 10
+i32.const 4
+i32.mul
+i32.load
+i32.add
+;;AQUI FIN ARRAY AccArr(l[9]) */
 }

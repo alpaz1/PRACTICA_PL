@@ -136,6 +136,8 @@ public class Declaracion extends Instruccion {
     public void generaCodigo() {
 
         if (exp != null) {
+            Programa.codigo.println(";;INICIO DECLARACION" + nombre);
+
             Programa.codigo.println("i32.const " + delta);
             Programa.codigo.println("get_local $localsStart");
             Programa.codigo.println("i32.add");
@@ -145,6 +147,7 @@ public class Declaracion extends Instruccion {
             //     Programa.codigo.println("i32.load"); // devuelve direccion
             // }
             Programa.codigo.println("i32.store"); // Guarda exp en la posicion localsStart + delta
+            Programa.codigo.println(";;FIN DECLARACION" + nombre);
         }
     }
 
