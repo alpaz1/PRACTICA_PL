@@ -3,11 +3,16 @@ package ast.Estructuras;
 
 import ast.Expresions.Const;
 import ast.Expresions.E;
+import ast.Expresions.ExpArray;
 import ast.Instructions.Instruccion;
 import ast.Instructions.KindInstruction;
 import ast.Types.BasicTypes;
 import ast.Types.KindTypes;
 import ast.Types.Types;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import ast.ASTNode;
 import ast.Programa;
 
@@ -135,7 +140,32 @@ public class Declaracion extends Instruccion {
     @Override
     public void generaCodigo() {
 
-        if (exp != null) {
+        if(exp instanceof ExpArray){
+
+           
+
+
+            int i = 0;
+            for(E e: ((ExpArray)exp).getListaConst()){
+                Programa.codigo.println(";;INICIO DECLARACION" + nombre);
+
+                Programa.codigo.println("i32.const " + delta);
+                Programa.codigo.println("get_local $localsStart");
+                Programa.codigo.println("i32.add");
+                Programa.codigo.println("i32.const " + i*e.tipo.getTam());
+                ++i;
+                Programa.codigo.println("i32.add");
+
+                
+                e.generaCodigo();
+                
+                Programa.codigo.println("i32.store"); // Guarda exp en la posicion localsStart + delta
+                Programa.codigo.println(";;FIN DECLARACION" + nombre);
+            }
+
+
+        }
+        else if (exp != null) {
             Programa.codigo.println(";;INICIO DECLARACION" + nombre);
 
             Programa.codigo.println("i32.const " + delta);

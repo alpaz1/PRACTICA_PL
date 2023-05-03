@@ -58,6 +58,6 @@ public class AccesoStruct extends Acceso{
     public void calcularDirRelativa() {
         acceso.calcularDirRelativa();
         Programa.codigo.println("i32.const " + campoVinculo.delta);
-        Programa.codigo.println("i32.sum");
+        Programa.codigo.println("i32.add");
     }
 }

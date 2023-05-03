@@ -1,8 +1,6 @@
 package ast.Expresions;
 
 import ast.Programa;
-import ast.Types.BasicTypes;
-import ast.Types.KindTypes;
 import ast.Types.Types;
 
 public class Const extends E {

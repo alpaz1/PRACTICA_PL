@@ -2,7 +2,6 @@ package ast.Expresions;
 
 import ast.ASTNode;
 import ast.NodeKind;
-import ast.Types.Types;
 
 public abstract class E extends ASTNode {
     public abstract KindE kindExp();

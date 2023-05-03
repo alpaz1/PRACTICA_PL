@@ -64,6 +64,7 @@ public class Asignacion extends Instruccion{
 
         iden.calcularDirRelativa();
         exp.generaCodigo();
+
         Programa.codigo.println("i32.store");
         Programa.codigo.println(";;FIN ASIGNACION" + iden);
     }
