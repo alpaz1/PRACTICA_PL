@@ -1,8 +1,11 @@
 package ast.Expresions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import ast.Pair;
+import ast.Programa;
 import ast.Types.ArrayType;
 import ast.Types.BasicTypes;
 import ast.Types.KindTypes;
@@ -13,6 +16,8 @@ public class ExpArray  extends E{
 
     public ExpArray( ArrayList<E> valor){
         this.valor = valor;    
+        Collections.reverse(valor);
+
     }
 
     @Override
@@ -20,7 +25,24 @@ public class ExpArray  extends E{
         return KindE.ARRAY;
     }
 
+    public ArrayList<E> getListaConst(){
+
+    
+        
+        ArrayList <E> aux = new ArrayList<E>();
+        for(E e: valor){
+            if(e.kindExp().toString().equals("ARRAY"))
+                aux.addAll(((ExpArray)e).getListaConst());
+            else return valor;
+        }
+        return aux;
+        
+    }
+
  
+    public ArrayList<E> getValor(){
+        return valor;
+    }
 
 
     @Override
@@ -53,6 +75,28 @@ public class ExpArray  extends E{
             e.vincular();
         }
     }
+
+    /* 
+
+    public String getValor() {
+        // se debería cambiar a int o float segun corresponda
+        if (valor.equals("verdad")) {
+          return "1";
+        } else if (valor.equals("mentira")) {
+          return "0";
+        } else{
+          return valor;
+        }
+      }
+    
+  
+    
+      @Override
+      public void generaCodigo() {
+          Programa.codigo.println("i32.const " + getValor());
+      }
+    
+      */
 
     
     

@@ -5,16 +5,15 @@ import ast.Programa;
 import ast.Estructuras.Declaracion;
 import ast.Expresions.Const;
 import ast.Types.BasicTypes;
-import ast.Types.EnumTypes;
 import ast.Types.KindTypes;
 import ast.Estructuras.EnumClass;
 
 public class AccesoVar extends Acceso {
-    private String direccionInicial;
+    private String nombreVar;
     private String nombreEnum;
 
     public AccesoVar(String nombreVar) {
-        this.direccionInicial = nombreVar;
+        this.nombreVar = nombreVar;
     }
 
     public String getNombreEnum() {
@@ -22,9 +21,9 @@ public class AccesoVar extends Acceso {
     }
 
     public void vincular() {
-        ASTNode nodo = Programa.pila.buscaId(direccionInicial);
+        ASTNode nodo = Programa.pila.buscaId(nombreVar);
         if (nodo == null) {
-            System.out.println("Error vinculacion: Intento de acceso sin declaracion: " + direccionInicial);
+            System.out.println("Error vinculacion: Intento de acceso sin declaracion: " + nombreVar);
             Programa.okVinculacion = false;
         } else{
             this.nodoVinculo = nodo;
@@ -32,20 +31,15 @@ public class AccesoVar extends Acceso {
     }
 
     public String toString() {
-        return direccionInicial;
+        return nombreVar;
     }
 
     @Override
-    public void generaCodigo() {
-        // Accedemos a la posicion
+    public void calcularDirRelativa() {
         Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
         Programa.codigo.println("i32.const " + nodoVinculo.delta); //cte de valor el delta asociado al nodo
         Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
-        Programa.codigo.println("i32.load"); //deja el valor en la pila
-        
     }
-
-   
 
     @Override
     public void checkType() {
@@ -65,7 +59,7 @@ public class AccesoVar extends Acceso {
             boolean ok = false;
             for (EnumClass enum_ : Programa.definiciones.getEnumList()) {
                 for (Const c : enum_.getCampos()) {
-                    if (c.getValor().equals(direccionInicial)) {
+                    if (c.getValor().equals(nombreVar)) {
                         ok = true;
                         nombreEnum = enum_.getName();
                         this.tipo = new BasicTypes(KindTypes.ENUM);
@@ -76,7 +70,7 @@ public class AccesoVar extends Acceso {
                     break;
             }
             if (!ok) {
-                System.out.println("Error tipos: acceso a variable  " + direccionInicial);
+                System.out.println("Error tipos: acceso a variable  " + nombreVar);
                 Programa.okTipos = false;
             }
         }
