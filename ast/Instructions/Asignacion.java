@@ -62,28 +62,7 @@ public class Asignacion extends Instruccion{
     public void generaCodigo(){
         Programa.codigo.println(";;INICIO ASIGNACION" + iden);
 
-        if(iden instanceof AccesoVar){
-            Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
-            Programa.codigo.println("i32.const " + iden.nodoVinculo.delta); //cte de valor el delta asociado al nodo del identificados de la variable cuyo valor vamos a modificar
-            Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
-        }
-        else if(iden instanceof AccesoArray){
-            Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
-
-            Acceso aux = ((AccesoArray)iden).acceso;
-            while( aux instanceof AccesoArray){
-
-                ((AccesoArray)aux).calcularDirRelativa(((AccesoArray)aux));
-                aux = ((AccesoArray)aux).acceso;
-                
-
-            }
-            ((AccesoArray)iden).calcularDirRelativa((AccesoArray)iden);
-
-
-            
-        }
-
+        iden.calcularDirRelativa();
         exp.generaCodigo();
         Programa.codigo.println("i32.store");
         Programa.codigo.println(";;FIN ASIGNACION" + iden);

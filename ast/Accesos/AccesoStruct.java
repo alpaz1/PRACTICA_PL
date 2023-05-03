@@ -9,6 +9,7 @@ import ast.Types.StructType;
 public class AccesoStruct extends Acceso{
     protected Acceso acceso;
     protected String campo; // aceso.campo
+    Declaracion campoVinculo;
 
     public AccesoStruct(Acceso acceso, String campo) {
         this.campo = campo;
@@ -43,6 +44,7 @@ public class AccesoStruct extends Acceso{
                  }
                 else {
                     this.tipo = m.tipo;
+                    this.campoVinculo = m;
                 } 
             }
         }
@@ -50,5 +52,12 @@ public class AccesoStruct extends Acceso{
             System.out.println("Error tipos: Acceso Struct ");
             Programa.okTipos = false;
         }
+    }
+
+    @Override
+    public void calcularDirRelativa() {
+        acceso.calcularDirRelativa();
+        Programa.codigo.println("i32.const " + campoVinculo.delta);
+        Programa.codigo.println("i32.sum");
     }
 }

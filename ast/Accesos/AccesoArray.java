@@ -13,12 +13,14 @@ public class AccesoArray extends Acceso{
         this.acceso = acceso;
     }
 
+    @Override
     public void vincular() {
         acceso.vincular();
         this.nodoVinculo = acceso.nodoVinculo;
         exp.vincular();
     }
 
+    @Override
     public String toString() {
         return "AccArr(" + acceso + "[" + exp + "])";
     }
@@ -50,73 +52,26 @@ public class AccesoArray extends Acceso{
         
     }
 
-    public void calcularDirRelativa(AccesoArray a){
+    @Override
+    public void calcularDirRelativa(){
+        Programa.codigo.println(";;AQUI ACCESO ARRAY " + this);
+        Programa.codigo.println(";;AQUI COMIENZO EXP " + exp);
 
-        Programa.codigo.println(";;AQUI ACCESO ARRAY " + a);//deja el valor de localsStart en la cima de la pila
+        exp.generaCodigo(); // indice
 
+        Programa.codigo.println(";;AQUI FIN EXP " + exp) ;
 
-      
-        //int tam_elem = tipo.getTam();
-        Programa.codigo.println(";;AQUI COMIENZO EXP " + a.exp);//deja el valor de localsStart en la cima de la pila
-
-        a.exp.generaCodigo(); // indice
-
-        Programa.codigo.println(";;AQUI FIN EXP " + a.exp) ;//deja el valor de localsStart en la cima de la pila
-        int tam_elem = a.tipo.getTam();
-
-        Programa.codigo.println("i32.const " + tam_elem ); // tam un elemento
+        Programa.codigo.println("i32.const " + tipo.getTam()); // tam un elemento
         Programa.codigo.println("i32.mul");
+
+        acceso.calcularDirRelativa();
+
         Programa.codigo.println("i32.add");
-        Programa.codigo.println(";;AQUI FIN ARRAY " + a);//deja el valor de localsStart en la cima de la pila
-
+        Programa.codigo.println(";;AQUI FIN ARRAY " + this);
     }
-
-
-
-
 
     public void generaCodigo() {
-
-        Acceso aux = this.acceso;
-        Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
-
-            while( aux instanceof AccesoArray){
-                Programa.codigo.println(";;AQUI ACCESO ARRAY");//deja el valor de localsStart en la cima de la pila
-
-                
-                calcularDirRelativa(((AccesoArray)aux));
-                
-                aux = ((AccesoArray)aux).acceso;                
-
-            }
-            calcularDirRelativa(this);
-            Programa.codigo.println("i32.load");
-
-        
+        calcularDirRelativa();                    
+        Programa.codigo.println("i32.load");
     }
-
-    /*get_local $localsStart
-i32.const 0
-i32.add
-i32.load
-;;AQUI COMIENZO EXP 9
-i32.const 9
-;;AQUI FIN EXP 9
-i32.const 48
-i32.mul
-i32.load
-i32.add
-;;AQUI FIN ARRAY l
-;;AQUI ACCESO ARRAY AccArr(l[9])
-i32.const 0
-i32.add
-i32.load
-;;AQUI COMIENZO EXP 10
-i32.const 10
-;;AQUI FIN EXP 10
-i32.const 4
-i32.mul
-i32.load
-i32.add
-;;AQUI FIN ARRAY AccArr(l[9]) */
 }
