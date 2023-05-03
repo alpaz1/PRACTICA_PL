@@ -198,4 +198,4 @@ identificador = {letra}({letra}|{digito}|"_")*
 
 
 {identificador}           {return ops.unidadId();}
-[^]                       {ops.error();}  
+[^]                       {errores.errorLexico(fila(),columna(),lexema());}  
