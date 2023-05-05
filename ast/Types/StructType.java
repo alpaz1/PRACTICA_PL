@@ -4,8 +4,8 @@ import java.util.List;
 
 import ast.ASTNode;
 import ast.Programa;
-import ast.Estructuras.Declaracion;
 import ast.Estructuras.StructClass;
+import ast.Instructions.Declaracion;
 
 public class StructType extends Types{
 

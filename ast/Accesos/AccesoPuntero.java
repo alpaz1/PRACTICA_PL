@@ -30,10 +30,7 @@ public class AccesoPuntero extends Acceso{
     }
 
     @Override
-    public void generaCodigo() {
-        Programa.codigo.println("get_local $localsStart");
+    public void calcularDirRelativa() {
         nodoVinculo.generaCodigo();
-        Programa.codigo.println("i32.add");
-        Programa.codigo.println("i32.load");
     }
 }

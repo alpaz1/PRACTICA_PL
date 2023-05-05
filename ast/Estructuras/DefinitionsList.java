@@ -4,6 +4,7 @@ import java.util.*;
 
 import ast.Estructuras.clases.*;
 import ast.Instructions.Alias;
+import ast.Instructions.Declaracion;
 import ast.Programa;
 import ast.Auxiliares.Modulo;
 

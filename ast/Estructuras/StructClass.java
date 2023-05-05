@@ -5,6 +5,7 @@ import java.util.List;
 import ast.ASTNode;
 import ast.Programa;
 import ast.Util;
+import ast.Instructions.Declaracion;
 
 public class StructClass extends ASTNode{
     private String name;

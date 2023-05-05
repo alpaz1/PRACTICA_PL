@@ -23,6 +23,9 @@ public abstract class ASTNode {
     public int getDelta() {
         return delta;
     }
+    public void calcularDirRelativa(){
+        throw new UnsupportedOperationException("Unimplemented method 'calcularDirRelativa'");
+    }
     //public abstract NodeKind nodeKind();
     //public abstract String toString();
 }

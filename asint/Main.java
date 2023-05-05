@@ -17,8 +17,8 @@ public class Main {
 		p.vincular(); // vinculacion
 		System.out.println("------------------------ TIPADO ------------------------");
 		p.checkType();//tipado
-		System.out.println("------------------------ GENERACION DE CODIGO ------------------------");
-		if (Programa.okVinculacion || Programa.okTipos){
+		if (Programa.okVinculacion && Programa.okTipos){
+			System.out.println("------------------------ GENERACION DE CODIGO ------------------------");
 			p.generaCodigo();
 		} else{
 			System.out.println("Demasiados errores, no se puede generar codigo.");

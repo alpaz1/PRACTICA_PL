@@ -2,6 +2,7 @@ package ast.Expresions;
 
 import ast.ASTNode;
 import ast.NodeKind;
+import ast.Types.KindTypes;
 
 public abstract class E extends ASTNode {
     public abstract KindE kindExp();
@@ -15,7 +16,7 @@ public abstract class E extends ASTNode {
         return null;
     }
     public boolean isBasica() {
-        return getTipo().toString().equals("INT") || getTipo().toString().equals("FLOAT") ;
+        return getTipo().kind() == KindTypes.INT || getTipo().kind() == KindTypes.FLOAT || getTipo().kind() == KindTypes.POINTER;
     }
     public void calcularDirRelativa(){
         throw new UnsupportedOperationException();

@@ -2,8 +2,8 @@ package ast.Accesos;
 
 import ast.ASTNode;
 import ast.Programa;
-import ast.Estructuras.Declaracion;
 import ast.Expresions.Const;
+import ast.Instructions.Declaracion;
 import ast.Types.BasicTypes;
 import ast.Types.KindTypes;
 import ast.Estructuras.EnumClass;

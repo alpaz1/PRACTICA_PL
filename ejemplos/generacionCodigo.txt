@@ -8,8 +8,10 @@ estructura Tiempo{
 
 
 principal() {
-    entero a = 3;
-    entero* ptrA = *a;
-
-    imprime(@ptrA);
+    lista <Tiempo*> [4] lstTiempo;
+    Tiempo t2;
+    t2.minuto = 6;
+    lstTiempo[2] = *t2;
+    
+    imprime(@(lstTiempo[2]).minuto);
 }

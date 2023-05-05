@@ -1,20 +1,15 @@
 
-package ast.Estructuras;
+package ast.Instructions;
 
 import ast.Expresions.Const;
 import ast.Expresions.E;
 import ast.Expresions.ExpArray;
-import ast.Instructions.Instruccion;
-import ast.Instructions.KindInstruction;
 import ast.Types.BasicTypes;
 import ast.Types.KindTypes;
 import ast.Types.Types;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import ast.ASTNode;
 import ast.Programa;
+import ast.Estructuras.EnumClass;
 
 public class Declaracion extends Instruccion {
 
@@ -130,24 +125,21 @@ public class Declaracion extends Instruccion {
 
             if (!this.tipo.toString().equals(exp.tipo.toString())) { // tipos básicos
                 System.out.println("Error tipo: Declaracion " + tipo + " " + nombre + " = " + exp + "(" + this.tipo + ","
-                        + exp.tipo + ")");
+                + exp.tipo + ")");
                 Programa.okTipos = false;
             }
             // else System.out.println("tipo OK");
         }
     }
-
+    
     @Override
     public void generaCodigo() {
-
         if(exp instanceof ExpArray){
             int i = 0;
             for(E e: ((ExpArray)exp).getListaConst()){
                 Programa.codigo.println(";;Inicio declaracion " + nombre);
 
-                Programa.codigo.println("i32.const " + delta);
-                Programa.codigo.println("get_local $localsStart");
-                Programa.codigo.println("i32.add");
+                calcularDirRelativa();
                 Programa.codigo.println("i32.const " + i*e.tipo.getTam());
                 ++i;
                 Programa.codigo.println("i32.add");
@@ -161,18 +153,26 @@ public class Declaracion extends Instruccion {
         }
         else if (exp != null) {
             Programa.codigo.println(";;Inicio declaracion " + nombre);
-
-            Programa.codigo.println("i32.const " + delta);
-            Programa.codigo.println("get_local $localsStart");
-            Programa.codigo.println("i32.add");
-
-            exp.generaCodigo();
-            // if (exp instanceof Acceso) {
-            //     Programa.codigo.println("i32.load"); // devuelve direccion
-            // }
-            Programa.codigo.println("i32.store"); // Guarda exp en la posicion localsStart + delta
+            if (exp.isBasica()){ // para a = 3 + 2;
+                calcularDirRelativa();
+                exp.generaCodigo();
+                Programa.codigo.println("i32.store");
+            } else {
+                // Para a = t; (t es un struct)
+                exp.calcularDirRelativa();
+                calcularDirRelativa();
+                Programa.codigo.println("i32.const " + exp.getTipo().getTam());;
+                Programa.codigo.println("call $copyn"); // src dest tam
+            }
             Programa.codigo.println(";;Fin declaracion " + nombre);
         }
+    }
+
+
+    public void calcularDirRelativa(){
+        Programa.codigo.println("i32.const " + delta);
+        Programa.codigo.println("get_local $localsStart");
+        Programa.codigo.println("i32.add");
     }
 
     @Override

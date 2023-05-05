@@ -111,6 +111,8 @@ Acceso1 ::= IDEN:nombre
             | ARROBA PAP Acceso0:ref PCIERRE
             {: RESULT = new AccesoPuntero(ref); :}
             | POR Acceso1:ref
+            {: RESULT = new Puntero(ref); :}
+            | POR PAP Acceso0:ref PCIERRE
             {: RESULT = new Puntero(ref); :};
 
 

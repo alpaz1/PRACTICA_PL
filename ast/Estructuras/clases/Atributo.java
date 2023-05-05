@@ -1,6 +1,6 @@
 package ast.Estructuras.clases;
 import ast.ASTNode;
-import ast.Estructuras.Declaracion;
+import ast.Instructions.Declaracion;
 
 public class Atributo extends ASTNode {
     

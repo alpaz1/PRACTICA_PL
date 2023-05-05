@@ -3,8 +3,6 @@ package ast.Instructions;
 import java.util.Collections;
 import java.util.List;
 
-import ast.Estructuras.Declaracion;
-
 public class Bloque extends Instruccion{
     public List<? extends Instruccion> instList;
 

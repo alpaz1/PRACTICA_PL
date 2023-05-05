@@ -3,7 +3,7 @@ package ast.Accesos;
 import java.util.List;
 
 import ast.Programa;
-import ast.Estructuras.Declaracion;
+import ast.Instructions.Declaracion;
 import ast.Types.StructType;
 
 public class AccesoStruct extends Acceso{
@@ -56,6 +56,7 @@ public class AccesoStruct extends Acceso{
 
     @Override
     public void calcularDirRelativa() {
+        // System.out.println("Calculando dir relativa de " + this);
         acceso.calcularDirRelativa();
         Programa.codigo.println("i32.const " + campoVinculo.delta);
         Programa.codigo.println("i32.add");

@@ -4,7 +4,6 @@ import ast.Programa;
 import ast.Types.PointerType;
 
 public class Puntero extends Acceso {
-    private int direccion;
 
     public Puntero(Acceso variable){
         this.nodoVinculo = variable;
@@ -23,10 +22,11 @@ public class Puntero extends Acceso {
 
     @Override
     public void generaCodigo() {
-        Programa.codigo.println("i32.const " + nodoVinculo.getDelta()); // Pones la direccion de la variable a la que haces referencia en la cima de la pila
+        nodoVinculo.calcularDirRelativa(); // Pones la direccion de la variable a la que haces referencia en la cima de la pila
     }
 
-    public int getDireccion() {
-        return direccion;
+    @Override
+    public String toString() {
+        return "*" + nodoVinculo;
     }
 }

@@ -1,7 +1,7 @@
 package ast.Auxiliares;
 
 import ast.Programa;
-import ast.Estructuras.Declaracion;
+import ast.Instructions.Declaracion;
 import ast.Types.KindTypes;
 import ast.Types.Types;
 
