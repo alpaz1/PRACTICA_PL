@@ -76,4 +76,9 @@ public class AccesoVar extends Acceso {
         }
 
     }
+
+    @Override
+    public int getDelta() {
+        return nodoVinculo.delta;
+    }
 }

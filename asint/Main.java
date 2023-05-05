@@ -18,7 +18,11 @@ public class Main {
 		System.out.println("------------------------ TIPADO ------------------------");
 		p.checkType();//tipado
 		System.out.println("------------------------ GENERACION DE CODIGO ------------------------");
-		p.generaCodigo();
+		if (Programa.okVinculacion || Programa.okTipos){
+			p.generaCodigo();
+		} else{
+			System.out.println("Demasiados errores, no se puede generar codigo.");
+		}
 		// System.out.println(p);
 	}
 }

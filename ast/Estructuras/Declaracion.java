@@ -141,13 +141,9 @@ public class Declaracion extends Instruccion {
     public void generaCodigo() {
 
         if(exp instanceof ExpArray){
-
-           
-
-
             int i = 0;
             for(E e: ((ExpArray)exp).getListaConst()){
-                Programa.codigo.println(";;INICIO DECLARACION" + nombre);
+                Programa.codigo.println(";;Inicio declaracion " + nombre);
 
                 Programa.codigo.println("i32.const " + delta);
                 Programa.codigo.println("get_local $localsStart");
@@ -160,13 +156,11 @@ public class Declaracion extends Instruccion {
                 e.generaCodigo();
                 
                 Programa.codigo.println("i32.store"); // Guarda exp en la posicion localsStart + delta
-                Programa.codigo.println(";;FIN DECLARACION" + nombre);
+                Programa.codigo.println(";;Fin declaracion " + nombre);
             }
-
-
         }
         else if (exp != null) {
-            Programa.codigo.println(";;INICIO DECLARACION" + nombre);
+            Programa.codigo.println(";;Inicio declaracion " + nombre);
 
             Programa.codigo.println("i32.const " + delta);
             Programa.codigo.println("get_local $localsStart");
@@ -177,7 +171,7 @@ public class Declaracion extends Instruccion {
             //     Programa.codigo.println("i32.load"); // devuelve direccion
             // }
             Programa.codigo.println("i32.store"); // Guarda exp en la posicion localsStart + delta
-            Programa.codigo.println(";;FIN DECLARACION" + nombre);
+            Programa.codigo.println(";;Fin declaracion " + nombre);
         }
     }
 
