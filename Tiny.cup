@@ -77,17 +77,15 @@ non terminal ArrayList<E> ExpArray;
 
 
 P ::= Declaraciones:decs Principal:p
-                  {: RESULT = new Programa(decs, p);:}
-      | Declaraciones:decs error
-                  {:System.out.println("Error: No se encuentra funcion main"); RESULT = null;:};
+                  {: RESULT = new Programa(decs, p);:};
 
-Declaraciones ::= Declaracion:d Declaraciones:decs
+Declaraciones ::= Declaracion:d PUNTOYCOMA Declaraciones:decs
                     {: decs.addBasic(d);RESULT = decs; :} 
-                | Alias:a Declaraciones:decs
+                | Alias:a PUNTOYCOMA Declaraciones:decs
                     {:decs.addAlias(a); RESULT = decs;:}
-                | DeclaracionEnumerado:d Declaraciones:decs
+                | DeclaracionEnumerado:d PUNTOYCOMA Declaraciones:decs
                     {:decs.addEnum(d); RESULT = decs;:}
-                | DeclaracionRegistro:s Declaraciones:decs
+                | DeclaracionRegistro:s PUNTOYCOMA Declaraciones:decs
                     {:decs.addStruct(s);RESULT = decs;:}
                 | Modulos:m Declaraciones:decs
                     {:decs.addModulo(m);RESULT = decs;:}
@@ -116,12 +114,10 @@ Acceso1 ::= IDEN:nombre
             {: RESULT = new Puntero(ref); :};
 
 
-Declaracion ::= Tipo:t IDEN:n IGUAL E0:exp PUNTOYCOMA
+Declaracion ::= Tipo:t IDEN:n IGUAL E0:exp
                     {:RESULT = new Declaracion(t, n.lexema, exp);:}
-                | Tipo:t IDEN:n PUNTOYCOMA
-                    {:RESULT = new Declaracion(t, n.lexema);:}
-                | Tipo:t IDEN:nombre error
-                {:System.out.println("Error: Declaracion");RESULT=null;:};
+                | Tipo:t IDEN:n
+                    {:RESULT = new Declaracion(t, n.lexema);:};
 
 Asignacion ::= Acceso0:ref IGUAL E0:exp
                {:RESULT = new Asignacion(ref,exp);:};
@@ -144,10 +140,8 @@ Tipo ::=  TIPOINT
           | Tipo:t POR
             {:RESULT = new PointerType(t);:};
 
-Alias ::= TYPEDEF IDEN:nombre IGUAL Tipo:tipo PUNTOYCOMA
-          {:RESULT = new Alias(nombre.lexema,tipo);:}
-          | TYPEDEF IDEN:nombre IGUAL Tipo:tipo error
-          {:System.out.println("Error: Falta ;");RESULT = null;:};
+Alias ::= TYPEDEF IDEN:nombre IGUAL Tipo:tipo
+          {:RESULT = new Alias(nombre.lexema,tipo);:};
 
 Modulos ::= ALMOHADILLA INCLUDE COMILLASDOBLES IDEN:nombre PUNTO IDEN:ext COMILLASDOBLES
             {:RESULT = new Modulo(nombre.lexema,ext.lexema);:};
@@ -172,9 +166,7 @@ Instruccion ::= Declaracion:dec
               | LlamadaFuncion:fun
                   {:RESULT = new LlamadaFunInst(fun);:}
               | Acceso0:ref PUNTO IDEN:metodo PAP ListaArgumentos:arglist PCIERRE
-                  {: RESULT = new LlamadaMetodo(ref,new LlamadaFunExp(metodo.lexema,arglist));:}
-              | error PUNTOYCOMA
-                  {: System.out.println("Error: Instruccion"); RESULT = null; :};
+                  {: RESULT = new LlamadaMetodo(ref,new LlamadaFunExp(metodo.lexema,arglist));:};
 
 //---------------------Clases-----------------------------------
 
@@ -220,9 +212,7 @@ ListaArgumentos ::= E0:arg COMA ListaArgumentos:arglist
                 {: RESULT = new ArrayList<E>(); :};
 
 Print ::= PRINT PAP E0:exp PCIERRE 
-         {: RESULT = new Imprime(exp); :}
-         | PRINT PAP E0:exp PCIERRE error
-         {: System.out.println("Error: Falta ;"); RESULT = null; :};
+         {: RESULT = new Imprime(exp); :};
 
 Read ::= READ PAP PCIERRE 
          {:RESULT = new Lee();:};
@@ -230,9 +220,7 @@ Read ::= READ PAP PCIERRE
 Return ::= RETURN E0:exp 
             {:RESULT = new Devuelve(exp);:}
           | RETURN 
-            {:RESULT = new Devuelve();:}
-          | RETURN error
-            {: System.out.println("Error: Return"); RESULT = null; :};
+            {:RESULT = new Devuelve();:};
 
 // ------------------------ Bloques ------------------------
 Bloque ::= Condicional:block
@@ -247,31 +235,20 @@ Bloque ::= Condicional:block
 Condicional ::= IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE
               {: RESULT = new Condicional(exp,ins); :}
               | IF PAP E0:exp PCIERRE LLAP ListaInstrucciones:ins LLCIERRE ELSE LLAP ListaInstrucciones:inselse LLCIERRE
-              {: RESULT = new Condicional(exp,ins,inselse); :}
-              | IF error ListaInstrucciones:ins
-              {:System.out.println("Error: Condicion del if");RESULT = null;:};
+              {: RESULT = new Condicional(exp,ins,inselse); :};
 
 Iteracion ::= WHILE PAP E0:exp PCIERRE LLAP ListaInstrucciones:list LLCIERRE
               {:RESULT = new BucleWhile(exp,list);:}
-              | WHILE error ListaInstrucciones:list
-              {:System.out.println("Error: Condicion del while"); RESULT = null;:};
               | FOR PAP Declaracion:dec PUNTOYCOMA E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
                {:RESULT = new BucleFor(dec, exp, asig, list );:}
               | FOR PAP PUNTOYCOMA E0:exp PUNTOYCOMA Asignacion:asig PCIERRE LLAP ListaInstrucciones:list LLCIERRE
-               {:RESULT = new BucleFor(exp,asig,list);:}
-              | FOR error ListaInstrucciones:list
-               {:System.out.println("Error: Condicion del for"); RESULT = null;:};
+               {:RESULT = new BucleFor(exp,asig,list);:};
 
 
 Selecciona ::= SWITCH PAP IDEN:nombre PCIERRE LLAP Casos:casos PorDefecto:def LLCIERRE
             {:RESULT= new Switch(new AccesoVar(nombre.lexema),casos,def);:}
             | SWITCH PAP IDEN:nombre PCIERRE LLAP Casos:casos LLCIERRE
-            {:RESULT= new Switch(new AccesoVar(nombre.lexema),casos);:}
-            | SWITCH PAP E0:exp PCIERRE LLAP error LLCIERRE
-            {: System.out.println("Error: Cuerpo switch"); RESULT = null; :}
-            | SWITCH error LLAP BloqueCase:casos Default:def LLCIERRE
-             {: System.out.println("Error: Condicion switch"); RESULT = null; :};
-
+            {:RESULT= new Switch(new AccesoVar(nombre.lexema),casos);:};
 Casos ::= Caso:caso Casos:casos 
            {: casos.add(caso); RESULT = casos; :}
           |
@@ -279,9 +256,7 @@ Casos ::= Caso:caso Casos:casos
 Caso ::= CASE E0:exp DOSPUNTOS ListaInstrucciones:inst BREAK PUNTOYCOMA
           {:RESULT= new CasoSwitch(exp,inst,true);:}
           | CASE E0:exp DOSPUNTOS ListaInstrucciones:inst
-          {:RESULT= new CasoSwitch(exp,inst,false);:}
-          | CASE E0:exp DOSPUNTOS ListaInstrucciones:ins BREAK error
-          {: System.out.println("Error: Falta ;"); RESULT = null; :};;
+          {:RESULT= new CasoSwitch(exp,inst,false);:};
 PorDefecto ::= DEFAULT DOSPUNTOS ListaInstrucciones:inst
               {:RESULT= new CasoSwitch(inst);:};
 
@@ -302,21 +277,14 @@ Parametro ::= Tipo:t IDEN:id
               {:RESULT = new Parametro(t, id.lexema, true);:};
 
 //---------------------Otros tipos ----------------------------
-DeclaracionEnumerado ::= ENUM IDEN:n LLAP ListaEnumerado:campos LLCIERRE PUNTOYCOMA
-                            {:RESULT= new EnumClass(n.lexema, campos);:}
-                          | ENUM IDEN:nombre IGUAL LLAP DentroEnumerado:valores LLCIERRE error
-                            {: System.out.println("Error: Enumerado falta ;"); RESULT = null; :}
-                          | ENUM error PUNTOYCOMA
-                            {: System.out.println("Error: Enumerado en cuerpo"); RESULT = null; :};
+DeclaracionEnumerado ::= ENUM IDEN:n LLAP ListaEnumerado:campos LLCIERRE
+                            {:RESULT= new EnumClass(n.lexema, campos);:};
 ListaEnumerado ::= IDEN:campo COMA ListaEnumerado:campos
                     {:campos.add(campo.lexema); RESULT = campos;:}
                  | IDEN:campo
                     {:List<String> campos = new ArrayList<String>(); campos.add(campo.lexema); RESULT = campos;:};
-DeclaracionRegistro ::= STRUCT IDEN:nombre LLAP ListaCampos:valores LLCIERRE PUNTOYCOMA
-                    {:RESULT = new StructClass(nombre.lexema,valores);:}
-                    | STRUCT IDEN:nombre LLAP DentroStruct:valores LLCIERRE error
-                    {: System.out.println("Error: Struct falta ;"); RESULT = null; :};
-
+DeclaracionRegistro ::= STRUCT IDEN:nombre LLAP ListaCampos:valores LLCIERRE
+                    {:RESULT = new StructClass(nombre.lexema,valores);:};
 ListaCampos ::= Declaracion:dec PUNTOYCOMA ListaCampos:valores
                 {:valores.add(dec); RESULT = valores;:} 
                 | Declaracion:dec PUNTOYCOMA
