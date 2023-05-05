@@ -19,6 +19,10 @@ public abstract class ASTNode {
         delta = Programa.pila.getDelta();
         Programa.pila.updateDelta(tipo.getTam());
     }
+
+    public int getDelta() {
+        return delta;
+    }
     //public abstract NodeKind nodeKind();
     //public abstract String toString();
 }

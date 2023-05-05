@@ -21,8 +21,8 @@ public class Programa extends ASTNode {
     public static PilaTablaSimbolos pila;
     public static PrintWriter codigo;
     
-    public static boolean okTipos;
-    public static boolean okVinculacion;
+    public static boolean okTipos = true;
+    public static boolean okVinculacion = true;
 
     public static List<EnumClass> enumList = new ArrayList<EnumClass>();
 

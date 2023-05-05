@@ -109,7 +109,9 @@ Acceso1 ::= IDEN:nombre
             | ARROBA Acceso1:ref
             {: RESULT = new AccesoPuntero(ref); :}
             | ARROBA PAP Acceso0:ref PCIERRE
-            {: RESULT = new AccesoPuntero(ref); :};
+            {: RESULT = new AccesoPuntero(ref); :}
+            | POR Acceso1:ref
+            {: RESULT = new Puntero(ref); :};
 
 
 Declaracion ::= Tipo:t IDEN:n IGUAL E0:exp
@@ -357,7 +359,7 @@ E7 ::= TRUE:valor
         {:RESULT=llamada;:}
       | Read:llamada
         {:RESULT=llamada;:}
-      | LlamadaConstructor:llamada
+      | LlamadaConstructor:llamada // hola
         {:RESULT=llamada;:}
       | PAP E0:exp PCIERRE
         {:RESULT = exp;:}

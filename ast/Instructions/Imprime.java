@@ -22,11 +22,13 @@ public class Imprime extends Instruccion {
 
     @Override
     public void generaCodigo() {
+        Programa.codigo.println(";; Inicio imprime " + exp);
         exp.generaCodigo();
         // if (exp.getTipo().toString().equals(KindTypes.BOOL.toString())){
         //     // Programa.codigo.println("call ");
         // }
         Programa.codigo.println("call $print");
+        Programa.codigo.println(";; Fin imprime " + exp);
     }
 
     public KindInstruction kind() {

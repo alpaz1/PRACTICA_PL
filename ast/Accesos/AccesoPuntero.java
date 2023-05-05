@@ -1,24 +1,39 @@
 package ast.Accesos;
 
-public class AccesoPuntero extends Acceso{
-    protected Acceso direccion;
+import ast.Programa;
+import ast.Types.KindTypes;
+import ast.Types.PointerType;
 
-    public AccesoPuntero(Acceso direccion) {
-        this.direccion = direccion;
+public class AccesoPuntero extends Acceso{
+
+    public AccesoPuntero(Acceso puntero) {
+        this.nodoVinculo = puntero;
     }
 
     public String toString(){
-        return "AccPtr(@" + direccion +")";
+        return "AccPtr(@" + nodoVinculo +")";
     }
 
     public void vincular() {
-        direccion.vincular();
-        this.nodoVinculo = direccion.nodoVinculo;
+        nodoVinculo.vincular();
     }
 
     @Override
     public void checkType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkType'");
+        nodoVinculo.checkType();
+        // Checkea que nodoVinculo es un puntero
+        if (nodoVinculo.getTipo().kind() != KindTypes.POINTER){
+            System.out.println("Error tipo: intento de acceso a puntero en una varible que no es un puntero");
+            Programa.okTipos = false;
+        }
+        setTipo(nodoVinculo.getTipo().getTipo()); // puntero.getTipo() devuelve tipo puntero a .getTipo()
+    }
+
+    @Override
+    public void generaCodigo() {
+        Programa.codigo.println("get_local $localsStart");
+        nodoVinculo.generaCodigo();
+        Programa.codigo.println("i32.add");
+        Programa.codigo.println("i32.load");
     }
 }
