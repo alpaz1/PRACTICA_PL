@@ -1,7 +1,6 @@
 package ast.Expresions;
 
 import ast.Programa;
-import ast.Types.KindTypes;
 import ast.Types.Types;
 
 public class EBin extends E {

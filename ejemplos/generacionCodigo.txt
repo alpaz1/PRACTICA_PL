@@ -8,33 +8,8 @@ estructura Tiempo{
 
 
 principal() {
-    
-    lista < lista <entero> [2]> [2] l = {{1,2},{3,4}};
-    
-    paraCada (entero i = 0; i < 2; i = i + 1){
-        paraCada (entero j = 0; j < 2; j = j + 1){
-        }
-    }
+    entero a = 3;
+    entero* ptrA = *a;
 
-    Tiempo t;
-    t.hora = 1;
-    t.minuto = 2;
-    t.segundo = 3;
-
-    lista  <Tiempo> [2] listaTiempos = {t};
-
-    paraCada(entero i = 0; i < 2; i = i + 1){
-       
-        
-
-        imprime(listaTiempos[i].hora );
-        imprime(listaTiempos[i].minuto );
-        imprime(listaTiempos[i].segundo);
-        
-
-    }
-    
+    imprime(@ptrA);
 }
-
-
-

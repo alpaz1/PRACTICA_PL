@@ -60,12 +60,19 @@ public class Asignacion extends Instruccion{
     }
 
     public void generaCodigo(){
-        Programa.codigo.println(";;INICIO ASIGNACION" + iden);
+        Programa.codigo.println(";; INICIO ASIGNACION " + iden);
 
-        iden.calcularDirRelativa();
-        exp.generaCodigo();
-
-        Programa.codigo.println("i32.store");
-        Programa.codigo.println(";;FIN ASIGNACION" + iden);
+        if (exp.isBasica()){ // para a = 3 + 2;
+            iden.calcularDirRelativa();
+            exp.generaCodigo();
+            Programa.codigo.println("i32.store");
+        } else {
+            // Para a = t; (t es un struct)
+            exp.calcularDirRelativa();
+            iden.calcularDirRelativa();
+            Programa.codigo.println("i32.const " + exp.getTipo().getTam());;
+            Programa.codigo.println("call $copyn"); // src dest tam
+        }
+        Programa.codigo.println(";; FIN ASIGNACION " + iden);
     }
 }

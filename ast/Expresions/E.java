@@ -14,5 +14,10 @@ public abstract class E extends ASTNode {
     public Object getNombreEnum() {
         return null;
     }
-
+    public boolean isBasica() {
+        return getTipo().toString().equals("INT") || getTipo().toString().equals("FLOAT") ;
+    }
+    public void calcularDirRelativa(){
+        throw new UnsupportedOperationException();
+    }
 }
