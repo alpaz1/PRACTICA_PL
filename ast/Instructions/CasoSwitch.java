@@ -21,6 +21,7 @@ public class CasoSwitch extends Bloque {
     public CasoSwitch(List<Instruccion> instrucciones) {
         super(instrucciones);
         this.caso = null;
+        this.parada = true;
     }
 
     public void generaCodigo() {
@@ -40,7 +41,8 @@ public class CasoSwitch extends Bloque {
         for (Instruccion instruccion : instList) {
             instruccion.generaCodigo();
         }
-        Programa.codigo.println("br $break"); // ;; salto al end del switch bc of break
+        if (parada)
+            Programa.codigo.println("br $break"); // ;; salto al end del switch bc of break
     }
 
     public void vincular(){

@@ -15,7 +15,7 @@
 (func $principal
  (local $localsStart i32)
  (local $temp i32)
- i32.const 60
+ i32.const 4
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -28,228 +28,81 @@
  i32.const 8
  i32.add
  set_local $localsStart
-;;INICIO DECLARACIONl
+;;Inicio declaracion n
 i32.const 0
 get_local $localsStart
-i32.add
-i32.const 0
 i32.add
 i32.const 1
 i32.store
-;;FIN DECLARACIONl
-;;INICIO DECLARACIONl
-i32.const 0
+;;Fin declaracion n
+block
+loop
 get_local $localsStart
-i32.add
-i32.const 4
-i32.add
-i32.const 2
-i32.store
-;;FIN DECLARACIONl
-;;INICIO DECLARACIONl
 i32.const 0
+i32.add
+i32.load
+i32.const 10
+i32.lt_s
+i32.eqz
+br_if 1
 get_local $localsStart
+i32.const 0
 i32.add
-i32.const 8
-i32.add
+i32.load
+set_local $temp
+block $break
+block ;; un caso
+block ;; un caso
+block ;; caso default
+end
+get_local $temp
+i32.const 5
+get_local $temp
+i32.eq
+i32.eqz
+br_if 0
+;; Inicio imprime 500
+i32.const 500
+call $print
+;; Fin imprime 500
+br $break
+set_local $temp
+end
+get_local $temp
 i32.const 3
-i32.store
-;;FIN DECLARACIONl
-;;INICIO DECLARACIONl
-i32.const 0
-get_local $localsStart
-i32.add
-i32.const 12
-i32.add
-i32.const 4
-i32.store
-;;FIN DECLARACIONl
-;;INICIO DECLARACIONi
-i32.const 16
-get_local $localsStart
-i32.add
-i32.const 0
-i32.store
-;;FIN DECLARACIONi
-block
-loop
-get_local $localsStart
-i32.const 16
-i32.add
-i32.load
-i32.const 2
-i32.lt_s
+get_local $temp
+i32.eq
 i32.eqz
-br_if 1
-;;INICIO DECLARACIONj
-i32.const 20
-get_local $localsStart
-i32.add
-i32.const 0
-i32.store
-;;FIN DECLARACIONj
-block
-loop
-get_local $localsStart
-i32.const 20
-i32.add
-i32.load
-i32.const 2
-i32.lt_s
-i32.eqz
-br_if 1
-;;INICIO ASIGNACIONj
-get_local $localsStart
-i32.const 20
-i32.add
-get_local $localsStart
-i32.const 20
-i32.add
-i32.load
-i32.const 1
-i32.add
-i32.store
-;;FIN ASIGNACIONj
-br 0
+br_if 0
+;; Inicio imprime 300
+i32.const 300
+call $print
+;; Fin imprime 300
+set_local $temp
 end
-end
-;;INICIO ASIGNACIONi
+get_local $temp
+;; Inicio imprime n
 get_local $localsStart
-i32.const 16
-i32.add
-get_local $localsStart
-i32.const 16
-i32.add
-i32.load
-i32.const 1
-i32.add
-i32.store
-;;FIN ASIGNACIONi
-br 0
-end
-end
-;;INICIO ASIGNACIONAccStr(t.hora)
-get_local $localsStart
-i32.const 16
-i32.add
-i32.const 0
-i32.add
-i32.const 1
-i32.store
-;;FIN ASIGNACIONAccStr(t.hora)
-;;INICIO ASIGNACIONAccStr(t.minuto)
-get_local $localsStart
-i32.const 16
-i32.add
-i32.const 4
-i32.add
-i32.const 2
-i32.store
-;;FIN ASIGNACIONAccStr(t.minuto)
-;;INICIO ASIGNACIONAccStr(t.segundo)
-get_local $localsStart
-i32.const 16
-i32.add
-i32.const 8
-i32.add
-i32.const 3
-i32.store
-;;FIN ASIGNACIONAccStr(t.segundo)
-;;INICIO DECLARACIONlistaTiempos
-i32.const 28
-get_local $localsStart
-i32.add
-i32.const 0
-i32.add
-get_local $localsStart
-i32.const 16
-i32.add
-i32.load
-i32.store
-;;FIN DECLARACIONlistaTiempos
-;;INICIO DECLARACIONi
-i32.const 52
-get_local $localsStart
-i32.add
-i32.const 0
-i32.store
-;;FIN DECLARACIONi
-block
-loop
-get_local $localsStart
-i32.const 52
-i32.add
-i32.load
-i32.const 2
-i32.lt_s
-i32.eqz
-br_if 1
-;;AQUI ACCESO ARRAY AccArr(listaTiempos[i])
-;;AQUI COMIENZO EXP i
-get_local $localsStart
-i32.const 52
-i32.add
-i32.load
-;;AQUI FIN EXP i
-i32.const 12
-i32.mul
-get_local $localsStart
-i32.const 28
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(listaTiempos[i])
 i32.const 0
 i32.add
 i32.load
 call $print
-;;AQUI ACCESO ARRAY AccArr(listaTiempos[i])
-;;AQUI COMIENZO EXP i
+;; Fin imprime n
+br $break
+set_local $temp
+end ;; para salir del switch con break
+;; INICIO ASIGNACION n
 get_local $localsStart
-i32.const 52
-i32.add
-i32.load
-;;AQUI FIN EXP i
-i32.const 12
-i32.mul
-get_local $localsStart
-i32.const 28
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(listaTiempos[i])
-i32.const 4
-i32.add
-i32.load
-call $print
-;;AQUI ACCESO ARRAY AccArr(listaTiempos[i])
-;;AQUI COMIENZO EXP i
-get_local $localsStart
-i32.const 52
-i32.add
-i32.load
-;;AQUI FIN EXP i
-i32.const 12
-i32.mul
-get_local $localsStart
-i32.const 28
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(listaTiempos[i])
-i32.const 8
-i32.add
-i32.load
-call $print
-;;INICIO ASIGNACIONi
-get_local $localsStart
-i32.const 52
+i32.const 0
 i32.add
 get_local $localsStart
-i32.const 52
+i32.const 0
 i32.add
 i32.load
 i32.const 1
 i32.add
 i32.store
-;;FIN ASIGNACIONi
+;; FIN ASIGNACION n
 br 0
 end
 end

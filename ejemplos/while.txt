@@ -1,22 +1,16 @@
 principal() {
     entero n = 1;
     mientras (n < 10) {
-        imprime(n);
-        n = n + 1;
-    }
-    paraCada(entero i = 9; i >= 1; i = i - 1) {
-        selecciona(i) {
-            caso 5: 
-                imprime(10);
+        selecciona(n){
+            caso 5:
+                imprime(500);
                 ¡para!;
-            caso 1:
-                imprime(1);
+            caso 3:
+                imprime(300);
             porDefecto:
-                imprime(0);
+                imprime(n);
         }
-    }
-    paraCada(; n < 20; n = n + 2){
-        imprime(2*n);
+        n = n + 1;
     }
     
 }
