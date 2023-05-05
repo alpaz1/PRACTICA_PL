@@ -72,7 +72,6 @@ llaveCierre = \}
 punto = \.
 dosPuntos = \:
 arroba = \@
-arroba = \@
 
 
 int = entero
@@ -80,7 +79,6 @@ void = vacio
 float = flotante
 bool = buleano
 enum = enum
-array = lista
 array = lista
 
 true = verdad
@@ -104,13 +102,8 @@ include = incluir
 class = clase
 public = publico
 private = privado
-protected = protegido
 typedef = alias
-class = clase
-public = publico
-private = privado
-protected = protegido
-typedef = alias
+
 
 
 identificador = {letra}({letra}|{digito}|"_")*
@@ -157,7 +150,6 @@ identificador = {letra}({letra}|{digito}|"_")*
 {punto}                   {return ops.unidadPunto();}
 {dosPuntos}               {return ops.unidadDosPuntos();}
 {arroba}                  {return ops.unidadArroba();}
-{arroba}                  {return ops.unidadArroba();}
 
 {int}		                  {return ops.unidadTipoInt();}
 {bool}                    {return ops.unidadTipoBool();}
@@ -187,15 +179,9 @@ identificador = {letra}({letra}|{digito}|"_")*
 {class}                   {return ops.unidadClass();}
 {private}                 {return ops.unidadPrivate();}
 {public}                  {return ops.unidadPublic();}
-{protected}               {return ops.unidadProtected();}
 {typedef}                 {return ops.unidadTypedef();}
 
-{class}                   {return ops.unidadClass();}
-{private}                 {return ops.unidadPrivate();}
-{public}                  {return ops.unidadPublic();}
-{protected}               {return ops.unidadProtected();}
-{typedef}                 {return ops.unidadTypedef();}
 
 
 {identificador}           {return ops.unidadId();}
-[^]                       {ops.error();}  
+[^]                       {errores.errorLexico(fila(),columna(),lexema());}  
