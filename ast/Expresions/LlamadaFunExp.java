@@ -1,5 +1,6 @@
 package ast.Expresions;
 
+import java.util.Collections;
 import java.util.List;
 
 import ast.ASTNode;
@@ -11,6 +12,7 @@ public class LlamadaFunExp extends E {
     protected List<E> argumentos;
 
     public LlamadaFunExp(String nombre, List<E> argumentos) {
+        Collections.reverse(argumentos);
         this.nombre = nombre;
         this.argumentos = argumentos;
     }
@@ -49,31 +51,47 @@ public class LlamadaFunExp extends E {
         for (int i = 0; i < argumentos.size(); ++i){ // el nº argumentos esta ok por vinculacion
             argumentos.get(i).checkType();
             int j = argumentos.size() -i-1;
-            if(!argumentos.get(i).tipo.toString().equals(f.getParams().get(j).tipo.toString())){
+            if(!argumentos.get(i).tipo.toString().equals(f.getParams().get(i).tipo.toString())){
                 System.out.println("Error Tipos: Funcion " + f.getName() + " espera otro parametro en la posicion  " + i + ". "
                 + "El parametro esperado es de tipo: " + f.getParams().get(i).tipo.toString() + 
                 " , el parametro  recibido es de tipo: " + argumentos.get(i).tipo.toString());
                 Programa.okTipos = false;
             }
-        }  
+        }
     }
 
     @Override
     public void generaCodigo() {
 
         // Copia los argumentos aqui a memoria
-        // int delta = Programa.pila.getDelta();
-        // for (E argumento: argumentos){
-        //     Programa.codigo.println("i32.const " + delta);
-        //     Programa.codigo.println("get_local $localsStart");
-        //     Programa.codigo.println("i32.add");
-        //     argumento.generaCodigo();
-        //     Programa.codigo.println("i32.store");
-        //     delta += argumento.getTipo().getTam();
-        // }
+        Programa.codigo.println("get_global $SP"); // Posicion memoria
+        Programa.codigo.println("i32.const " + 8); //  + lo que ocupa mp y sp
+        Programa.codigo.println("i32.add");
+        Programa.codigo.println("set_local $temp"); // temp guarda el comienzo de memoria de la funcion
+        int delta = 0;
         for (E argumento: argumentos){
-            argumento.generaCodigo();
+            Programa.codigo.println(";; Copiando argumento: " + argumento); 
+            if (argumento.isBasica()){ // para a = 3 + 2;
+                Programa.codigo.println("i32.const " + delta); 
+                Programa.codigo.println("get_local $temp"); 
+                Programa.codigo.println("i32.add");
+                argumento.generaCodigo();
+                Programa.codigo.println("i32.store");
+            } else {
+                // Para a = t; (t es un struct)
+                argumento.calcularDirRelativa();
+                Programa.codigo.println("i32.const " + delta);
+                Programa.codigo.println("get_local $temp");
+                Programa.codigo.println("i32.add");
+                Programa.codigo.println("i32.const " + argumento.getTipo().getTam());
+                Programa.codigo.println("call $copyn"); // src dest tam
+            }
+
+            delta += argumento.getTipo().getTam();
         }
+        // for (E argumento: argumentos){
+        //     argumento.generaCodigo();
+        // }
         Programa.codigo.println("call $" + nombre);
     }
 }

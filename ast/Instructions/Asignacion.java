@@ -50,7 +50,7 @@ public class Asignacion extends Instruccion{
     }
 
     public void generaCodigo(){
-        Programa.codigo.println(";; INICIO ASIGNACION " + iden);
+        Programa.codigo.println(";; Inicio asignacio " + iden);
         if (exp.isBasica()){ // para a = 3 + 2;
             iden.calcularDirRelativa();
             exp.generaCodigo();
@@ -62,6 +62,6 @@ public class Asignacion extends Instruccion{
             Programa.codigo.println("i32.const " + exp.getTipo().getTam());;
             Programa.codigo.println("call $copyn"); // src dest tam
         }
-        Programa.codigo.println(";; FIN ASIGNACION " + iden);
+        Programa.codigo.println(";; Fin asignacion " + iden);
     }
 }

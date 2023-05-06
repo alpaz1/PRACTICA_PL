@@ -1,17 +1,30 @@
 
-estructura Tiempo{
-    entero hora;
-    entero minuto;
-    entero segundo;
-};
+entero insertar(lista <entero> [10] lst, entero pos, entero elem){
+    lst[pos] = elem;
+    imprime(lst[pos]);
+    devuelve 2;
+}
 
+entero suma(entero a, entero b){
+    imprime(a);
+    imprime(b);
+    devuelve a + b;
+}
 
+entero multiplicar(entero a, entero b){
+    entero resultado = 0;
+    paraCada (entero i = 0; i < a; i = i + 1){
+        resultado = resultado + b;
+    }
+    devuelve resultado;
+}
 
 principal() {
-    lista <Tiempo*> [4] lstTiempo;
-    Tiempo t2;
-    t2.minuto = 6;
-    lstTiempo[2] = *t2;
-    
-    imprime(@(lstTiempo[2]).minuto);
+    lista <entero> [10] listaNumeros;
+    paraCada (entero i = 0; i < 10; i = i + 1){
+        listaNumeros[i] = i;
+    }
+    // insertar(listaNumeros, 3, 100);
+    // imprime(listaNumeros[3]);
+    imprime(multiplicar(7, 5));
 }

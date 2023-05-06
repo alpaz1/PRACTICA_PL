@@ -6,5 +6,6 @@ asint/ClaseLexica.java
 
 .metadata*
 
-codigo/*
+*codigo.wat
+*codigo.wasm
 

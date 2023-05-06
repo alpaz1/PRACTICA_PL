@@ -103,9 +103,9 @@ public class Funcion extends ASTNode{
         // int tam = 200; // TODO: cambiar esto a lo que ocupa la funcion
         int tam = maxMemoria();
         Programa.codigo.print("(func $" + nombre);
-        for (Parametro param: paramList){
-            param.respresentacionWasm();
-        }
+        // for (Parametro param: paramList){
+        //     param.respresentacionWasm();
+        // }
         // RETURN TIPE
         if (! tipo.toString().equals("VOID")){
             Programa.codigo.print(" (result " + tipo.respresentacionWasm() +")");
@@ -127,9 +127,9 @@ public class Funcion extends ASTNode{
         Programa.codigo.println(" i32.const 8"); // salto el mp antiguo y el sp
         Programa.codigo.println(" i32.add");
         Programa.codigo.println(" set_local $localsStart"); // La funcion empieza aqui
-        for (Parametro param: paramList){
-            param.generaCodigo();
-        }
+        // for (Parametro param: paramList){
+        //     param.generaCodigo();
+        // }
         for (Instruccion instruccion: instList){
             instruccion.generaCodigo(); 
         }
