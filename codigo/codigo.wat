@@ -15,7 +15,7 @@
 (func $principal
  (local $localsStart i32)
  (local $temp i32)
- i32.const 4
+ i32.const 60
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -28,81 +28,107 @@
  i32.const 8
  i32.add
  set_local $localsStart
-;;Inicio declaracion n
-i32.const 0
+;;Inicio declaracion i
+i32.const 56
 get_local $localsStart
 i32.add
-i32.const 1
+i32.const 0
 i32.store
-;;Fin declaracion n
+;;Fin declaracion i
 block
 loop
 get_local $localsStart
-i32.const 0
+i32.const 56
 i32.add
 i32.load
-i32.const 10
+i32.const 7
 i32.lt_s
 i32.eqz
 br_if 1
+;; Inicio asignacio AccStr(AccArr(listaCitas[i]).mes)
+;;AQUI ACCESO ARRAY AccArr(listaCitas[i])
+;;AQUI COMIENZO EXP i
+get_local $localsStart
+i32.const 56
+i32.add
+i32.load
+;;AQUI FIN EXP i
+i32.const 8
+i32.mul
 get_local $localsStart
 i32.const 0
 i32.add
-i32.load
-set_local $temp
-block $break
-block ;; un caso
-block ;; un caso
-block ;; caso default
-end
-get_local $temp
+i32.add
+;;AQUI FIN ARRAY AccArr(listaCitas[i])
+i32.const 0
+i32.add
 i32.const 5
-get_local $temp
-i32.eq
-i32.eqz
-br_if 0
-;; Inicio imprime 500
-i32.const 500
-call $print
-;; Fin imprime 500
-br $break
-set_local $temp
-end
-get_local $temp
-i32.const 3
-get_local $temp
-i32.eq
-i32.eqz
-br_if 0
-;; Inicio imprime 300
-i32.const 300
-call $print
-;; Fin imprime 300
-set_local $temp
-end
-get_local $temp
-;; Inicio imprime n
+i32.store
+;; Fin asignacion AccStr(AccArr(listaCitas[i]).mes)
+;; Inicio asignacio i
 get_local $localsStart
-i32.const 0
-i32.add
-i32.load
-call $print
-;; Fin imprime n
-br $break
-set_local $temp
-end ;; para salir del switch con break
-;; INICIO ASIGNACION n
-get_local $localsStart
-i32.const 0
+i32.const 56
 i32.add
 get_local $localsStart
-i32.const 0
+i32.const 56
 i32.add
 i32.load
 i32.const 1
 i32.add
 i32.store
-;; FIN ASIGNACION n
+;; Fin asignacion i
+br 0
+end
+end
+;; Inicio asignacio i
+get_local $localsStart
+i32.const 56
+i32.add
+i32.const 0
+i32.store
+;; Fin asignacion i
+block
+loop
+get_local $localsStart
+i32.const 56
+i32.add
+i32.load
+i32.const 7
+i32.lt_s
+i32.eqz
+br_if 1
+;; Inicio imprime AccStr(AccArr(listaCitas[i]).mes)
+;;AQUI ACCESO ARRAY AccArr(listaCitas[i])
+;;AQUI COMIENZO EXP i
+get_local $localsStart
+i32.const 56
+i32.add
+i32.load
+;;AQUI FIN EXP i
+i32.const 8
+i32.mul
+get_local $localsStart
+i32.const 0
+i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(listaCitas[i])
+i32.const 0
+i32.add
+i32.load
+call $print
+;; Fin imprime AccStr(AccArr(listaCitas[i]).mes)
+;; Inicio asignacio i
+get_local $localsStart
+i32.const 56
+i32.add
+get_local $localsStart
+i32.const 56
+i32.add
+i32.load
+i32.const 1
+i32.add
+i32.store
+;; Fin asignacion i
 br 0
 end
 end
