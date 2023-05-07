@@ -47,6 +47,9 @@ var importObjects = {
     }};
 
 async function start() {
+    // await readInput(n); espera a leer n inputs. 
+    // DESCOMENTAR LA SIGUIENTE LINEA PARA PROBAR INPUTS
+    // await readInput(2);
     const code = readFileSync("codigo.wasm");
     wasmModule = await WebAssembly.compile(code);
     instance = await WebAssembly.instantiate(wasmModule, importObjects);
@@ -55,7 +58,7 @@ async function start() {
 }
 
 function run() {
-    // await readInput(2);
+    //await readInput(2);
     start();
 }
 

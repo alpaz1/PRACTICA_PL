@@ -29,9 +29,9 @@ public class CasoSwitch extends Bloque {
         Programa.codigo.println("get_local $temp"); // dejo en la cima de la pila la condicion pa no perderla
         if (caso != null) {
             caso.generaCodigo();
-            if (caso instanceof Acceso) {
-                Programa.codigo.println("i32.load"); // si es acceso, obtengo su valor
-            }
+            //if (caso instanceof Acceso) {
+              //  Programa.codigo.println("i32.load"); // si es acceso, obtengo su valor
+            //}
             Programa.codigo.println("get_local $temp"); // temp tiene el valor de la exp del switch
             Programa.codigo.println("i32.eq"); // si es es caso adecuado
             Programa.codigo.println("i32.eqz"); // cambio el valor

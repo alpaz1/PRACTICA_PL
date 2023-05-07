@@ -1,0 +1,5 @@
+principal() {
+    entero n = lee();
+    entero m = lee();
+    imprime(n+m);
+}

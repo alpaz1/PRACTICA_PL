@@ -1,0 +1,66 @@
+enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
+
+enum Temporal { Lluvioso, Soleado, Nublado, Nieve};
+estructura Cita{
+    entero mes;
+    entero anio;
+    DiaSemana dia;
+    Temporal tiempo;
+};
+
+principal() {
+    lista < Cita > [7] listaCitas;
+
+    paraCada (entero i = 0; i < 7; i = i + 1){
+        
+        listaCitas[i].mes = i + 1;
+        listaCitas[i].anio = 2023;
+      
+    }
+
+    listaCitas[0].dia = Lunes;
+    listaCitas[1].dia = Martes;
+    listaCitas[2].dia = Miercoles;
+    listaCitas[3].dia = Jueves;
+    listaCitas[4].dia = Viernes;
+    listaCitas[5].dia = Sabado;
+    listaCitas[6].dia = Domingo;
+    listaCitas[0].tiempo = Lluvioso;
+    listaCitas[1].tiempo = Lluvioso;
+    listaCitas[2].tiempo = Nublado;
+    listaCitas[3].tiempo = Nublado;
+    listaCitas[4].tiempo = Soleado;
+    listaCitas[5].tiempo = Soleado;
+    listaCitas[6].tiempo = Nieve;
+
+    paraCada (entero j = 0; j < 7; j = j + 1){
+        
+        imprime(listaCitas[j].dia);
+        si (listaCitas[j].dia == Viernes oo listaCitas[j].dia == Sabado oo listaCitas[j].dia == Domingo ){
+            imprime(1111);
+        }
+        sino {
+            imprime(2222);
+        }
+
+        imprime(listaCitas[j].mes);
+        imprime(listaCitas[j].anio);
+        imprime(listaCitas[j].tiempo);
+
+
+        Temporal t = listaCitas[j].tiempo;
+
+        selecciona (t){
+            caso Lluvioso: 
+                imprime(333);
+                ¡para!;
+            caso Soleado: 
+                imprime(444);
+                ¡para!;
+            caso Nublado:
+                imprime(555);
+                ¡para!;
+            porDefecto: imprime(666);
+        }
+    }
+}
