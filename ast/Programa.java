@@ -98,6 +98,17 @@ public class Programa extends ASTNode {
         return -1;
     }
 
+    public static int comprobarSiEsValorEnum(String nombre){
+        for (EnumClass e: enumList){
+            for(E valor: e.getCampos()){
+                if(valor.toString().equals(nombre))
+                    return e.getCampos().indexOf(valor);
+
+            }
+        }
+        return -1;
+    }
+
     
 
 

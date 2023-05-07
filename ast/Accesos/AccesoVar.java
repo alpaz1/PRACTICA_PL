@@ -36,9 +36,19 @@ public class AccesoVar extends Acceso {
 
     @Override
     public void calcularDirRelativa() {
-        Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
-        Programa.codigo.println("i32.const " + nodoVinculo.delta); //cte de valor el delta asociado al nodo
-        Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
+
+        int posEnum = Programa.comprobarSiEsValorEnum(nombreVar);
+
+        if(posEnum != -1){
+            Programa.codigo.println("i32.const " + posEnum); //cte de valor el delta asociado al nodo
+            this.isEnum = true;
+        }
+        else{
+            Programa.codigo.println("get_local $localsStart");//deja el valor de localsStart en la cima de la pila
+            Programa.codigo.println("i32.const " + nodoVinculo.delta); //cte de valor el delta asociado al nodo
+            Programa.codigo.println("i32.add"); //sumamos el valor de comienzo del bloque más el valor delta del nodo
+        }
+
     }
 
     @Override

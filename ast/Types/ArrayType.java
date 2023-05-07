@@ -27,7 +27,9 @@ public class ArrayType extends Types{
 
     @Override
     public int getTam() {
-        
+
+        System.out.println("Cada " + tipo +" ocupa " + tipo.getTam() + ". Como hay " + tam.getValor() + " el tam total es " +  tipo.getTam() * Integer.parseInt(tam.getValor()));
+
         return tipo.getTam() * Integer.parseInt(tam.getValor());
        
     }

@@ -56,9 +56,9 @@ public class AccesoStruct extends Acceso{
 
     @Override
     public void calcularDirRelativa() {
-        // System.out.println("Calculando dir relativa de " + this);
+        Programa.codigo.println(";; Calculando dir relativa de " + this + " " + campoVinculo.delta);
         acceso.calcularDirRelativa();
-        Programa.codigo.println("i32.const " + campoVinculo.delta);
+        Programa.codigo.println("i32.const " + campoVinculo.delta );
         Programa.codigo.println("i32.add");
     }
 }

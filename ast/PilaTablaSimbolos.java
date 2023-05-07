@@ -17,7 +17,7 @@ public class PilaTablaSimbolos {
     }
 
      // Cada vez que entro en un nuevo ambito 
-     public void abreBloque(){
+    public void abreBloque(){
         // que empieza un nuevo bloque apilando una nueva tabla vacía
         pilaTabla.push(new HashMap<String,ASTNode>());
         deltaBloques.push(totalDelta); // El delta antes del bloque

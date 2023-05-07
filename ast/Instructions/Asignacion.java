@@ -50,8 +50,18 @@ public class Asignacion extends Instruccion{
     }
 
     public void generaCodigo(){
-        Programa.codigo.println(";; Inicio asignacio " + iden);
-        if (exp.isBasica()){ // para a = 3 + 2;
+        Programa.codigo.println(";; Inicio asignacion " + iden);
+        if(exp.getTipo().kind().toString().equals("ENUM")){
+            Programa.codigo.println(";; Inicio asignacion " + " " + exp + exp.getTipo().kind());
+
+            iden.calcularDirRelativa();
+
+            Programa.codigo.println("i32.const " + Programa.buscarPosEnum(iden.getTipo(), exp));
+            Programa.codigo.println("i32.store");
+
+
+        }
+        else if (exp.isBasica()){ // para a = 3 + 2;
             iden.calcularDirRelativa();
             exp.generaCodigo();
             Programa.codigo.println("i32.store");

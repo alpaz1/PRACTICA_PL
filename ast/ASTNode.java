@@ -17,7 +17,12 @@ public abstract class ASTNode {
     public void generaCodigo() {}
     public void setDelta(){
         delta = Programa.pila.getDelta();
-        Programa.pila.updateDelta(tipo.getTam());
+
+        int tam = tipo.getTam();
+
+        System.out.println("Tipo: " + tipo + " tamaño: " + tam);
+
+        Programa.pila.updateDelta(tam);
     }
 
     public int getDelta() {

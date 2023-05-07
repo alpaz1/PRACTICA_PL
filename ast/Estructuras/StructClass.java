@@ -27,6 +27,7 @@ public class StructClass extends ASTNode{
 
     @Override
     public void vincular() {
+        System.out.println("VOY A VINCULAR EL STRUCT " + name);
         ASTNode nodo = Programa.pila.buscaId(name);
         if (nodo == null) { //devuelve null cuando no esta
             Programa.pila.insertaId(name, this);
@@ -36,6 +37,8 @@ public class StructClass extends ASTNode{
                 campo.delta = structDelta;
                 structDelta += campo.getTipo().getTam();
             }
+            System.out.println("YA HE ACABADO, EL DELTA DE ESTE STRUCT ES: " +structDelta);
+
         } else {
             System.out.println("Error vinculacion: Este identificador ya esta usado: " + name);
             Programa.okVinculacion = false;

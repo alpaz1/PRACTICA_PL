@@ -42,10 +42,14 @@ public class Declaracion extends Instruccion {
         // mismo name en ese bloque
         ASTNode nodo = Programa.pila.buscaIdCima(nombre);
         if (nodo == null) { // devuelve null cuando no esta
+            System.out.println("VOY A VINCULAR EL " + tipo + " " + nombre);
+
             Programa.pila.insertaId(nombre, this);
             setDelta(); // posicion relativa al bloque
+            
             if (exp != null)
                 exp.vincular();
+            System.out.println("YA HE ACABADO");
         } else {
             System.out.println("Error vinculacion: Este identificador ya esta usado: " + nombre);
             Programa.okVinculacion = false;
@@ -153,12 +157,13 @@ public class Declaracion extends Instruccion {
         }
         else if (exp != null) {
             Programa.codigo.println(";;Inicio declaracion " + nombre);
-            if (exp.isBasica()){ // para a = 3 + 2;
+           if (exp.isBasica()){ // para a = 3 + 2;
                 calcularDirRelativa();
                 exp.generaCodigo();
                 Programa.codigo.println("i32.store");
             } 
             else if(exp.tipo.toString().equals("ENUM")){ //para enums
+
 
                 calcularDirRelativa();
                 Programa.codigo.println("i32.const " + Programa.buscarPosEnum(this.getTipo(), exp));
@@ -167,6 +172,7 @@ public class Declaracion extends Instruccion {
 
 
             }
+             
             else {//para structs
                 
                 exp.calcularDirRelativa();
