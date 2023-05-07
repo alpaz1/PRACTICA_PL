@@ -40,8 +40,10 @@ public class StructType extends Types{
     @Override
     public int getTam() {
         int tam = 0;
-        for (Declaracion declaracion: getCampos()){
-            tam += declaracion.maxMemoria();
+        if(campos != null){ //solo hacemos esto si es de verdad struct, si campos es null estamos antes un ENUM
+            for (Declaracion declaracion: getCampos()){
+                tam += declaracion.maxMemoria();
+            }
         }
         return tam;
     }

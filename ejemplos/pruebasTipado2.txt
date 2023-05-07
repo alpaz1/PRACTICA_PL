@@ -1,7 +1,36 @@
-enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
+
+
+estructura Cita{
+    DiaSemana dia;
+    entero mes;
+    entero anio;
+};
+
+
+
 
 principal() {
-    DiaSemana dia = Lunes;
-    imprime(dia);
-    imprime(Lunes);
+
+    lista < Cita > [7] listaCitas;
+    
+
+    entero i = 0;
+
+    mientras(i < 7){
+        listaCitas[i].mes = 5;
+        i = i + 1;
+    }
+
+
+    i = 0;
+   
+
+
+    mientras (i < 7){
+        imprime(listaCitas[i].mes);
+        i = i + 1;
+
+    }
+    
+
 }

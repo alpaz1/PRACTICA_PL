@@ -157,8 +157,18 @@ public class Declaracion extends Instruccion {
                 calcularDirRelativa();
                 exp.generaCodigo();
                 Programa.codigo.println("i32.store");
-            } else {
-                // Para a = t; (t es un struct)
+            } 
+            else if(exp.tipo.toString().equals("ENUM")){ //para enums
+
+                calcularDirRelativa();
+                Programa.codigo.println("i32.const " + Programa.buscarPosEnum(this.getTipo(), exp));
+                Programa.codigo.println("i32.store");
+
+
+
+            }
+            else {//para structs
+                
                 exp.calcularDirRelativa();
                 calcularDirRelativa();
                 Programa.codigo.println("i32.const " + exp.getTipo().getTam());;

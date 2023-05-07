@@ -11,6 +11,8 @@ import java.util.List;
 import ast.Estructuras.DefinitionsList;
 import ast.Estructuras.EnumClass;
 import ast.Estructuras.FMain;
+import ast.Expresions.E;
+import ast.Types.Types;
 
 
 public class Programa extends ASTNode {
@@ -77,5 +79,26 @@ public class Programa extends ASTNode {
     public String toString() {
         return definiciones.toString() + "\nFuncion Main: " + fmain.toString();
     }
+
+
+    //devuelve la posicion que ocupa el valor de un enum dentro de la declaracion del enum
+    public static int buscarPosEnum(Types tipoEnum, E exp) {
+
+        for (EnumClass e: enumList){
+            if(e.getName().toString().equals(tipoEnum.toString())){
+                for(E valor: e.getCampos()){
+                    if(valor.toString().equals(exp.toString()))
+                        return e.getCampos().indexOf(valor);
+
+                }
+     
+            }
+
+        }
+        return -1;
+    }
+
+    
+
 
 }

@@ -29,7 +29,7 @@
  i32.add
  set_local $localsStart
 ;;Inicio declaracion i
-i32.const 56
+i32.const 0
 get_local $localsStart
 i32.add
 i32.const 0
@@ -38,7 +38,7 @@ i32.store
 block
 loop
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 i32.load
 i32.const 7
@@ -49,7 +49,7 @@ br_if 1
 ;;AQUI ACCESO ARRAY AccArr(listaCitas[i])
 ;;AQUI COMIENZO EXP i
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 i32.load
 ;;AQUI FIN EXP i
@@ -67,10 +67,10 @@ i32.store
 ;; Fin asignacion AccStr(AccArr(listaCitas[i]).mes)
 ;; Inicio asignacio i
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 i32.load
 i32.const 1
@@ -82,7 +82,7 @@ end
 end
 ;; Inicio asignacio i
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 i32.const 0
 i32.store
@@ -90,7 +90,7 @@ i32.store
 block
 loop
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 i32.load
 i32.const 7
@@ -101,7 +101,7 @@ br_if 1
 ;;AQUI ACCESO ARRAY AccArr(listaCitas[i])
 ;;AQUI COMIENZO EXP i
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 i32.load
 ;;AQUI FIN EXP i
@@ -119,10 +119,10 @@ call $print
 ;; Fin imprime AccStr(AccArr(listaCitas[i]).mes)
 ;; Inicio asignacio i
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 get_local $localsStart
-i32.const 56
+i32.const 0
 i32.add
 i32.load
 i32.const 1
