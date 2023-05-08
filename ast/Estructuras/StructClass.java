@@ -16,6 +16,7 @@ public class StructClass extends ASTNode{
         this.name = name;
         this.campos = campos;
         Collections.reverse(this.campos);
+        Programa.lista_tipos.add(this.name);
     }
 
     public String getName(){

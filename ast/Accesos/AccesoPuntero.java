@@ -2,7 +2,6 @@ package ast.Accesos;
 
 import ast.Programa;
 import ast.Types.KindTypes;
-import ast.Types.PointerType;
 
 public class AccesoPuntero extends Acceso{
 

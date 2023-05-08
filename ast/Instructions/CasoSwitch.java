@@ -1,7 +1,6 @@
 package ast.Instructions;
 
 import ast.Programa;
-import ast.Accesos.Acceso;
 import ast.Expresions.E;
 import ast.Types.Types;
 

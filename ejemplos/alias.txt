@@ -12,6 +12,7 @@ estructura claseDePL{
 };
 
 principal() {
+    entero* ptr = nuevo entero;
     listaEntero aaa;
     aaa[0] = 100;
     aaa[1] = 200;

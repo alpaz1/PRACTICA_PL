@@ -28,11 +28,16 @@ public class Programa extends ASTNode {
 
     public static List<EnumClass> enumList = new ArrayList<EnumClass>();
 
+    public static List<String> lista_tipos = new ArrayList<String>();
 
     public Programa(DefinitionsList l, FMain fmain) {
         Programa.definiciones = l;
         Programa.fmain = fmain;
         Programa.pila = new PilaTablaSimbolos();
+
+        lista_tipos.add("INT");
+        lista_tipos.add("BOOL");
+        lista_tipos.add("FLOAT");
     }
     
 
@@ -110,8 +115,8 @@ public class Programa extends ASTNode {
     }
 
     public void simplifyAlias(){
-        this.definiciones.simplifyAlias();
-        this.fmain.simplifyAlias(definiciones.getAliasList());
+        Programa.definiciones.simplifyAlias();
+        Programa.fmain.simplifyAlias(definiciones.getAliasList());
     }
 
 

@@ -55,7 +55,7 @@ i32.load
 (func $principal
  (local $localsStart i32)
  (local $temp i32)
- i32.const 12
+ i32.const 16
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -68,6 +68,12 @@ i32.load
  i32.const 8
  i32.add
  set_local $localsStart
+;;Inicio declaracion ptr
+i32.const 0
+get_local $localsStart
+i32.add
+i32.store
+;;Fin declaracion ptr
 ;; Inicio asignacion AccArr(aaa[0])
 ;;AQUI ACCESO ARRAY AccArr(aaa[0])
 ;;AQUI COMIENZO EXP 0
@@ -76,7 +82,7 @@ i32.const 0
 i32.const 4
 i32.mul
 get_local $localsStart
-i32.const 0
+i32.const 4
 i32.add
 i32.add
 ;;AQUI FIN ARRAY AccArr(aaa[0])
@@ -91,7 +97,7 @@ i32.const 1
 i32.const 4
 i32.mul
 get_local $localsStart
-i32.const 0
+i32.const 4
 i32.add
 i32.add
 ;;AQUI FIN ARRAY AccArr(aaa[1])
@@ -114,7 +120,7 @@ i32.const 0
 i32.const 4
 i32.mul
 get_local $localsStart
-i32.const 0
+i32.const 4
 i32.add
 i32.add
 ;;AQUI FIN ARRAY AccArr(aaa[0])
@@ -131,7 +137,7 @@ i32.const 1
 i32.const 4
 i32.mul
 get_local $localsStart
-i32.const 0
+i32.const 4
 i32.add
 i32.add
 ;;AQUI FIN ARRAY AccArr(aaa[1])

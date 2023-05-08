@@ -1,6 +1,5 @@
 package ast.Expresions;
 
-import ast.Types.KindTypes;
 import ast.Types.Types;
 
 public class EUnaria extends E {

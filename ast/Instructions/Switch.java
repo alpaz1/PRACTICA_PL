@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import ast.Programa;
-import ast.Accesos.Acceso;
 import ast.Expresions.E;
 
 public class Switch extends Bloque{

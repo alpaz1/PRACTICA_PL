@@ -1,7 +1,5 @@
 package ast.Expresions;
 
-import java.util.ArrayList;
-
 import ast.Programa;
 import ast.Types.BasicTypes;
 import ast.Types.KindTypes;

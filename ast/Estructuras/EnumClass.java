@@ -22,6 +22,7 @@ public class EnumClass extends ASTNode{
             this.campos.add(new Const(s, new EnumTypes(name)));
         }
         Programa.enumList.add(this);
+        Programa.lista_tipos.add(this.name);
         Collections.reverse(this.campos);
     }
 

@@ -6,7 +6,6 @@ import ast.Estructuras.clases.*;
 import ast.Instructions.Alias;
 import ast.Instructions.Declaracion;
 import ast.Types.Types;
-import ast.Programa;
 import ast.Auxiliares.Modulo;
 
 public class DefinitionsList {

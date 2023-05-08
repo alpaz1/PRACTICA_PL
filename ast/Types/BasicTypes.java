@@ -1,6 +1,5 @@
 package ast.Types;
 
-import ast.Programa;
 
 public class BasicTypes extends Types {
 

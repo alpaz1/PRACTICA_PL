@@ -2,10 +2,6 @@ package ast.Expresions;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-
-import ast.Pair;
-import ast.Programa;
 import ast.Types.ArrayType;
 import ast.Types.BasicTypes;
 import ast.Types.KindTypes;

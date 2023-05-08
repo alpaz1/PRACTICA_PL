@@ -1,7 +1,6 @@
 package ast.Types;
 
 import ast.Expresions.Const;
-import ast.Expresions.E;
 
 public class ArrayType extends Types{
 
@@ -18,10 +17,7 @@ public class ArrayType extends Types{
     }
 
     public String toString(){
-        if(tam != null)
-            return "Array " + "<" + tipo.toString() + ">" ;
-        else 
-            return "Array "+ "<" + tipo.toString() + ">" ;
+        return "Array " + "<" + tipo.toString() + ">";
     }
 
 

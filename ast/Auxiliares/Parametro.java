@@ -2,7 +2,6 @@ package ast.Auxiliares;
 
 import ast.Programa;
 import ast.Instructions.Declaracion;
-import ast.Types.KindTypes;
 import ast.Types.Types;
 
 public class Parametro extends Declaracion{

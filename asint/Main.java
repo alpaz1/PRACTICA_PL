@@ -14,17 +14,22 @@ public class Main {
 		Programa p = (Programa) asint.parse().value;
 
 		p.simplifyAlias();
+		System.out.println("------------------------ AST ------------------------");
 		System.out.println(p);
-
 		System.out.println("------------------------ VINCULACIÓN ------------------------");
 		p.vincular(); // vinculacion
-		System.out.println("------------------------ TIPADO ------------------------");
-		p.checkType();//tipado
-		if (Programa.okVinculacion && Programa.okTipos){
-			System.out.println("------------------------ GENERACION DE CODIGO ------------------------");
-			p.generaCodigo();
-		} else{
-			System.out.println("Demasiados errores, no se puede generar codigo.");
+		if (Programa.okVinculacion) {
+			System.out.println("------------------------ TIPADO ------------------------");
+			p.checkType();//tipado
+			if (Programa.okVinculacion && Programa.okTipos){
+				System.out.println("------------------------ GENERACION DE CODIGO ------------------------");
+				p.generaCodigo();
+			} 	else{
+				System.out.println("Demasiados errores, no se puede generar codigo.");
+			}
+		}
+		else {
+			System.out.println("Ha ocurrido algún error en vinculación");
 		}
 		// System.out.println(p);
 	}

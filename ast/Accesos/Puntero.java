@@ -1,6 +1,5 @@
 package ast.Accesos;
 
-import ast.Programa;
 import ast.Types.PointerType;
 
 public class Puntero extends Acceso {
