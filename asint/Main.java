@@ -13,6 +13,9 @@ public class Main {
 		AnalizadorSintacticoTiny asint = new AnalizadorSintacticoTiny(alex);
 		Programa p = (Programa) asint.parse().value;
 
+		p.simplifyAlias();
+		System.out.println(p);
+
 		System.out.println("------------------------ VINCULACIÓN ------------------------");
 		p.vincular(); // vinculacion
 		System.out.println("------------------------ TIPADO ------------------------");

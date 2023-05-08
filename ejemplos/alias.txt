@@ -1,0 +1,19 @@
+alias rubio = entero;
+alias albert = rubio;
+alias listaEntero = lista<albert>[3];
+
+albert suma(albert a, albert b) {
+    albert c = a + b;
+    devuelve c;
+}
+
+estructura claseDePL{
+    albert tiempo;
+};
+
+principal() {
+    listaEntero aaa;
+    aaa[0] = 100;
+    aaa[1] = 200;
+    imprime(suma(aaa[0],aaa[1]));
+}

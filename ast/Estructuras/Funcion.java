@@ -9,6 +9,7 @@ import ast.Programa;
 import ast.Util;
 import ast.Auxiliares.Parametro;
 import ast.Estructuras.clases.Atributo;
+import ast.Instructions.Alias;
 import ast.Instructions.Bloque;
 import ast.Instructions.Instruccion;
 import ast.Types.Types;
@@ -157,6 +158,17 @@ public class Funcion extends ASTNode{
     }
     public List<Parametro> getParams(){
         return this.paramList;
+    }
+
+    public void simplifyAlias(List<Alias> lista_alias) {
+        for (Alias a: lista_alias){
+            if (this.tipo.toString().equals(a.getNombre()))
+                this.tipo = a.getTipo();
+        }
+        for (Parametro param: paramList)
+                param.simplifyAlias(lista_alias);    
+        for (Instruccion ins: instList)
+            ins.simplifyAlias(lista_alias);
     }
 
 }

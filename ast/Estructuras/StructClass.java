@@ -5,6 +5,7 @@ import java.util.List;
 import ast.ASTNode;
 import ast.Programa;
 import ast.Util;
+import ast.Instructions.Alias;
 import ast.Instructions.Declaracion;
 
 public class StructClass extends ASTNode{
@@ -53,6 +54,11 @@ public class StructClass extends ASTNode{
 
     public List<Declaracion> getCampos(){
         return this.campos;
+    }
+
+    public void simplifyAlias(List<Alias> lista_alias){
+        for (Declaracion d: campos)
+            d.simplifyAlias(lista_alias);
     }
 
 }

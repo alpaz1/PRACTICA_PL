@@ -109,7 +109,10 @@ public class Programa extends ASTNode {
         return -1;
     }
 
-    
+    public void simplifyAlias(){
+        this.definiciones.simplifyAlias();
+        this.fmain.simplifyAlias(definiciones.getAliasList());
+    }
 
 
 }

@@ -7,6 +7,9 @@ import ast.Expresions.ExpArray;
 import ast.Types.BasicTypes;
 import ast.Types.KindTypes;
 import ast.Types.Types;
+
+import java.util.List;
+
 import ast.ASTNode;
 import ast.Programa;
 import ast.Estructuras.EnumClass;
@@ -199,6 +202,31 @@ public class Declaracion extends Instruccion {
     @Override
     public KindInstruction kind() {
         return KindInstruction.DECLARACION;
+    }
+
+    public void simplifyAlias(List<Alias> lista_alias){
+        Types aux = this.tipo;
+        if (aux.getTipo() == null) { // Si el tipo de la declaracion no es compuesto
+            for (Alias a: lista_alias){ // Buscamos si coincide con algun alias
+                if (aux.toString().equals(a.getNombre())){
+                    this.tipo = a.getTipo(); // En cuyo caso asignamos el tipo del alias
+                    return;
+                }
+            }
+        }
+        else { // Si el tipo es compuesto
+            boolean encontrado = false;
+            while (aux != null && !encontrado) { // Bajo al tipo más profundo
+                for (Alias a: lista_alias) { 
+                    if (aux.getTipo() != null && aux.getTipo().toString().equals(a.getNombre())){
+                        aux.setTipo(a.getTipo());
+                        encontrado = true;
+                        return;
+                    }
+                }  
+                aux = aux.getTipo();
+            }
+        }
     }
 
 }

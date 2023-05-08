@@ -1,5 +1,7 @@
 package ast.Instructions;
 
+import java.util.List;
+
 import ast.ASTNode;
 import ast.Programa;
 import ast.Types.Types;
@@ -33,5 +35,16 @@ public class Alias extends ASTNode{
             Programa.okVinculacion = false;
         }
     }
+
+    public Types getTipo() {
+        return this.tipo;
+    }
+    public String getNombre(){
+        return this.nombre;
+    }
+    public void setTipo(Types tipo){
+        this.tipo = tipo;
+    }
+
     
 }
