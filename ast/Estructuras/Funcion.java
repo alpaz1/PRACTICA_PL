@@ -40,7 +40,6 @@ public class Funcion extends ASTNode{
                 param.vincular();
             }
 
-            // si es void no hace falta
             for (Instruccion instruccion : instList) {
                 instruccion.vincular();
             }
@@ -80,8 +79,6 @@ public class Funcion extends ASTNode{
     }
 
     public void checkType() {
-        //this.tipo.chequea();
-
         for (Parametro p : paramList) {
             p.checkType();
         }
@@ -89,6 +86,7 @@ public class Funcion extends ASTNode{
         for (Instruccion ins : instList) {
             ins.checkType();
         }
+
     }
 
     public int maxMemoria() {
@@ -102,7 +100,7 @@ public class Funcion extends ASTNode{
     @Override
     public void generaCodigo() {
         // int tam = 200; // TODO: cambiar esto a lo que ocupa la funcion
-        int tam = maxMemoria();
+        int tam = maxMemoria() + 8;
         Programa.codigo.print("(func $" + nombre);
         // for (Parametro param: paramList){
         //     param.respresentacionWasm();
@@ -166,7 +164,7 @@ public class Funcion extends ASTNode{
                 this.tipo = a.getTipo();
         }
         for (Parametro param: paramList)
-                param.simplifyAlias(lista_alias);    
+            param.simplifyAlias(lista_alias);    
         for (Instruccion ins: instList)
             ins.simplifyAlias(lista_alias);
     }

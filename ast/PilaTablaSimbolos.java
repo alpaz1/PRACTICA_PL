@@ -98,7 +98,6 @@ public class PilaTablaSimbolos {
             for (ASTNode globalNode: cima.values()){
                 if (globalNode.tipoNodo == NodeKind.FUNCION){
                     node = globalNode;
-                    break;
                 }
             }
 

@@ -2,6 +2,7 @@ package ast.Instructions;
 
 import ast.Programa;
 import ast.Expresions.LlamadaFunExp;
+import ast.Types.KindTypes;
 
 public class LlamadaFunInst extends Instruccion {
     private LlamadaFunExp llamadaFuncion;
@@ -21,12 +22,15 @@ public class LlamadaFunInst extends Instruccion {
     @Override
     public void checkType() {
         llamadaFuncion.checkType();
+        this.tipo = llamadaFuncion.getTipo();
     }
 
     @Override
     public void generaCodigo() {
         llamadaFuncion.generaCodigo();
-        Programa.codigo.println("drop");
+        if (tipo.kind() != KindTypes.VOID){
+            Programa.codigo.println("drop");
+        }
     }
 
     public String toString(){

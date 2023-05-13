@@ -18,19 +18,17 @@ public class Main {
 		System.out.println(p);
 		System.out.println("------------------------ VINCULACIÓN ------------------------");
 		p.vincular(); // vinculacion
-		if (Programa.okVinculacion) {
-			System.out.println("------------------------ TIPADO ------------------------");
-			p.checkType();//tipado
-			if (Programa.okVinculacion && Programa.okTipos){
-				System.out.println("------------------------ GENERACION DE CODIGO ------------------------");
-				p.generaCodigo();
-			} 	else{
-				System.out.println("Demasiados errores, no se puede generar codigo.");
-			}
-		}
-		else {
+		if (! Programa.okVinculacion) {
 			System.out.println("Ha ocurrido algún error en vinculación");
+			System.exit(0);
 		}
-		// System.out.println(p);
+		System.out.println("------------------------ TIPADO ------------------------");
+		p.checkType(); // tipado
+		if (Programa.okVinculacion && Programa.okTipos){
+			System.out.println("------------------------ GENERACION DE CODIGO ------------------------");
+			p.generaCodigo();
+		} 	else{
+			System.out.println("Demasiados errores, no se puede generar codigo.");
+		}
 	}
 }

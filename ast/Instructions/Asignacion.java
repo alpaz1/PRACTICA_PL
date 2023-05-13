@@ -61,7 +61,7 @@ public class Asignacion extends Instruccion{
 
 
         }
-        else if (exp.isBasica()){ // para a = 3 + 2;
+        else if (exp.isAcceso()){ // para a = 3 + 2;
             iden.calcularDirRelativa();
             exp.generaCodigo();
             Programa.codigo.println("i32.store");
@@ -69,7 +69,7 @@ public class Asignacion extends Instruccion{
             // Para a = t; (t es un struct)
             exp.calcularDirRelativa();
             iden.calcularDirRelativa();
-            Programa.codigo.println("i32.const " + exp.getTipo().getTam());;
+            Programa.codigo.println("i32.const " + (exp.getTipo().getTam() / 4)); // getTam está en bytes no en bloques de 32 bits
             Programa.codigo.println("call $copyn"); // src dest tam
         }
         Programa.codigo.println(";; Fin asignacion " + iden);

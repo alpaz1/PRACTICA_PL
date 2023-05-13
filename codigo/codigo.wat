@@ -12,10 +12,10 @@
 (global $MP (mut i32) (i32.const 0)) ;; mark pointer
 (global $NP (mut i32) (i32.const 131071996)) ;; heap 2000*64*1024-4
 (start $principal)
-(func $suma (result i32)
+(func $insertar
  (local $localsStart i32)
  (local $temp i32)
- i32.const 12
+ i32.const 56
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -28,34 +28,112 @@
  i32.const 8
  i32.add
  set_local $localsStart
-;;Inicio declaracion c
-i32.const 8
+;; Inicio asignacion AccArr(lst[pos])
+i32.const 44
 get_local $localsStart
 i32.add
+;;AQUI ACCESO ARRAY AccArr(lst[pos])
+;;AQUI COMIENZO EXP pos
+i32.const 40
 get_local $localsStart
-i32.const 0
 i32.add
 i32.load
-get_local $localsStart
+;;AQUI FIN EXP pos
 i32.const 4
+i32.mul
+i32.const 0
+get_local $localsStart
 i32.add
 i32.load
+i32.add
+;;AQUI FIN ARRAY AccArr(lst[pos])
+i32.const 1
+call $copyn
+;; Fin asignacion AccArr(lst[pos])
+ call $freeStack
+)
+(func $listaPrimeros10 (result )
+ (local $localsStart i32)
+ (local $temp i32)
+ i32.const 52
+ call $reserveStack
+ set_local $temp
+ get_global $MP
+ get_local $temp
+ i32.store
+ get_global $MP
+ get_global $SP
+ i32.store offset=4
+ get_global $MP
+ i32.const 8
+ i32.add
+ set_local $localsStart
+;;Inicio declaracion i
+i32.const 40
+get_local $localsStart
+i32.add
+i32.const 0
+i32.store
+;;Fin declaracion i
+block
+loop
+i32.const 40
+get_local $localsStart
+i32.add
+i32.load
+i32.const 10
+i32.lt_s
+i32.eqz
+br_if 1
+;; Inicio asignacion AccArr(lst2[i])
+i32.const 40
+get_local $localsStart
+i32.add
+;;AQUI ACCESO ARRAY AccArr(lst2[i])
+;;AQUI COMIENZO EXP i
+i32.const 40
+get_local $localsStart
+i32.add
+i32.load
+;;AQUI FIN EXP i
+i32.const 4
+i32.mul
+i32.const 0
+get_local $localsStart
+i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(lst2[i])
+i32.const 1
+call $copyn
+;; Fin asignacion AccArr(lst2[i])
+;; Inicio asignacion i
+i32.const 40
+get_local $localsStart
+i32.add
+i32.const 40
+get_local $localsStart
+i32.add
+i32.load
+i32.const 1
 i32.add
 i32.store
-;;Fin declaracion c
+;; Fin asignacion i
+br 0
+end
+end
+i32.const 0
 get_local $localsStart
-i32.const 8
 i32.add
 i32.load
 return
  call $freeStack
 i32.const 0
-i32.load
+.load
 )
 (func $principal
  (local $localsStart i32)
  (local $temp i32)
- i32.const 16
+ i32.const 8
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -68,84 +146,6 @@ i32.load
  i32.const 8
  i32.add
  set_local $localsStart
-;;Inicio declaracion ptr
-i32.const 0
-get_local $localsStart
-i32.add
-i32.store
-;;Fin declaracion ptr
-;; Inicio asignacion AccArr(aaa[0])
-;;AQUI ACCESO ARRAY AccArr(aaa[0])
-;;AQUI COMIENZO EXP 0
-i32.const 0
-;;AQUI FIN EXP 0
-i32.const 4
-i32.mul
-get_local $localsStart
-i32.const 4
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(aaa[0])
-i32.const 100
-i32.store
-;; Fin asignacion AccArr(aaa[0])
-;; Inicio asignacion AccArr(aaa[1])
-;;AQUI ACCESO ARRAY AccArr(aaa[1])
-;;AQUI COMIENZO EXP 1
-i32.const 1
-;;AQUI FIN EXP 1
-i32.const 4
-i32.mul
-get_local $localsStart
-i32.const 4
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(aaa[1])
-i32.const 200
-i32.store
-;; Fin asignacion AccArr(aaa[1])
-;; Inicio imprime Llamada suma ([AccArr(aaa[0]), AccArr(aaa[1])])
-get_global $SP
-i32.const 8
-i32.add
-set_local $temp
-;; Copiando argumento: AccArr(aaa[0])
-i32.const 0
-get_local $temp
-i32.add
-;;AQUI ACCESO ARRAY AccArr(aaa[0])
-;;AQUI COMIENZO EXP 0
-i32.const 0
-;;AQUI FIN EXP 0
-i32.const 4
-i32.mul
-get_local $localsStart
-i32.const 4
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(aaa[0])
-i32.load
-i32.store
-;; Copiando argumento: AccArr(aaa[1])
-i32.const 4
-get_local $temp
-i32.add
-;;AQUI ACCESO ARRAY AccArr(aaa[1])
-;;AQUI COMIENZO EXP 1
-i32.const 1
-;;AQUI FIN EXP 1
-i32.const 4
-i32.mul
-get_local $localsStart
-i32.const 4
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(aaa[1])
-i32.load
-i32.store
-call $suma
-call $print
-;; Fin imprime Llamada suma ([AccArr(aaa[0]), AccArr(aaa[1])])
  call $freeStack
 )
 (func $reserveStack (param $size i32)

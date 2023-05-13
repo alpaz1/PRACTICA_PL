@@ -51,9 +51,9 @@ public class StructType extends Types{
         int tam = 0;
         for (Declaracion declaracion: getCampos()){
             //System.out.println(declaracion.getTipo().kind()  + " "+ declaracion.maxMemoria());
-            System.out.println("El campo " + declaracion.toString() +" ocupa " + declaracion.maxMemoria());
+            // System.out.println("El campo " + declaracion.toString() +" ocupa " + declaracion.maxMemoria());
             tam += declaracion.maxMemoria();
-            System.out.println("El tamaño actual de  " + nombre_tipo +" es " + tam);
+            // System.out.println("El tamaño actual de  " + nombre_tipo +" es " + tam);
         }
 
 

@@ -15,8 +15,20 @@ public abstract class E extends ASTNode {
     public Object getNombreEnum() {
         return null;
     }
+    public boolean isAcceso() {
+        return true;
+    }
+
     public boolean isBasica() {
-        return getTipo().kind() == KindTypes.INT || getTipo().kind() == KindTypes.FLOAT || getTipo().kind() == KindTypes.POINTER;
+        boolean basica = false;
+        switch (tipo.kind()){
+            case INT:
+            case FLOAT:
+            case POINTER:
+            basica = true;
+            default:
+        }
+        return basica;
     }
     public void calcularDirRelativa(){
         throw new UnsupportedOperationException();

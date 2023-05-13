@@ -1,30 +1,39 @@
 
-entero insertar(lista <entero> [10] lst, entero pos, entero elem){
+vacio insertar(lista <entero> [10] &lst, entero pos, entero elem){
     lst[pos] = elem;
-    imprime(lst[pos]);
-    devuelve 2;
 }
 
-entero suma(entero a, entero b){
-    imprime(a);
-    imprime(b);
-    devuelve a + b;
-}
+// entero suma(entero a, entero b){
+//     imprime(a);
+//     imprime(b);
+//     devuelve a + b;
+// }
 
-entero multiplicar(entero a, entero b){
-    entero resultado = 0;
-    paraCada (entero i = 0; i < a; i = i + 1){
-        resultado = resultado + b;
+// entero multiplicar(entero a, entero b){
+//     entero resultado = 0;
+//     paraCada (entero i = 0; i < a; i = i + 1){
+//         resultado = resultado + b;
+//     }
+//     devuelve resultado;
+// }
+
+lista <entero> [10] listaPrimeros10(){
+    lista <entero> [10] lst2;
+    paraCada (entero i = 0; i < 10; i = i + 1){
+        lst2[i] = i;
     }
-    devuelve resultado;
+    devuelve lst2;
 }
 
 principal() {
-    lista <entero> [10] listaNumeros;
-    paraCada (entero i = 0; i < 10; i = i + 1){
-        listaNumeros[i] = i;
-    }
+    // lista <entero> [10] listaNumeros;
+    // paraCada (entero i = 0; i < 10; i = i + 1){
+    //     listaNumeros[i] = i;
+    // }
     // insertar(listaNumeros, 3, 100);
     // imprime(listaNumeros[3]);
-    imprime(multiplicar(7, 5));
+    // imprime(multiplicar(7, 5));
+    // entero a = 5;
+    // cambiarValor();
+    // imprime(a);
 }

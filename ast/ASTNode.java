@@ -20,7 +20,7 @@ public abstract class ASTNode {
 
         int tam = tipo.getTam();
 
-        System.out.println("Tipo: " + tipo + " tamaño: " + tam);
+        // System.out.println("Tipo: " + tipo + " tamaño: " + tam);
 
         Programa.pila.updateDelta(tam);
     }

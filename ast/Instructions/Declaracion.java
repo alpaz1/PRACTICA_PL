@@ -45,16 +45,17 @@ public class Declaracion extends Instruccion {
         // mismo name en ese bloque
         ASTNode nodo = Programa.pila.buscaIdCima(nombre);
         if (nodo == null) { // devuelve null cuando no esta
-            System.out.println("VOY A VINCULAR EL " + tipo + " " + nombre);
+            // System.out.println("VOY A VINCULAR EL " + tipo + " " + nombre);
 
             Programa.pila.insertaId(nombre, this);
             setDelta(); // posicion relativa al bloque
             
             if (exp != null)
                 exp.vincular();
-            System.out.println("YA HE ACABADO");
+            // System.out.println("YA HE ACABADO");
         } else {
-            System.out.println("Error vinculacion: Este identificador ya esta usado: " + nombre);
+            System.out.println("Error vinculacion: Este identificador ya esta usado: " + nombre +
+            " (en " + this + ")");
             Programa.okVinculacion = false;
         }
     }
@@ -160,7 +161,7 @@ public class Declaracion extends Instruccion {
         }
         else if (exp != null) {
             Programa.codigo.println(";;Inicio declaracion " + nombre);
-           if (exp.isBasica()){ // para a = 3 + 2;
+           if (exp.isAcceso()){ // para a = 3 + 2;
                 calcularDirRelativa();
                 exp.generaCodigo();
                 Programa.codigo.println("i32.store");
@@ -180,7 +181,7 @@ public class Declaracion extends Instruccion {
                 
                 exp.calcularDirRelativa();
                 calcularDirRelativa();
-                Programa.codigo.println("i32.const " + exp.getTipo().getTam());;
+                Programa.codigo.println("i32.const " + (exp.getTipo().getTam()/ 4)); // getTam está en bytes no en bloques de 32 bits
                 Programa.codigo.println("call $copyn"); // src dest tam
             }
             Programa.codigo.println(";;Fin declaracion " + nombre);
