@@ -23,7 +23,20 @@ public class ExpNew extends E {
         return KindE.NEW;
     }
 
-    public void checkType() {}
+    @Override
+    public void generaCodigo(){
+        Programa.codigo.println("i32.const " + tipoBase.getTam());
+        Programa.codigo.println("call $reserveHeap");
+        Programa.codigo.println("get_global $NP");
+        
+    }
+
+    public void checkType() {
+
+    }
+
+
+
     public void vincular() {
         Types aux = this.tipo;
         while (aux.getTipo() != null)

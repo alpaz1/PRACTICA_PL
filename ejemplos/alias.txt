@@ -11,10 +11,32 @@ estructura claseDePL{
     albert tiempo;
 };
 
+enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
+
+enum Temporal { Lluvioso, Soleado, Nublado, Nieve};
+
+
+estructura Cita{
+    entero mes;
+    entero anio;
+    DiaSemana dia;
+    Temporal tiempo;
+};
+
 principal() {
     entero* ptr = nuevo entero;
+     @ptr = 2;
+    imprime(ptr);
+    imprime(@ptr);
     listaEntero aaa;
     aaa[0] = 100;
     aaa[1] = 200;
     imprime(suma(aaa[0],aaa[1]));
-}
+
+    Cita* c = nuevo Cita;
+    @c.mes = 1;
+    imprime(c);
+    imprime( @c.mes);
+
+
+} //131071996
