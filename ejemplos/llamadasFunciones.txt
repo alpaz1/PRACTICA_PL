@@ -1,4 +1,3 @@
-
 entero cuadrado(entero n){
     devuelve n*n;
 }

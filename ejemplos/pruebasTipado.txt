@@ -35,8 +35,6 @@ entero funCall = prueba (b,b,z);
 buleano funCall1 = prueba (b,b,z);
 
 
-
-
 enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
 enum Frutas { Manzana, Pera};
 
@@ -52,8 +50,6 @@ estructura Tiempo{
 DiaSemana dia = 2;
 
 lista <entero> [2] arrayTiempo = {h};
-
-
 
 
 principal() {
