@@ -1,0 +1,21 @@
+
+entero cuadrado(entero n){
+    devuelve n*n;
+}
+
+
+// Función que calcula el factorial de un número utilizando una llamada recursiva
+entero factorial(entero n) {
+  si (n == 0) {
+    devuelve 1;
+  } sino {
+    devuelve n * factorial(n - 1);
+  }
+}
+
+principal() {
+  entero num = 2;
+  entero resultado = cuadrado(factorial(num));
+
+  imprime(resultado);
+}

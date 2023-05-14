@@ -1,42 +1,23 @@
-alias rubio = entero;
-alias albert = rubio;
-alias listaEntero = lista<albert>[3];
+//Con este archivo comprobaremos que los alias funcionan correctamente
 
-albert suma(albert a, albert b) {
+alias rubio = entero; //rubio es un sinónimo de entero
+alias albert = rubio; //albert es un sinónimo de rubio, por tanto de entero
+alias listaEntero = lista<albert>[3]; //listaEntero es un sinónimo lista<albert>, y por tanto un sinónimo de lista<entero>
+
+albert suma(albert a, albert b) {//esta funciónn suma dos alberts(enteros) y devuelve el resultado
     albert c = a + b;
     devuelve c;
 }
 
-estructura claseDePL{
+estructura claseDePL{ //definimos un struct cuyo único campo es de tipo albert(entero) y se llama tiempo
     albert tiempo;
 };
 
-enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
-
-enum Temporal { Lluvioso, Soleado, Nublado, Nieve};
-
-
-estructura Cita{
-    entero mes;
-    entero anio;
-    DiaSemana dia;
-    Temporal tiempo;
-};
 
 principal() {
-    entero* ptr = nuevo entero;
-     @ptr = 2;
-    imprime(ptr);
-    imprime(@ptr);
-    listaEntero aaa;
-    aaa[0] = 100;
+   
+    listaEntero aaa; //creamos una lista de enteros con el alias
+    aaa[0] = 100; //inicializamos a enteros
     aaa[1] = 200;
-    imprime(suma(aaa[0],aaa[1]));
-
-    Cita* c = nuevo Cita;
-    @c.mes = 1;
-    imprime(c);
-    imprime( @c.mes);
-
-
-} //131071996
+    imprime(suma(aaa[0],aaa[1])); //sumamos los valores
+}

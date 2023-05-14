@@ -1,0 +1,32 @@
+
+
+vacio swap(entero* a, entero* b) {
+  entero temp = @a;
+  @a = @b;
+  @b = temp;
+}
+
+principal() {
+  entero x = 5;
+  entero y = 10;
+
+  // Declaración de punteros
+  entero* ptr_x = *x;
+  entero* ptr_y = *y;
+
+  imprime(@ptr_x);
+  imprime(@ptr_y);
+
+
+  // Valores de x e y antes del intercambio
+  imprime(x);
+  imprime(y);
+
+  // Intercambiar los valores de x e y utilizando punteros
+  swap(ptr_x, ptr_y);
+
+  //valres despues del intercambio
+  imprime(x);
+  imprime(y);
+
+}

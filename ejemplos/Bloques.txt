@@ -1,0 +1,31 @@
+
+ principal() {
+
+  entero x = 10;
+
+  
+    {
+      entero z = 30;
+      imprime(x);
+      //imprime(y);
+      //imprime(z);
+
+      // Operaciones matemáticas con las variables x, y y z
+      //entero sum = x + y + z;
+     // entero product = x * y * z;
+
+      // Imprimir resultados de las operaciones
+      //imprime(sum);
+      //imprime(product);
+    }
+
+    // Operación matemática con las variables x e y
+    //entero difference = x - y;
+
+    imprime(x);
+    //imprime(y);
+    //imprime(difference);
+  
+
+
+}

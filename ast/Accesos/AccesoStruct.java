@@ -29,6 +29,7 @@ public class AccesoStruct extends Acceso{
     public void checkType() {
         acceso.checkType();
         if(acceso.tipo != null){
+            
             if(acceso.tipo instanceof StructType){
                 List<Declaracion> declaraciones = ((StructType)acceso.tipo).getCampos();
                 Declaracion m = null;
@@ -46,6 +47,10 @@ public class AccesoStruct extends Acceso{
                     this.tipo = m.tipo;
                     this.campoVinculo = m;
                 } 
+            }
+            else{
+                System.out.println("Error tipos: " + acceso + " no es un struct, es de tipo " + acceso.tipo);
+                Programa.okTipos = false;
             }
         }
         else{
