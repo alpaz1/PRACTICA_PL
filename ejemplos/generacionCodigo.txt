@@ -3,27 +3,27 @@ vacio insertar(lista <entero> [10] &lst, entero pos, entero elem){
     lst[pos] = elem;
 }
 
-// entero suma(entero a, entero b){
-//     imprime(a);
-//     imprime(b);
-//     devuelve a + b;
-// }
-
-// entero multiplicar(entero a, entero b){
-//     entero resultado = 0;
-//     paraCada (entero i = 0; i < a; i = i + 1){
-//         resultado = resultado + b;
-//     }
-//     devuelve resultado;
-// }
-
-lista <entero> [10] listaPrimeros10(){
-    lista <entero> [10] lst2;
-    paraCada (entero i = 0; i < 10; i = i + 1){
-        lst2[i] = i;
-    }
-    devuelve lst2;
+entero suma(entero a, entero b){
+    imprime(a);
+    imprime(b);
+    devuelve a + b;
 }
+
+entero multiplicar(entero a, entero b){
+    entero resultado = 0;
+    paraCada (entero i = 0; i < a; i = i + 1){
+        resultado = resultado + b;
+    }
+    devuelve resultado;
+}
+
+// lista <entero> [10] listaPrimeros10(){
+//     lista <entero> [10] lst2;
+//     paraCada (entero i = 0; i < 10; i = i + 1){
+//         lst2[i] = i;
+//     }
+//     devuelve lst2;
+// }
 
 principal() {
     // lista <entero> [10] listaNumeros;
@@ -32,7 +32,7 @@ principal() {
     // }
     // insertar(listaNumeros, 3, 100);
     // imprime(listaNumeros[3]);
-    // imprime(multiplicar(7, 5));
+    imprime(suma(3, multiplicar(7, 5)));
     // entero a = 5;
     // cambiarValor();
     // imprime(a);
