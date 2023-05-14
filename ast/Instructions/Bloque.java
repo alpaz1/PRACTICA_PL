@@ -46,4 +46,10 @@ public class Bloque extends Instruccion{
     @Override
     public void vincular() {}
 
+    public void generaCodigo(){
+        for (Instruccion instruccion: instList){
+            instruccion.generaCodigo();
+        }
+    }
+
 }
