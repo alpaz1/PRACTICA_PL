@@ -13,7 +13,7 @@ entero factorial(entero n) {
 }
 
 principal() {
-  entero num = 2;
+  entero num = 5;
   entero resultado = cuadrado(factorial(num));
 
   imprime(resultado);

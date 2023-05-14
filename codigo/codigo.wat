@@ -12,96 +12,10 @@
 (global $MP (mut i32) (i32.const 0)) ;; mark pointer
 (global $NP (mut i32) (i32.const 131071996)) ;; heap 2000*64*1024-4
 (start $principal)
-(func $cuadrado (result i32)
- (local $localsStart i32)
- (local $temp i32)
- i32.const 12
- call $reserveStack
- set_local $temp
- get_global $MP
- get_local $temp
- i32.store
- get_global $MP
- get_global $SP
- i32.store offset=4
- get_global $MP
- i32.const 8
- i32.add
- set_local $localsStart
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-i32.mul
-call $freeStack
-return
- call $freeStack
-i32.const 0
-i32.load
-)
-(func $factorialRec (result i32)
- (local $localsStart i32)
- (local $temp i32)
- i32.const 12
- call $reserveStack
- set_local $temp
- get_global $MP
- get_local $temp
- i32.store
- get_global $MP
- get_global $SP
- i32.store offset=4
- get_global $MP
- i32.const 8
- i32.add
- set_local $localsStart
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-i32.const 0
-i32.eq
-if
-i32.const 1
-call $freeStack
-return
-else
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-get_global $SP
-i32.const 8
-i32.add
-set_local $temp
-;; Copiando argumento: RESTA(n,1)
-i32.const 0
-get_local $temp
-i32.add
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-i32.const 1
-i32.sub
-i32.store
-call $factorialRec
-i32.mul
-call $freeStack
-return
-end
- call $freeStack
-i32.const 0
-i32.load
-)
 (func $principal
  (local $localsStart i32)
  (local $temp i32)
- i32.const 16
+ i32.const 24
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -114,50 +28,112 @@ i32.load
  i32.const 8
  i32.add
  set_local $localsStart
-;;Inicio declaracion n
+;;Inicio declaracion x
 i32.const 0
+get_local $localsStart
+i32.add
+i32.const 10
+i32.store
+;;Fin declaracion x
+;;Inicio declaracion y
+i32.const 4
 get_local $localsStart
 i32.add
 i32.const 5
 i32.store
-;;Fin declaracion n
-;;Inicio declaracion resultado
-i32.const 4
+;;Fin declaracion y
+;;Inicio declaracion x
+i32.const 8
 get_local $localsStart
 i32.add
-get_global $SP
-i32.const 8
-i32.add
-set_local $temp
-;; Copiando argumento: Llamada factorialRec ([n])
-i32.const 0
-get_local $temp
-i32.add
-get_global $SP
-i32.const 8
-i32.add
-set_local $temp
-;; Copiando argumento: n
-i32.const 0
+i32.const 20
+i32.store
+;;Fin declaracion x
+;;Inicio declaracion y
+i32.const 12
 get_local $localsStart
 i32.add
-i32.const 0
-get_local $temp
+i32.const 30
+i32.store
+;;Fin declaracion y
+;; Inicio imprime x
+i32.const 8
+get_local $localsStart
 i32.add
-i32.const 1
-call $copyn
-call $factorialRec
-i32.store
-call $cuadrado
-i32.store
-;;Fin declaracion resultado
-;; Inicio imprime resultado
+i32.load
+call $print
+;; Fin imprime x
+;; Inicio imprime y
+i32.const 12
+get_local $localsStart
+i32.add
+i32.load
+call $print
+;; Fin imprime y
+;; Inicio imprime MUL(x,y)
+i32.const 8
+get_local $localsStart
+i32.add
+i32.load
+i32.const 12
+get_local $localsStart
+i32.add
+i32.load
+i32.mul
+call $print
+;; Fin imprime MUL(x,y)
+;; Inicio imprime x
+i32.const 8
+get_local $localsStart
+i32.add
+i32.load
+call $print
+;; Fin imprime x
+;; Inicio imprime y
 i32.const 4
 get_local $localsStart
 i32.add
 i32.load
 call $print
-;; Fin imprime resultado
+;; Fin imprime y
+;; Inicio imprime MUL(x,y)
+i32.const 8
+get_local $localsStart
+i32.add
+i32.load
+i32.const 4
+get_local $localsStart
+i32.add
+i32.load
+i32.mul
+call $print
+;; Fin imprime MUL(x,y)
+;; Inicio imprime x
+i32.const 0
+get_local $localsStart
+i32.add
+i32.load
+call $print
+;; Fin imprime x
+;; Inicio imprime y
+i32.const 4
+get_local $localsStart
+i32.add
+i32.load
+call $print
+;; Fin imprime y
+;; Inicio imprime MUL(x,y)
+i32.const 0
+get_local $localsStart
+i32.add
+i32.load
+i32.const 4
+get_local $localsStart
+i32.add
+i32.load
+i32.mul
+call $print
+;; Fin imprime MUL(x,y)
  call $freeStack
 )
 (func $reserveStack (param $size i32)
