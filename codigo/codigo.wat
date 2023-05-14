@@ -12,10 +12,10 @@
 (global $MP (mut i32) (i32.const 0)) ;; mark pointer
 (global $NP (mut i32) (i32.const 131071996)) ;; heap 2000*64*1024-4
 (start $principal)
-(func $suma (result i32)
+(func $cuadrado (result i32)
  (local $localsStart i32)
  (local $temp i32)
- i32.const 20
+ i32.const 12
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -28,26 +28,72 @@
  i32.const 8
  i32.add
  set_local $localsStart
-;;Inicio declaracion c
-i32.const 8
+i32.const 0
 get_local $localsStart
+i32.add
+i32.load
+i32.const 0
+get_local $localsStart
+i32.add
+i32.load
+i32.mul
+call $freeStack
+return
+ call $freeStack
+i32.const 0
+i32.load
+)
+(func $factorialRec (result i32)
+ (local $localsStart i32)
+ (local $temp i32)
+ i32.const 12
+ call $reserveStack
+ set_local $temp
+ get_global $MP
+ get_local $temp
+ i32.store
+ get_global $MP
+ get_global $SP
+ i32.store offset=4
+ get_global $MP
+ i32.const 8
+ i32.add
+ set_local $localsStart
+i32.const 0
+get_local $localsStart
+i32.add
+i32.load
+i32.const 0
+i32.eq
+if
+i32.const 1
+call $freeStack
+return
+else
+i32.const 0
+get_local $localsStart
+i32.add
+i32.load
+get_global $SP
+i32.const 8
+i32.add
+set_local $temp
+;; Copiando argumento: RESTA(n,1)
+i32.const 0
+get_local $temp
 i32.add
 i32.const 0
 get_local $localsStart
 i32.add
 i32.load
-i32.const 4
-get_local $localsStart
-i32.add
-i32.load
-i32.add
+i32.const 1
+i32.sub
 i32.store
-;;Fin declaracion c
-i32.const 8
-get_local $localsStart
-i32.add
-i32.load
+call $factorialRec
+i32.mul
+call $freeStack
 return
+end
  call $freeStack
 i32.const 0
 i32.load
@@ -55,7 +101,7 @@ i32.load
 (func $principal
  (local $localsStart i32)
  (local $temp i32)
- i32.const 28
+ i32.const 16
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -68,148 +114,50 @@ i32.load
  i32.const 8
  i32.add
  set_local $localsStart
-;;Inicio declaracion ptr
+;;Inicio declaracion n
 i32.const 0
 get_local $localsStart
 i32.add
-i32.const 4
-call $reserveHeap
-get_global $NP
+i32.const 5
 i32.store
-;;Fin declaracion ptr
-;; Inicio asignacion AccPtr(@ptr)
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-i32.const 2
-i32.store
-;; Fin asignacion AccPtr(@ptr)
-;; Inicio imprime ptr
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-call $print
-;; Fin imprime ptr
-;; Inicio imprime AccPtr(@ptr)
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-i32.load
-call $print
-;; Fin imprime AccPtr(@ptr)
-;; Inicio asignacion AccArr(aaa[0])
-;;AQUI ACCESO ARRAY AccArr(aaa[0])
-;;AQUI COMIENZO EXP 0
-i32.const 0
-;;AQUI FIN EXP 0
-i32.const 4
-i32.mul
+;;Fin declaracion n
+;;Inicio declaracion resultado
 i32.const 4
 get_local $localsStart
 i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(aaa[0])
-i32.const 100
-i32.store
-;; Fin asignacion AccArr(aaa[0])
-;; Inicio asignacion AccArr(aaa[1])
-;;AQUI ACCESO ARRAY AccArr(aaa[1])
-;;AQUI COMIENZO EXP 1
-i32.const 1
-;;AQUI FIN EXP 1
-i32.const 4
-i32.mul
-i32.const 4
-get_local $localsStart
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(aaa[1])
-i32.const 200
-i32.store
-;; Fin asignacion AccArr(aaa[1])
-;; Inicio imprime Llamada suma ([AccArr(aaa[0]), AccArr(aaa[1])])
 get_global $SP
 i32.const 8
 i32.add
 set_local $temp
-;; Copiando argumento: AccArr(aaa[0])
-;;AQUI ACCESO ARRAY AccArr(aaa[0])
-;;AQUI COMIENZO EXP 0
+;; Copiando argumento: Llamada factorialRec ([n])
 i32.const 0
-;;AQUI FIN EXP 0
-i32.const 4
-i32.mul
-i32.const 4
+get_local $temp
+i32.add
+get_global $SP
+i32.const 8
+i32.add
+set_local $temp
+;; Copiando argumento: n
+i32.const 0
 get_local $localsStart
 i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(aaa[0])
 i32.const 0
 get_local $temp
 i32.add
 i32.const 1
 call $copyn
-;; Copiando argumento: AccArr(aaa[1])
-;;AQUI ACCESO ARRAY AccArr(aaa[1])
-;;AQUI COMIENZO EXP 1
-i32.const 1
-;;AQUI FIN EXP 1
-i32.const 4
-i32.mul
-i32.const 4
-get_local $localsStart
-i32.add
-i32.add
-;;AQUI FIN ARRAY AccArr(aaa[1])
-i32.const 4
-get_local $temp
-i32.add
-i32.const 1
-call $copyn
-call $suma
-call $print
-;; Fin imprime Llamada suma ([AccArr(aaa[0]), AccArr(aaa[1])])
-;;Inicio declaracion c
-i32.const 16
-get_local $localsStart
-i32.add
-i32.const 16
-call $reserveHeap
-get_global $NP
+call $factorialRec
 i32.store
-;;Fin declaracion c
-;; Inicio asignacion AccStr(AccPtr(@c).mes)
-;; Calculando dir relativa de AccStr(AccPtr(@c).mes) 0
-i32.const 16
-get_local $localsStart
-i32.add
-i32.load
-i32.const 0
-i32.add
-i32.const 1
+call $cuadrado
 i32.store
-;; Fin asignacion AccStr(AccPtr(@c).mes)
-;; Inicio imprime c
-i32.const 16
+;;Fin declaracion resultado
+;; Inicio imprime resultado
+i32.const 4
 get_local $localsStart
 i32.add
 i32.load
 call $print
-;; Fin imprime c
-;; Inicio imprime AccStr(AccPtr(@c).mes)
-;; Calculando dir relativa de AccStr(AccPtr(@c).mes) 0
-i32.const 16
-get_local $localsStart
-i32.add
-i32.load
-i32.const 0
-i32.add
-i32.load
-call $print
-;; Fin imprime AccStr(AccPtr(@c).mes)
+;; Fin imprime resultado
  call $freeStack
 )
 (func $reserveStack (param $size i32)

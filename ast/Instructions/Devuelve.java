@@ -34,6 +34,7 @@ public class Devuelve extends Instruccion {
             valorRetorno.vincular();
         this.nodoVinculo = Programa.pila.buscaIdFuncionActual();
         funcion = (Funcion) nodoVinculo;
+        System.out.println(this + " Vinculado con + " + funcion.getName());
     }
 
     @Override
@@ -43,6 +44,7 @@ public class Devuelve extends Instruccion {
         } else {
             valorRetorno.calcularDirRelativa(); // si es un struct, array, etc se devuelve por referencia
         }
+        Programa.codigo.println("call $freeStack"); 
         Programa.codigo.println("return");
     }
 
