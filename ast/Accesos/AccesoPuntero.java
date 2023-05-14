@@ -32,4 +32,6 @@ public class AccesoPuntero extends Acceso{
     public void calcularDirRelativa() {
         nodoVinculo.generaCodigo();
     }
+
+    
 }

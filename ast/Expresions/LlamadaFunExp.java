@@ -63,7 +63,7 @@ public class LlamadaFunExp extends E {
                 + "El argumento esperado es de tipo: " + parametro.tipo + 
                 " , el argumento  recibido es de tipo: " + argumento.tipo);
                 Programa.okTipos = false;
-            } else if (parametro.isAmpersand() && argumento.isAcceso()){
+            } else if (parametro.isAmpersand() && !argumento.isInMemory()){
                 System.out.println("Error Tipos: Funcion " + funcion.getName() + " espera un argumento por referencia en la posicion  " + i +
                 ", el argumento recibido es de tipo: " + argumento.tipo);
                 Programa.okTipos = false;
@@ -89,7 +89,7 @@ public class LlamadaFunExp extends E {
             Parametro parametro = funcion.getParams().get(i);
             E argumento = argumentos.get(i);
             Programa.codigo.println(";; Copiando argumento: " + argumento); 
-            if (argumento.isAcceso()){ 
+            if (! argumento.isInMemory()){ 
                 // Para int, bool...
                 calculaPosicion(delta);
                 argumento.generaCodigo();

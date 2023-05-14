@@ -28,4 +28,9 @@ public class Puntero extends Acceso {
     public String toString() {
         return "*" + nodoVinculo;
     }
+
+    @Override
+    public boolean isInMemory() {
+        return false;
+    }
 }

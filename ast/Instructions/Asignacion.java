@@ -61,13 +61,15 @@ public class Asignacion extends Instruccion{
 
 
         }
-        else if (exp.isAcceso()){ // para a = 3 + 2;
+        else if (! exp.isInMemory()){ // para a = 3 + 2;
             iden.calcularDirRelativa();
             exp.generaCodigo();
             Programa.codigo.println("i32.store");
         } else {
             // Para a = t; (t es un struct)
+            Programa.codigo.println(";;exp tipo " + exp);
             exp.calcularDirRelativa();
+            Programa.codigo.println(";;iden");
             iden.calcularDirRelativa();
             Programa.codigo.println("i32.const " + (exp.getTipo().getTam() / 4)); // getTam está en bytes no en bloques de 32 bits
             Programa.codigo.println("call $copyn"); // src dest tam

@@ -161,7 +161,7 @@ public class Declaracion extends Instruccion {
         }
         else if (exp != null) {
             Programa.codigo.println(";;Inicio declaracion " + nombre);
-           if (exp.isAcceso()){ // para a = 3 + 2;
+           if (! exp.isInMemory()){ // para a = 3 + 2;
                 calcularDirRelativa();
                 exp.generaCodigo();
                 Programa.codigo.println("i32.store");

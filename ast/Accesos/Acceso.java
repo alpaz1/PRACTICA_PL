@@ -19,8 +19,8 @@ public abstract class Acceso extends E{
     public void calcularDirRelativa() {} 
 
     @Override
-    public boolean isAcceso() {
-        return false;
+    public boolean isInMemory() {
+        return true;
     }
 
     @Override

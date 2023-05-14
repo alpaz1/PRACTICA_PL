@@ -23,7 +23,7 @@ public abstract class Types {
     public String toString() {return "";}
 
     public String respresentacionWasm(){
-        return "";
+        return "i32";
     }
 
     public abstract int getTam();

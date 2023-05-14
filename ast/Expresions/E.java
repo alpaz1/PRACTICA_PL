@@ -15,8 +15,9 @@ public abstract class E extends ASTNode {
     public Object getNombreEnum() {
         return null;
     }
-    public boolean isAcceso() {
-        return true;
+    public boolean isInMemory() {
+        // Dice si es una expresion guardada en memoria o si es 3 + 4 por ejemplo
+        return false;
     }
 
     public boolean isBasica() {
