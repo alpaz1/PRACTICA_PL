@@ -25,7 +25,9 @@ public class Devuelve extends Instruccion {
     }
 
     public String toString() {
-        return "Devuelve " + valorRetorno.toString();
+        if (valorRetorno != null)
+            return "Devuelve " + valorRetorno.toString();
+        return "Devuelve";
     }
 
     @Override
@@ -38,10 +40,12 @@ public class Devuelve extends Instruccion {
 
     @Override
     public void generaCodigo() {
-        if (valorRetorno.isBasica()){
-            valorRetorno.generaCodigo();
-        } else {
-            valorRetorno.calcularDirRelativa(); // si es un struct, array, etc se devuelve por referencia
+        if (valorRetorno != null){
+            if (valorRetorno.isBasica()){
+                valorRetorno.generaCodigo();
+            } else {
+                valorRetorno.calcularDirRelativa(); // si es un struct, array, etc se devuelve por referencia
+            }
         }
         Programa.codigo.println("return");
     }

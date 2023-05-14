@@ -1,6 +1,12 @@
-enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
 
+//Con este fichero comprobaremos que el funcionamiento del lenguaje al combinar arrays, enums y structs es el esperado
+
+
+enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
 enum Temporal { Lluvioso, Soleado, Nublado, Nieve};
+
+//Comenzamos declarando dos tipos enumerados
+
 estructura Cita{
     entero mes;
     entero anio;
@@ -8,9 +14,21 @@ estructura Cita{
     Temporal tiempo;
 };
 
+//Declaramos un struct con un campo para cada tipo enumerado definido
+
+
+
 principal() {
+
+
+    //declaramos un array de la estructura definida anteriormente. 
+    //La idea es tener un "calendario" que nos permita ver que día de que mes tenemos un acontecimiento importante
+    //además de en qué día de la semana cae y que tiempo hará
     lista < Cita > [7] listaCitas;
 
+
+
+    //inicializamos los valores del array para poder hacer pruebas
     paraCada (entero i = 0; i < 7; i = i + 1){
         
         listaCitas[i].mes = i + 1;
@@ -25,6 +43,7 @@ principal() {
     listaCitas[4].dia = Viernes;
     listaCitas[5].dia = Sabado;
     listaCitas[6].dia = Domingo;
+
     listaCitas[0].tiempo = Lluvioso;
     listaCitas[1].tiempo = Lluvioso;
     listaCitas[2].tiempo = Nublado;
@@ -33,9 +52,12 @@ principal() {
     listaCitas[5].tiempo = Soleado;
     listaCitas[6].tiempo = Nieve;
 
+
+
     paraCada (entero j = 0; j < 7; j = j + 1){
         
         imprime(listaCitas[j].dia);
+        //imprimimos el día de la semana y mostramos 1111 si es fin de semana y 2222 en caso contrario
         si (listaCitas[j].dia == Viernes oo listaCitas[j].dia == Sabado oo listaCitas[j].dia == Domingo ){
             imprime(1111);
         }
@@ -47,20 +69,38 @@ principal() {
         imprime(listaCitas[j].anio);
         imprime(listaCitas[j].tiempo);
 
+        
 
+       
         Temporal t = listaCitas[j].tiempo;
 
-        selecciona (t){
-            caso Lluvioso: 
-                imprime(333);
-                ¡para!;
-            caso Soleado: 
-                imprime(444);
-                ¡para!;
-            caso Nublado:
-                imprime(555);
-                ¡para!;
-            porDefecto: imprime(666);
+
+
+
+        si(t == Lluvioso){
+                imprime(333);//sj ese día llueve, mostramos 333
+
         }
+        sino{
+            si(t == Soleado){
+                imprime(444); //si hace sol 444
+            }
+
+            sino{
+                si(t == Nublado){
+                    imprime(555);//si estará nublado 555
+                    
+                }
+                sino{
+                    imprime(666); //y en otro caso, es decir, si nieva, 666
+                }
+            }
+        }
+
     }
+
+
+
+    
+
 }
