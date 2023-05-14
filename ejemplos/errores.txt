@@ -6,6 +6,7 @@ entero factorial(aaa){ // Error en param de funcion
     devuelve 10;
 }
 
+
 enum DiaSemana {
     a, b, c
 } // Falta ; en enum

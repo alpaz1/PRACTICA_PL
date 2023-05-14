@@ -13,9 +13,13 @@ import errors.GestionErroresTiny;
 %{
   private ALexOperations ops;
   private GestionErroresTiny errores;
+  private int charline = 0;
   public String lexema() {return yytext();}
   public int fila() {return yyline+1;}
   public int columna() {return yycolumn+1;}
+  private void refrescaColumna() {
+    charline = yycolumn + yytext().length();
+  }
   public void fijaGestionErrores(GestionErroresTiny errores) {
    this.errores = errores;
   }
@@ -39,6 +43,7 @@ numeroReal = [\+\-]?{parteEntera}\.{parteDecimal}
 inputCharacter = [^\r\n]
 separador = [ \t\r\b\n]
 comentario = "//"{inputCharacter}*\n?
+comentarioLargo = "/*" ~"*/"
 
 operadorSuma = \+
 operadorResta = \-
@@ -111,8 +116,9 @@ identificador = {letra}({letra}|{digito}|"_")*
 
 
 %%
-{separador}               {}
-{comentario}              {}
+{separador}               {refrescaColumna();}
+{comentario}              {refrescaColumna();}
+{comentarioLargo}         {refrescaColumna();}
 
 {numeroEntero}            {return ops.unidadEnt();}
 {numeroReal}              {return ops.unidadReal();}
