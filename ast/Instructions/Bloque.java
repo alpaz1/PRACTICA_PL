@@ -3,6 +3,8 @@ package ast.Instructions;
 import java.util.Collections;
 import java.util.List;
 
+import ast.Programa;
+
 public class Bloque extends Instruccion{
     public List<? extends Instruccion> instList;
 
@@ -44,7 +46,19 @@ public class Bloque extends Instruccion{
     }
 
     @Override
-    public void vincular() {}
+    public void vincular() {
+        Programa.pila.abreBloque();
+        for (Instruccion instruccion : this.instList) {
+            instruccion.vincular();
+        }
+        Programa.pila.cierraBloque();
+    }
+
+    public void checkType() {
+        for (Instruccion instruccion : instList) {
+            instruccion.checkType();
+        }
+    }
 
     public void generaCodigo(){
         for (Instruccion instruccion: instList){
