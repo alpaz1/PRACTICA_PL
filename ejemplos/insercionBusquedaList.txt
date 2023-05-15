@@ -1,9 +1,6 @@
-
-
 vacio insertar(lista <entero> [10] &lst, entero pos, entero elem){
     lst[pos] = elem;
 }
-
 
 
 entero buscarElem(entero e, lista <entero> [10] &lst){

@@ -1,6 +1,3 @@
-
-
-
 // Paso por valor
 vacio incrementarPorValor(entero num) {
     num = num + 1;

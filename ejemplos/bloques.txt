@@ -1,9 +1,6 @@
 
  principal() {
 
-
-
-
   entero x = 10;
   entero y = 5;
 

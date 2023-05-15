@@ -10,9 +10,7 @@ vacio cambiarEdad(Persona* p, entero nuevaEdad) {
 }
 
 principal() {
-
-
-
+  
   Persona* p1 = nuevo Persona;
   @p1.dni = 0;
   @p1.edad = 30;

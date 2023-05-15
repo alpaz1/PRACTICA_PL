@@ -45,7 +45,7 @@ public class Programa extends ASTNode {
         pila.abreBloque();
         definiciones.vincular();
         fmain.vincular();
-        pila.print();
+        //pila.print();
         pila.cierraBloque();
     }
 
