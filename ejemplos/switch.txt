@@ -1,0 +1,63 @@
+
+/*
+EN ESTE ARCHIVO SE COMPRUEBA LA FUNCIONALIDAD DEL SWITCH (INCLUIDO CON BREAKS Y DEFAULTS)
+COMPROBAMOS TAMBIÉN QUE SE PUEDEN PONER MAS CONDICIONES EN LA CONDICIÓN DE PARADA DEL FOR
+*/
+
+
+lista<entero> [20] l;
+
+principal(){
+
+    entero i = 0;
+    //inicializamos el array l haciendo que en las posiciones pares este 1 y en las impares -1
+    paraCada (; i < 20; i = i + 1){
+        buleano aux = (i % 2 == 0);
+       selecciona(aux){
+        caso(verdad):
+            l[i] = 1;
+            ¡para!;
+        porDefecto: 
+            l[i] = -1;
+       }
+       imprime(l[i]);
+    }
+
+
+    //contamos cuantos numeros positivos y cuantos numeros negativos hay en el array antes del primer 0;
+
+    entero numPositivos = 0;
+    entero numNegativos = 0;
+
+    //ponemos por ejemplo l[11] = 0
+
+    l[11] = 0;
+    buleano sigue = verdad;
+
+    paraCada(entero j = 0; j < 20 yy sigue; j = j + 1){ //recorremos el array hasta que encontremos un 0
+        buleano aux = l[j] > 0;
+         selecciona(aux){
+            caso(verdad)://si encontramos un numeros positivo lo contamos
+                numPositivos = numPositivos + 1;
+                imprime(l[j]);
+                ¡para!;
+            caso(mentira):
+                si(l[j] == 0){
+                    sigue = mentira;//si encontramos el 0 avisamos de que hay que parar
+                }
+                sino{
+                    numNegativos = numNegativos + 1;//si encontramos un numero negativo lo contamos
+                    imprime(l[j]);
+                }
+                ¡para!;
+                
+         }
+    }
+
+
+    //mostramos cuantos numeros positivos y negativos hemos encontrado
+    imprime(numPositivos);
+    imprime(numNegativos);
+   
+
+}

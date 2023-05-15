@@ -1,0 +1,57 @@
+
+
+
+// Paso por valor
+vacio incrementarPorValor(entero num) {
+    num = num + 1;
+}
+
+// Paso por referencia
+vacio incrementarPorReferencia(entero& num) {
+    num = num + 1;
+}
+
+estructura Prueba{
+    entero x;
+    buleano y;
+};
+
+// Paso por valor
+vacio actualiza(Prueba p) {
+    p.x = p.x + 1;
+    p.y = mentira;
+}
+
+// Paso por referencia
+vacio actualizaPorReferencia(Prueba& p) {
+    p.x = p.x + 1;
+    p.y = mentira;
+}
+
+principal() {
+    entero numero = 5;
+
+    imprime(numero);
+
+    // Paso por valor
+    incrementarPorValor(numero);
+    imprime(numero);//observamos que el valor de numero no ha cambiado
+
+    // Paso por referencia
+    incrementarPorReferencia(numero);
+    imprime(numero);//observamos que el valor del numero si ha cambiado
+
+    Prueba p;
+    p.x = 0;
+    p.y = verdad;
+    imprime(p.x);
+    imprime(p.y);
+
+    actualiza(p);
+    imprime(p.x);
+    imprime(p.y);//observamos que ninun campo del struct cambia
+
+    actualizaPorReferencia(p);
+    imprime(p.x);
+    imprime(p.y);//observamos que ambos campos del struct cambian
+}

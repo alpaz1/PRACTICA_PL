@@ -35,8 +35,9 @@ public class Devuelve extends Instruccion {
         if (valorRetorno != null)
             valorRetorno.vincular();
         this.nodoVinculo = Programa.pila.buscaIdFuncionActual();
+        System.out.println("HOLA " + this.nodoVinculo.toString());
         funcion = (Funcion) nodoVinculo;
-        System.out.println(this + " Vinculado con + " + funcion.getName());
+        System.out.println(this + " Vinculado con  " + funcion.getName());
     }
 
     @Override
@@ -59,7 +60,7 @@ public class Devuelve extends Instruccion {
             tipo = valorRetorno.getTipo();
         }
         if (!nodoVinculo.getTipo().toString().equals(this.tipo.toString())){
-            System.err.println("Error de tipo: el valor devuelto (" + this.tipo.toString() + ") no se corresponde con el de la función (" +
+            System.err.println("Error de tipo en el return de la funcion: " + funcion.getName() + " el valor devuelto (" + this.tipo.toString() + ") no se corresponde con el de la función (" +
             nodoVinculo.getTipo() + ")");
             Programa.okVinculacion = false;
         }

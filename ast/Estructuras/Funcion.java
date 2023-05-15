@@ -19,6 +19,7 @@ public class Funcion extends ASTNode{
     private String nombre;
     List<Instruccion> instList;
     private List<Parametro> paramList;
+    
 
     public Funcion(Types tipo, String name, List<Parametro> paramList, List<Instruccion> instList){
         this.nombre = name;

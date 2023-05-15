@@ -10,6 +10,12 @@ public abstract class ASTNode {
     public int delta;//posición dentro de su ámbtio de dicho nodo
     public ASTNode(){}
 
+    boolean dev = false;
+
+    public void setReturn(){
+        this.dev = true;
+    }
+
     public abstract void vincular();
     public Types getTipo(){return tipo;}
     public void setTipo(Types tipo){this.tipo = tipo;}

@@ -15,7 +15,7 @@ public class Main {
 
 		Programa p = (Programa) asint.parse().value;
 
-	//	try {
+		try {
 			p.simplifyAlias();
 			System.out.println("------------------------ AST ------------------------");
 			System.out.println(p);
@@ -33,9 +33,9 @@ public class Main {
 			} 	else{
 				System.out.println("Demasiados errores, no se puede generar codigo.");
 			}
-		//} catch (Exception e) {
-			//System.out.println("Se han detectado errores sintácticos, debe corregirlos para poder compilar el código");
-	//	}
+		} catch (Exception e) {
+			System.out.println("Se han detectado errores sintácticos, debe corregirlos para poder compilar el código");
+		}
 		
 	}
 }
