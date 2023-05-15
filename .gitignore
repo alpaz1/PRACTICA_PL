@@ -3,9 +3,8 @@ asint/AnalizadorSintacticoTiny.java
 asint/ClaseLexica.java
 
 *.class
+codigo/bin/*
 
 .metadata*
 
-*codigo.wat
-*codigo.wasm
 

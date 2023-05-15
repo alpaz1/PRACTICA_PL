@@ -22,6 +22,8 @@ public class Programa extends ASTNode {
     private static FMain fmain; // Funcion main del programa
     public static PilaTablaSimbolos pila;
     public static PrintWriter codigo;
+
+    private String filename;
     
     public static boolean okTipos = true;
     public static boolean okVinculacion = true;
@@ -38,6 +40,10 @@ public class Programa extends ASTNode {
         lista_tipos.add("INT");
         lista_tipos.add("BOOL");
         lista_tipos.add("FLOAT");
+    }
+
+    public void setFilename(String filename){
+        this.filename = filename;
     }
     
 
@@ -61,7 +67,7 @@ public class Programa extends ASTNode {
 
     public void generaCodigo() {
         try {
-            codigo = new PrintWriter(new FileWriter("codigo/codigo.wat"));
+            codigo = new PrintWriter(new FileWriter("codigo/bin/" + filename + ".wat"));
             FileReader preludio = new FileReader("codigo/preludio.wat");
             preludio.transferTo(codigo);
             preludio.close();
