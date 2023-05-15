@@ -6,7 +6,9 @@ creado con Java, JLex, CUP y webassembly.
 ---
 En la carpeta `alex` se encuentran los ficheros Java necesarios para el análisis léxico. En la carpeta `asint` ocurre lo mismo para el análisis sintáctico. Además se encuentra el fichero `Main.java`. En la carpeta `ast` se pueden encontrar todos los ficheros Java para la generación de dicho ast. Los ficheros `AnalizadorLexicoTiny.l` `Tiny.cup` se encuentra en la carpeta raíz.
 
-Para compilar y ejecutar un ejemplo en concreto contamos con dos scrpits de Shelll. En primer lugar se debe ejecutar el script `compilarCodigo.sh` seguido del archivo de ejemplo (en dirección relativa, esto es, ejemplos/archivo.txt) o con la opción -t para compilar todos. Una vez compilado, el script `ejecutarCodigo.sh` ejecutará el código webassembly generado por la última ejecución satisfactoria de `compilarCodigo.sh`
+Para compilar y ejecutar un ejemplo en concreto contamos con dos scrpits de Shell. En primer lugar se debe ejecutar el script `compilarCodigo.sh` seguido del archivo de ejemplo (en dirección relativa, esto es, ejemplos/archivo.txt) o con la opción -t para compilar todos. Una vez compilado, el script `ejecutarCodigo.sh` ejecutará el código webassembly generado por la última ejecución satisfactoria de `compilarCodigo.sh`
+
+Tambien es posible compilar y ejecutar todos los ejemplos con el script `ejecutarEjemplos.sh`
 
 En la carpeta `ejemplos` incluimos varios ficheros de prueba para las distintas funcionalidades. Las explicamos a continuación.
 
