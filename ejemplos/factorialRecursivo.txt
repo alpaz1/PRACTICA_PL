@@ -1,13 +1,17 @@
 entero factorialRec(entero n) {
+    entero sol;
     si (n == 0) {
-        devuelve 1;
+        sol = 1;
     }
     sino {
-        devuelve n * factorialRec(n - 1);
+        sol =  n * factorialRec(n - 1);
     }
+
+    devuelve sol;
 }
 
 principal () {
     entero n = 5;
+
     imprime(factorialRec(n));
 }

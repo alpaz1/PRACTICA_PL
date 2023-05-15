@@ -5,16 +5,17 @@ entero cuadrado(entero n){
 
 // Función que calcula el factorial de un número utilizando una llamada recursiva
 entero factorial(entero n) {
+  entero sol;
   si (n == 0) {
-    devuelve 1;
+    sol = 1;
   } sino {
-    devuelve n * factorial(n - 1);
+    sol =  n * factorial(n - 1);
   }
+  devuelve sol;
 }
 
 principal() {
   entero num = 5;
-  entero resultado = cuadrado(factorial(num));
+  imprime(cuadrado(factorial(num)));
 
-  imprime(resultado);
 }
