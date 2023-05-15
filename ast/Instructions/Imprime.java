@@ -2,7 +2,6 @@ package ast.Instructions;
 
 import ast.Programa;
 import ast.Expresions.E;
-import ast.Types.KindTypes;
 
 public class Imprime extends Instruccion {
     protected E exp;

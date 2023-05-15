@@ -1,7 +1,6 @@
 package ast.Instructions;
 
 import ast.Programa;
-import ast.Accesos.Acceso;
 import ast.Expresions.E;
 import ast.Types.Types;
 
@@ -21,6 +20,7 @@ public class CasoSwitch extends Bloque {
     public CasoSwitch(List<Instruccion> instrucciones) {
         super(instrucciones);
         this.caso = null;
+        this.parada = true;
     }
 
     public void generaCodigo() {
@@ -28,9 +28,9 @@ public class CasoSwitch extends Bloque {
         Programa.codigo.println("get_local $temp"); // dejo en la cima de la pila la condicion pa no perderla
         if (caso != null) {
             caso.generaCodigo();
-            if (caso instanceof Acceso) {
-                Programa.codigo.println("i32.load"); // si es acceso, obtengo su valor
-            }
+            //if (caso instanceof Acceso) {
+              //  Programa.codigo.println("i32.load"); // si es acceso, obtengo su valor
+            //}
             Programa.codigo.println("get_local $temp"); // temp tiene el valor de la exp del switch
             Programa.codigo.println("i32.eq"); // si es es caso adecuado
             Programa.codigo.println("i32.eqz"); // cambio el valor
@@ -40,7 +40,8 @@ public class CasoSwitch extends Bloque {
         for (Instruccion instruccion : instList) {
             instruccion.generaCodigo();
         }
-        Programa.codigo.println("br $break"); // ;; salto al end del switch bc of break
+        if (parada)
+            Programa.codigo.println("br $break"); // ;; salto al end del switch bc of break
     }
 
     public void vincular(){

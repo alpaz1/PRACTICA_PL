@@ -1,0 +1,39 @@
+estructura Tiempo {
+    entero minutos;
+} // Falta ; en struct
+
+entero factorial(aaa){ // Error en param de funcion
+    devuelve 10;
+}
+
+
+enum DiaSemana {
+    a, b, c
+} // Falta ; en enum
+entero aaa = 2 // Falta ; en dec
+
+clase miClase {
+    privado entero miatributo // Error Falta ;
+}
+
+principal() {
+    entero n = 1 + (2 * 3; // Error en exp
+    entero m = n - 1;
+    entero; // error
+    imprime(n);
+    si (n<=10 { // Error en sintaxis de la cond
+        n = n + 1 // Falta ; en asig
+    }
+    mientras () { // Error en sintaxis de la cond
+        imprime(n);
+        n = n + 1;
+    }
+    paraCada( entero i = 0;  i <= 10  i = i + 1 ){ // Error en cond del for (Falta un ;)
+        imprime(2*n);
+    }
+    selecciona(n{ // Error cond de switch
+        caso 3: a = 3; 
+        caso 4: ¡para! //  Falta ; break
+        porDefecto: a = ; //error en instruccion 
+    }
+}

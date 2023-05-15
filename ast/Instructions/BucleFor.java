@@ -3,7 +3,6 @@ package ast.Instructions;
 import java.util.List;
 
 import ast.Programa;
-import ast.Estructuras.Declaracion;
 import ast.Expresions.E;
 
 public class BucleFor extends Bloque {

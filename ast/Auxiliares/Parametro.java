@@ -1,8 +1,7 @@
 package ast.Auxiliares;
 
 import ast.Programa;
-import ast.Estructuras.Declaracion;
-import ast.Types.KindTypes;
+import ast.Instructions.Declaracion;
 import ast.Types.Types;
 
 public class Parametro extends Declaracion{
@@ -24,16 +23,16 @@ public class Parametro extends Declaracion{
         }
     }
 
+    public boolean isAmpersand() {
+        return ampersand;
+    }
+
     @Override
-    public void generaCodigo() {
-        Programa.codigo.println("i32.const " + delta);
-        Programa.codigo.println("get_local $localsStart");
-        Programa.codigo.println("i32.add");
-        
-        Programa.codigo.println("get_local " + "$" + nombre);
-        // if (exp instanceof Acceso) {
-        //     Programa.codigo.println("i32.load"); // devuelve direccion
-        // }
-        Programa.codigo.println("i32.store"); // Guarda exp en la posicion localsStart + delta
+    public void calcularDirRelativa() {
+        // Accede a la posion de memoria en la que se guarda el delta de la variable a la que hace referencia
+        super.calcularDirRelativa();
+        if (ampersand){
+            Programa.codigo.println("i32.load"); 
+        }
     }
 }

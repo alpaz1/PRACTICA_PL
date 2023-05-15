@@ -2,7 +2,6 @@ package ast.Accesos;
 
 import ast.Programa;
 import ast.Types.KindTypes;
-import ast.Types.PointerType;
 
 public class AccesoPuntero extends Acceso{
 
@@ -30,10 +29,9 @@ public class AccesoPuntero extends Acceso{
     }
 
     @Override
-    public void generaCodigo() {
-        Programa.codigo.println("get_local $localsStart");
+    public void calcularDirRelativa() {
         nodoVinculo.generaCodigo();
-        Programa.codigo.println("i32.add");
-        Programa.codigo.println("i32.load");
     }
+
+    
 }

@@ -1,7 +1,6 @@
 package ast.Types;
 
 import ast.Expresions.Const;
-import ast.Expresions.E;
 
 public class ArrayType extends Types{
 
@@ -18,16 +17,15 @@ public class ArrayType extends Types{
     }
 
     public String toString(){
-        if(tam != null)
-            return "Array " + "<" + tipo.toString() + ">" ;
-        else 
-            return "Array "+ "<" + tipo.toString() + ">" ;
+        return "Array " + "<" + tipo.toString() + ">";
     }
 
 
     @Override
     public int getTam() {
-        
+
+        // System.out.println("Cada " + tipo +" ocupa " + tipo.getTam() + ". Como hay " + tam.getValor() + " el tam total es " +  tipo.getTam() * Integer.parseInt(tam.getValor()));
+
         return tipo.getTam() * Integer.parseInt(tam.getValor());
        
     }

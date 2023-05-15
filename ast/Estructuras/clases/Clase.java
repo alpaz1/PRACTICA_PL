@@ -5,6 +5,7 @@ import java.util.List;
 
 import ast.ASTNode;
 import ast.Programa;
+import ast.Instructions.Alias;
 
 public class Clase extends ASTNode{
     private String nombre;
@@ -102,6 +103,15 @@ public class Clase extends ASTNode{
     public String toString() {
         return "Clase: " + this.nombre +"(" +this.modo.toString() +")" +"{Atributos: " + atributos.toString() + 
         ", Constructores: "+ constructores.toString() + ", Metodos: " + metodos.toString()+"}";
+    }
+
+    public void simplifyAlias(List<Alias> lista_alias){
+        for (Atributo a: atributos)
+            a.simplifyAlias(lista_alias);
+        for (Constructor c: constructores)
+            c.simplifyAlias(lista_alias);
+        for (Metodo m: metodos)
+            m.simplifyAlias(lista_alias);
     }
     
 }

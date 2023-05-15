@@ -1,6 +1,9 @@
 package ast.Estructuras.clases;
+import java.util.List;
+
 import ast.ASTNode;
-import ast.Estructuras.Declaracion;
+import ast.Instructions.Alias;
+import ast.Instructions.Declaracion;
 
 public class Atributo extends ASTNode {
     
@@ -29,5 +32,9 @@ public class Atributo extends ASTNode {
     @Override
     public void checkType() {
         dec.checkType();
+    }
+
+    public void simplifyAlias(List<Alias> lista_alias){
+        dec.simplifyAlias(lista_alias);
     }
 }

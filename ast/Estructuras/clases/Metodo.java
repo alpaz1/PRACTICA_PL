@@ -5,6 +5,7 @@ import java.util.List;
 
 import ast.ASTNode;
 import ast.Estructuras.Funcion;
+import ast.Instructions.Alias;
 
 public class Metodo extends ASTNode {
     private PrivacyMode modo;
@@ -38,5 +39,9 @@ public class Metodo extends ASTNode {
 
     public PrivacyMode getPrivacyMode() {
         return this.modo;
+    }
+
+    public void simplifyAlias(List<Alias> lista_alias){
+        fun.simplifyAlias(lista_alias);
     }
 }

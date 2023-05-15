@@ -1,9 +1,9 @@
 package ast.Instructions;
 
+import java.util.Collections;
 import java.util.List;
 
 import ast.Programa;
-import ast.Accesos.Acceso;
 import ast.Expresions.E;
 
 public class Switch extends Bloque{
@@ -17,21 +17,23 @@ public class Switch extends Bloque{
         this.exp = var;
         this.casos = casos;
         this.instList = casos;
+        Collections.reverse(this.casos);
     }
     public Switch(E var, List<CasoSwitch> casos, CasoSwitch def){
         super();
         this.hayPorDefecto = true;
         this.exp = var;
         this.casos = casos;
-        this.instList = casos;
         this.porDefecto = def;
+        this.instList = casos;
+        Collections.reverse(this.casos);
     }
 
     public void generaCodigo(){
-        exp.generaCodigo(); // evaluo la condicion 
-        if(exp instanceof Acceso){
-            Programa.codigo.println("i32.load"); // si es acceso, obtengo su valor
-        }
+        exp.generaCodigo(); // evaluo la condicion (Ya hacemos load si es acceso)
+        //if(exp instanceof Acceso){
+        //  Programa.codigo.println("i32.load"); // si es acceso, obtengo su valor
+        //}
         Programa.codigo.println("set_local $temp"); // guardo la condicion en temp
 
         Programa.codigo.println("block $break"); // block etiqueta en end para saltar cuando entre en un caso con break
@@ -44,11 +46,11 @@ public class Switch extends Bloque{
             caso.generaCodigo(); // lo primero que haré despues de end es dejar en la cima de la pila el valor de la exp
             Programa.codigo.println("set_local $temp"); // guardo la condicion en temp que dejé en la cima para recuperar
         }
-        if (hayPorDefecto){
+        if (hayPorDefecto) {
             porDefecto.generaCodigo();
             Programa.codigo.println("set_local $temp");
         }
-
+        
         Programa.codigo.println("end ;; para salir del switch con break");
         //Programa.escribir.println("drop"); // para quitar de la cima el valor
     }
@@ -83,7 +85,10 @@ public class Switch extends Bloque{
     }
     
     public String toString() {
-        return "Switch (Condición: " + exp.toString() + ", Casos:" +casos.toString()+ ")";
+        if (!hayPorDefecto)
+            return "Switch (Condición: " + exp.toString() + ", Casos:" +casos.toString()+ ")";
+        else
+            return "Switch (Condición: " + exp.toString() + ", Casos:" +casos.toString()+ ") " + porDefecto.toString();
     }
 
 }

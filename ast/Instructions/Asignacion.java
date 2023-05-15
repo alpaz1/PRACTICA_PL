@@ -1,8 +1,6 @@
 package ast.Instructions;
 
 import ast.Expresions.E;
-import ast.Types.KindTypes;
-import ast.Types.Types;
 import ast.Programa;
 import ast.Accesos.*;
 
@@ -13,14 +11,6 @@ public class Asignacion extends Instruccion{
 
     public Asignacion(Acceso iden, E exp){
         this.iden = iden;
-        this.exp = exp;
-    }
-
-
-
-    public Asignacion(Acceso iden, E exp, Types tipo){
-        this.iden = iden;
-        this.tipo = tipo;
         this.exp = exp;
     }
 
@@ -60,19 +50,30 @@ public class Asignacion extends Instruccion{
     }
 
     public void generaCodigo(){
-        Programa.codigo.println(";; INICIO ASIGNACION " + iden);
+        Programa.codigo.println(";; Inicio asignacion " + iden);
+        if(exp.getTipo().kind().toString().equals("ENUM")){
+            Programa.codigo.println(";; Inicio asignacion " + " " + exp + exp.getTipo().kind());
 
-        if (exp.isBasica()){ // para a = 3 + 2;
+            iden.calcularDirRelativa();
+
+            Programa.codigo.println("i32.const " + Programa.buscarPosEnum(iden.getTipo(), exp));
+            Programa.codigo.println("i32.store");
+
+
+        }
+        else if (! exp.isInMemory()){ // para a = 3 + 2;
             iden.calcularDirRelativa();
             exp.generaCodigo();
             Programa.codigo.println("i32.store");
         } else {
             // Para a = t; (t es un struct)
+            Programa.codigo.println(";;exp tipo " + exp);
             exp.calcularDirRelativa();
+            Programa.codigo.println(";;iden");
             iden.calcularDirRelativa();
-            Programa.codigo.println("i32.const " + exp.getTipo().getTam());;
+            Programa.codigo.println("i32.const " + (exp.getTipo().getTam() / 4)); // getTam está en bytes no en bloques de 32 bits
             Programa.codigo.println("call $copyn"); // src dest tam
         }
-        Programa.codigo.println(";; FIN ASIGNACION " + iden);
+        Programa.codigo.println(";; Fin asignacion " + iden);
     }
 }

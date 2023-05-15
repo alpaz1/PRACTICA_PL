@@ -1,0 +1,30 @@
+
+ principal() {
+
+  entero x = 10;
+  entero y = 5;
+
+  {
+    entero x = 20;
+
+    {
+      entero y = 30;
+      imprime(x);
+      imprime(y);
+      imprime(x*y);
+    }
+
+    
+
+    imprime(x);
+      imprime(y);
+      imprime(x*y);
+  }
+
+  imprime(x);
+  imprime(y);
+  imprime(x*y);
+  
+
+
+}

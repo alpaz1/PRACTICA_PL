@@ -2,8 +2,6 @@ package ast.Types;
 
 public class PointerType extends Types{
 
-    protected Types tipo;
-
     public PointerType(Types tipo) {
         this.tipo = tipo;
     }

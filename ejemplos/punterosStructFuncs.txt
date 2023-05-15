@@ -1,0 +1,44 @@
+
+/*
+COMPROBAMOS QUE PODEMOS MODIFICAR CAMPOS DE UN STRUCT MEDIANTE PUNTEROS Y FUNCIONES
+
+En este programa, se define un struct llamado Persona con dos miembros: dni (de tipo int) y edad (de tipo int). También se define una función llamada cambiarEdad que toma un puntero a Persona y un entero que representa la nueva edad. 
+Dentro de la función, se utiliza la sintaxis de acceso a miembros  para modificar el valor de la edad del objeto Persona apuntado por el puntero.
+En la función main, se declara una variable p1 de tipo Persona y se le asigna un valor para dni y edad. Se imprime por pantalla el valor de dni y edad antes de llamar a la función cambiarEdad.
+Se llama a la función cambiarEdad con un puntero a p1 como primer argumento y el valor 35 como segundo argumento para cambiar la edad de p1.
+Finalmente, se imprime por pantalla el valor de dni y edad después de llamar a la función cambiarEdad para verificar que se ha modificado correctamente el valor de edad mediante el puntero.
+
+
+*/
+
+estructura Persona {
+  entero dni;
+  entero edad;
+};
+
+vacio cambiarEdad(Persona* p, entero nuevaEdad) {
+  @p.edad = nuevaEdad;
+  devuelve;
+
+}
+
+principal() {
+
+
+
+  Persona p1;
+  p1.dni = 0;
+  p1.edad = 30;
+
+  //Antes de cambiar la edad
+  imprime(p1.dni);
+  imprime(p1.edad);
+
+  // Llamada a la función para cambiar la edad utilizando un puntero a Persona
+  
+  cambiarEdad(*p1, 35);
+  //Despues de cambiar la edad
+  imprime(p1.edad);
+
+
+}

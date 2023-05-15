@@ -9,6 +9,7 @@ import ast.Programa;
 import ast.Util;
 import ast.Auxiliares.Parametro;
 import ast.Estructuras.clases.Atributo;
+import ast.Instructions.Alias;
 import ast.Instructions.Bloque;
 import ast.Instructions.Instruccion;
 import ast.Types.Types;
@@ -18,6 +19,7 @@ public class Funcion extends ASTNode{
     private String nombre;
     List<Instruccion> instList;
     private List<Parametro> paramList;
+    
 
     public Funcion(Types tipo, String name, List<Parametro> paramList, List<Instruccion> instList){
         this.nombre = name;
@@ -39,7 +41,6 @@ public class Funcion extends ASTNode{
                 param.vincular();
             }
 
-            // si es void no hace falta
             for (Instruccion instruccion : instList) {
                 instruccion.vincular();
             }
@@ -79,8 +80,6 @@ public class Funcion extends ASTNode{
     }
 
     public void checkType() {
-        //this.tipo.chequea();
-
         for (Parametro p : paramList) {
             p.checkType();
         }
@@ -88,6 +87,7 @@ public class Funcion extends ASTNode{
         for (Instruccion ins : instList) {
             ins.checkType();
         }
+
     }
 
     public int maxMemoria() {
@@ -100,13 +100,9 @@ public class Funcion extends ASTNode{
 
     @Override
     public void generaCodigo() {
-        // int tam = 200; // TODO: cambiar esto a lo que ocupa la funcion
-        int tam = maxMemoria();
+        int tam = maxMemoria() + 8;
         Programa.codigo.print("(func $" + nombre);
-        for (Parametro param: paramList){
-            param.respresentacionWasm();
-        }
-        // RETURN TIPE
+       
         if (! tipo.toString().equals("VOID")){
             Programa.codigo.print(" (result " + tipo.respresentacionWasm() +")");
         }
@@ -127,9 +123,9 @@ public class Funcion extends ASTNode{
         Programa.codigo.println(" i32.const 8"); // salto el mp antiguo y el sp
         Programa.codigo.println(" i32.add");
         Programa.codigo.println(" set_local $localsStart"); // La funcion empieza aqui
-        for (Parametro param: paramList){
-            param.generaCodigo();
-        }
+        // for (Parametro param: paramList){
+        //     param.generaCodigo();
+        // }
         for (Instruccion instruccion: instList){
             instruccion.generaCodigo(); 
         }
@@ -157,6 +153,17 @@ public class Funcion extends ASTNode{
     }
     public List<Parametro> getParams(){
         return this.paramList;
+    }
+
+    public void simplifyAlias(List<Alias> lista_alias) {
+        for (Alias a: lista_alias){
+            if (this.tipo.toString().equals(a.getNombre()))
+                this.tipo = a.getTipo();
+        }
+        for (Parametro param: paramList)
+            param.simplifyAlias(lista_alias);    
+        for (Instruccion ins: instList)
+            ins.simplifyAlias(lista_alias);
     }
 
 }

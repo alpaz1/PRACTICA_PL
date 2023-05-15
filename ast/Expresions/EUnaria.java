@@ -1,6 +1,6 @@
 package ast.Expresions;
 
-import ast.Types.KindTypes;
+import ast.Programa;
 import ast.Types.Types;
 
 public class EUnaria extends E {
@@ -28,5 +28,38 @@ public class EUnaria extends E {
 
     @Override
     public void checkType() {
+        this.exp.checkType();
+        switch (this.tipoExp.toString()){
+            case "NEG":
+                if (this.exp.getTipo().toString() != "BOOL"){
+                    System.out.println("Error de tipos: Negación de un no buleano");
+                    Programa.okTipos = false;
+                }
+                break;
+            case "MENOS":
+                if (this.exp.getTipo().toString() != "INT"){
+                    System.out.println("Error de tipos: Opuesto de un no entero");
+                    Programa.okTipos = false;
+                }
+        }
+    }
+
+    @Override
+    public void generaCodigo() {
+     
+     
+      switch (tipoExp) {
+        case NEG:
+         exp.generaCodigo();
+          Programa.codigo.println("i32.eqz");
+          break;
+        case MENOS:
+          Programa.codigo.println("i32.const 0");
+          exp.generaCodigo(); 
+          Programa.codigo.println("i32.sub");
+
+          break;
+        default:
+      }
     }
 }

@@ -1,12 +1,14 @@
 package ast.Instructions;
 
+import ast.Programa;
 import ast.Expresions.LlamadaFunExp;
+import ast.Types.KindTypes;
 
 public class LlamadaFunInst extends Instruccion {
-    private LlamadaFunExp funcion;
+    private LlamadaFunExp llamadaFuncion;
 
-    public LlamadaFunInst(LlamadaFunExp funcion){
-        this.funcion = funcion;
+    public LlamadaFunInst(LlamadaFunExp llamadaFuncion){
+        this.llamadaFuncion = llamadaFuncion;
     }
 
     public KindInstruction kind() {
@@ -14,10 +16,24 @@ public class LlamadaFunInst extends Instruccion {
     }
 
     public void vincular() {
-        funcion.vincular();
+        llamadaFuncion.vincular();
+    }
+
+    @Override
+    public void checkType() {
+        llamadaFuncion.checkType();
+        this.tipo = llamadaFuncion.getTipo();
+    }
+
+    @Override
+    public void generaCodigo() {
+        llamadaFuncion.generaCodigo();
+        if (tipo.kind() != KindTypes.VOID){
+            Programa.codigo.println("drop");
+        }
     }
 
     public String toString(){
-        return funcion.toString();
+        return llamadaFuncion.toString();
     }
 }

@@ -2,6 +2,7 @@ package ast.Expresions;
 
 import ast.ASTNode;
 import ast.NodeKind;
+import ast.Types.KindTypes;
 
 public abstract class E extends ASTNode {
     public abstract KindE kindExp();
@@ -14,8 +15,21 @@ public abstract class E extends ASTNode {
     public Object getNombreEnum() {
         return null;
     }
+    public boolean isInMemory() {
+        // Dice si es una expresion guardada en memoria o si es 3 + 4 por ejemplo
+        return false;
+    }
+
     public boolean isBasica() {
-        return getTipo().toString().equals("INT") || getTipo().toString().equals("FLOAT") ;
+        boolean basica = false;
+        switch (tipo.kind()){
+            case INT:
+            case FLOAT:
+            case POINTER:
+            basica = true;
+            default:
+        }
+        return basica;
     }
     public void calcularDirRelativa(){
         throw new UnsupportedOperationException();

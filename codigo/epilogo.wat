@@ -15,6 +15,7 @@
    call $exception
    end
 )
+
 (func $freeStack (type $_sig_void)
    get_global $MP
    i32.load
@@ -24,10 +25,20 @@
    i32.load
    set_global $MP   
 )
+
 (func $reserveHeap (type $_sig_i32)
    (param $size i32)
-;; ....
+
+
+   get_global $NP
+   get_local $size
+   i32.sub
+   set_global $NP
+  
+
+
 )
+
 (func $copyn (type $_sig_i32i32i32) ;; copy $n i32 slots from $src to $dest
    (param $src i32)
    (param $dest i32)

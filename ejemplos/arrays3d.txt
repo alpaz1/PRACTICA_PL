@@ -1,0 +1,26 @@
+
+ /*
+Queremos ver que efectivamente podemos inicializar y recorrer arrays de cualquier dimension. Probamos para 3 dimensiones
+En este programa, se declara e inicializa un array de tres dimensiones llamado cubo. 
+El cubo tiene 2 filas, 3 columnas y 4 niveles de profundidad. Luego se utiliza un bucle anidado triple for para imprimir todos los elementos del cubo por pantalla.
+El bucle for exterior itera sobre las filas del cubo, mientras que el primer bucle for interior itera sobre las columnas del cubo y el segundo bucle for interior itera sobre los niveles de profundidad del cubo. 
+Dentro del cuerpo del bucle, se accede a cada elemento del cubo utilizando la sintaxis cubo[i][j][k] y se imprime por pantalla
+ */
+
+
+principal() {
+ 
+  // Declaración e inicialización de un array de tres dimensiones
+  lista <lista < lista < entero > [ 2 ] > [3]> [4] cubo = {{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}},
+                                            {{13, 14, 15, 16}, {17, 18, 19, 20}, {21, 22, 23, 24}}};
+
+  // Imprimir el cubo por pantalla
+  paraCada (entero i = 0; i < 4; i = i + 1) {
+    paraCada (entero j = 0; j < 3; j = j + 1) {
+      paraCada (entero k = 0; k < 2; k = k + 1) {
+        imprime(cubo[i][j][k]);
+      }   
+    }
+  }
+
+}

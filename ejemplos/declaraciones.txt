@@ -1,15 +1,18 @@
-enum DiaSemana {
-    a, b, c
-};
+/*
+CODIGO QUE HICIMOS PARA COMPROBAR QUE NO HABÍA CONFLICTOS ENTRE DECLARACIONES, PARAMETROS, RETURNS, VARIABLES GLOBALES...
+*/
+
 entero a = 5;
 buleano b = verdad;
 flotante c;
 entero n = 10;
+
 entero d (entero x, buleano y){
-    a = 7;
+    devuelve x;
 }
-buleano and(buleano x, buleano y){
-    devuelve x yy y;
+
+buleano and (buleano x, buleano y){
+    devuelve x;
 }
 
 lista <entero> [3] l;
@@ -17,7 +20,6 @@ lista <entero> [3] l;
 principal() {
     b = verdad oo mentira;
     buleano aaa = no verdad;
-    b = 5;
     entero resultado = 1;
     paraCada(entero i = 0; i + 2 < 1; i = i + 1){
         a = 34;
@@ -27,5 +29,4 @@ principal() {
     }
 
     lista <entero> [3] l;
-    devuelve 8;
 }

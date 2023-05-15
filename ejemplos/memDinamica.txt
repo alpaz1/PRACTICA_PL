@@ -1,0 +1,31 @@
+estructura Persona {
+  entero dni;
+  entero edad;
+};
+
+vacio cambiarEdad(Persona* p, entero nuevaEdad) {
+  @p.edad = nuevaEdad;
+  devuelve;
+
+}
+
+principal() {
+  
+  Persona* p1 = nuevo Persona;
+  @p1.dni = 0;
+  @p1.edad = 30;
+
+  imprime(p1);//observamos que el heap ha disminuido su tamaño y por tanto efectivamente se ha creado en memoria dinamica
+  //el valor antiguo de NP era 131071996 (pues es a lo que se inicializa en codigo.wat) y ahora es 131071988, es decir, hemos ocupado 8 posiciones que es exactamente lo que ocupa nuestro struct con dos enteros
+
+  imprime(@p1.dni);
+  imprime(@p1.edad);
+
+  // Llamada a la función para cambiar la edad utilizando un puntero a Persona
+  
+  cambiarEdad(p1, 35);
+  //Despues de cambiar la edad
+  imprime(@p1.edad);
+
+
+}

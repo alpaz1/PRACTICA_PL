@@ -4,7 +4,8 @@ import java.util.*;
 
 import ast.Estructuras.clases.*;
 import ast.Instructions.Alias;
-import ast.Programa;
+import ast.Instructions.Declaracion;
+import ast.Types.Types;
 import ast.Auxiliares.Modulo;
 
 public class DefinitionsList {
@@ -125,5 +126,55 @@ public class DefinitionsList {
     public void addModulo(Modulo m){
         lista_modulos.add(0,m);
     }
+
+    public List<Alias> getAliasList() {
+        return this.lista_alias;
+    }
+
+    private void simplifyAlias(int pos) {
+        Types aux = lista_alias.get(pos).getTipo();
+        if (aux.getTipo() == null) { // Si el tipo del alias no es compuesto
+            for (int j = pos - 1; j >= 0; --j) { // Buscamos si coincide con algun alias anterior
+                String nombre = lista_alias.get(j).getNombre(); 
+                if (aux.toString().equals(nombre)){
+                    simplifyAlias(j); // Lo simplificamos y asignamos
+                    lista_alias.get(pos).setTipo(lista_alias.get(j).getTipo()); // En cuyo caso asignamos el tipo del alias
+                    return;
+                }
+            }
+        }
+        else { // Si el tipo es compuesto
+            boolean encontrado = false;
+            while (aux != null && !encontrado) { // Bajo al tipo más profundo
+                for (int j = pos - 1; j>= 0; --j) {
+                    String nombre = lista_alias.get(j).getNombre(); 
+                    if (aux.getTipo() != null && aux.getTipo().toString().equals(nombre)){
+                        simplifyAlias(j);
+                        aux.setTipo(lista_alias.get(j).getTipo());
+                        encontrado = true;
+                        return;
+                    }
+                }  
+                aux = aux.getTipo();
+            }
+        }
+    }
+
+    public void simplifyAlias() {
+        // Como solo podemos resolver anidamientos en orden, recorremos la lista en sentido contrario
+        for (int i = lista_alias.size() - 1; i >=0; --i) {
+            simplifyAlias(i); // resolvemos el i-esimo alias
+        }
+        for (Declaracion d: lista_basica)
+            d.simplifyAlias(this.lista_alias);
+        for (StructClass s: lista_struct)
+            s.simplifyAlias(this.lista_alias);
+        for (Funcion f: lista_funcion)
+            f.simplifyAlias(this.lista_alias);
+        for (Clase c: lista_clases)
+            c.simplifyAlias(this.lista_alias);
+    }
+
+    
 
 }

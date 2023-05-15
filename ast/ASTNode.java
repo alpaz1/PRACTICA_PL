@@ -10,6 +10,12 @@ public abstract class ASTNode {
     public int delta;//posición dentro de su ámbtio de dicho nodo
     public ASTNode(){}
 
+    boolean dev = false;
+
+    public void setReturn(){
+        this.dev = true;
+    }
+
     public abstract void vincular();
     public Types getTipo(){return tipo;}
     public void setTipo(Types tipo){this.tipo = tipo;}
@@ -17,7 +23,19 @@ public abstract class ASTNode {
     public void generaCodigo() {}
     public void setDelta(){
         delta = Programa.pila.getDelta();
-        Programa.pila.updateDelta(tipo.getTam());
+
+        int tam = tipo.getTam();
+
+        // System.out.println("Tipo: " + tipo + " tamaño: " + tam);
+
+        Programa.pila.updateDelta(tam);
+    }
+
+    public int getDelta() {
+        return delta;
+    }
+    public void calcularDirRelativa(){
+        throw new UnsupportedOperationException("Unimplemented method 'calcularDirRelativa'");
     }
 
     public int getDelta() {

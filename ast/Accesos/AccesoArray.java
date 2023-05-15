@@ -35,8 +35,7 @@ public class AccesoArray extends Acceso{
             if (acceso.tipo == null || exp.tipo == null) {
                 this.tipo = null;
             } else if (acceso.tipo instanceof ArrayType  && acceso.tipo.getTipo().toString().equals(((ArrayType) acceso.tipo).getTipo().toString())) {
-                //System.out.println(acceso.tipo.getTipo().toString());
-                //System.out.println(((ArrayType) acceso.tipo).getTipo().toString());
+            // } else if (acceso.tipo instanceof ArrayType  && acceso.tipo.getTipo().kind() == acceso.tipo.getTipo().kind()) {
 
                 if (exp.tipo.toString().equals("INT")) {
                     this.tipo = ((ArrayType) acceso.tipo).getTipo();

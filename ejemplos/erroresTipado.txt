@@ -1,11 +1,17 @@
 
-lista <entero> [2] m = {1,1};
+/*
+EN ESTE FICHERO SE PRUEBA QUE EL COMPILADOR DETECTA ERRORES DE TIPADO Y SE RECUPERA DE ELLOS. 
+SE HACEN VARIAS PRUEBSA DE ASIGNACIONES DE TODOS LOS TIPOS Y SE OBTIENEN LOS MENSAJES DE ERRORES PERTINENTES.
+*/
+
+
+lista <entero> [2] m = {1,1}; 
 
 lista <lista <entero>[2]> [3] z = {{1}, {2}};
 
 lista <lista <lista <entero>[2]>[2]> [3] w = {{{11}}, {{2}}};
 
-lista <entero> [2] n = {verdad,1};
+lista <entero> [2] n = {verdad,1};//debe dar error de tipo por no inicializar con una expresion homogénea
 
 
 buleano g = mentira;
@@ -13,16 +19,14 @@ entero h = -1;
 buleano f = (verdad == g);
 buleano a = verdad oo mentira;
 entero b = 3 - 1 + 5 * 6;
-// entero c = -b;
-// buleano d = no a - verdad;
-// entero e = c + b;
-
-entero sumar(buleano a, entero b){
-    return a;
-}
+entero c = -b;
+buleano d = no a - verdad; //error de tipo por que el operador - no es aplicable
+entero e = c + b;
 
 
-entero prueba(entero a, entero b, lista <lista <entero>[]>[] miArray){
+
+
+entero prueba(entero a, entero b, lista <lista <entero>[5]>[5] miArray){
     mientras (a == b){
         paraCada(entero i = 0; i < b; i = i + 1){
             b = b + 1;
@@ -32,9 +36,7 @@ entero prueba(entero a, entero b, lista <lista <entero>[]>[] miArray){
 }
 
 entero funCall = prueba (b,b,z);
-buleano funCall1 = prueba (b,b,z);
-
-
+buleano funCall1 = prueba (b,b,z);//error de tipo por incompatibilidad entre buleano y entero
 
 
 enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
@@ -49,18 +51,17 @@ estructura Tiempo{
     lista <Frutas> [2] arrayFrutasTiempo;
 };
 
-DiaSemana dia = 2;
+DiaSemana dia = 2; //error de tipo, int no es DiaSemana
 
 lista <entero> [2] arrayTiempo = {h};
 
 
-
-
 principal() {
+    
     Tiempo t;
     t.segundo = 60;
-    t.noExiste = 100;
-    t.hora = verdad;
+    t.noExiste = 100;//error de tipo, este campo no existe
+    t.hora = verdad; //error de tipo, incompatibilidad entre int y bool
     t.segundo = h;
     t.segundo = h + 2;
     t.n = {1,1};
@@ -69,7 +70,7 @@ principal() {
 
     DiaSemana dia1 = Lunes;
     Frutas fruta1 = Pera;
-    DiaSemana fruta = Pera;
+    DiaSemana fruta = Pera;//error de tipo, Pera no es un DiaSemana
     lista <lista <Frutas> [2]> [2] arrayFrutas = {{Pera}};
 
     lista <Frutas> [2] arrayFrutas1 = {Pera, Manzana};   
@@ -77,7 +78,7 @@ principal() {
 
     paraCada (entero b = 0; b < 2; b = b + 1){
         si(a == verdad){
-            si(Pera){
+            si(Pera){ //error de tipo, Pera no es bool
                 entero entIf = 1;
             }
             sino{
@@ -114,15 +115,16 @@ principal() {
 
     p[0] = 1;
     p[0] = h;
-    p[0] = verdad;
-    p[0] = a;
+    p[0] = verdad;//error de tipo, verdad es bool y p es de tipo int
+    p[0] = a; //error de tipo, a es bool y p es int
 
     arrayFrutas[0][0] = fruta1;
     arrayFrutas[0] = arrayFrutas1;
 
     t.frutaTiempo = Manzana;
-    t.arrayFrutasTiempo = {1};
+    t.arrayFrutasTiempo = {1}; //array<frutas> es incompatible con array<int>
     t.arrayFrutasTiempo[b] = Pera;
     t.arrayFrutasTiempo = arrayFrutas1;
-    t.arrayFrutasTiempo = arrayFrutas;
+    t.arrayFrutasTiempo = arrayFrutas;//error de tipo por que los arrays de cada lado tienen dimensiones distintas
+    
 }

@@ -17,7 +17,7 @@ public class PilaTablaSimbolos {
     }
 
      // Cada vez que entro en un nuevo ambito 
-     public void abreBloque(){
+    public void abreBloque(){
         // que empieza un nuevo bloque apilando una nueva tabla vacía
         pilaTabla.push(new HashMap<String,ASTNode>());
         deltaBloques.push(totalDelta); // El delta antes del bloque
@@ -96,9 +96,9 @@ public class PilaTablaSimbolos {
             }
             // al final del todo esta la funcion
             for (ASTNode globalNode: cima.values()){
-                if (globalNode.tipoNodo == NodeKind.FUNCION){
+                if (globalNode.tipoNodo == NodeKind.FUNCION && !globalNode.dev){
+                    globalNode.setReturn();
                     node = globalNode;
-                    break;
                 }
             }
 

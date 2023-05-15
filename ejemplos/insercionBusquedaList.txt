@@ -1,0 +1,37 @@
+vacio insertar(lista <entero> [10] &lst, entero pos, entero elem){
+    lst[pos] = elem;
+}
+
+
+entero buscarElem(entero e, lista <entero> [10] &lst){
+    buleano para = mentira;
+    entero p = -1;
+    paraCada (entero i = 0; i < 10 yy (no para); i = i + 1){
+        si(lst[i] == e){
+            p = i;
+            para = verdad;
+        }    
+    }
+
+    devuelve p;
+}
+
+
+principal() {
+     lista <entero> [10] listaNumeros;
+     paraCada (entero i = 0; i < 10; i = i + 1){
+         listaNumeros[i] = i;
+     }
+
+     insertar(listaNumeros, 3, 100);
+     insertar(listaNumeros, 4, 100);
+
+        paraCada (entero i = 0; i < 10; i = i + 1){
+        imprime(listaNumeros[i]);
+     }
+
+    entero pos = buscarElem(100,listaNumeros);
+    imprime(pos);
+
+     
+}

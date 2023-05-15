@@ -4,8 +4,9 @@ import java.util.List;
 
 import ast.ASTNode;
 import ast.Programa;
-import ast.Estructuras.Declaracion;
+import ast.Estructuras.EnumClass;
 import ast.Estructuras.StructClass;
+import ast.Instructions.Declaracion;
 
 public class StructType extends Types{
 
@@ -39,10 +40,23 @@ public class StructType extends Types{
 
     @Override
     public int getTam() {
+
+        for (EnumClass e: Programa.enumList){
+            if(e.getName().toString().equals(nombre_tipo.toString())){
+               return 4;
+     
+            }
+
+        }
         int tam = 0;
         for (Declaracion declaracion: getCampos()){
+            //System.out.println(declaracion.getTipo().kind()  + " "+ declaracion.maxMemoria());
+            // System.out.println("El campo " + declaracion.toString() +" ocupa " + declaracion.maxMemoria());
             tam += declaracion.maxMemoria();
+            // System.out.println("El tamaño actual de  " + nombre_tipo +" es " + tam);
         }
+
+
         return tam;
     }
     

@@ -1,7 +1,0 @@
-enum DiaSemana { Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo};
-
-principal() {
-    DiaSemana dia = Lunes;
-    imprime(dia);
-    imprime(Lunes);
-}
