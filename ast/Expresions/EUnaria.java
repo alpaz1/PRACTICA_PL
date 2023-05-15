@@ -28,6 +28,20 @@ public class EUnaria extends E {
 
     @Override
     public void checkType() {
+        this.exp.checkType();
+        switch (this.tipoExp.toString()){
+            case "NEG":
+                if (this.exp.getTipo().toString() != "BOOL"){
+                    System.out.println("Error de tipos: Negación de un no buleano");
+                    Programa.okTipos = false;
+                }
+                break;
+            case "MENOS":
+                if (this.exp.getTipo().toString() != "INT"){
+                    System.out.println("Error de tipos: Opuesto de un no entero");
+                    Programa.okTipos = false;
+                }
+        }
     }
 
     @Override
