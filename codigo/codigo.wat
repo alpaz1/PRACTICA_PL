@@ -12,10 +12,10 @@
 (global $MP (mut i32) (i32.const 0)) ;; mark pointer
 (global $NP (mut i32) (i32.const 131071996)) ;; heap 2000*64*1024-4
 (start $principal)
-(func $cuadrado (result i32)
+(func $principal
  (local $localsStart i32)
  (local $temp i32)
- i32.const 12
+ i32.const 32
  call $reserveStack
  set_local $temp
  get_global $MP
@@ -28,140 +28,352 @@
  i32.const 8
  i32.add
  set_local $localsStart
+;;Inicio declaracion i
+i32.const 80
+get_local $localsStart
+i32.add
 i32.const 0
+i32.store
+;;Fin declaracion i
+block
+loop
+i32.const 80
 get_local $localsStart
 i32.add
 i32.load
-i32.const 0
+i32.const 20
+i32.lt_s
+i32.eqz
+br_if 1
+;;Inicio declaracion aux
+i32.const 84
+get_local $localsStart
+i32.add
+i32.const 80
 get_local $localsStart
 i32.add
 i32.load
+i32.const 2
+i32.rem_s
+i32.const 0
+i32.eq
+i32.store
+;;Fin declaracion aux
+i32.const 84
+get_local $localsStart
+i32.add
+i32.load
+set_local $temp
+block $break
+block ;; un caso
+block ;; caso default
+end
+get_local $temp
+i32.const 1
+get_local $temp
+i32.eq
+i32.eqz
+br_if 0
+;; Inicio asignacion AccArr(l[i])
+;;AQUI ACCESO ARRAY AccArr(l[i])
+;;AQUI COMIENZO EXP i
+i32.const 80
+get_local $localsStart
+i32.add
+i32.load
+;;AQUI FIN EXP i
+i32.const 4
 i32.mul
-call $freeStack
-return
- call $freeStack
-i32.const 0
-i32.load
-)
-(func $factorial (result i32)
- (local $localsStart i32)
- (local $temp i32)
- i32.const 16
- call $reserveStack
- set_local $temp
- get_global $MP
- get_local $temp
- i32.store
- get_global $MP
- get_global $SP
- i32.store offset=4
- get_global $MP
- i32.const 8
- i32.add
- set_local $localsStart
 i32.const 0
 get_local $localsStart
 i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(l[i])
+i32.const 1
+i32.store
+;; Fin asignacion AccArr(l[i])
+br $break
+set_local $temp
+end
+get_local $temp
+;; Inicio asignacion AccArr(l[i])
+;;AQUI ACCESO ARRAY AccArr(l[i])
+;;AQUI COMIENZO EXP i
+i32.const 80
+get_local $localsStart
+i32.add
+i32.load
+;;AQUI FIN EXP i
+i32.const 4
+i32.mul
+i32.const 0
+get_local $localsStart
+i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(l[i])
+i32.const -1
+i32.store
+;; Fin asignacion AccArr(l[i])
+br $break
+set_local $temp
+end ;; para salir del switch con break
+;; Inicio imprime AccArr(l[i])
+;;AQUI ACCESO ARRAY AccArr(l[i])
+;;AQUI COMIENZO EXP i
+i32.const 80
+get_local $localsStart
+i32.add
+i32.load
+;;AQUI FIN EXP i
+i32.const 4
+i32.mul
+i32.const 0
+get_local $localsStart
+i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(l[i])
+i32.load
+call $print
+;; Fin imprime AccArr(l[i])
+;; Inicio asignacion i
+i32.const 80
+get_local $localsStart
+i32.add
+i32.const 80
+get_local $localsStart
+i32.add
+i32.load
+i32.const 1
+i32.add
+i32.store
+;; Fin asignacion i
+br 0
+end
+end
+;;Inicio declaracion numPositivos
+i32.const 84
+get_local $localsStart
+i32.add
+i32.const 0
+i32.store
+;;Fin declaracion numPositivos
+;;Inicio declaracion numNegativos
+i32.const 88
+get_local $localsStart
+i32.add
+i32.const 0
+i32.store
+;;Fin declaracion numNegativos
+;; Inicio asignacion AccArr(l[11])
+;;AQUI ACCESO ARRAY AccArr(l[11])
+;;AQUI COMIENZO EXP 11
+i32.const 11
+;;AQUI FIN EXP 11
+i32.const 4
+i32.mul
+i32.const 0
+get_local $localsStart
+i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(l[11])
+i32.const 0
+i32.store
+;; Fin asignacion AccArr(l[11])
+;;Inicio declaracion sigue
+i32.const 92
+get_local $localsStart
+i32.add
+i32.const 1
+i32.store
+;;Fin declaracion sigue
+;;Inicio declaracion j
+i32.const 96
+get_local $localsStart
+i32.add
+i32.const 0
+i32.store
+;;Fin declaracion j
+block
+loop
+i32.const 96
+get_local $localsStart
+i32.add
+i32.load
+i32.const 20
+i32.lt_s
+i32.const 92
+get_local $localsStart
+i32.add
+i32.load
+i32.and
+i32.eqz
+br_if 1
+;;Inicio declaracion aux
+i32.const 100
+get_local $localsStart
+i32.add
+;;AQUI ACCESO ARRAY AccArr(l[j])
+;;AQUI COMIENZO EXP j
+i32.const 96
+get_local $localsStart
+i32.add
+i32.load
+;;AQUI FIN EXP j
+i32.const 4
+i32.mul
+i32.const 0
+get_local $localsStart
+i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(l[j])
+i32.load
+i32.const 0
+i32.gt_s
+i32.store
+;;Fin declaracion aux
+i32.const 100
+get_local $localsStart
+i32.add
+i32.load
+set_local $temp
+block $break
+block ;; un caso
+block ;; un caso
+end
+get_local $temp
+i32.const 1
+get_local $temp
+i32.eq
+i32.eqz
+br_if 0
+;; Inicio asignacion numPositivos
+i32.const 84
+get_local $localsStart
+i32.add
+i32.const 84
+get_local $localsStart
+i32.add
+i32.load
+i32.const 1
+i32.add
+i32.store
+;; Fin asignacion numPositivos
+;; Inicio imprime AccArr(l[j])
+;;AQUI ACCESO ARRAY AccArr(l[j])
+;;AQUI COMIENZO EXP j
+i32.const 96
+get_local $localsStart
+i32.add
+i32.load
+;;AQUI FIN EXP j
+i32.const 4
+i32.mul
+i32.const 0
+get_local $localsStart
+i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(l[j])
+i32.load
+call $print
+;; Fin imprime AccArr(l[j])
+br $break
+set_local $temp
+end
+get_local $temp
+i32.const 0
+get_local $temp
+i32.eq
+i32.eqz
+br_if 0
+;;AQUI ACCESO ARRAY AccArr(l[j])
+;;AQUI COMIENZO EXP j
+i32.const 96
+get_local $localsStart
+i32.add
+i32.load
+;;AQUI FIN EXP j
+i32.const 4
+i32.mul
+i32.const 0
+get_local $localsStart
+i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(l[j])
 i32.load
 i32.const 0
 i32.eq
 if
-;; Inicio asignacion sol
-i32.const 4
+;; Inicio asignacion sigue
+i32.const 92
 get_local $localsStart
 i32.add
-i32.const 1
+i32.const 0
 i32.store
-;; Fin asignacion sol
+;; Fin asignacion sigue
 else
-;; Inicio asignacion sol
+;; Inicio imprime AccArr(l[j])
+;;AQUI ACCESO ARRAY AccArr(l[j])
+;;AQUI COMIENZO EXP j
+i32.const 96
+get_local $localsStart
+i32.add
+i32.load
+;;AQUI FIN EXP j
 i32.const 4
-get_local $localsStart
-i32.add
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-get_global $SP
-i32.const 8
-i32.add
-set_local $temp
-;; Copiando argumento: RESTA(n,1)
-i32.const 0
-get_local $temp
-i32.add
-i32.const 0
-get_local $localsStart
-i32.add
-i32.load
-i32.const 1
-i32.sub
-i32.store
-call $factorial
 i32.mul
-i32.store
-;; Fin asignacion sol
-end
-i32.const 4
+i32.const 0
 get_local $localsStart
 i32.add
+i32.add
+;;AQUI FIN ARRAY AccArr(l[j])
 i32.load
-call $freeStack
-return
- call $freeStack
-i32.const 0
-i32.load
-)
-(func $principal
- (local $localsStart i32)
- (local $temp i32)
- i32.const 12
- call $reserveStack
- set_local $temp
- get_global $MP
- get_local $temp
- i32.store
- get_global $MP
- get_global $SP
- i32.store offset=4
- get_global $MP
- i32.const 8
- i32.add
- set_local $localsStart
-;;Inicio declaracion num
-i32.const 0
-get_local $localsStart
-i32.add
-i32.const 5
-i32.store
-;;Fin declaracion num
-;; Inicio imprime Llamada cuadrado ([Llamada factorial ([num])])
-get_global $SP
-i32.const 8
-i32.add
-set_local $temp
-;; Copiando argumento: Llamada factorial ([num])
-i32.const 0
-get_local $temp
-i32.add
-get_global $SP
-i32.const 8
-i32.add
-set_local $temp
-;; Copiando argumento: num
-i32.const 0
-get_local $localsStart
-i32.add
-i32.const 0
-get_local $temp
-i32.add
-i32.const 1
-call $copyn
-call $factorial
-i32.store
-call $cuadrado
 call $print
-;; Fin imprime Llamada cuadrado ([Llamada factorial ([num])])
+;; Fin imprime AccArr(l[j])
+;; Inicio asignacion numNegativos
+i32.const 88
+get_local $localsStart
+i32.add
+i32.const 88
+get_local $localsStart
+i32.add
+i32.load
+i32.const 1
+i32.add
+i32.store
+;; Fin asignacion numNegativos
+end
+br $break
+set_local $temp
+end ;; para salir del switch con break
+;; Inicio asignacion j
+i32.const 96
+get_local $localsStart
+i32.add
+i32.const 96
+get_local $localsStart
+i32.add
+i32.load
+i32.const 1
+i32.add
+i32.store
+;; Fin asignacion j
+br 0
+end
+end
+;; Inicio imprime numPositivos
+i32.const 84
+get_local $localsStart
+i32.add
+i32.load
+call $print
+;; Fin imprime numPositivos
+;; Inicio imprime numNegativos
+i32.const 88
+get_local $localsStart
+i32.add
+i32.load
+call $print
+;; Fin imprime numNegativos
  call $freeStack
 )
 (func $reserveStack (param $size i32)

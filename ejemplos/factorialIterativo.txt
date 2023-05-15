@@ -7,6 +7,6 @@ entero factorialIterativo(entero n) {
 }
 
 principal () {
-    entero 5;
+    entero n = 5;
     imprime (factorialIterativo(n));
 }

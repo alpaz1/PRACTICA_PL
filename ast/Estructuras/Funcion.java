@@ -100,13 +100,9 @@ public class Funcion extends ASTNode{
 
     @Override
     public void generaCodigo() {
-        // int tam = 200; // TODO: cambiar esto a lo que ocupa la funcion
         int tam = maxMemoria() + 8;
         Programa.codigo.print("(func $" + nombre);
-        // for (Parametro param: paramList){
-        //     param.respresentacionWasm();
-        // }
-        // RETURN TIPE
+       
         if (! tipo.toString().equals("VOID")){
             Programa.codigo.print(" (result " + tipo.respresentacionWasm() +")");
         }

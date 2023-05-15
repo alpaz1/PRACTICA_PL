@@ -35,7 +35,6 @@ public class Devuelve extends Instruccion {
         if (valorRetorno != null)
             valorRetorno.vincular();
         this.nodoVinculo = Programa.pila.buscaIdFuncionActual();
-        System.out.println("HOLA " + this.nodoVinculo.toString());
         funcion = (Funcion) nodoVinculo;
         System.out.println(this + " Vinculado con  " + funcion.getName());
     }

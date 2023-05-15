@@ -34,6 +34,7 @@ public class Main {
 				System.out.println("Demasiados errores, no se puede generar codigo.");
 			}
 		} catch (Exception e) {
+			//e.printStackTrace();
 			System.out.println("Se han detectado errores sintácticos, debe corregirlos para poder compilar el código");
 		}
 		

@@ -1,3 +1,10 @@
+/*
+INCLUIMOS TAMBIÉN ESTE ARCHIVO EN EL QUE HEMOS IDO HACIENDO DIVERSAS PRUEBAS PARA PROBAR EL FUNCIONAMIENTO ADECUADO DE CADA PARTE QUE IMPLEMENTAMOS
+ESTE ARCHIVO NO ESTA HECHO CON LA INTENCION DE GENERAR UN PROGRAMA QUE TENGA ALGUNA FUNCIONALIDAD, SINO PARA DETECTAR ERRORES. 
+DE HECHO, NO SE PASA AL TIPADO PUESTO QUE COMO SE PUEDE VER, SE ENCUENTRAN VARIOS ERRORES DE VINCULACIÓN. 
+*/
+
+
 #incluir "hola.txt"
 #incluir "pruebaaa.h"
 
@@ -14,36 +21,19 @@ estructura Tiempo{
     entero segundo;
 };
 
-// Clase personalizada
-publico clase miClase{
-    privado entero a = 1;
-    privado lista <lista <DiaSemana>[2]> [3] miAray = {{Lunes,Martes}};
-    publico Tiempo tiempo;
-    
-    publico miClase(Tiempo& t, entero ab){
-        tiempo = t;
-        DiaSemana d = Martes;
-        miAray[1][2] = Jueves;
-    }
-
-    privado void fun(buleano b){
-        b = mentira;
-    }
-}
 
 lista <Tiempo> [2] a;
 
 entero x_a = 5 + 1;
 buleano encontrado = verdad yy mentira oo mentira;
 
-buleano prueba(entero a, entero& b, lista <lista <DiaSemana>[]>[] &miArray){
+buleano prueba(entero a, entero& b, lista <lista <DiaSemana>[4]>[4] &miArray){
     mientras (a == b){
         paraCada(entero i = 0; i < b; i = i + 1){
             b = b + 1;
         }
     }
     devuelve a;
-    devuelve b;
 }
 
 
@@ -73,7 +63,6 @@ principal(){
 
     Tiempo t;
 
-    miClase mc = nuevo miClase(t,a);
 
     matriz m = {{Viernes, Sabado}, {Sabado,Domingo}, {Domingo, Viernes}};
 
@@ -140,41 +129,8 @@ principal(){
     }
 
 
-    principal() {
-
-
-    lista < Cita > [7] listaCitas;
-
-
-    paraCada (entero i = 0; i < 7; i = i + 1){
-        listaCitas[i].mes = i + 1;
-        listaCitas[i].anio = 2023;
-    }
-
-    listaCitas[0].dia = Lunes;
-    listaCitas[1].dia = Martes;
-    listaCitas[2].dia = Miercoles;
-    listaCitas[3].dia = Jueves;
-    listaCitas[4].dia = Viernes;
-    listaCitas[5].dia = Sabado;
-    listaCitas[6].dia = Domingo;
-
-
-    paraCada (entero j = 0; j < 7; j = j + 1){
-        imprime(listaCitas[j].dia);
-        imprime(listaCitas[j].mes);
-        imprime(listaCitas[j].anio);
-
-        si  (listaCitas[j].dia == Viernes oo listaCitas[j].dia == Sabado oo listaCitas[j].dia == Domingo ){
-            imprime(1000);
-        }
-        sino {
-            imprime(1111);
-        }
-
-    }
     
 
 }
-}
+
 
