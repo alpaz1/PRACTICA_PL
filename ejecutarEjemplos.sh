@@ -14,6 +14,7 @@ find . -name "*.java" -exec javac -cp lib/cup.jar -d bin/ {} +
 # A partir de aquí es output del analizador sintáctico
 echo -e "\n------------------ Analizador Sintactico ------------------\n"
 
+mkdir -p codigo/bin
 i=0  
 for file in ejemplos/*; do
 i=$((i+1))
