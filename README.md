@@ -8,7 +8,7 @@ En la carpeta `alex` se encuentran los ficheros Java necesarios para el análisi
 
 Para compilar y ejecutar un ejemplo en concreto contamos con dos scrpits de Shell. En primer lugar se debe ejecutar el script `compilarCodigo.sh` seguido del archivo de ejemplo (en dirección relativa, esto es, ejemplos/archivo.txt) o con la opción -t para compilar todos. Una vez compilado, el script `ejecutarCodigo.sh` ejecutará el código webassembly generado por la última ejecución satisfactoria de `compilarCodigo.sh`
 
-Tambien es posible compilar y ejecutar todos los ejemplos con el script `ejecutarEjemplos.sh`
+También hemos incluido un  último script `ejecutarEjemplos.sh` que compila y ejecuta cada uno de los ejemplos de la carpeta `ejemplos`, mostrando todos los pasos de la compilación y el output de la ejecución para cada uno de ellos.
 
 En la carpeta `ejemplos` incluimos varios ficheros de prueba para las distintas funcionalidades. Las explicamos a continuación.
 
